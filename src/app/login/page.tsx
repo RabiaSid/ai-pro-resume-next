@@ -10,6 +10,8 @@ import { H1 } from '@/utlis/typography'
 import AppButton from '@/components/common/button/pages'
 import AppInputField from '@/components/common/inpufield/page'
 import GoogleLogo from "media/assets/google_logo.webp";
+import FacebookLogo from "media/assets/fb_logo.webp";
+import LinkedInLogo from "media/assets/link.webp";
 
 export default function page() {
     const [showPassword, setShowPassword] = useState(false);
@@ -27,13 +29,11 @@ export default function page() {
         setCaptchaError("");
     };
 
-    // Reset the reCAPTCHA value after a certain time
     const resetRecaptchaValue = () => {
         setVerified(null);
     };
 
-    // Set a timeout to reset the reCAPTCHA value after 5 minutes (adjust as needed)
-    const TIMEOUT_DURATION = 1 * 60 * 1000; // 5 minutes in milliseconds
+    const TIMEOUT_DURATION = 1 * 60 * 1000;
     let timeoutId: any;
 
     const handleRecaptchaTimeout = () => {
@@ -47,6 +47,7 @@ export default function page() {
     return (
         <div className="border w-full md:w-[550px] m-auto mt-20 px-4 min-h-[800px] text-center font-Lexend">
             <H1 >SIGN IN</H1>
+
             <div className="text-black text-left my-4 text-lg flex items-start justify-center">
                 <IoInformationCircle size={24} className="mt-[2px] text-[red]" />
                 <p className="w-[97%] text-center">
@@ -56,57 +57,78 @@ export default function page() {
                 </p>
             </div>
 
-            <div>
-                {/* //Social Logins */}
-                <AppButton title='Sign-in  with Google'
-                    className="w-[100%] border border-solid text-gray-400 border-slate-300 px-2 py-2 rounded-md hover:bg-slate-800 hover:text-white ease-in transition-all flex justify-center items-center"
-                    childClassName="sm:tracking-widest relative"
-                    leftIcon={
-                        <>
-                            <Image
-                                src={GoogleLogo}
-                                alt="My Image"
-                                width={25}
-                                height={25}
-                                className="mr-2"
-                            />
-                        </>
-                    }
-                />
+            {/* //Social Logins */}
+            <div className='grid space-y-3'>
+                <div>
+                    {/* //Social Logins */}
+                    <AppButton title='Sign-in  with Google'
+                        className="w-[100%] border border-solid text-gray-400 border-slate-300 px-2 py-2 rounded-md hover:bg-slate-800 hover:text-white ease-in transition-all flex justify-center items-center"
+                        childClassName="sm:tracking-widest relative"
+                        leftIcon={
+                            <>
+                                <Image
+                                    src={GoogleLogo}
+                                    alt="My Image"
+                                    width={25}
+                                    height={25}
+                                    className="mr-2"
+                                />
+                            </>
+                        }
+                    />
+                </div>
+
+                <div>
+                    {/* //Social Logins */}
+                    <AppButton title='Sign-in  with Facebook'
+                        className="w-[100%] border border-solid text-gray-400 border-slate-300 px-2 py-2 rounded-md hover:bg-slate-800 hover:text-white ease-in transition-all flex justify-center items-center"
+                        childClassName="sm:tracking-widest relative"
+                        leftIcon={
+                            <>
+                                <Image
+                                    src={FacebookLogo}
+                                    alt="My Image"
+                                    width={25}
+                                    height={25}
+                                    className="mr-2"
+                                />
+                            </>
+                        }
+                    />
+                </div>
+
+                <div>
+                    <AppButton title='Sign-in  with LinkendIn'
+                        className="w-[100%] border border-solid text-gray-400 border-slate-300 px-2 py-2 rounded-md hover:bg-slate-800 hover:text-white ease-in transition-all flex justify-center items-center"
+                        childClassName="sm:tracking-widest relative"
+                        leftIcon={
+                            <>
+                                <Image
+                                    src={LinkedInLogo}
+                                    alt="My Image"
+                                    width={25}
+                                    height={25}
+                                    className="mr-2"
+                                />
+                            </>
+                        }
+                    />
+                </div>
             </div>
 
             <div>
                 <form
-                //  onSubmit={handleSubmit(handleLoginSubmit)}
+                //  onSubmit={handleSubmit(handleLoginSubmit)} 
                 >
-                    {/* <Box
-                        component="fo irm"
-                        sx={{
-                            "& > :not(style)": { m: 0, width: "100%" },
-                        }}
-                        noValidate
-                        autoComplete="on"
-                        className="flex flex-col gap-4"
-                    > */}
                     {/* Email */}
                     <div className="flex flex-col">
                         <AppInputField
-                            // id="email"
                             label="Email or Customer ID*"
                             // variant="outlined"
                             type="email"
                             className="w-full"
-                            // autoComplete="on"
-                            // autoFocus
-                            // {...register("email", {
-                            //     required: "Please Enter Your Email or Customer ID",
-                            // })}
                             aria-label={errors?.email ? "Email error" : ""}
-                        // error={!!errors.email}
                         />
-                        {/* <span className="text-left text-red-500 text-xs">
-                                {errors?.email?.message}
-                            </span> */}
                     </div>
 
                     {/* Password */}
@@ -141,6 +163,7 @@ export default function page() {
                             <span className="text-left text-red-500 text-xs">
                                 {/* {errors?.password?.message} */}
                             </span>
+
                             <div className="flex justify-between">
                                 <div className="text-slate-500">
                                     <input type="checkbox" className="autofill:bg-yellow-200" />{" "}
@@ -155,6 +178,7 @@ export default function page() {
                                     </Link>
                                 </div>
                             </div>
+
                         </div>
                     </div>
                     {/* </Box> */}
@@ -186,6 +210,6 @@ export default function page() {
                 />
                 {/* font-Lexend text-xs md:text-sm xl:text-base font-semibold "button text formatting" */}
             </div>
-        </div>
+        </div >
     )
 }

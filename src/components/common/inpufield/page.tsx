@@ -30,7 +30,7 @@ export default function AppInputField({
                     placeholder=" "
                     value={value}
                     onChange={onChange}
-                    className={`w-full bg-white focus:outline-primaryBlue focus:shadow-outline border rounded-md py-3 px-3 block appearance-none leading-normal transition-all duration-200 
+                    className={`w-full focus:outline-primaryBlue focus:shadow-outline border rounded-md py-3 px-3 block appearance-none leading-normal transition-all duration-200 
                         ${status === "success" && 'border-green-500 focus:border-green-500'}
                         ${status === "error" && 'border-red-500 focus:border-red-500'}
                         ${status === "warning" && 'border-yellow-500 focus:border-yellow-500'}
@@ -40,15 +40,15 @@ export default function AppInputField({
                 />
                 <label
                     htmlFor="input-field"
-                    className={`absolute top-3 left-3 pointer-events-none transition-all duration-200 px-2
-                    ${status === "success" && 'text-green-500'}
-                    ${status === "error" && 'text-red-500'}
-                    ${status === "warning" && 'text-yellow-500'}
-                    ${status === null && 'text-gray-400'}
-                    `}
+                    className={`absolute bg-none bg-transparent top-3 left-3 pointer-events-none transition-all duration-200 px-2
+    ${status === "success" && 'text-green-500'}
+    ${status === "error" && 'text-red-500'}
+    ${status === "warning" && 'text-yellow-500'}
+    ${status === null && 'text-gray-400'}`}
                 >
                     {status === "error" ? "Error: Invalid Input" : label}
                 </label>
+
             </div>
             {status === "error" && <p className="text-red-500 text-xs mt-1 border">Error: Invalid Input</p>}
         </div>
