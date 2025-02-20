@@ -45,7 +45,7 @@ export default function page() {
         setShowPassword((prevShowPassword) => !prevShowPassword);
     };
     return (
-        <div className="border w-full md:w-[550px] m-auto mt-20 px-4 min-h-[800px] text-center font-Lexend">
+        <div className="w-full md:w-[550px] m-auto mt-20 px-4 min-h-[800px] text-center font-Lexend">
             <H1 >SIGN IN</H1>
 
             <div className="text-black text-left my-4 text-lg flex items-start justify-center">
