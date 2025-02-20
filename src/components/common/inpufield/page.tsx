@@ -30,11 +30,11 @@ export default function AppInputField({
                     placeholder=" "
                     value={value}
                     onChange={onChange}
-                    className={`w-full bg-white focus:outline-none focus:shadow-outline border rounded-md py-3 px-3 block appearance-none leading-normal transition-all duration-200 
+                    className={`w-full bg-white focus:outline-primaryBlue focus:shadow-outline border rounded-md py-3 px-3 block appearance-none leading-normal transition-all duration-200 
                         ${status === "success" && 'border-green-500 focus:border-green-500'}
                         ${status === "error" && 'border-red-500 focus:border-red-500'}
                         ${status === "warning" && 'border-yellow-500 focus:border-yellow-500'}
-                        ${status === null && 'border-gray-300 focus:border-blue-400'}
+                        ${status === null && ' border-slate-300 focus:border-primaryBlue'}
                         `}
                     {...rest}
                 />

@@ -38,10 +38,22 @@
 // Import Components
 // import ConditionalLayout from "./ConditionalLayout";
 // Import Css
+import type { Metadata } from "next";
+import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import ConditionalLayout from "./Layout/conditionalLayout";
 // Meta Data
-export const metadata = {
+const geistSans = Geist({
+  variable: "--font-geist-sans",
+  subsets: ["latin"],
+});
+
+const geistMono = Geist_Mono({
+  variable: "--font-geist-mono",
+  subsets: ["latin"],
+});
+
+export const metadata: Metadata = {
   // Title & Descriptions
   title: "Your Vision Coupled with Creative Excellence",
   description: "Explore our animation studio's diverse services, where creativity meets precision, bringing your ideas to life in captivating motion.",
@@ -61,7 +73,7 @@ export const metadata = {
 export default function RootLayout({ children }: any) {
   return (
     <html lang="en" suppressHydrationWarning>
-      <body suppressHydrationWarning>
+      <body className={`${geistSans.variable} ${geistMono.variable} antialiased`}>
         {/* <body className={`${primary.variable}`}> */}
         <ConditionalLayout>
           {children}
