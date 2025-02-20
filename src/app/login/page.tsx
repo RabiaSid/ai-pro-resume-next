@@ -1,19 +1,42 @@
 'use client'
-import { H1 } from '@/utlis/typography'
+import { H1 } from '@/utils/typography'
 import { Box, TextField } from '@mui/material'
 import Link from 'next/link'
 import React, { useState } from 'react'
 import { FaRegEye, FaRegEyeSlash } from 'react-icons/fa'
 import { IoInformationCircle } from 'react-icons/io5'
 import { useForm } from "react-hook-form";
+import ReCAPTCHA from "react-google-recaptcha";
 
 export default function page() {
     const [showPassword, setShowPassword] = useState(false);
+    const [captchaError, setCaptchaError] = useState("");
+    const [verified, setVerified] = useState<any>(false);
+
     const {
         register,
         handleSubmit,
         formState: { errors },
     } = useForm();
+
+    const handleCheckCaptcha = () => {
+        setVerified(true);
+        setCaptchaError("");
+    };
+
+    // Reset the reCAPTCHA value after a certain time
+    const resetRecaptchaValue = () => {
+        setVerified(null);
+    };
+
+    // Set a timeout to reset the reCAPTCHA value after 5 minutes (adjust as needed)
+    const TIMEOUT_DURATION = 1 * 60 * 1000; // 5 minutes in milliseconds
+    let timeoutId: any;
+
+    const handleRecaptchaTimeout = () => {
+        clearTimeout(timeoutId);
+        timeoutId = setTimeout(resetRecaptchaValue, TIMEOUT_DURATION);
+    };
 
     const handleTogglePasswordVisibility = () => {
         setShowPassword((prevShowPassword) => !prevShowPassword);
@@ -47,6 +70,7 @@ export default function page() {
                         autoComplete="on"
                         className="flex flex-col gap-4"
                     >
+                        {/* Email */}
                         <div className="flex flex-col">
                             <TextField
                                 id="email"
@@ -65,6 +89,7 @@ export default function page() {
                                 {errors?.email?.message}
                             </span> */}
                         </div>
+
                         {/* Password */}
                         <div>
                             <div className="flex flex-col">
@@ -102,23 +127,37 @@ export default function page() {
                                         <input type="checkbox" className="autofill:bg-yellow-200" />{" "}
                                         Remember me
                                     </div>
-                                    <Link
-                                        to={"/forgot-password"}
-                                        className="text-[#0072b1] font-bold hover:text-slate-800"
-                                    >
-                                        {" "}
-                                        Forgot Password?
-                                    </Link>
+                                    <div className="text-slate-500">
+                                        <Link
+                                            href={"/forget-password"} >
+                                            <span className="text-[#0072b1] font-bold hover:text-slate-80">
+                                                Forgot Password?
+                                            </span>
+                                        </Link>
+                                    </div>
                                 </div>
                             </div>
                         </div>
                     </Box>
-
-                    <button type="submit" className="hidden" id="submitForm"></button>
                 </form>
 
 
 
+            </div>
+
+            <div>
+                <div className="flex flex-col items-start mt-4">
+                    <span className="text-red-500 text-sm">{captchaError}</span>
+                    <ReCAPTCHA
+                        sitekey={"6LdRjxslAAAAAIP7BsNtsYgCvPM5RfNXjHGIzveJ"}
+                        onChange={(val: any) => {
+                            handleCheckCaptcha(val);
+                            handleRecaptchaTimeout();
+                        }}
+                    />
+                </div>
+
+                {/* font-Lexend text-xs md:text-sm xl:text-base font-semibold "button text formatting" */}
             </div>
         </div>
     )
