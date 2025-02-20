@@ -10,7 +10,7 @@ type propType = {
     rightIcon?: React.ReactNode;
 }
 
-export default function (props: propType) {
+export default function AppButton(props: propType) {
     const {
         className = "",
         childClassName = "",
