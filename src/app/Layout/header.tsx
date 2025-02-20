@@ -55,7 +55,7 @@ export default function Header() {
                         <div key={index} className="relative group">
                             {/* Regular Menu Item */}
                             {!item.submenu ? (
-                                <Link href={item.path} className={`block p-2 lg:px-4 md:mx-2 text-gray-600 rounded hover:primaryBlue hover:text-gray-700 transition-colors duration-300 ${item.className || ""}`}>
+                                <Link href={item.path} className={`block px-3 py-2 lg:px-4 md:mx-2 text-gray-600 rounded hover:bg-primaryBlue hover:text-white transition-colors duration-300 ${item.className || ""}`}>
                                     {item.name}
                                 </Link>
                             ) : (
@@ -63,15 +63,17 @@ export default function Header() {
                                 <div>
                                     <button
                                         // onClick={toggleSubmenu}
-                                        className=" p-2 lg:px-4 md:mx-2 text-gray-600 rounded hover:bg-gray-200 hover:text-gray-700 transition-colors duration-300 flex items-center"
+                                        onMouseEnter={() => setSubmenuOpen(true)}
+                                        onMouseLeave={() => setSubmenuOpen(false)}
+                                        className=" px-3 py-2 lg:px-4 md:mx-2 text-gray-600 rounded hover:bg-primaryBlue hover:text-white transition-colors duration-300 flex items-center"
                                     >
                                         {item.name} ▼
                                     </button>
 
-                                    <div className={`absolute left-0 mt-1 w-48 bg-white border rounded-lg shadow-md transition-all duration-300 
+                                    <div className={`absolute left-0 mt-1 w-48 bg-white border transition-all duration-300 overflow-hidden shadow-[0_3px_10px_rgb(0,0,0,0.2)] rounded-xl 
                                         ${submenuOpen ? "block" : "hidden"} md:group-hover:block`}>
                                         {item.submenu.map((sub, subIndex) => (
-                                            <Link key={subIndex} href={sub.path} className="block px-4 py-2 text-gray-700 hover:bg-gray-100">
+                                            <Link key={subIndex} href={sub.path} className="block px-4 py-4 hover:border-l-4 transition border-primaryGreen text-gray-700 hover:bg-primaryBlue hover:text-white">
                                                 {sub.name}
                                             </Link>
                                         ))}

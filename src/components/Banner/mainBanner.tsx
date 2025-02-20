@@ -1,7 +1,10 @@
 import React from 'react'
+import AppButton from '../common/button/pages'
 
 export default function MainBanner() {
     return (
-        <div>MainBanner</div>
+        <div>
+            <AppButton title='hellow' />
+        </div>
     )
 }
