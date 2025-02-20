@@ -1,7 +1,5 @@
 export function H1({ className = '', children }: any) {
-    const defaultClasses = `font-nohemi scroll-m-20 text-4xl font-[600] tracking-wider 
-      leading-[60px] sm:leading-[60px] md:leading-[80px] lg:leading-[110px] xl:leading-[120px] 
-    text-[50px] md:text-[70px] lg:text-[90px] xl:text-[100px] `;
+    const defaultClasses = `fclassName="text-primary-black font-Lexend font-bold text-2xl lg:text-4xl xl:text-5xl  sm:leading-[1.7] md:leading-[1.5] lg:leading-[1.5] 2xl:leading-[1.2] text-center  sm:text-left  " `;
 
     return <h1 className={`${defaultClasses} ${className}`}>{children}</h1>;
 }
