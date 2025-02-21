@@ -1,128 +1,89 @@
-import React, { useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
 import Logo from "media/assets/logo_resume.webp";
 import styles from "./header.module.css"
-import { BiCaretDown, BiSolidUser, BiUserCircle } from 'react-icons/bi';
+import { menuItems, menuIconItems } from './data';
+import { BiCaretDown, BiMenu } from 'react-icons/bi';
+import { AiOutlineClose } from 'react-icons/ai';
+
 
 export default function Header() {
     const [menuOpen, setMenuOpen] = useState(false);
     const [submenuOpen, setSubmenuOpen] = useState(false);
+    const [submenu, setSubmenu] = useState<{ [key: number]: boolean }>({});
+    const [isMobile, setIsMobile] = useState(false);
+    const modalRef = useRef<HTMLDivElement | null>(null);
+    const toggleMenu = () => {
+        setMenuOpen((prev) => !prev);
+    };
 
-    const toggleMenu = () => setMenuOpen(!menuOpen);
-    // const toggleSubmenu = () => setSubmenuOpen(!submenuOpen);
 
-    const menuItems = [
-        { name: "Home", path: "/" },
-        { name: "About", path: "/about" },
-        {
-            name: "Services",
-            submenu: [
-                { name: "Web Development", path: "/services/web-development" },
-                { name: "Mobile Apps", path: "/services/mobile-apps" },
-                { name: "SEO Optimization", path: "/services/seo" }
-            ]
-        },
-        { name: "Pricing", path: "/pricing" },
-        { name: "Contact", path: "/contact" },
-        {
-            name: "Login", path: "/login",
-            className: "text-black border border-transparent hover:bg-transparent hover:text-primaryBlue",
-            leftIcon: <BiUserCircle
-                className="text-lg text-[#00bfab] hover:text-[#0072b1]"
-                size={36}
-            />
-        },
-        {
-            path: "/register",
-            className: "border border-transparent hover:bg-transparent ",
-            leftIcon: <button
-                className={"flex items-center border-l gap-2 pl-2"}
-            // ref={menuRef}
-            // onClick={() => setIsDropOpen(!isDropOpen)}
-            >
-                <BiSolidUser className="bg-[#0072b1] text-white rounded-full p-1 text-2xl " />
+    const toggleSubmenu = (index: number) => {
+        setSubmenuOpen(!submenuOpen)
+        setSubmenu((prev) => {
+            const newState: { [key: number]: boolean } = {};
+            Object.keys(prev).forEach((key) => {
+                newState[Number(key)] = false;
+            });
+            return { ...newState, [index]: !prev[index] };
+        });
+    };
 
-                <BiCaretDown
-                    className="text-[#616161] text-md"
-                    size={20}
-                />
-            </button>
-        },
-        {
-            path: "/register",
-            className: "border border-transparent hover:bg-transparent ",
-            leftIcon: <button
-                className={"flex items-center border-l gap-2 pl-2"}
-            // ref={menuRef}
-            // onClick={() => setIsDropOpen(!isDropOpen)}
-            >
-                <BiSolidUser className="bg-[#0072b1] text-white rounded-full p-1 text-2xl " />
+    useEffect(() => {
+        const handleResize = () => {
+            setIsMobile(window.innerWidth < 768);
+        };
+        handleResize();
+        window.addEventListener('resize', handleResize);
+        return () => window.removeEventListener('resize', handleResize);
+    }, []);
 
-                <BiCaretDown
-                    className="text-[#616161] text-md"
-                    size={20}
-                />
-            </button>
-        },
-        {
-            path: "/register",
-            className: "border border-transparent hover:bg-transparent ",
-            leftIcon: <button
-                className={"flex items-center border-l gap-2 pl-2"}
-            // ref={menuRef}
-            // onClick={() => setIsDropOpen(!isDropOpen)}
-            >
-                <BiSolidUser className="bg-[#0072b1] text-white rounded-full p-1 text-2xl " />
 
-                <BiCaretDown
-                    className="text-[#616161] text-md"
-                    size={20}
-                />
-            </button>
-        }
-    ];
+    useEffect(() => {
+        const handleClickOutside = (event: MouseEvent) => {
+            if (modalRef.current && !modalRef.current.contains(event.target as Node)) {
+                setSubmenu({});
+            }
+        };
 
+        document.addEventListener("mousedown", handleClickOutside);
+        return () => {
+            document.removeEventListener("mousedown", handleClickOutside);
+        };
+    }, []);
     return (
-        <nav className="bg-white py-2 md:py-4 shadow-md">
-            <div className="container px-4 mx-auto flex items-center justify-between">
+        <nav className="bg-white py-2 md:py-4 shadow-md sticky top-0 ">
+            <div className="container md:px-4 mx-auto flex items-center justify-between ">
 
                 {/* Logo */}
                 <Link href="/" className="flex ">
                     <Image src={Logo} alt="Logo" width={150} height={40} className="logo py-2" />
                 </Link>
 
-                {/* Mobile Menu Toggle */}
-                <button onClick={toggleMenu} className="md:hidden p-2 text-gray-700">
-                    {menuOpen ? '✖' : '☰'}
-                </button>
-
-                {/* Menu Items */}
-                <div className={`absolute md:static top-16 left-0 w-full md:w-auto bg-white md:bg-transparent shadow-md md:shadow-none p-5 md:p-0 transition-all duration-300 
-                    ${menuOpen ? "block" : "hidden"} md:flex md:items-center md:space-x-4`}>
-
-                    {menuItems.map((item, index) => (
-                        <div key={index} className="relative group">
+                <div className='md:hidden flex items-center '>
+                    {menuIconItems.map((item, index) => (
+                        <div key={index} className="relative group ">
                             {/* Regular Menu Item */}
                             {!item.submenu ? (
-                                <Link href={item.path} className={`flex items-center gap-2 px-3 py-2 lg:px-4 md:mx-2  text-gray-600 rounded hover:bg-primaryBlue hover:text-white transition-colors duration-300 ${item.className || ""}`}>
+                                <Link href={item.path} className={`flex items-center py-2  
+                                text-gray-600 rounded hover:bg-primaryBlue hover:text-primaryBlue
+                                 transition-colors duration-300  ${item.className || ""}`}>
                                     {item.leftIcon}  <span className={styles.navFont}>{item.name}</span>
                                 </Link>
                             ) : (
                                 /* Dropdown Menu */
-                                <div>
+                                <div ref={modalRef} className=''>
                                     <button
-                                        // onClick={toggleSubmenu}
-                                        onMouseEnter={() => setSubmenuOpen(true)}
-                                        onMouseLeave={() => setSubmenuOpen(false)}
-                                        className={`px-3 py-2 lg:px-4 md:mx-2 text-gray-600 rounded hover:bg-primaryBlue hover:text-white transition-colors duration-300 flex items-center`}
+                                        onClick={() => toggleSubmenu(index)}
+                                        className={`py-2 text-gray-600 rounded  hover:text-primaryBlue transition-colors duration-300 flex items-center gap-2`}
                                     >
-                                        <span className={styles.navFont}>{item.name} ▼</span>
+                                        {item.leftIcon}  <span className={styles.navFont}>{item.name} </span>
                                     </button>
 
                                     <div className={`absolute left-0 mt-1 w-48 bg-white border transition-all duration-300 overflow-hidden shadow-[0_3px_10px_rgb(0,0,0,0.2)] rounded-xl 
-                                        ${submenuOpen ? "block" : "hidden"} md:group-hover:block`}>
-                                        {item.submenu.map((sub, subIndex) => (
+                                        ${submenu[index] ? "block" : "hidden"} md:group-hover:block`}>
+                                        {submenuOpen && item.submenu.map((sub, subIndex) => (
                                             <Link key={subIndex} href={sub.path} className="block px-4 py-4 hover:border-l-4 transition border-primaryGreen text-gray-700 hover:bg-primaryBlue hover:text-white">
                                                 <span className={styles.navFontSubmenu}>{sub.name}</span>
                                             </Link>
@@ -132,6 +93,99 @@ export default function Header() {
                             )}
                         </div>
                     ))}
+
+                    {/* Mobile Menu Toggle */}
+                    <button onClick={toggleMenu} className="md:hidden p-2 text-gray-700">
+                        {menuOpen ? (
+                            <AiOutlineClose size={40} className="text-red-600" />
+                        ) : (
+                            <BiMenu size={40} className="text-gray-700" />
+                        )}
+                    </button>
+                </div>
+
+                <div className={`absolute md:static  top-16 left-0 w-full md:w-auto bg-white md:bg-transparent shadow-md md:shadow-none p-5 md:p-0 transition-all duration-300 
+                    ${menuOpen || !isMobile ? "block " : "hidden"} md:flex md:items-center md:space-x-4 `}>
+                    <div className={`flex md:items-center  flex-col md:flex-row divide-y-2 md:divide-y-0 ${isMobile && "max-h-[550px] overflow-y-auto overflow-x-hidden"} `}>
+                        {menuItems.map((item, index) => (
+                            <div key={index} className={`relative group `}>
+
+                                {/* Regular Menu Item */}
+                                {!item.submenu ? (
+                                    <Link href={item.path} className={`flex items-center  gap-2 px-4 py-4 lg:px-4 md:mx-2  text-gray-600 rounded md:hover:bg-primaryBlue md:hover:text-white transition-colors duration-300 ${item.className || ""}`}>
+                                        <span className={styles.navFont}>{item.name}</span>
+                                    </Link>
+                                ) : (
+                                    /* Dropdown Menu */
+
+                                    <div ref={modalRef} className={item.className || ""}>
+                                        <button
+                                            onClick={() => toggleSubmenu(index)}
+                                            className={`px-3 py-4 lg:px-4 md:mx-2 w-full text-gray-600 rounded md:hover:bg-primaryBlue  md:hover:text-white transition-colors duration-300 flex items-center justify-between`}
+                                        >
+                                            <span className={styles.navFont}>{item.name} </span>
+                                            <BiCaretDown
+                                                className={`mt-1 ${submenuOpen && submenu[index] ? "transform rotate-180" : ""
+                                                    }`}
+                                                size={24}
+                                            />
+                                        </button>
+
+                                        <div className={`md:absolute divide-y-2 md:divide-y-0 md:left-0 md:mt-1 text-center md:text-start w-[90%] mx-auto md:w-48  md:bg-white md:border transition-all duration-300 overflow-hidden md:shadow-[0_3px_10px_rgb(0,0,0,0.2)] rounded-xl 
+                                        ${submenuOpen === true && submenu[index] ? "block" : "hidden"} md:group-hover:block`}
+                                            onMouseEnter={() => setSubmenuOpen(true)}
+                                            onMouseLeave={() => setSubmenuOpen(false)}
+                                        >
+                                            {item.submenu.map((sub, subIndex) => (
+                                                <Link key={subIndex} href={sub.path} className="block px-4 py-4 md:hover:border-l-4 transition md:border-primaryGreen text-gray-700 md:hover:bg-primaryBlue md:hover:text-white">
+                                                    <span className={styles.navFontSubmenu}>{sub.name}</span>
+                                                </Link>
+                                            ))}
+                                        </div>
+                                    </div>
+                                )}
+                            </div>
+                        ))}
+                        {menuIconItems.map((item, index) => (
+                            <div key={index} className="relative group hidden md:block">
+                                {/* Regular Menu Item */}
+                                {!item.submenu ? (
+                                    <Link href={item.path} className={`flex items-center py-2  
+                                text-gray-600 rounded hover:bg-primaryBlue hover:text-primaryBlue
+                                 transition-colors duration-300  ${item.className || ""}`}>
+                                        {item.leftIcon}  <span className={styles.navFont}>{item.name}</span>
+                                    </Link>
+                                ) : (
+                                    /* Dropdown Menu */
+                                    <div ref={modalRef} className=''>
+                                        <button
+                                            onClick={() => toggleSubmenu(index)}
+                                            className={`py-2 text-gray-600 rounded hover:text-primaryBlue transition-colors duration-300 flex items-center gap-2`}
+                                        >
+                                            {item.leftIcon}  <span className={styles.navFont}>{item.name} </span>
+                                            <BiCaretDown
+                                                className={`mt-1 ${submenuOpen && submenu[index] ? "transform rotate-180" : ""
+                                                    }`}
+                                                size={24}
+                                            />
+                                        </button>
+
+                                        <div className={`absolute left-0 mt-1 w-48 bg-white border transition-all duration-300 overflow-hidden shadow-[0_3px_10px_rgb(0,0,0,0.2)] rounded-xl 
+                                        ${submenuOpen === true && submenu[index] ? "block" : "hidden"} md:group-hover:block divide-y-2 `}
+                                            onMouseEnter={() => setSubmenuOpen(true)}
+                                            onMouseLeave={() => setSubmenuOpen(false)}>
+                                            {item.submenu.map((sub, subIndex) => (
+                                                <Link key={subIndex} href={sub.path} className="flex flex-col px-1 py-2 transition  text-gray-700 ">
+                                                    <span className={`${styles.navFontSubmenu} hover:bg-primaryBlue hover:text-white rounded-lg p-2`}>{sub.name}</span>
+                                                </Link>
+                                            ))}
+                                        </div>
+                                    </div>
+                                )}
+                            </div>
+                        ))}
+                    </div>
+
                 </div>
             </div>
         </nav>
