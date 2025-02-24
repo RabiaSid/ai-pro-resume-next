@@ -12,8 +12,10 @@ import AppInputField from '@/components/common/inpufield/page'
 import GoogleLogo from "media/assets/google_logo.webp";
 import FacebookLogo from "media/assets/fb_logo.webp";
 import LinkedInLogo from "media/assets/link.webp";
+import { useRouter } from 'next/navigation'
 
 export default function page() {
+    const router = useRouter();
     const [showPassword, setShowPassword] = useState(false);
     const [captchaError, setCaptchaError] = useState("");
     const [verified, setVerified] = useState<any>(false);
@@ -44,6 +46,9 @@ export default function page() {
     const handleTogglePasswordVisibility = () => {
         setShowPassword((prevShowPassword) => !prevShowPassword);
     };
+    const handleCreate = () => {
+        router.push("/register")
+    }
     return (
         <div className="w-full md:w-[550px] m-auto mt-20 px-4 min-h-[800px] text-center font-Lexend">
             <H1 className='text-primaryBlue mb-5'>SIGN IN</H1>
@@ -205,11 +210,10 @@ export default function page() {
                 />
 
                 <AppButton title='Create Account'
+                    onClick={handleCreate}
                     className="bg-[#0072b1] uppercase w-full mt-4 px-8 py-2 rounded-md text-white text-xl font-bold hover:bg-slate-800 ease-in transition-all mb-4 sm:mb-0"
-
                 />
-                {/* font-Lexend text-xs md:text-sm xl:text-base font-semibold "button text formatting" */}
             </div>
-        </div >
+        </div>
     )
 }

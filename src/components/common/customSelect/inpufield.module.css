@@ -1,9 +1,21 @@
 .floatLabelSelect {
-    margin: 16px 0;     
- }
+  position: relative;
+  margin: 16px 0;
+}
 
-.floatLabelSelect:focus-within label,
-  .floatLabelSelect input:not(:placeholder-shown) + label {
-    transform: translateY(-1.5rem) scale(0.75);
-    background-color: white;
+.floatLabelSelect label {
+  position: absolute;
+  left: 12px;
+  top: 50%;
+  transform: translateY(-50%);
+  background-color: white;
+  padding: 0 5px;
+  transition: all 0.2s ease-out;
+}
+
+.floatLabelSelect select:focus + label,
+.floatLabelSelect select:has(option:checked:not([value=""])) + label {
+  top: 5px;
+  font-size: 12px;
+  color: #a3a3a3; 
 }

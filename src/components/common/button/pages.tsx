@@ -9,6 +9,7 @@ type propType = {
     leftIcon?: React.ReactNode;
     rightIcon?: React.ReactNode;
     border?: string;
+    onClick?: () => void;
 }
 
 export default function AppButton(props: propType) {
@@ -21,9 +22,10 @@ export default function AppButton(props: propType) {
         leftIcon,
         rightIcon,
         border,
+        onClick,
     } = props;
     return (
-        <div
+        <button
             className={
                 className ? className :
                     `group border-2 border-transparent ${mainColor ? mainColor : "bg-primaryBlue"} 
@@ -32,6 +34,7 @@ export default function AppButton(props: propType) {
                 inline-flex w-fit py-2 px-6 xl:py-3 xl:px-12 ${border ? border : "rounded-full"} justify-center 
                 items-center font-semibold sm:text-lg tracking-normal uppercase  
                 `}
+            onClick={onClick}
         >
             {leftIcon && <span className="mr-2">{leftIcon}</span>}
             <span
@@ -40,7 +43,7 @@ export default function AppButton(props: propType) {
                 {title}
             </span>
             {rightIcon && <span className="ml-2">{rightIcon}</span>}
-        </div>
+        </button>
     );
 };
 

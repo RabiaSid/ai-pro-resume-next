@@ -4,7 +4,7 @@ import styles from "./inpufield.module.css"
 type PropsType = {
     label?: string;
     name: string;
-    options?: { id: string; name: string }[];
+    options?: { id: string; name: string, disabled?: boolean }[];
     value?: string;
     onChange?: (event: React.ChangeEvent<HTMLSelectElement>) => void;
     className?: string;
@@ -37,24 +37,24 @@ const CustomSelect = ({
           `}
                     {...rest}
                 >
-                    <option value="">Select an option</option>
+                    <option value="" ></option>
                     {options.map((option) => (
-                        <option key={option.id} value={option.id}>
+                        <option disabled={option.disabled} key={option.id} value={option.id}>
                             {option.name}
                         </option>
                     ))}
                 </select>
                 <label
                     htmlFor={name}
-                    className={`absolute top-3 left-3 pointer-events-none transition-all duration-200 px-2
-            peer-focus:${status === "success" ? "text-green-500" : ""}
-            peer-focus:${status === "error" ? "text-red-500" : ""}
-            peer-focus:${status === "warning" ? "text-yellow-500" : ""}
-            ${status === null ? "text-gray-400 peer-focus:text-primaryBlue" : ""}
-          `}
+                    className={`absolute left-3 px-2 bg-white transition-all duration-200 peer-placeholder-shown:top-3 peer-placeholder-shown:text-gray-400 peer-focus:top-1 peer-focus:text-xs peer-focus:text-primaryBlue
+        ${status === "success" ? "peer-focus:text-green-500" : ""}
+        ${status === "error" ? "peer-focus:text-red-500" : ""}
+        ${status === "warning" ? "peer-focus:text-yellow-500" : ""}
+    `}
                 >
                     {status === "error" ? "Error: Invalid Selection" : label}
                 </label>
+
             </div>
             {status === "error" && <p className="text-red-500 text-xs mt-1">Error: Invalid Selection</p>}
         </div>
