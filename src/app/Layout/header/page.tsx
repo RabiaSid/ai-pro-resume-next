@@ -53,7 +53,7 @@ export default function Header() {
         };
     }, []);
     return (
-        <nav className="bg-white py-2 md:py-4 shadow-md sticky top-0 ">
+        <nav className="bg-white py-2 md:py-4 shadow-md ">
             <div className="container md:px-4 mx-auto flex items-center justify-between ">
 
                 {/* Logo */}
@@ -104,8 +104,9 @@ export default function Header() {
                     </button>
                 </div>
 
-                <div className={`absolute md:static  top-16 left-0 w-full md:w-auto bg-white md:bg-transparent shadow-md md:shadow-none p-5 md:p-0 transition-all duration-300 
-                    ${menuOpen || !isMobile ? "block " : "hidden"} md:flex md:items-center md:space-x-4 `}>
+                <div className={`absolute md:static  top-16 left-0 w-full md:w-auto bg-white md:bg-transparent
+                 shadow-md md:shadow-none p-5 md:p-0 transition-all duration-300 
+                 ${menuOpen || !isMobile ? "block " : "hidden"} md:flex md:items-center md:space-x-4 `}>
                     <div className={`flex md:items-center  flex-col md:flex-row divide-y-2 md:divide-y-0 ${isMobile && "max-h-[550px] overflow-y-auto overflow-x-hidden"} `}>
                         {menuItems.map((item, index) => (
                             <div key={index} className={`relative group `}>

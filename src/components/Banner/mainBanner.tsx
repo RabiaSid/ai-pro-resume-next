@@ -3,6 +3,7 @@
 import React, { useEffect, useState } from "react";
 import { useTypedText } from "../useTypedText";
 import AppButton from "../common/button/pages";
+import ZoomImageSlider from "../zoomImageSlider";
 // import NinaButton from "@/components/NinaButton";
 
 interface ButtonProps {
@@ -15,7 +16,7 @@ interface ButtonProps {
     guestLink: string;
 }
 
-interface BannerProps {
+type BannerProps = {
     user?: { token?: string };
     title: string;
     subtitle: string[];
@@ -26,41 +27,8 @@ interface BannerProps {
 }
 
 
-
-const ZoomCarousel: React.FC<{ images?: string[] }> = ({ images = [] }) => {
-    const [cImage, setCurrentIndex] = useState(0);
-
-    useEffect(() => {
-        if (images.length === 0) return;
-
-        const intervalId = setInterval(() => {
-            setCurrentIndex((prevIndex) => (prevIndex + 1) % images.length);
-        }, 5000);
-        return () => clearInterval(intervalId);
-    }, [images.length]);
-
-    if (images.length === 0) {
-        return <div>No images available</div>;
-    }
-
-    return (
-        <>
-            <link rel="preload" as="image" href={images[0]} />
-            <div className="w-full lg:w-[700px] slick__main__holder">
-                {images.map((img, idx) => (
-                    <img
-                        key={idx}
-                        src={img}
-                        className={`${idx === cImage ? "active" : "inActive"} skew-y-12`}
-                        alt={`image${idx + 1}`}
-                    />
-                ))}
-            </div>
-        </>
-    );
-};
-
-const Banner: React.FC<BannerProps> = ({ user, title, subtitle, description, button1, button2, images = [] }) => {
+export default function Banner(props: BannerProps) {
+    const { user, title, subtitle, description, button1, button2, images = [] } = props
     const typedText = useTypedText(subtitle);
 
     return (
@@ -100,11 +68,9 @@ const Banner: React.FC<BannerProps> = ({ user, title, subtitle, description, but
                     </div>
                 </div>
                 <div className="flex justify-center items-center">
-                    {/* <ZoomCarousel images={images} /> */}
+                    <ZoomImageSlider images={images} />
                 </div>
             </div>
         </section>
     );
-};
-
-export default Banner;
+}

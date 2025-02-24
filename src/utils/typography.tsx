@@ -48,7 +48,7 @@ export function H6({ className = '', children }: any) {
 }
 
 export function P({ className = '', children }: any) {
-    const defaultClasses = 'font-inter leading-7 [&:not(:first-child)]:mt-6';
+    const defaultClasses = 'font-inter leading-7 [&:not(:first-child)]:mt-6 ';
 
     return <p className={`${defaultClasses} ${className}`}>{children}</p>;
 }
