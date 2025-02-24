@@ -1,9 +1,13 @@
 "use client";
 
-import React, { useEffect, useState } from "react";
+import React from "react";
+import Image from "next/image";
 import { useTypedText } from "../useTypedText";
 import AppButton from "../common/button/pages";
 import ZoomImageSlider from "../zoomImageSlider";
+import shadeImage01 from "media/assets/pattrens/01.webp";
+import shadeImage02 from "media/assets/pattrens/02.webp";
+import shadeImage03 from "media/assets/pattrens/03.webp";
 // import NinaButton from "@/components/NinaButton";
 
 interface ButtonProps {
@@ -17,10 +21,10 @@ interface ButtonProps {
 }
 
 type BannerProps = {
-    user?: { token?: string };
+    user?: { token?: any };
     title: string;
     subtitle: string[];
-    description: string;
+    description: string | React.ReactNode;
     button1: ButtonProps;
     button2: ButtonProps;
     images?: any;
@@ -32,8 +36,27 @@ export default function Banner(props: BannerProps) {
     const typedText = useTypedText(subtitle);
 
     return (
-        <section className="w-full py-10 bg-gray-100">
-            <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 grid lg:grid-cols-2 gap-8 items-center">
+        <section className="w-full py-5 my-10 bg-white relative">
+            <div className="absolute w-full h-[600px] flex  justify-center items-center z-0 overflow-hidden">
+                <Image
+                    src={shadeImage01}
+                    alt="full shade image"
+                    className="w-[800px] relative left-[900px]  top-[50px] "
+                />
+                <Image
+                    src={shadeImage03}
+                    alt="full shade image"
+                    className="w-[1200px] relative left-[300px] top-[-150px] "
+                />
+                <Image
+                    src={shadeImage02}
+                    alt="full shade image"
+                    className="w-[1200px] relative top-[50px]"
+                />
+            </div>
+
+
+            <div className="grid lg:grid-cols-2 gap-8 items-center">
                 <div className="text-left space-y-6">
                     <h1 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-gray-900">
                         <span className="block mb-2">{title}</span>

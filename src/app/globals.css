@@ -21,20 +21,23 @@
   background: #868686;
 }
 
-/* :root {
-  --background: #ffffff;
-  --foreground: #171717;
+.scrollHeader ::-webkit-scrollbar {
+  width: 4px;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+/* Track */
+.scrollHeader ::-webkit-scrollbar-track {
+  background: #00caa5;
 }
 
-body {
-  color: var(--foreground);
-  background: var(--background);
-  font-family: Arial, Helvetica, sans-serif;
-} */
+/* Handle */
+.scrollHeader ::-webkit-scrollbar-thumb {
+  background:  #0072b1;
+}
+
+/* Handle on hover */
+.scrollHeader ::-webkit-scrollbar-thumb:hover {
+  background: #868686;
+}
+
+

@@ -53,7 +53,7 @@ export default function Header() {
         };
     }, []);
     return (
-        <nav className="bg-white py-2 md:py-4 shadow-md ">
+        <nav className={`bg-white py-2 md:py-4 shadow-md z-10 `}>
             <div className="container md:px-4 mx-auto flex items-center justify-between ">
 
                 {/* Logo */}
@@ -106,8 +106,8 @@ export default function Header() {
 
                 <div className={`absolute md:static  top-16 left-0 w-full md:w-auto bg-white md:bg-transparent
                  shadow-md md:shadow-none p-5 md:p-0 transition-all duration-300 
-                 ${menuOpen || !isMobile ? "block " : "hidden"} md:flex md:items-center md:space-x-4 `}>
-                    <div className={`flex md:items-center  flex-col md:flex-row divide-y-2 md:divide-y-0 ${isMobile && "max-h-[550px] overflow-y-auto overflow-x-hidden"} `}>
+                 ${menuOpen || !isMobile ? "block " : "hidden"} md:flex md:items-center md:space-x-4 scrollHeader `}>
+                    <div className={`flex md:items-center  flex-col md:flex-row divide-y-2 md:divide-y-0 ${isMobile && "max-h-[600px] overflow-y-auto overflow-x-hidden"} px-5 `}>
                         {menuItems.map((item, index) => (
                             <div key={index} className={`relative group `}>
 
@@ -134,8 +134,8 @@ export default function Header() {
 
                                         <div className={`md:absolute divide-y-2 md:divide-y-0 md:left-0 md:mt-1 text-center md:text-start w-[90%] mx-auto md:w-48  md:bg-white md:border transition-all duration-300 overflow-hidden md:shadow-[0_3px_10px_rgb(0,0,0,0.2)] rounded-xl 
                                         ${submenuOpen === true && submenu[index] ? "block" : "hidden"} md:group-hover:block`}
-                                            onMouseEnter={() => setSubmenuOpen(true)}
-                                            onMouseLeave={() => setSubmenuOpen(false)}
+                                            onClick={() => setSubmenuOpen(true)}
+                                        // onMouseLeave={() => setSubmenuOpen(false)}
                                         >
                                             {item.submenu.map((sub, subIndex) => (
                                                 <Link key={subIndex} href={sub.path} className="block px-4 py-4 md:hover:border-l-4 transition md:border-primaryGreen text-gray-700 md:hover:bg-primaryBlue md:hover:text-white">
