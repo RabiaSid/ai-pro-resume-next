@@ -3,8 +3,8 @@ import React, { useState } from "react"
 // import { usePathname } from "next/navigation"
 // import { PopupProvider } from "./configs/store/Popup"
 
-import Header from "@/app/Layout/header"
-import Footer from "@/app/Layout/footer"
+import Header from "@/app/Layout/header/page"
+import Footer from "@/app/Layout/footer/page"
 
 const ConditionalLayout = ({ children }: any) => {
     // const pathname = usePathname();

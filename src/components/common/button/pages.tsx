@@ -30,7 +30,7 @@ export default function AppButton(props: propType) {
                 ${altColor ? altColor : "hover:bg-transparent"} 
                 ${altColor ? altColor : "hover:border-primaryBlue"} 
                 inline-flex w-fit py-2 px-6 xl:py-3 xl:px-12 ${border ? border : "rounded-full"} justify-center 
-                items-center font-semibold sm:text-xl tracking-normal uppercase  
+                items-center font-semibold sm:text-lg tracking-normal uppercase  
                 `}
         >
             {leftIcon && <span className="mr-2">{leftIcon}</span>}
