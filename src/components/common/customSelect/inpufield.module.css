@@ -1,0 +1,9 @@
+.floatLabelSelect {
+    margin: 16px 0;     
+ }
+
+.floatLabelSelect:focus-within label,
+  .floatLabelSelect input:not(:placeholder-shown) + label {
+    transform: translateY(-1.5rem) scale(0.75);
+    background-color: white;
+}
