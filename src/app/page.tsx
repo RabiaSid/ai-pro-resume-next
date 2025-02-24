@@ -2,7 +2,7 @@ import React from 'react'
 import MainBanner from '@/components/Banner/mainBanner'
 import { BannerData } from './data'
 import OurFaqs from '@/components/Faq/faq'
-import ResumeTemplateSlider from '@/components/TemplateSlider'
+// import ResumeTemplateSlider from '@/components/TemplateSlider'
 
 export default function Page() {
 
@@ -10,7 +10,7 @@ export default function Page() {
         <>
             <div className='container md:px-4 mx-auto'>
                 <MainBanner {...BannerData} />
-                <ResumeTemplateSlider />
+                {/* <ResumeTemplateSlider /> */}
                 <OurFaqs />
             </div>
         </>
