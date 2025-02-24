@@ -9,6 +9,10 @@ type PropsType = {
     onChange?: (event: React.ChangeEvent<HTMLInputElement>) => void;
     className?: string;
     status?: "success" | "error" | "warning" | null;
+    readOnly?: boolean;
+    leftIcon?: any;
+    rightIcon?: any;
+
 };
 
 export default function AppInputField({
@@ -19,18 +23,24 @@ export default function AppInputField({
     onChange,
     className = "",
     status = null,
+    readOnly = false,
+    leftIcon,
+    rightIcon,
     ...rest
 }: PropsType) {
     return (
         <div className={`w-72 ${className}`}>
-            <div className={`relative ${styles.floatLabelInput}`}>
+            <div className={`relative flex ${styles.floatLabelInput}`}>
+                {leftIcon && <span className="mr-2">{leftIcon}</span>}
                 <input
                     type={type}
                     id="input-field"
                     placeholder=" "
                     value={value}
+                    readOnly={readOnly}
                     onChange={onChange}
-                    className={`peer w-full focus:text-primaryBlue focus:outline-primaryBlue focus:shadow-outline border rounded-md py-3 px-3 block appearance-none leading-normal transition-all duration-200 
+                    className={`peer ${readOnly ? 'text-primaryGray cursor-not-allowed ' : 'focus:text-primaryBlue focus:outline-primaryBlue'}
+                     w-full focus:shadow-outline border rounded-md py-3 px-3 block appearance-none leading-normal transition-all duration-200 
                         ${status === "success" ? 'border-green-500 focus:border-green-500' : ''}
                         ${status === "error" ? 'border-red-500 focus:border-red-500' : ''}
                         ${status === "warning" ? 'border-yellow-500 focus:border-yellow-500' : ''}
@@ -38,6 +48,7 @@ export default function AppInputField({
                     `}
                     {...rest}
                 />
+                {rightIcon && <span className="ml-2">{rightIcon}</span>}
                 <label
                     htmlFor="input-field"
                     className={`absolute bg-none bg-transparent top-3 left-3 pointer-events-none transition-all duration-200 px-2
