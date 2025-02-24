@@ -3,33 +3,43 @@ import Link from 'next/link'
 import React, { useState } from 'react'
 import Image from 'next/image'
 import { FaRegEye, FaRegEyeSlash } from 'react-icons/fa'
-import { IoInformationCircle } from 'react-icons/io5'
-import { useForm } from "react-hook-form";
+import { Controller, useForm } from "react-hook-form";
 import ReCAPTCHA from "react-google-recaptcha";
-import { H1, H2 } from '@/utils/typography'
+import { H1 } from '@/utils/typography'
 import AppButton from '@/components/common/button/pages'
 import AppInputField from '@/components/common/inpufield/page'
 import GoogleLogo from "media/assets/google_logo.webp";
 import FacebookLogo from "media/assets/fb_logo.webp";
 import LinkedInLogo from "media/assets/link.webp";
 import CustomSelect from '@/components/common/customSelect/CustomSelect'
-import { Fa42Group } from 'react-icons/fa6'
+
+import { useRouter } from 'next/navigation'
+import CustomPhoneNumber from '@/components/common/customSelect/CustomPhoneNumber'
+
 
 export default function page() {
+    const router = useRouter();
     const [captchaError, setCaptchaError] = useState("");
     const [verified, setVerified] = useState<any>(false);
     const [showPassword, setShowPassword] = useState(false);
     const [showC_Password, setC_ShowPassword] = useState(false);
 
     const staticOptions = [
-        { id: "1", name: "Option 1" },
-        { id: "2", name: "Option 2" },
-        { id: "3", name: "Option 3" },
+        { id: "us", name: "United States" },
+        { id: "ca", name: "Canada" },
+        { id: "uk", name: "United Kingdom" },
+        { id: "au", name: "Australia" },
+        { id: "de", name: "Germany" },
+        { id: "fr", name: "France" },
+        { id: "in", name: "India" },
+        { id: "jp", name: "Japan" },
+        { id: "cn", name: "China" },
     ];
 
     const {
         register,
         handleSubmit,
+        control,
         formState: { errors },
     } = useForm();
 
@@ -57,6 +67,13 @@ export default function page() {
     const handleTogglePasswordVisibilityC = () => {
         setC_ShowPassword((prevShowPassword) => !prevShowPassword);
     };
+    const handleClick = () => {
+        console.log("Creatimg account");
+    };
+    const handleLoginSubmit = (data: any) => {
+        console.log(data);
+    }
+
     return (
         <div className="w-full md:w-[550px] m-auto mt-20 px-4 min-h-[800px] text-center font-Lexend">
             <H1 className='text-primaryBlue mb-5'>CREATE ACCOUNT</H1>
@@ -121,8 +138,7 @@ export default function page() {
             </div>
 
             <div>
-                <form
-                //  onSubmit={handleSubmit(handleLoginSubmit)} 
+                <form onSubmit={handleSubmit(handleLoginSubmit)}
                 >
                     {/* Name */}
                     <div className="flex flex-col">
@@ -212,24 +228,13 @@ export default function page() {
                         </span>
                     </div>
 
-
                     {/* Referred By */}
                     <div className="flex flex-col">
                         <AppInputField
                             label="Referred By"
                             type="text"
                             className="w-full"
-                            readOnly={true}
-                            aria-label={errors?.reffered ? "reffered error" : ""}
-                        />
-                    </div>
-
-                    {/* Referred By */}
-                    <div className="flex flex-col">
-                        <AppInputField
-                            label="Referred By"
-                            type="text"
-                            className="w-full"
+                            value='Rimsha012'
                             readOnly={true}
                             aria-label={errors?.reffered ? "reffered error" : ""}
                         />
@@ -248,13 +253,13 @@ export default function page() {
 
                     {/* Phone Number   */}
                     <div className="flex flex-col">
-                        <AppInputField
-                            label="Referred By"
-                            type="text"
-                            className="w-full"
-                            readOnly={true}
-                            aria-label={errors?.reffered ? "reffered error" : ""}
-                            leftIcon={<Fa42Group />}
+                        <Controller
+                            name="phone"
+                            control={control}
+                            rules={{ required: "Phone Number is Required" }}
+                            render={({ field }) => (
+                                <CustomPhoneNumber field={field} errors={errors} />
+                            )}
                         />
                     </div>
 
@@ -275,11 +280,7 @@ export default function page() {
                             </div>
                         </div>
                     </div>
-
                 </form>
-
-
-
             </div>
 
             <div>
@@ -294,17 +295,16 @@ export default function page() {
                     />
                 </div>
 
-
                 <AppButton title='Create Account'
-                    className="bg-[#0072b1] uppercase w-full mt-4 px-8 py-2 rounded-md text-white text-xl font-bold hover:bg-slate-800 ease-in transition-all mb-4 sm:mb-0"
-
+                    onClick={handleClick}
+                    className="bg-primaryBlue uppercase w-full mt-4 px-8 py-2 rounded-md text-white text-xl font-bold hover:bg-slate-800 ease-in transition-all mb-4 sm:mb-0"
                 />
                 <div className="w-[60%] text-center mt-4 text-slate-500 inline-block mb-5">
                     <p className="text-slate-500">
                         Already an account?{" "}
                         <a
                             href={"/login"}
-                            className="text-[#0072b1] font-bold hover:text-slate-800"
+                            className="text-primaryBlue font-bold hover:text-slate-800"
                         >
                             LOGIN
                         </a>

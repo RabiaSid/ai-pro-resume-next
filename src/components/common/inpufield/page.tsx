@@ -40,7 +40,8 @@ export default function AppInputField({
                     value={value}
                     readOnly={readOnly}
                     onChange={onChange}
-                    className={`peer w-full focus:text-primaryBlue focus:outline-primaryBlue focus:shadow-outline border rounded-md py-3 px-3 block appearance-none leading-normal transition-all duration-200 
+                    className={`peer ${readOnly ? 'text-primaryGray cursor-not-allowed ' : 'focus:text-primaryBlue focus:outline-primaryBlue'}
+                     w-full focus:shadow-outline border rounded-md py-3 px-3 block appearance-none leading-normal transition-all duration-200 
                         ${status === "success" ? 'border-green-500 focus:border-green-500' : ''}
                         ${status === "error" ? 'border-red-500 focus:border-red-500' : ''}
                         ${status === "warning" ? 'border-yellow-500 focus:border-yellow-500' : ''}
