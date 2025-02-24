@@ -33,6 +33,7 @@ export default function AppInputField({
             <div className={`relative flex ${styles.floatLabelInput}`}>
                 {leftIcon && <span className="mr-2">{leftIcon}</span>}
                 <input
+
                     type={type}
                     id="input-field"
                     placeholder=" "

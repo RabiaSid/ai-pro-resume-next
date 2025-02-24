@@ -1,4 +1,7 @@
 import React, { useEffect, useState } from 'react'
+import Image from 'next/image';
+import Head from "next/head";
+import styles from "./zoomImageSlider.module.css"
 
 type propsType = {
     images?: any;
@@ -9,31 +12,35 @@ export default function ZoomImageSlider(props: propsType) {
     const [cImage, setCurrentIndex] = useState(0);
 
     useEffect(() => {
-        if (images.length === 0) return;
-
         const intervalId = setInterval(() => {
             setCurrentIndex((prevIndex) => (prevIndex + 1) % images.length);
-        }, 5000);
-        return () => clearInterval(intervalId);
-    }, [images.length]);
+        }, 5000); // Change the interval time (in milliseconds) as needed
 
-    if (images.length === 0) {
-        return <div>No images available</div>;
-    }
+        return () => clearInterval(intervalId); // Cleanup function
+    }, [images.length]);
 
     return (
         <>
-            <link rel="preload" as="image" href={images[0]} />
-            <div className="w-full lg:w-[700px] slick__main__holder">
+            <Head>
+                <link rel="preload" as="image" href={images[0]} />
+            </Head>
+            <div className={`w-full lg:w-[700px] ${styles.zoomImageSlider}`}>
                 {images.map((img: any, idx: any) => (
-                    <img
+                    <Image
                         key={idx}
                         src={img}
-                        className={`${idx === cImage ? "active" : "inActive"} skew-y-12`}
-                        alt={`image${idx + 1}`}
+                        width={550} // Adjust width accordingly
+                        height={400} // Adjust height accordingly
+                        className={`${idx === cImage ? styles.active : styles.inActive} skew-y-12`}
+                        alt={`image ${idx + 1}`}
+                        priority={idx === 0} // Prioritize the first image for better performance
                     />
                 ))}
             </div>
         </>
     );
 }
+
+
+
+
