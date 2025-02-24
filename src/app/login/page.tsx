@@ -46,7 +46,7 @@ export default function page() {
     };
     return (
         <div className="w-full md:w-[550px] m-auto mt-20 px-4 min-h-[800px] text-center font-Lexend">
-            <H1 >SIGN IN</H1>
+            <H1 className='text-primaryBlue mb-5'>SIGN IN</H1>
 
             <div className="text-black text-left my-4 text-lg flex items-start justify-center">
                 <IoInformationCircle size={24} className="mt-[2px] text-[red]" />
