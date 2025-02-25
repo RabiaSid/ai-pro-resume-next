@@ -9,12 +9,11 @@ import premium from 'media/assets/premium.webp';
 // import global from '@/config/global';
 // import ApiService from '@/services/ApiService';
 import AppButton from '../common/button/pages';
-import Template1 from 'media/assets/template_design_1.webp'
-import Template2 from 'media/assets/template_design_2.webp'
-import Template3 from 'media/assets/template_design_3.webp'
+import Template1 from 'media/assets/resume_template_images/template_3.webp'
+import Template2 from 'media/assets/resume_template_images/template_2.webp'
+import Template3 from 'media/assets/resume_template_images/template_3.webp'
 import Image from 'next/image';
-// import useEmblaCarousel from 'embla-carousel-react';
-// import styles from "./templateSlider.module.css"
+import { H2, Medium } from '@/utils/typography';
 
 interface Template {
     id: number;
@@ -27,9 +26,16 @@ interface User {
     purchase_templates?: { id: number }[];
 }
 
+type propsType = {
+    title: string | React.ReactNode;
+    description: string | React.ReactNode;
+}
 
 
-export default function ResumeTemplateSlider() {
+
+export default function ResumeTemplateSlider(props: propsType) {
+    const { title, description } = props
+
     // const { user } = useAuth();
     // const [templates, setTemplates] = useState<Template[]>([]);
     // const [userDetails, setUserDetails] = useState<User | null>(null);
@@ -67,23 +73,11 @@ export default function ResumeTemplateSlider() {
     //     }
     // }, [resumeTemplatesListing, userDetails]);
 
-    // const settings = {
-    //     dots: false,
-    //     infinite: true,
-    //     speed: 500,
-    //     slidesToShow: 3,
-    //     slidesToScroll: 1,
-    //     arrows: false,
-    //     autoplay: true,
-    //     autoplaySpeed: 2000,
-    //     responsive: [
-    //         { breakpoint: 1500, settings: { slidesToShow: 2 } },
-    //         { breakpoint: 1200, settings: { slidesToShow: 2 } },
-    //         { breakpoint: 768, settings: { slidesToShow: 1 } },
-    //     ],
-    // };
-    // const [emblaRef, emblaApi] = useEmblaCarousel();
+
     const [templates, setTemplates] = useState<Template[]>([
+        { id: 1, image: Template1, is_paid: 0 },
+        { id: 2, image: Template2, is_paid: 1 },
+        { id: 3, image: Template3, is_paid: 0 },
         { id: 1, image: Template1, is_paid: 0 },
         { id: 2, image: Template2, is_paid: 1 },
         { id: 3, image: Template3, is_paid: 0 },
@@ -107,45 +101,71 @@ export default function ResumeTemplateSlider() {
         ],
     };
 
-    // const OPTIONS: any = { align: "center" };
 
 
     return (
         <section className="mt-2 px-2 flex justify-center items-center flex-wrap relative">
-            <h3 className="text-center text-[#0072b1] font-bold text-xl md:text-3xl drop-shadow-lg sm:py-6">
-                <span className="text-[#00caa5]">Try Out Our Professional</span> Resume Templates Now!
-            </h3>
-            <div className="w-full lg:w-[80%] lg:flex px-4 sm:justify-center sm:items-center gap-4 xl:gap-4">
-                <div className="w-full sm:text-center border-4">
-                    <p className="text-slate-800 text-justify font-normal leading-[1.5]">
-                        Our AI resume builder allows you to <b>create resumes</b> in minutes...
-                    </p>
-
-                    {templates.length > 0 && (
-                        <Slider {...settings} ref={sliderRef} className='border-4'>
-                            {templates.map((template) => {
-                                const isPurchased = userPurchasedTemplates.some(pt => pt.id === template.id);
+            <H2 className="text-primaryBlue py-4">
+                {title}
+            </H2>
+            <div className="flex w-full sm:justify-center sm:items-center sm:text-center">
+                <div className="block">
+                    <Medium className=" m-auto text-slate-800  text-justify font-Lexend">
+                        {description}
+                    </Medium>
+                    <div
+                        className={`${templates.length === 0 ? "" : "grid grid-cols-1 gap-4"
+                            }`}
+                    >
+                        <Slider {...settings} ref={sliderRef}>
+                            {templates.map((template, index) => {
+                                const isPurchased = userPurchasedTemplates.some(
+                                    (purchasedTemplate) => purchasedTemplate.id === template.id
+                                );
                                 return (
-                                    <div key={template.id} className="w-full relative mt-4 flex justify-center items-center border-4 border-red-950">
-                                        <div className="relative">
-                                            {isPurchased ? (
-                                                <div className="flex bg-gradient-to-r from-[#00caa5] to-[#01B2AC] w-[150px] h-8 absolute left-[-35px] top-6 text-white -rotate-45 justify-center items-center z-50" style={{ clipPath: "polygon(20% 0%, 80% 0%, 100% 100%, 0% 100%)" }}>
-                                                    <Image src={brand} alt="purchased icon" />
-                                                    <span>Own</span>
+                                    <div key={index}>
+                                        <div className="w-full relative mt-4 flex justify-center items-center">
+                                            <div className="cl_hover2 w-max lg:m-4">
+                                                <div className="relative">
+                                                    {isPurchased ? (
+                                                        <div
+                                                            className="flex  bg-gradient-to-r  from-[#00caa5] to-[#01B2AC] w-[150px] h-8 absolute left-[-35px] top-6 text-white -rotate-45 justify-center items-center z-50"
+                                                            style={{
+                                                                clipPath:
+                                                                    "polygon(20% 0%, 80% 0%, 100% 100%, 0% 100%)",
+                                                            }}
+                                                        >
+                                                            <Image src={brand} alt="purchased icon" />
+                                                            <span>Own</span>
+                                                        </div>
+                                                    ) : (
+                                                        template.is_paid === 1 && (
+                                                            <div
+                                                                className="flex bg-gradient-to-r from-[#01B2AC] to-[#0072B1] w-[150px] h-8 absolute left-[-35px] top-6 text-white -rotate-45 justify-center items-center z-50"
+                                                                style={{
+                                                                    clipPath:
+                                                                        "polygon(20% 0%, 80% 0%, 100% 100%, 0% 100%)",
+                                                                }}
+                                                            >
+                                                                <Image src={premium} alt="premium icon" />
+                                                                <span>Premium</span>
+                                                            </div>
+                                                        )
+                                                    )}
+
+                                                    <Image
+                                                        src={template.image}
+                                                        alt="My Image"
+                                                        className="shadow-[0px_0px_3px_rgba(0,0,0,1)] rounded-xl w-[100%] sm:w-[90%] p-2 lg:p-0"
+                                                    />
                                                 </div>
-                                            ) : template.is_paid === 1 && (
-                                                <div className="flex bg-gradient-to-r from-[#01B2AC] to-[#0072B1] w-[150px] h-8 absolute left-[-35px] top-6 text-white -rotate-45 justify-center items-center z-50" style={{ clipPath: "polygon(20% 0%, 80% 0%, 100% 100%, 0% 100%)" }}>
-                                                    <Image src={premium} alt="premium icon" />
-                                                    <span>Premium</span>
-                                                </div>
-                                            )}
-                                            <Image src={template.image} alt="Resume Template" className="shadow-md rounded-xl w-full sm:w-[90%] p-2 lg:p-0" />
+                                            </div>
                                         </div>
                                     </div>
                                 );
                             })}
                         </Slider>
-                    )}
+                    </div>
 
                     <div className="flex justify-center items-center w-full pt-8 my-4 text-center">
                         {/* <NinaButton title="View All Templates" mainColor="#0072b1" sliderColor="#fff59c" mainTextColor="#FFFFFF" hoverTextColor="#0072b1" link="/resume-templates" /> */}
@@ -154,7 +174,7 @@ export default function ResumeTemplateSlider() {
                 </div>
 
             </div>
-        </section>
+        </section >
     );
 }
 
