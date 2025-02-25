@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Lexend } from "next/font/google";
 import "./globals.css";
 import ConditionalLayout from "./Layout/conditionalLayout";
+import ReduxProvider from "@/redux/Provider";
 
 // Meta Data
 const lexend = Lexend({
@@ -30,9 +31,11 @@ export default function RootLayout({ children }: any) {
   return (
     <html lang="en" suppressHydrationWarning>
       <body className={lexend.className}>
-        <ConditionalLayout>
-          {children}
-        </ConditionalLayout>
+        <ReduxProvider>
+          <ConditionalLayout>
+            {children}
+          </ConditionalLayout>
+        </ReduxProvider>
       </body>
     </html>
   );
