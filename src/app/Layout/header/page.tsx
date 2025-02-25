@@ -53,7 +53,7 @@ export default function Header() {
         };
     }, []);
     return (
-        <nav className={`bg-white py-2 md:py-4 shadow-md z-10 `}>
+        <nav className={`bg-white py-2 md:py-4 shadow-md z-10 relative`}>
             <div className="container md:px-4 mx-auto flex items-center justify-between ">
 
                 {/* Logo */}
