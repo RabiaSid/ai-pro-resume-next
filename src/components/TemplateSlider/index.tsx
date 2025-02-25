@@ -9,10 +9,16 @@ import premium from 'media/assets/premium.webp';
 // import global from '@/config/global';
 // import ApiService from '@/services/ApiService';
 import AppButton from '../common/button/pages';
+import Template1 from 'media/assets/template_design_1.webp'
+import Template2 from 'media/assets/template_design_2.webp'
+import Template3 from 'media/assets/template_design_3.webp'
+import Image from 'next/image';
+// import useEmblaCarousel from 'embla-carousel-react';
+// import styles from "./templateSlider.module.css"
 
 interface Template {
     id: number;
-    image: string;
+    image: any;
     is_paid: number;
 }
 
@@ -76,11 +82,11 @@ export default function ResumeTemplateSlider() {
     //         { breakpoint: 768, settings: { slidesToShow: 1 } },
     //     ],
     // };
-
+    // const [emblaRef, emblaApi] = useEmblaCarousel();
     const [templates, setTemplates] = useState<Template[]>([
-        { id: 1, image: '/dummy1.jpg', is_paid: 0 },
-        { id: 2, image: '/dummy2.jpg', is_paid: 1 },
-        { id: 3, image: '/dummy3.jpg', is_paid: 0 },
+        { id: 1, image: Template1, is_paid: 0 },
+        { id: 2, image: Template2, is_paid: 1 },
+        { id: 3, image: Template3, is_paid: 0 },
     ]);
     const [userPurchasedTemplates, setUserPurchasedTemplates] = useState<Template[]>([]);
     const sliderRef = useRef<Slider | null>(null);
@@ -101,6 +107,8 @@ export default function ResumeTemplateSlider() {
         ],
     };
 
+    // const OPTIONS: any = { align: "center" };
+
 
     return (
         <section className="mt-2 px-2 flex justify-center items-center flex-wrap relative">
@@ -112,62 +120,39 @@ export default function ResumeTemplateSlider() {
                     <p className="text-slate-800 text-justify font-normal leading-[1.5]">
                         Our AI resume builder allows you to <b>create resumes</b> in minutes...
                     </p>
-                    {/* {templates.length > 0 && (
-                        <Slider {...settings} ref={sliderRef}>
-                            {templates.map((template) => {
-                                const isPurchased = userPurchasedTemplates.some(pt => pt.id === template.id);
-                                return (
-                                    <div key={template.id} className="w-full relative mt-4 flex justify-center items-center">
-                                        <div className="relative">
-                                            {isPurchased ? (
-                                                <div className="flex bg-gradient-to-r from-[#00caa5] to-[#01B2AC] w-[150px] h-8 absolute left-[-35px] top-6 text-white -rotate-45 justify-center items-center z-50" style={{ clipPath: "polygon(20% 0%, 80% 0%, 100% 100%, 0% 100%)" }}>
-                                                    <img src={brand.src} alt="purchased icon" />
-                                                    <span>Own</span>
-                                                </div>
-                                            ) : template.is_paid === 1 && (
-                                                <div className="flex bg-gradient-to-r from-[#01B2AC] to-[#0072B1] w-[150px] h-8 absolute left-[-35px] top-6 text-white -rotate-45 justify-center items-center z-50" style={{ clipPath: "polygon(20% 0%, 80% 0%, 100% 100%, 0% 100%)" }}>
-                                                    <img src={premium.src} alt="premium icon" />
-                                                    <span>Premium</span>
-                                                </div>
-                                            )}
-                                            <img src={`${global.imageUrl}${template.image}`} alt="Resume Template" className="shadow-md rounded-xl w-full sm:w-[90%] p-2 lg:p-0" />
-                                        </div>
-                                    </div>
-                                );
-                            })}
-                        </Slider>
-                    )} */}
+
                     {templates.length > 0 && (
                         <Slider {...settings} ref={sliderRef} className='border-4'>
                             {templates.map((template) => {
                                 const isPurchased = userPurchasedTemplates.some(pt => pt.id === template.id);
                                 return (
-                                    <div key={template.id} className="w-full relative mt-4 flex justify-center items-center ">
+                                    <div key={template.id} className="w-full relative mt-4 flex justify-center items-center border-4 border-red-950">
                                         <div className="relative">
                                             {isPurchased ? (
                                                 <div className="flex bg-gradient-to-r from-[#00caa5] to-[#01B2AC] w-[150px] h-8 absolute left-[-35px] top-6 text-white -rotate-45 justify-center items-center z-50" style={{ clipPath: "polygon(20% 0%, 80% 0%, 100% 100%, 0% 100%)" }}>
-                                                    <img src={brand.src} alt="purchased icon" />
+                                                    <Image src={brand} alt="purchased icon" />
                                                     <span>Own</span>
                                                 </div>
                                             ) : template.is_paid === 1 && (
                                                 <div className="flex bg-gradient-to-r from-[#01B2AC] to-[#0072B1] w-[150px] h-8 absolute left-[-35px] top-6 text-white -rotate-45 justify-center items-center z-50" style={{ clipPath: "polygon(20% 0%, 80% 0%, 100% 100%, 0% 100%)" }}>
-                                                    <img src={premium.src} alt="premium icon" />
+                                                    <Image src={premium} alt="premium icon" />
                                                     <span>Premium</span>
                                                 </div>
                                             )}
-                                            <img src={template.image} alt="Resume Template" className="shadow-md rounded-xl w-full sm:w-[90%] p-2 lg:p-0" />
+                                            <Image src={template.image} alt="Resume Template" className="shadow-md rounded-xl w-full sm:w-[90%] p-2 lg:p-0" />
                                         </div>
                                     </div>
                                 );
                             })}
                         </Slider>
                     )}
-                </div>
-            </div>
-            <div className="flex justify-center items-center w-full pt-8 my-4 text-center">
-                {/* <NinaButton title="View All Templates" mainColor="#0072b1" sliderColor="#fff59c" mainTextColor="#FFFFFF" hoverTextColor="#0072b1" link="/resume-templates" /> */}
 
-                <AppButton title="View All Templates" />
+                    <div className="flex justify-center items-center w-full pt-8 my-4 text-center">
+                        {/* <NinaButton title="View All Templates" mainColor="#0072b1" sliderColor="#fff59c" mainTextColor="#FFFFFF" hoverTextColor="#0072b1" link="/resume-templates" /> */}
+                        <AppButton title="View All Templates" />
+                    </div>
+                </div>
+
             </div>
         </section>
     );
