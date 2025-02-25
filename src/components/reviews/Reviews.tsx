@@ -6,8 +6,16 @@ import Slider from "react-slick";
 import { FaLongArrowAltLeft, FaLongArrowAltRight } from "react-icons/fa";
 import { MdOutlineStar } from "react-icons/md";
 import { IoIosStarOutline } from "react-icons/io";
+import ReviewCard from "../common/card/ReviewCard";
+import { H2, Medium } from "@/utils/typography";
 
-const Reviews = () => {
+type propsType = {
+  title: string | React.ReactNode;
+  description: string | React.ReactNode;
+};
+
+const Reviews = (props: propsType) => {
+  const { title, description } = props;
   const [our_reviews, set_our_reviews] = useState<any[]>([
     {
       id: 1,
@@ -48,23 +56,6 @@ const Reviews = () => {
 
   const reviewsSliderRef: any = useRef(null);
 
-  const maxStars = 5;
-
-  //   const formatDate = (dateString: any) => {
-  //     const date = new Date(dateString);
-  //     const options = { day: "numeric", month: "short", year: "numeric" };
-  //     return date.toLocaleDateString("en-GB", options);
-  //   };
-
-  //   const fetchData = async () => {
-  //     try {
-  //       const reviewsResponse = await axios.get(global.baseurl + "/our-reviews");
-  //       set_our_reviews(reviewsResponse.data.data);
-  //     } catch (error) {
-  //       console.error("Error fetching data:", error);
-  //     }
-  //   };
-
   return (
     <>
       <section className="bg-[#eeeef1] pt-6 my-5 py-10">
@@ -72,21 +63,17 @@ const Reviews = () => {
           <div className="flex flex-col gap-4 lg:grid justify-center text-center">
             <div className="items-center">
               <div className="px-4  py-2 relative">
-                <h3 className="text-[#0072b1] drop-shadow-lg font-lexend font-bold text-2xl lg:text-4xl w-[100%] lg:w-[80%] 2xl:w-[100%]">
-                  Recommended by Experts &{" "}
-                  <span className="text-[#00caa5]">Community</span>
-                </h3>
-                <p className=" text-[black] font-lexend font-semibold text-lg pt-4">
-                  Community-reviewed, professional-trusted resume builder for
-                  career success and confidence{" "}
-                </p>
+                <H2 className="text-primaryBlue py-4">{title}</H2>
+                <Medium className=" m-auto text-black font-Lexend">
+                  {description}
+                </Medium>
               </div>
             </div>
           </div>
 
           <div className="bg-opacity-25 flex flex-col w-full h-fit  items-center px-4 mb-10 mt-4 relative">
             <div className="w-full our__reviews">
-              {our_reviews && (
+              {our_reviews.length > 0 && (
                 <Slider
                   ref={reviewsSliderRef}
                   {...{
@@ -124,50 +111,8 @@ const Reviews = () => {
                     },
                   ]}
                 >
-                  {our_reviews.map((review) => (
-                    <div key={review.id} className="p-10">
-                      <div className="bg-white shadow-[0px_0px_20px_rgba(220,220,230,1)] border-2 rounded-md p-4 m-auto w-full flex flex-col justify-between gap-4 h-[250px] sm:h-[200px]">
-                        {/* Stars and Date */}
-                        <div className="flex justify-between items-center">
-                          <div className="flex text-sm">
-                            {[...Array(maxStars)].map((_, idx) => (
-                              <div key={idx}>
-                                {idx < review.stars ? (
-                                  <MdOutlineStar
-                                    size={20}
-                                    className="text-[#f99e00]"
-                                  />
-                                ) : (
-                                  <IoIosStarOutline
-                                    size={20}
-                                    className="text-[#f99e00]"
-                                  />
-                                )}
-                              </div>
-                            ))}
-                          </div>
-                          <span className="text-sm text-slate-700 font-semibold">
-                            {review.postedDate}
-                          </span>
-                        </div>
-
-                        {/* User Name */}
-                        <div className="font-Lexend flex items-center gap-2">
-                          <span className="font-semibold text-sm drop-shadow-lg">
-                            {review.userName}
-                          </span>
-                        </div>
-
-                        {/* Review Text */}
-                        <div className="flex-1">
-                          <p className="text-sm text-slate-700">
-                            {review.review.length > 299
-                              ? review.review.substring(0, 300) + "..."
-                              : review.review}
-                          </p>
-                        </div>
-                      </div>
-                    </div>
+                  {our_reviews?.map((rev, idx) => (
+                    <ReviewCard key={idx} review={rev} />
                   ))}
                 </Slider>
               )}
