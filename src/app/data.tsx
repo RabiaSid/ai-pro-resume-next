@@ -55,4 +55,19 @@ export const BannerData = {
     },
     images: images
 }
+export const ResumeTemplateData = {
+    title: (<>
+        <span className="text-primaryGreen">Try Out Our Professional </span> Resume Templates Now!</>),
+    description: (<>
+        Our best AI resume builder allows you to <b>create resumes</b> in
+        minutes. Our <b>professional resume templates</b> are based on what
+        employers look for in a candidate. We also offer{" "}
+        <b>professional cover letter templates</b> that allow you to write
+        amazing pitches to get your dream job. <b>Generate resume</b>{" "}
+        summaries and incredible cover letters with our AI-based suggestions
+        to avoid errors and boring text. You can use our pre-written{" "}
+        <b>professional resume</b> and <b>cover letter examples</b> to
+        kick-start your career. Let's get started!
+    </>),
+}
 
