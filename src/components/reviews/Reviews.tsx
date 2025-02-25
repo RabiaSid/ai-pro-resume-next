@@ -122,14 +122,14 @@ const Reviews = (props: propsType) => {
                 className="z-10 hidden sm:block"
                 onClick={() => reviewsSliderRef.current.slickPrev()}
               >
-                <FaLongArrowAltLeft className="text-primary-green text-2xl cursor-pointer transition-all hover:text-3xl" />
+                <FaLongArrowAltLeft className="text-primaryGreen text-2xl cursor-pointer transition-all hover:text-3xl" />
               </div>
 
               <div
                 className="z-10 hidden sm:block"
                 onClick={() => reviewsSliderRef.current.slickNext()}
               >
-                <FaLongArrowAltRight className="text-primary-green text-2xl cursor-pointer transition-all hover:text-3xl" />
+                <FaLongArrowAltRight className="text-primaryGreen text-2xl cursor-pointer transition-all hover:text-3xl" />
               </div>
             </div>
           </div>
