@@ -15,13 +15,13 @@ import Template3 from 'media/assets/resume_template_images/template_3.webp'
 import Image from 'next/image';
 import { H2, Medium } from '@/utils/typography';
 
-interface Template {
+type Template = {
     id: number;
     image: any;
     is_paid: number;
 }
 
-interface User {
+type User = {
     token?: string;
     purchase_templates?: { id: number }[];
 }
