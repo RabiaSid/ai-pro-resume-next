@@ -2,6 +2,8 @@ import type { Metadata } from "next";
 import { Lexend } from "next/font/google";
 import "./globals.css";
 import ConditionalLayout from "./Layout/conditionalLayout";
+import "slick-carousel/slick/slick.css";
+import "slick-carousel/slick/slick-theme.css";
 
 // Meta Data
 const lexend = Lexend({

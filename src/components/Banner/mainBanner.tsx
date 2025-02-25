@@ -8,6 +8,7 @@ import ZoomImageSlider from "../zoomImageSlider";
 import shadeImage01 from "media/assets/pattrens/01.webp";
 import shadeImage02 from "media/assets/pattrens/02.webp";
 import shadeImage03 from "media/assets/pattrens/03.webp";
+import { H1, Lead } from "@/utils/typography";
 // import NinaButton from "@/components/NinaButton";
 
 interface ButtonProps {
@@ -58,13 +59,13 @@ export default function Banner(props: BannerProps) {
 
             <div className="grid lg:grid-cols-2 gap-8 items-center">
                 <div className="text-left space-y-6">
-                    <h1 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-gray-900">
+                    <H1 className=" text-primaryBlack">
                         <span className="block mb-2">{title}</span>
                         <span className="bg-gradient-to-r from-blue-500 to-green-400 bg-clip-text text-transparent">
                             {typedText}
                         </span>
-                    </h1>
-                    <p className="text-lg text-gray-700 leading-relaxed">{description}</p>
+                    </H1>
+                    <Lead className="text-gray-700 ">{description}</Lead>
                     <div className="flex gap-4">
                         <div>
                             <AppButton title={button1.title} />
