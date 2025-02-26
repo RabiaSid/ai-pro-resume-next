@@ -1,116 +1,79 @@
 'use client';
 
-import React, { useState } from 'react'
-import AppButton from '../common/button/pages'
-import OnScrollAnimeCard from '../common/card/OnScrollAnimeCard'
-import ServiceImg1 from 'media/assets/service_1.webp'
-import ServiceImg2 from 'media/assets/service_2.webp'
-import ServiceImg3 from 'media/assets/service_3.webp'
-const dummyServices = [
-    {
-        image: ServiceImg1,
-        name: 'Web Development',
-        description: '<ul><li>Responsive Design</li><li>Modern UI/UX</li><li>SEO Optimization</li></ul>',
-    },
-    {
-        image: ServiceImg2,
-        name: 'Mobile App Development',
-        description: '<ul><li>iOS & Android Apps</li><li>React Native</li><li>Performance Optimization</li></ul>',
-    },
-    {
-        image: ServiceImg3,
-        name: 'Cloud Services',
-        description: '<ul><li>AWS & Azure</li><li>Scalability</li><li>Serverless Architecture</li></ul>',
-    },
-    {
-        image: ServiceImg1,
-        name: 'AI & Machine Learning',
-        description: '<ul><li>Data Analysis</li><li>Chatbots</li><li>Automation</li></ul>',
-    },
-];
-export default function OnScrollAnime() {
-    // const [random_services, set_random_services] = useState<any[]>([{
-    //     image: ServiceImg1,
-    //     name: 'Web Development',
-    //     description: '<ul><li>Responsive Design</li><li>Modern UI/UX</li><li>SEO Optimization</li></ul>',
-    // },
-    // {
-    //     image: ServiceImg2,
-    //     name: 'Mobile App Development',
-    //     description: '<ul><li>iOS & Android Apps</li><li>React Native</li><li>Performance Optimization</li></ul>',
-    // },
-    // {
-    //     image: ServiceImg3,
-    //     name: 'Cloud Services',
-    //     description: '<ul><li>AWS & Azure</li><li>Scalability</li><li>Serverless Architecture</li></ul>',
-    // },]);
-    // const [random_services, set_random_services] = useState([" ", " "]);
-    // const fetchData = async () => {
-    //     try {
-    //         const reviewsResponse = await axios.get(global.baseurl + "/our-reviews");
+import Image from 'next/image';
+import service_1 from 'media/assets/service_1.webp';
+import service_2 from 'media/assets/service_2.webp';
+import service_3 from 'media/assets/service_3.webp';
+import banner_about from 'media/assets/main_image.webp';
+import AppButton from '../common/button/pages';
+import { H3 } from '../typography';
+import OnScrollAnimeCard from '../common/card/OnScrollAnimeCard';
+// import { UserContext } from '@/context/UserContext';
 
-    //         set_our_reviews(reviewsResponse.data.data);
+const ResumeBuilderSection: React.FC = () => {
+    // const { user } = useContext(UserContext);
+    const dummyData = [
+        { img: service_1, title: 'Personalized AI-Based Suggestions', description: 'AI Pro Resume is your resume specialist that provides AI-based personalized suggestions based on your skills and experiences. These suggestions can speed up your cover letter and resume-making process.' },
+        { img: service_2, title: 'Resume Parser', description: 'With the perfect resume builder, you do not have to write or copy-paste your data. Just import your current resume and see the magic of our resume parser tool. It fetches all the data from your file and transfers them to creative resume maker.' },
+        { img: service_3, title: 'ATS Friendly Templates', description: 'AI Pro Resume allows you to create an ATS-friendly resume that will pass the ATS scan without hassle. We help you design resumes that maximize your chance of being noticed by employers and application tracking systems.' }
+    ]
 
-    //         const servicesResponse = await axios.get(
-    //             global.baseurl + "/random-services"
-    //         );
-    //         set_random_services(servicesResponse.data.data.services);
-    //     } catch (error) {
-    //         console.error("Error fetching data:", error);
-    //     }
-    // };
-
-    // useEffect(() => {
-    //     fetchData();
-    // }, []);
     return (
-        <section className='relative '>
-            <div className="container m-auto overflow-hidden py-8 px-8">
-                <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-4 gap-2 ">
-                    {/* {random_services?.map((service, idx) => (
-                        <div
-                            key={idx}
-                            className="bg-[rgba(255,255,255,0.4)] border-4 hover:bg-[rgba(255,255,255,0.9)] cursor-pointer backdrop-blur-[10px] rounded-lg 
-                        opacity-0 translate-y-10 fadeInUp"
-                        >
-
-                            <OnScrollAnimeCard
-                                img={service.image}
-                                alt={service.name}
-                                title={service.name}
-                                points={service.description}
-                            />
-
+        <section className="overflow-x-hidden ">
+            <div className="relative">
+                <div className="max-w-[1500px] m-auto px-4">
+                    <div className="w-full text-center">
+                        <div className="py-5 opacity-0 translate-x-[-50px] transition-all duration-700 ease-in-out scroll-trigger">
+                            <H3 className="text-primaryBlue drop-shadow-lg font-bold px-4 sm:px-0">
+                                What Makes Us
+                                <span className="text-primaryGreen mx-4 ">
+                                    The Best Resume Builder
+                                </span>
+                                Online?
+                            </H3>
+                            <div className="grid gap-4 mt-10 sm:grid-cols-2 xl:grid-cols-3 font-Lexend sm:px-0">
+                                {dummyData.map((service, index) => (
+                                    <OnScrollAnimeCard
+                                        key={index}
+                                        img={service.img}
+                                        title={service.title}
+                                        description={service.description}
+                                    />
+                                ))}
+                            </div>
                         </div>
-                    ))} */}
-                    {dummyServices.map((service, idx) => (
-                        <div
-                            key={idx}
-                            className='bg-[rgba(255,255,255,0.4)] hover:bg-[rgba(255,255,255,0.9)] cursor-pointer backdrop-blur-[10px] rounded-lg 
-        opacity-0 translate-y-10 '
-                        >
-                            <OnScrollAnimeCard
-                                img={service.image}
-                                alt={service.name}
-                                title={service.name}
-                                points={service.description}
-                            />
+                        <div className="bg-transparent opacity-0 translate-x-[50px] transition-all duration-700 ease-in-out scroll-trigger delay-200">
+                            <div className="justify-center hidden xl:flex">
+                                <Image src={banner_about} alt="about" />
+                            </div>
+                            <div className="flex justify-center items-center w-full mt-6">
+                                <AppButton title="LET'S BUILD YOUR RESUME" />
+                                {/* <NinaButton
+                                title="LET'S BUILD YOUR RESUME"
+                                mainColor="#0072b1"
+                                sliderColor="#fff59c"
+                                mainTextColor="#FFFFFF"
+                                hoverTextColor="#0072b1"
+                                link={user?.token ? '/resume-templates' : '/login'}
+                              /> */}
+                            </div>
                         </div>
-                    ))}
-                </div>
-                <div className="flex justify-center items-center w-full pt-8">
-                    <AppButton title="Let's Explore Services" />
-                    {/* <NinaButton
-                        className=""
-                        title="Let's Explore Services"
-                        mainColor="#0072b1"
-                        sliderColor="#fff59c"
-                        mainTextColor="#FFFFFF"
-                        hoverTextColor="#0072b1"
-                        link={user?.token ? "/services" : "/login"}
-                    /> */}
+                    </div>
                 </div>
             </div>
-        </section >
-    )
+        </section>
+    );
+};
+
+export default ResumeBuilderSection;
+
+// Add the following script to your project to trigger animations on scroll
+if (typeof window !== "undefined") {
+    document.addEventListener("scroll", () => {
+        document.querySelectorAll(".scroll-trigger").forEach((el) => {
+            if (el.getBoundingClientRect().top < window.innerHeight * 0.9) {
+                el.classList.add("opacity-100", "translate-x-0");
+            }
+        });
+    });
 }
