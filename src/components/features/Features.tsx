@@ -4,7 +4,7 @@ import React from "react";
 import PattrenGreen from "media/assets/multi-liners-blue.png";
 import Image from "next/image";
 import FlipCard from "../common/card/flipCard/FlipCard";
-import icon_1 from "media/assets/icon_1.png";
+import icon_1 from "media/assets/icon_1.webp";
 import icon_2 from "media/assets/icon_2.webp";
 import icon_3 from "media/assets/icon_3.webp";
 import icon_4 from "media/assets/icon_4.webp";
@@ -23,7 +23,7 @@ type propsType = {
 const Features = (props: propsType) => {
   const { title, description } = props;
   return (
-    <section className="bg-[#01b2ac] relative overflow-hidden">
+    <section className="bg-[#01b2ac] relative border-t-[1px] overflow-hidden">
       <div className="absolute bottom-0 w-[800px] right-0">
         <Image
           src={PattrenGreen}

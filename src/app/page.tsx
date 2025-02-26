@@ -12,6 +12,7 @@ import ResumeTemplateSlider from "@/components/TemplateSlider";
 import Clients from "@/components/clients/Clients";
 import Reviews from "@/components/reviews/Reviews";
 import Features from "@/components/features/Features";
+import Services from "@/components/services/Services";
 
 export default function Page() {
   return (
@@ -19,6 +20,7 @@ export default function Page() {
       <div className="container md:px-4 mx-auto">
         <MainBanner {...BannerData} />
         <ResumeTemplateSlider {...ResumeTemplateData} />
+        <Services />
         <Features {...FeaturesData} />
         <OurFaqs />
         <Clients {...ClientData} />
