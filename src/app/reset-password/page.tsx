@@ -3,7 +3,7 @@ import Link from 'next/link'
 import React, { useState } from 'react'
 import { FaRegEye, FaRegEyeSlash } from 'react-icons/fa'
 import { useForm } from "react-hook-form";
-import { H1 } from '@/utils/typography'
+import { H1 } from '@/components/typography'
 import AppButton from '@/components/common/button/pages'
 import AppInputField from '@/components/common/inpufield/page'
 import { useRouter } from 'next/navigation'

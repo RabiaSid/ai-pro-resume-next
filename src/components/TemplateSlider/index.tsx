@@ -13,7 +13,7 @@ import Template1 from 'media/assets/resume_template_images/template_3.webp'
 import Template2 from 'media/assets/resume_template_images/template_2.webp'
 import Template3 from 'media/assets/resume_template_images/template_3.webp'
 import Image from 'next/image';
-import { H2, Medium } from '@/utils/typography';
+import { H2, Medium } from '@/components/typography';
 
 type Template = {
     id: number;

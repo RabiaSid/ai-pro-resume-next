@@ -13,7 +13,7 @@ import icon_6 from "media/assets/icon_6.webp";
 import icon_7 from "media/assets/icon_7.webp";
 import icon_8 from "media/assets/icon_8.webp";
 import styles from "./feature.module.css";
-import { H2, Medium } from "@/utils/typography";
+import { H2, Medium } from "@/components/typography";
 
 type propsType = {
   title: string | React.ReactNode;

@@ -3,7 +3,7 @@
 import React, { useState, useEffect } from "react";
 // import axios from "axios";
 import { usePathname } from "next/navigation";
-import { H3 } from "@/utils/typography";
+import { H3 } from "@/components/typography";
 
 interface Faq {
     question: string;

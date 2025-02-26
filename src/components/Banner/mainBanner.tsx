@@ -8,7 +8,7 @@ import ZoomImageSlider from "../zoomImageSlider";
 import shadeImage01 from "media/assets/pattrens/01.webp";
 import shadeImage02 from "media/assets/pattrens/02.webp";
 import shadeImage03 from "media/assets/pattrens/03.webp";
-import { H1, Lead } from "@/utils/typography";
+import { H1, Lead } from "@/components/typography";
 // import NinaButton from "@/components/NinaButton";
 
 interface ButtonProps {

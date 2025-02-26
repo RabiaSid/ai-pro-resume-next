@@ -6,7 +6,7 @@ import "slick-carousel/slick/slick-theme.css";
 import Image from "next/image";
 import { useState } from "react";
 import client1 from "media/assets/about_icon_1.webp";
-import { H2 } from "@/utils/typography";
+import { H2 } from "@/components/typography";
 
 type propsType = {
   title: string | React.ReactNode;

@@ -7,7 +7,7 @@ import { FaLongArrowAltLeft, FaLongArrowAltRight } from "react-icons/fa";
 import { MdOutlineStar } from "react-icons/md";
 import { IoIosStarOutline } from "react-icons/io";
 import ReviewCard from "../common/card/ReviewCard";
-import { H2, Medium } from "@/utils/typography";
+import { H2, Medium } from "@/components/typography";
 
 type propsType = {
   title: string | React.ReactNode;
