@@ -26,6 +26,7 @@ export default function AppButton(props: propType) {
     } = props;
     return (
         <button
+            type="submit"
             className={
                 className ? className :
                     `group border-2 border-transparent ${mainColor ? mainColor : "bg-primaryBlue"} 

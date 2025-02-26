@@ -67,6 +67,20 @@ const authSlice = createSlice({
         state.loading = false;
         state.error = action.payload as string;
       })
+      .addCase(registerUser.pending, (state) => {
+        state.loading = true;
+        state.error = null;
+      })
+      .addCase(registerUser.fulfilled, (state, action) => {
+        state.loading = false;
+        state.user = action.payload.user;
+        state.token = action.payload.token;
+        Cookies.set("token", action.payload.token);
+      })
+      .addCase(registerUser.rejected, (state, action) => {
+        state.loading = false;
+        state.error = action.payload as string;
+      })
       .addCase(logoutUser.fulfilled, (state) => {
         state.user = null;
         state.token = null;
