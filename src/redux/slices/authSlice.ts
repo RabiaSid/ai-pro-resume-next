@@ -49,7 +49,18 @@ const authSlice = createSlice({
   name: "auth",
   initialState,
   reducers: {
-    
+    setUser: (state, action) => {
+      state.user = action.payload;
+    },
+    setToken: (state, action) => {
+      state.token = action.payload;
+      Cookies.set("token", action.payload);
+    },
+    logout: (state) => {
+      state.user = null;
+      state.token = null;
+      Cookies.remove("token");
+    },
   },
   extraReducers: (builder) => {
     builder
@@ -59,10 +70,12 @@ const authSlice = createSlice({
       })
       .addCase(loginUser.fulfilled, (state, action) => {
         state.loading = false;
-        state.user = action.payload.user;
-        state.token = action.payload.token;
-        Cookies.set("token", action.payload.token);
-      })
+        console.log(action, "actionaction");
+        state.user = action.payload.response.data.user; 
+        state.token = action.payload.response.data.token; 
+        Cookies.set("token", action.payload.response.data.token);
+    })
+    
       .addCase(loginUser.rejected, (state, action) => {
         state.loading = false;
         state.error = action.payload as string;
@@ -75,7 +88,7 @@ const authSlice = createSlice({
         state.loading = false;
         state.user = action.payload.user;
         state.token = action.payload.token;
-        Cookies.set("token", action.payload.token);
+        // Cookies.set("token", action.payload.token);
       })
       .addCase(registerUser.rejected, (state, action) => {
         state.loading = false;

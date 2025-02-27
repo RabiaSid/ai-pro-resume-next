@@ -14,15 +14,21 @@ import FacebookLogo from "media/assets/fb_logo.webp";
 import LinkedInLogo from "media/assets/link.webp";
 import { useRouter } from 'next/navigation'
 import Ads from '@/components/ads/Ads'
+import { useDispatch, useSelector } from 'react-redux'
+import { AppDispatch, RootState } from '@/redux/store'
+import { loginUser } from '@/redux/slices/authSlice'
+// import { useAppDispatch } from '@/redux/store';
 
 export default function page() {
     const router = useRouter();
+    const dispatch = useDispatch<AppDispatch>();
+    const { loading, error, user } = useSelector((state: RootState) => state.auth);
+
     const [showPassword, setShowPassword] = useState(false);
     const [captchaError, setCaptchaError] = useState("");
     const [verified, setVerified] = useState<any>(false);
 
     const {
-        register,
         handleSubmit,
         control,
         formState: { errors },
@@ -32,6 +38,7 @@ export default function page() {
         setVerified(true);
         setCaptchaError("");
     };
+    console.log(user, "useruser");
 
     const resetRecaptchaValue = () => {
         setVerified(null);
@@ -48,12 +55,29 @@ export default function page() {
     const handleTogglePasswordVisibility = () => {
         setShowPassword((prevShowPassword) => !prevShowPassword);
     };
+
     const handleCreate = () => {
         router.push("/register")
     }
-    const handleLoginSubmit = (data: any) => {
-        console.log(data, "data");
 
+    const handleLoginSubmit = async (formData: any) => {
+        console.log(formData, "formData");
+        const credentials = {
+            email: formData?.email,
+            password: formData?.password,
+        }
+        try {
+            const response = await dispatch(loginUser(credentials));
+            console.error(response?.payload, "responseresponsevv");
+
+            if (response.payload?.statusCode == "200") {
+                router.push("/");
+            } else {
+                console.error(response.payload?.statusCode);
+            }
+        } catch (error) {
+            console.error("Login failed:", error);
+        }
     }
     return (
         <>
@@ -73,6 +97,7 @@ export default function page() {
 
                 {/* //Social Logins */}
                 <div className='grid space-y-3'>
+
                     <div>
                         {/* //Social Logins */}
                         <AppButton title='Sign-in  with Google'
@@ -93,7 +118,6 @@ export default function page() {
                     </div>
 
                     <div>
-                        {/* //Social Logins */}
                         <AppButton title='Sign-in  with Facebook'
                             className="w-[100%] border border-solid text-gray-400 border-slate-300 px-2 py-2 rounded-md hover:bg-slate-800 hover:text-white ease-in transition-all flex justify-center items-center"
                             childClassName="sm:tracking-widest relative"
@@ -128,43 +152,60 @@ export default function page() {
                             }
                         />
                     </div>
+
                 </div>
+
+
                 <form onSubmit={handleSubmit(handleLoginSubmit)}>
                     <div>
                         {/* Email */}
                         <div className="flex flex-col">
-                            <AppInputField
-                                label="Email or Customer ID*"
-                                type="email"
-                                className="w-full"
-                                {...register("email", { required: "Email is required" })}
-                                aria-label={errors?.email ? "Email error" : ""}
+                            <Controller
+                                name="email"
+                                control={control}
+                                defaultValue=""
+                                rules={{ required: "Email is required" }}
+                                render={({ field }) => (
+                                    <AppInputField
+                                        label="Email or Customer ID*"
+                                        type="email"
+                                        className="w-full"
+                                        {...field}
+                                        aria-label={errors?.email ? "Email error" : ""}
+                                    />
+                                )}
                             />
                         </div>
 
                         {/* Password */}
-                        <div>
-                            <div className="flex flex-col">
-                                <div className="relative w-full">
-                                    <AppInputField
-                                        label="Password*"
-                                        type={showPassword ? "text" : "password"}
-                                        className="w-full"
-                                        {...register("password", { required: "Please Enter Your Password" })}
-                                        aria-label={errors?.password ? "Password error" : ""}
-                                    />
-                                    <button
-                                        type="button"
-                                        onClick={handleTogglePasswordVisibility}
-                                        className="absolute inset-y-0 right-0 pr-4 flex items-center"
-                                    >
-                                        {showPassword ? <FaRegEye className="text-xl" /> : <FaRegEyeSlash className="text-xl" />}
-                                    </button>
-                                </div>
+                        <div className="flex flex-col">
+                            <div className="relative w-full">
+                                <Controller
+                                    name="password"
+                                    control={control}
+                                    defaultValue=""
+                                    rules={{ required: "Please Enter Your Password" }}
+                                    render={({ field }) => (
+                                        <AppInputField
+                                            label="Password*"
+                                            type={showPassword ? "text" : "password"}
+                                            className="w-full"
+                                            {...field}
+                                            aria-label={errors?.password ? "Password error" : ""}
+                                        />
+                                    )}
+                                />
+                                <button
+                                    type="button"
+                                    onClick={handleTogglePasswordVisibility}
+                                    className="absolute inset-y-0 right-0 pr-4 flex items-center"
+                                >
+                                    {showPassword ? <FaRegEye className="text-xl" /> : <FaRegEyeSlash className="text-xl" />}
+                                </button>
                             </div>
                         </div>
-                    </div>
 
+                    </div>
                     <div className="flex flex-col items-start mt-4">
                         <span className="text-red-500 text-sm">{captchaError}</span>
                         <ReCAPTCHA
