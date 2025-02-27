@@ -16,10 +16,15 @@ import CustomSelect from '@/components/common/customSelect/CustomSelect'
 import { useRouter } from 'next/navigation'
 import CustomPhoneNumber from '@/components/common/customSelect/CustomPhoneNumber'
 import Ads from '@/components/ads/Ads'
+import { registerUser } from '@/redux/slices/authSlice'
+import { useDispatch } from 'react-redux'
+import { AppDispatch } from '@/redux/store'
 
 
 export default function page() {
     const router = useRouter();
+    const dispatch = useDispatch<AppDispatch>();
+
     const [captchaError, setCaptchaError] = useState("");
     const [verified, setVerified] = useState<any>(false);
     const [showPassword, setShowPassword] = useState(false);
@@ -71,8 +76,31 @@ export default function page() {
     const handleClick = () => {
         console.log("Creatimg account");
     };
-    const handleLoginSubmit = (data: any) => {
-        console.log(data);
+    const handleLoginSubmit = async (formData: any) => {
+        console.log(formData);
+        console.log(formData, "formData");
+        const credentials = {
+            name: formData?.name,
+            email: formData?.email,
+            role: formData?.role,
+            password: formData?.password,
+            confirm_password: formData?.confirm_password,
+            country_id: 2,
+            contact: formData?.contact,
+            referred_by: formData?.referred_by,
+        }
+        try {
+            const response = await dispatch(registerUser(credentials));
+            console.error(response?.payload, "responseresponsevv");
+
+            if (response.payload?.statusCode == "200") {
+                router.push("/login");
+            } else {
+                console.error(response.payload?.statusCode);
+            }
+        } catch (error) {
+            console.error("Login failed:", error);
+        }
     }
 
     return (
@@ -145,41 +173,61 @@ export default function page() {
                     >
                         {/* Name */}
                         <div className="flex flex-col">
-                            <AppInputField
-                                label="Name*"
-                                // variant="outlined"
-                                type="text"
-                                className="w-full"
-                                aria-label={errors?.name ? "Name error" : ""}
+                            <Controller
+                                name='name'
+                                control={control}
+                                defaultValue=""
+                                render={({ field }) => (
+                                    <AppInputField
+                                        {...field}
+                                        label="Name*"
+                                        // variant="outlined"
+                                        type="text"
+                                        className="w-full"
+                                        aria-label={errors?.name ? "Name error" : ""}
+                                    />
+                                )}
                             />
                         </div>
 
                         {/* Email */}
                         <div className="flex flex-col">
-                            <AppInputField
-                                label="Email*"
-                                // variant="outlined"
-                                type="email"
-                                className="w-full"
-                                aria-label={errors?.email ? "Email error" : ""}
+                            <Controller
+                                name='email'
+                                control={control}
+                                defaultValue=""
+                                rules={{ required: "Email is required" }}
+                                render={({ field }) => (
+                                    <AppInputField
+                                        {...field}
+                                        label="Email*"
+                                        // variant="outlined"
+                                        type="email"
+                                        className="w-full"
+                                        aria-label={errors?.email ? "Email error" : ""}
+                                    />
+                                )}
                             />
+
                         </div>
 
                         {/* Password */}
                         <div className="flex flex-col">
                             <div className="relative w-full">
-                                <AppInputField
-                                    // id="password"
-                                    label="Password*"
-                                    // variant="outlined"
-                                    // autoComplete="on"
-                                    type={showPassword ? "text" : "password"}
-                                    className="w-full"
-                                    {...register("password", {
-                                        required: "Please Enter Your Password",
-                                    })}
-                                    aria-label={errors?.password ? "Password error" : ""}
-                                // error={!!errors.password}
+                                <Controller
+                                    name="password"
+                                    control={control}
+                                    defaultValue=""
+                                    rules={{ required: "Please Enter Your Password" }}
+                                    render={({ field }) => (
+                                        <AppInputField
+                                            label="Password*"
+                                            type={showPassword ? "text" : "password"}
+                                            className="w-full"
+                                            {...field}
+                                            aria-label={errors?.password ? "Password error" : ""}
+                                        />
+                                    )}
                                 />
                                 <button
                                     type="button"
@@ -201,18 +249,20 @@ export default function page() {
                         {/* Confirm Password */}
                         <div className="flex flex-col">
                             <div className="relative w-full">
-                                <AppInputField
-                                    // id="password"
-                                    label="Confirm Password*"
-                                    // variant="outlined"
-                                    // autoComplete="on"
-                                    type={showPassword ? "text" : "password"}
-                                    className="w-full"
-                                    {...register("password", {
-                                        required: "Please Enter Your Confirm Password",
-                                    })}
-                                    aria-label={errors?.password ? "Password error" : ""}
-                                // error={!!errors.password}
+                                <Controller
+                                    name="confirm_password"
+                                    control={control}
+                                    defaultValue=""
+                                    rules={{ required: "Please Enter Your Confirm Password" }}
+                                    render={({ field }) => (
+                                        <AppInputField
+                                            label="Confirm Password*"
+                                            type={showPassword ? "text" : "password"}
+                                            className="w-full"
+                                            {...field}
+                                            aria-label={errors?.password ? "Password error" : ""}
+                                        />
+                                    )}
                                 />
                                 <button
                                     type="button"
@@ -233,31 +283,45 @@ export default function page() {
 
                         {/* Referred By */}
                         <div className="flex flex-col">
-                            <AppInputField
-                                label="Referred By"
-                                type="text"
-                                className="w-full"
-                                value='Rimsha012'
-                                readOnly={true}
-                                aria-label={errors?.reffered ? "reffered error" : ""}
+                            <Controller
+                                name='referred_by'
+                                control={control}
+                                defaultValue="Rimsha012"
+                                render={({ field }) => (
+                                    <AppInputField
+                                        {...field}
+                                        label="Referred By"
+                                        type="text"
+                                        className="w-full"
+                                        readOnly={true}
+                                        aria-label={errors?.reffered ? "reffered error" : ""}
+                                    />
+                                )}
                             />
                         </div>
 
                         {/* Select Country */}
                         <div className="flex flex-col">
-                            <CustomSelect
-                                label="Select Country"
-                                name="text"
-                                className="w-full"
-                                options={staticOptions}
-                            // onChange={onChange}
+
+                            <Controller
+                                name="country_id"
+                                control={control}
+                                rules={{ required: "Country is Required" }}
+                                render={({ field }) => (
+                                    <CustomSelect
+                                        {...field}
+                                        label="Select Country"
+                                        name="text"
+                                        className="w-full"
+                                        options={staticOptions}
+                                    />)}
                             />
                         </div>
 
                         {/* Phone Number   */}
                         <div className="flex flex-col">
                             <Controller
-                                name="phone"
+                                name="contact"
                                 control={control}
                                 rules={{ required: "Phone Number is Required" }}
                                 render={({ field }) => (
@@ -283,37 +347,40 @@ export default function page() {
                                 </div>
                             </div>
                         </div>
+
+
+                        <div>
+                            <div className="flex flex-col items-start mt-4">
+                                <span className="text-red-500 text-sm">{captchaError}</span>
+                                <ReCAPTCHA
+                                    sitekey={"6LdRjxslAAAAAIP7BsNtsYgCvPM5RfNXjHGIzveJ"}
+                                    onChange={(val: any) => {
+                                        handleCheckCaptcha();
+                                        handleRecaptchaTimeout();
+                                    }}
+                                />
+                            </div>
+
+                            <AppButton title='Create Account'
+                                onClick={handleClick}
+                                className="bg-primaryBlue uppercase w-full mt-4 px-8 py-2 rounded-md text-white text-xl font-bold hover:bg-slate-800 ease-in transition-all mb-4 sm:mb-0"
+                            />
+                            <div className="w-[60%] text-center mt-4 text-slate-500 inline-block mb-5">
+                                <p className="text-slate-500">
+                                    Already an account?{" "}
+                                    <a
+                                        href={"/login"}
+                                        className="text-primaryBlue font-bold hover:text-slate-800"
+                                    >
+                                        LOGIN
+                                    </a>
+                                </p>
+                            </div>
+                        </div>
                     </form>
                 </div>
 
-                <div>
-                    <div className="flex flex-col items-start mt-4">
-                        <span className="text-red-500 text-sm">{captchaError}</span>
-                        <ReCAPTCHA
-                            sitekey={"6LdRjxslAAAAAIP7BsNtsYgCvPM5RfNXjHGIzveJ"}
-                            onChange={(val: any) => {
-                                handleCheckCaptcha();
-                                handleRecaptchaTimeout();
-                            }}
-                        />
-                    </div>
 
-                    <AppButton title='Create Account'
-                        onClick={handleClick}
-                        className="bg-primaryBlue uppercase w-full mt-4 px-8 py-2 rounded-md text-white text-xl font-bold hover:bg-slate-800 ease-in transition-all mb-4 sm:mb-0"
-                    />
-                    <div className="w-[60%] text-center mt-4 text-slate-500 inline-block mb-5">
-                        <p className="text-slate-500">
-                            Already an account?{" "}
-                            <a
-                                href={"/login"}
-                                className="text-primaryBlue font-bold hover:text-slate-800"
-                            >
-                                LOGIN
-                            </a>
-                        </p>
-                    </div>
-                </div>
             </div>
         </>
     )

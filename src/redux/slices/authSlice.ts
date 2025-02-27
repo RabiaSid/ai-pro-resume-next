@@ -9,13 +9,6 @@ interface AuthState {
   error: string | null;
 }
 
-const initialState: AuthState = {
-  user: null,
-  token: Cookies.get("token") || null,
-  loading: false,
-  error: null,
-};
-
 // Async thunk for login
 export const loginUser = createAsyncThunk("auth/login", async (credentials: { email: string; password: string }, { rejectWithValue }) =>  {
     try {
@@ -47,16 +40,21 @@ export const logoutUser = createAsyncThunk("auth/logout", async () => {
 
 const authSlice = createSlice({
   name: "auth",
-  initialState,
+  initialState :{
+    user: null,
+    token: Cookies.get("token") || null,
+    loading: false,
+    error: null,
+  } as AuthState,
   reducers: {
-    setUser: (state, action) => {
+    handleSetUser: (state, action) => {
       state.user = action.payload;
     },
-    setToken: (state, action) => {
+    handleSetToken: (state, action) => {
       state.token = action.payload;
       Cookies.set("token", action.payload);
     },
-    logout: (state) => {
+    handleLogout: (state) => {
       state.user = null;
       state.token = null;
       Cookies.remove("token");
@@ -85,9 +83,11 @@ const authSlice = createSlice({
         state.error = null;
       })
       .addCase(registerUser.fulfilled, (state, action) => {
+        console.log(action, "reg actionaction");
+
         state.loading = false;
-        state.user = action.payload.user;
-        state.token = action.payload.token;
+        state.user = action.payload.response.data.user;
+        state.token = action.payload.response.data.token;
         // Cookies.set("token", action.payload.token);
       })
       .addCase(registerUser.rejected, (state, action) => {
