@@ -38,7 +38,7 @@ export const menuItems: MenuItem[] = [
     },
     { name: "Pricing", path: "/pricing" },
     { name: "Contact", path: "/contact" },
-    { name: "Profile", path: "/", className: "block md:hidden" },
+    { name: "Profile", path: "/account", className: "block md:hidden" },
     { name: "Dashboard", path: "/", className: "block md:hidden" },
     { name: "Sign out", path: "/", className: "block md:hidden" },
     { name: "Login", path: "/", className: "block md:hidden" },
@@ -67,7 +67,7 @@ export const menuIconItems: MenuIconItem[] = [
             <BiSolidUser className="bg-[#0072b1] text-white rounded-full p-1 text-2xl " />
         </div>,
         submenu: [
-            { name: "Profile", path: "/" },
+            { name: "Profile", path: "/account" },
             { name: "Dashboard", path: "/" },
             { name: "Sign out", path: "/" }
         ]
