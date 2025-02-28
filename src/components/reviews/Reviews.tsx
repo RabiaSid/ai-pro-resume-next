@@ -58,8 +58,8 @@ const Reviews = (props: propsType) => {
 
   return (
     <>
-      <section className="bg-[#eeeef1] pt-6 py-10">
-        <div className="container m-auto flex flex-col relative ">
+      <section className="bg-[#eeeef1] pt-6 my-5 py-10">
+        <div className="container m-auto flex flex-col relative">
           <div className="flex flex-col gap-4 lg:grid justify-center text-center">
             <div className="items-center">
               <div className="px-4  py-2 relative">
@@ -71,7 +71,7 @@ const Reviews = (props: propsType) => {
             </div>
           </div>
 
-          <div className="bg-opacity-25 flex flex-col w-full h-fit  items-center mb-10 mt-4 relative">
+          <div className="bg-opacity-25 flex flex-col w-full h-fit  items-center px-4 mb-10 mt-4 relative">
             <div className="w-full our__reviews">
               {our_reviews.length > 0 && (
                 <Slider
