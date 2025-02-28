@@ -165,3 +165,19 @@ export const ApplyNowBannerData = {
     </>
   ),
 };
+
+export const ContactUsBannerData = {
+  title: (
+    <>
+      Contact Us-Connect with a{" "}
+      <span
+        style={{ color: "#00caa5" }}
+        className="bg-no-repeat bg-cover leading-[1.5] font-lexend font-bold"
+      >
+        AI Resume Builder
+      </span>{" "}
+      for Personalized Career Help
+    </>
+  ),
+  description: <></>,
+};
