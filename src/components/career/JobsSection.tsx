@@ -17,7 +17,6 @@ const JobsSection = () => {
   const user = { token: "jkdkw2jgdw2kjdgw2kdg " }; // Dummy user state for testing
 
   useEffect(() => {
-    // Dummy job data for UI testing
     const dummyJobs: Job[] = [
       {
         id: 1,
