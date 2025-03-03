@@ -8,21 +8,21 @@ interface LinkTextProps {
 
 
 export function H1({ className = '', children }: any) {
-    const defaultClasses = `fclassName="text-primary-black font-Lexend font-bold text-2xl lg:text-4xl xl:text-5xl  sm:leading-[1.7] md:leading-[1.5] lg:leading-[1.5] 2xl:leading-[1.2] text-center  sm:text-left  " `;
+    const defaultClasses = 'text-3xl sm:text-4xl lg:text-5xl font-bold';
 
     return <h1 className={`${defaultClasses} ${className}`}>{children}</h1>;
 }
 
 export function H2({ className = '', children }: any) {
     const defaultClasses =
-        'font-poppins scroll-m-20 text-3xl font-semibold tracking-tight lg:text-4xl';
+        'font-poppins scroll-m-20 font-bold text-xl md:text-3xl tracking-tight lg:text-4xl';
 
     return <h2 className={`${defaultClasses} ${className}`}>{children}</h2>;
 }
 
 export function H3({ className = '', children }: any) {
     const defaultClasses =
-        'font-poppins scroll-m-20 text-[30px] font-semibold tracking-tight lg:text-[35px]';
+        'font-poppins scroll-m-20 text-3xl font-semibold tracking-tight lg:text-4xl';
 
     return <h3 className={`${defaultClasses} ${className}`}>{children}</h3>;
 }
@@ -53,14 +53,21 @@ export function P({ className = '', children }: any) {
     return <p className={`${defaultClasses} ${className}`}>{children}</p>;
 }
 
-export function Lead({ className = '', children }: any) {
-    const defaultClasses = 'font-poppins text-xl';
+
+export function Large({ className = '', children }: any) {
+    const defaultClasses = 'font-poppins text-lg font-semibold';
 
     return <p className={`${defaultClasses} ${className}`}>{children}</p>;
 }
 
-export function Large({ className = '', children }: any) {
-    const defaultClasses = 'font-poppins text-lg font-semibold';
+export function Lead({ className = '', children }: any) {
+    const defaultClasses = 'text-lg text-gray-700 leading-relaxed';
+
+    return <p className={`${defaultClasses} ${className}`}>{children}</p>;
+}
+
+export function Medium({ className = '', children }: any) {
+    const defaultClasses = 'sm:text-left sm:text-md  font-normal leading-[1.5]';
 
     return <p className={`${defaultClasses} ${className}`}>{children}</p>;
 }

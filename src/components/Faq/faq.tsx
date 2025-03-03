@@ -3,7 +3,7 @@
 import React, { useState, useEffect } from "react";
 // import axios from "axios";
 import { usePathname } from "next/navigation";
-import { H2 } from "@/utils/typography";
+import { H3 } from "@/components/typography";
 
 interface Faq {
     question: string;
@@ -87,10 +87,10 @@ export default function OurFaqs() {
         <>
             {faqs.length > 0 && (
                 <section className="w-full bg-white py-4 px-4 sm:px-20 justify-between items-center align-middle rounded-tr-[150px] relative">
-                    <div className="text-md sm:text-lg text-center font-bold text-primary flex sm:gap-2 justify-center items-center">
-                        <H2 className="text-primaryBlue">
+                    <div className="flex sm:gap-2 justify-center items-center">
+                        <H3 className="text-primaryBlue">
                             FREQUENTLY <span className="text-primaryGreen">ASKED </span> QUESTIONS
-                        </H2>
+                        </H3>
                     </div>
 
                     <div className="accordion-group w-[90%] lg:w-[75%] 2xl:w-[60%] mx-auto">
