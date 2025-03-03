@@ -58,7 +58,7 @@ const Reviews = (props: propsType) => {
 
   return (
     <>
-      <section className="bg-[#eeeef1] pt-6 my-5 py-10">
+      <section className="bg-[#eeeef1] pt-6 mt-5 py-10">
         <div className="container m-auto flex flex-col relative">
           <div className="flex flex-col gap-4 lg:grid justify-center text-center">
             <div className="items-center">

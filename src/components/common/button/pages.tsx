@@ -6,6 +6,7 @@ type propType = {
     title: string;
     mainColor?: string;
     altColor?: string;
+    width?: string;
     leftIcon?: React.ReactNode;
     rightIcon?: React.ReactNode;
     border?: string;
@@ -20,6 +21,7 @@ export default function AppButton(props: propType) {
         title,
         mainColor,
         altColor,
+        width,
         leftIcon,
         rightIcon,
         border,
@@ -36,7 +38,7 @@ export default function AppButton(props: propType) {
                 ${altColor ? altColor : "hover:bg-transparent"} 
                 ${altColor ? altColor : "hover:border-primaryBlue"} 
                
-                inline-flex w-full py-2 px-6 xl:py-3 xl:px-12 ${border ? border : "rounded-full"} justify-center 
+                inline-flex ${width ? width : "w-full"} py-2 px-6 xl:py-3 xl:px-12 ${border ? border : "rounded-full"} justify-center 
                 items-center font-semibold sm:text-lg tracking-normal uppercase  
                 `}
             onClick={onClick}

@@ -8,14 +8,15 @@ type propsType = {
     img?: any;
     title?: any;
     description?: string;
+    className?: any
 }
 
 const OnScrollAnimeCard = (props: propsType) => {
-    const { img, title, description } = props
+    const { img, title, description, className } = props
 
 
     return (
-        <div className="p-6 shadow-[0_0_50px_0px_rgba(0,0,0,0.15)] rounded-lg bg-white flex opacity-0 translate-x-[-50px] transition-all duration-700 ease-in-out scroll-trigger delay-150">
+        <div className={`p-6 shadow-[0_0_50px_0px_rgba(0,0,0,0.15)] rounded-lg bg-white flex ${className ? className : ''}`}>
             <div className="flex-shrink-0">
                 <Image src={img} alt={title} width={60} height={60} className="shadow-[0_0_1px_0px_rgba(0,0,0,0.2)] w-[60px] rounded-lg" />
             </div>
