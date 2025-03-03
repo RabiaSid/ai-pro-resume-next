@@ -29,11 +29,7 @@ export const menuItems: MenuItem[] = [
   { name: "About", path: "/about" },
   {
     name: "Services",
-    submenu: [
-      { name: "Web Development", path: "/services/web-development" },
-      { name: "Mobile Apps", path: "/services/mobile-apps" },
-      { name: "SEO Optimization", path: "/services/seo" }
-    ]
+    path: "/services",
   },
   { name: "Pricing", path: "/pricing" },
   { name: "Contact", path: "/contact-us" },
@@ -41,7 +37,6 @@ export const menuItems: MenuItem[] = [
   { name: "Dashboard", path: "/", className: "block md:hidden" },
   { name: "Sign out", path: "/", className: "block md:hidden" },
   { name: "Login", path: "/", className: "block md:hidden" },
-
 ];
 
 export const menuIconItems: MenuIconItem[] = [
@@ -61,8 +56,8 @@ export const menuIconItems: MenuIconItem[] = [
       <div
         className={" items-center border-l gap-2 pl-2 hidden md:flex"}
         style={{ minHeight: "20px", minWidth: "20px" }}
-      // ref={menuRef}
-      // onClick={() => setIsDropOpen(!isDropOpen)}
+        // ref={menuRef}
+        // onClick={() => setIsDropOpen(!isDropOpen)}
       >
         <BiSolidUser className="bg-[#0072b1] text-white rounded-full p-1 text-2xl " />
       </div>

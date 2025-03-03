@@ -1,6 +1,6 @@
 'use client'
 import Link from 'next/link'
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import Image from 'next/image'
 import { FaRegEye, FaRegEyeSlash } from 'react-icons/fa'
 import { IoInformationCircle } from 'react-icons/io5'
@@ -17,15 +17,19 @@ import Ads from '@/components/ads/Ads'
 import { useDispatch, useSelector } from 'react-redux'
 import { AppDispatch, RootState } from '@/redux/store'
 import { loginUser } from '@/redux/slices/authSlice'
+import Cookies from "js-cookie";
 
 export default function page() {
     const router = useRouter();
     const dispatch = useDispatch<AppDispatch>();
-    const { loading, error, user } = useSelector((state: RootState) => state.auth);
+    const { loading, user } = useSelector((state: RootState) => state.auth);
 
     const [showPassword, setShowPassword] = useState(false);
     const [captchaError, setCaptchaError] = useState("");
     const [verified, setVerified] = useState<any>(false);
+    const [rememberMe, setRememberMe] = useState(false);
+    const [showAlert, setShowAlert] = useState(false);
+    const [showErrorMessage, setShowErrorMessage] = useState<string>();
 
     const {
         handleSubmit,
@@ -60,6 +64,7 @@ export default function page() {
     }
 
     const handleLoginSubmit = async (formData: any) => {
+        setShowAlert(false)
         console.log(formData, "formData");
         const credentials = {
             email: formData?.email,
@@ -67,22 +72,39 @@ export default function page() {
         }
         try {
             const response = await dispatch(loginUser(credentials));
-            console.log(response, "ressss");
-
+            // rememberMe
             if (response.payload?.statusCode == 200) {
                 router.push("/");
             } else {
-                console.error(response.payload?.statusCode);
+                setShowAlert(true)
+                setShowErrorMessage("Invalid Credentials.");
             }
         } catch (error) {
-            console.error("Login failed:", error);
+            setShowAlert(true)
+            setShowErrorMessage("Something wents wrong!");
         }
     }
+    useEffect(() => {
+        const tokenExist = Cookies.get("userToken");
+        if (tokenExist) {
+            router.push("/")
+        }
+    }, [])
     return (
         <>
             <Ads />
             <div className="w-full md:w-[550px] m-auto mt-20 px-4 min-h-[800px] text-center font-Lexend">
 
+                {showAlert && showErrorMessage?.length && (
+                    <div
+                        className="bg-red-100 border-l-4 text-start mb-4 border-red-500 text-red-700 p-4 rounded relative"
+                        role="alert"
+                    >
+                        <ul className="list-disc list-inside">
+                            {showErrorMessage}
+                        </ul>
+                    </div>
+                )}
                 <H1 className='text-primaryBlue mb-5'>SIGN IN</H1>
 
                 <div className="text-black text-left my-4 text-lg flex items-start justify-center">
@@ -93,6 +115,7 @@ export default function page() {
                         downloads at <span className="text-[red]">no hidden costs</span>.
                     </p>
                 </div>
+
 
                 {/* //Social Logins */}
                 <div className='grid space-y-3'>
@@ -208,6 +231,20 @@ export default function page() {
                         </div>
 
                     </div>
+                    <div className="flex justify-between mt-[-10px]">
+                        <div className="text-slate-500">
+                            <input type="checkbox" onClick={() => setRememberMe(true)} className="autofill:bg-yellow-200" />{" "}
+                            Remember me
+                        </div>
+                        <div className="text-slate-500">
+                            <Link
+                                href={"/forget-password"} >
+                                <span className="text-[#0072b1] font-bold hover:text-slate-80">
+                                    Forgot Password?
+                                </span>
+                            </Link>
+                        </div>
+                    </div>
                     <div className="flex flex-col items-start mt-4">
                         <span className="text-red-500 text-sm">{captchaError}</span>
                         <ReCAPTCHA
@@ -218,14 +255,6 @@ export default function page() {
                             }}
                         />
                     </div>
-
-                    {/* <AppButton
-                        title="Sign-in"
-                        className="bg-[#0072b1] uppercase w-full mt-4 px-8 py-2
-                         rounded-md text-white text-xl font-bold
-                          hover:bg-slate-800 ease-in transition-all flex 
-                          items-center justify-center"
-                    /> */}
 
                     <AppButton
                         title="Sign-in"
@@ -239,12 +268,11 @@ export default function page() {
                         className={`${loading ? 'bg-blue-300 cursor-not-allowed' : 'bg-primaryBlue hover:bg-slate-800 cursor-pointer '} uppercase w-full mt-4 px-8 py-2 rounded-md text-white text-xl flex items-center justify-center font-bold ease-in transition-all mb-4 sm:mb-0`}
                     />
                 </form>
+
                 <AppButton
                     title="Create Account"
                     onClick={handleCreate}
-                    className={` uppercase w-full mt-4 px-8 py-2 rounded-md
-                        text-white text-xl flex items-center justify-center
-                         font-bold ease-in transition-all mb-4 sm:mb-0 bg-primaryBlue hover:bg-slate-800 cursor-pointer`}
+                    className={` uppercase w-full mt-4 px-8 py-2 rounded-md text-white text-xl flex items-center justify-center font-bold ease-in transition-all mb-4 sm:mb-0 bg-primaryBlue hover:bg-slate-800 cursor-pointer`}
                 />
             </div>
         </>
