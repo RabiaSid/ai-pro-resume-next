@@ -168,9 +168,9 @@ export default function ResumeTemplateSlider(props: propsType) {
                             </Slider>
                         </div>
 
-                        <div className="flex justify-center items-center w-full pt-8 my-4 text-center">
+                        <div className="flex justify-center items-center w-full pt-8">
                             {/* <NinaButton title="View All Templates" mainColor="#0072b1" sliderColor="#fff59c" mainTextColor="#FFFFFF" hoverTextColor="#0072b1" link="/resume-templates" /> */}
-                            <AppButton title="View All Templates" />
+                            <AppButton title="View All Templates" width="w-fit" />
                         </div>
                     </div>
 
