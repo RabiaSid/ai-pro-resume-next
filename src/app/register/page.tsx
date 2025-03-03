@@ -19,14 +19,12 @@ import Ads from '@/components/ads/Ads'
 import { registerUser } from '@/redux/slices/authSlice'
 import { useDispatch, useSelector } from 'react-redux'
 import { AppDispatch, RootState } from '@/redux/store'
-import { CgSpinner } from 'react-icons/cg'
-
 
 export default function page() {
     const router = useRouter();
     const dispatch = useDispatch<AppDispatch>();
 
-    const { loading, error, errorsList, status } = useSelector((state: RootState) => state.auth);
+    const { loading, error, errorsList } = useSelector((state: RootState) => state.auth);
     const [captchaError, setCaptchaError] = useState("");
     const [verified, setVerified] = useState<any>(false);
     const [showPassword, setShowPassword] = useState(false);
@@ -50,6 +48,7 @@ export default function page() {
     const {
         handleSubmit,
         control,
+        getValues,
         formState: { errors },
     } = useForm({ mode: "onChange" });
 
@@ -94,20 +93,17 @@ export default function page() {
             referred_by: formData?.referred_by,
         }
         try {
-            const response = await dispatch(registerUser(credentials));
-            console.log(response, "dddddd");
-
-            // if (response.payload.success) {
-            //     // Redirect to the desired page after successful registration
-            //     // router.push('/dashboard');
-            // } else {
-            //     // Handle registration failure (e.g., show an error message)
-            //     console.error('Registration failed:', response.payload.message);
-            // }
-
+            await dispatch(registerUser(credentials)).then((response) => {
+                console.log(response, "response");
+                if (response?.payload?.statusCode == 200) {
+                    router.push('/login')
+                }
+            }).catch((err) => {
+                console.log(err, "Error while registering!");
+            })
         } catch (error) {
             setShowAlert(true)
-            console.error("Login failed:", error);
+            console.error("Registering failed:", error);
         }
     }
     useEffect(() => {
@@ -122,11 +118,9 @@ export default function page() {
         <>
             <Ads />
             <div className="w-full md:w-[550px] m-auto mt-20 px-4 min-h-[800px] text-center font-Lexend">
-
-
                 {showAlert && showErrorMessage.length > 0 && (
                     <div
-                        className="bg-red-100 border-l-4 mb-4 border-red-500 text-red-700 p-4 rounded relative"
+                        className="bg-red-100 border-l-4 text-start mb-4 border-red-500 text-red-700 p-4 rounded relative"
                         role="alert"
                     >
                         <strong className="block font-bold mb-2">Please address the following errors:</strong>
@@ -137,8 +131,6 @@ export default function page() {
                         </ul>
                     </div>
                 )}
-
-
                 <H1 className='text-primaryBlue mb-5'>CREATE ACCOUNT</H1>
 
                 {/* //Social Logins */}
@@ -284,9 +276,6 @@ export default function page() {
                                     )}
                                 </button>
                             </div>
-                            <span className="text-left text-red-500 text-xs">
-                                {/* {errors?.password?.message} */}
-                            </span>
                         </div>
 
                         {/* Confirm Password */}
@@ -296,7 +285,11 @@ export default function page() {
                                     name="confirm_password"
                                     control={control}
                                     defaultValue=""
-                                    rules={{ required: "Please Enter Your Confirm Password" }}
+                                    rules={{
+                                        required: "Please Enter Your Confirm Password",
+                                        validate: (value) =>
+                                            value === getValues('password') || "Passwords do not match"
+                                    }}
                                     render={({ field }) => (
                                         <AppInputField
                                             label="Confirm Password*"
@@ -321,9 +314,6 @@ export default function page() {
                                     )}
                                 </button>
                             </div>
-                            <span className="text-left text-red-500 text-xs">
-                                {/* {errors?.password?.message} */}
-                            </span>
                         </div>
 
                         {/* Referred By */}
@@ -380,26 +370,6 @@ export default function page() {
                                 )}
                             />
                         </div>
-
-                        {/* Remember Me */}
-                        <div>
-                            <div className="flex justify-between">
-                                <div className="text-slate-500">
-                                    <input type="checkbox" className="autofill:bg-yellow-200" />{" "}
-                                    Remember me
-                                </div>
-                                <div className="text-slate-500">
-                                    <Link
-                                        href={"/forget-password"} >
-                                        <span className="text-[#0072b1] font-bold hover:text-slate-80">
-                                            Forgot Password?
-                                        </span>
-                                    </Link>
-                                </div>
-                            </div>
-                        </div>
-
-
                         <div>
                             <div className="flex flex-col items-start mt-4">
                                 <span className="text-red-500 text-sm">{captchaError}</span>
@@ -438,8 +408,6 @@ export default function page() {
                         </div>
                     </form>
                 </div>
-
-
             </div>
         </>
     )
