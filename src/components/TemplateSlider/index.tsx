@@ -104,75 +104,77 @@ export default function ResumeTemplateSlider(props: propsType) {
 
 
     return (
-        <section className="mt-2 px-2 flex justify-center items-center flex-wrap relative">
-            <H2 className="text-primaryBlue py-4">
-                {title}
-            </H2>
-            <div className="flex w-full sm:justify-center sm:items-center sm:text-center">
-                <div className="block">
-                    <Medium className=" m-auto text-slate-800  text-justify font-Lexend">
-                        {description}
-                    </Medium>
-                    <div
-                        className={`${templates.length === 0 ? "" : "grid grid-cols-1 gap-4"
-                            }`}
-                    >
-                        <Slider {...settings} ref={sliderRef}>
-                            {templates.map((template, index) => {
-                                const isPurchased = userPurchasedTemplates.some(
-                                    (purchasedTemplate) => purchasedTemplate.id === template.id
-                                );
-                                return (
-                                    <div key={index}>
-                                        <div className="w-full relative mt-4 flex justify-center items-center">
-                                            <div className="cl_hover2 w-max lg:m-4">
-                                                <div className="relative">
-                                                    {isPurchased ? (
-                                                        <div
-                                                            className="flex  bg-gradient-to-r  from-[#00caa5] to-[#01B2AC] w-[150px] h-8 absolute left-[-35px] top-6 text-white -rotate-45 justify-center items-center z-50"
-                                                            style={{
-                                                                clipPath:
-                                                                    "polygon(20% 0%, 80% 0%, 100% 100%, 0% 100%)",
-                                                            }}
-                                                        >
-                                                            <Image src={brand} alt="purchased icon" />
-                                                            <span>Own</span>
-                                                        </div>
-                                                    ) : (
-                                                        template.is_paid === 1 && (
+        <section className="container md:px-4 mx-auto">
+            <div className="mt-2 px-2 flex justify-center items-center flex-wrap relative">
+                <H2 className="text-primaryBlue py-4">
+                    {title}
+                </H2>
+                <div className="flex w-full sm:justify-center sm:items-center sm:text-center">
+                    <div className="block">
+                        <Medium className=" m-auto text-slate-800  text-justify font-Lexend">
+                            {description}
+                        </Medium>
+                        <div
+                            className={`${templates.length === 0 ? "" : "grid grid-cols-1 gap-4"
+                                }`}
+                        >
+                            <Slider {...settings} ref={sliderRef}>
+                                {templates.map((template, index) => {
+                                    const isPurchased = userPurchasedTemplates.some(
+                                        (purchasedTemplate) => purchasedTemplate.id === template.id
+                                    );
+                                    return (
+                                        <div key={index}>
+                                            <div className="w-full relative mt-4 flex justify-center items-center">
+                                                <div className="cl_hover2 w-max lg:m-4">
+                                                    <div className="relative">
+                                                        {isPurchased ? (
                                                             <div
-                                                                className="flex bg-gradient-to-r from-[#01B2AC] to-[#0072B1] w-[150px] h-8 absolute left-[-35px] top-6 text-white -rotate-45 justify-center items-center z-50"
+                                                                className="flex  bg-gradient-to-r  from-[#00caa5] to-[#01B2AC] w-[150px] h-8 absolute left-[-35px] top-6 text-white -rotate-45 justify-center items-center z-50"
                                                                 style={{
                                                                     clipPath:
                                                                         "polygon(20% 0%, 80% 0%, 100% 100%, 0% 100%)",
                                                                 }}
                                                             >
-                                                                <Image src={premium} alt="premium icon" />
-                                                                <span>Premium</span>
+                                                                <Image src={brand} alt="purchased icon" />
+                                                                <span>Own</span>
                                                             </div>
-                                                        )
-                                                    )}
+                                                        ) : (
+                                                            template.is_paid === 1 && (
+                                                                <div
+                                                                    className="flex bg-gradient-to-r from-[#01B2AC] to-[#0072B1] w-[150px] h-8 absolute left-[-35px] top-6 text-white -rotate-45 justify-center items-center z-50"
+                                                                    style={{
+                                                                        clipPath:
+                                                                            "polygon(20% 0%, 80% 0%, 100% 100%, 0% 100%)",
+                                                                    }}
+                                                                >
+                                                                    <Image src={premium} alt="premium icon" />
+                                                                    <span>Premium</span>
+                                                                </div>
+                                                            )
+                                                        )}
 
-                                                    <Image
-                                                        src={template.image}
-                                                        alt="My Image"
-                                                        className="shadow-[0px_0px_3px_rgba(0,0,0,1)] rounded-xl w-[100%] sm:w-[90%] p-2 lg:p-0"
-                                                    />
+                                                        <Image
+                                                            src={template.image}
+                                                            alt="My Image"
+                                                            className="shadow-[0px_0px_3px_rgba(0,0,0,1)] rounded-xl w-[100%] sm:w-[90%] p-2 lg:p-0"
+                                                        />
+                                                    </div>
                                                 </div>
                                             </div>
                                         </div>
-                                    </div>
-                                );
-                            })}
-                        </Slider>
+                                    );
+                                })}
+                            </Slider>
+                        </div>
+
+                        <div className="flex justify-center items-center w-full pt-8 my-4 text-center">
+                            {/* <NinaButton title="View All Templates" mainColor="#0072b1" sliderColor="#fff59c" mainTextColor="#FFFFFF" hoverTextColor="#0072b1" link="/resume-templates" /> */}
+                            <AppButton title="View All Templates" />
+                        </div>
                     </div>
 
-                    <div className="flex justify-center items-center w-full pt-8 my-4 text-center">
-                        {/* <NinaButton title="View All Templates" mainColor="#0072b1" sliderColor="#fff59c" mainTextColor="#FFFFFF" hoverTextColor="#0072b1" link="/resume-templates" /> */}
-                        <AppButton title="View All Templates" />
-                    </div>
                 </div>
-
             </div>
         </section >
     );

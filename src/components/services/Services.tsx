@@ -1,7 +1,6 @@
 "use client";
 
 import React, { useState } from "react";
-import ScrollAnimation from "react-animate-on-scroll";
 import AppButton from "../common/button/pages";
 import ServiceCard from "../common/card/ServiceCard";
 import serviceimg from "media/assets/about_img_2.webp";
@@ -69,20 +68,22 @@ const Services = () => {
         <div className="container m-auto overflow-hidden py-8 px-8">
           <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-4 gap-2">
             {random_services.map((service) => (
-              <ScrollAnimation
-                animateIn="bounceInUp"
-                delay={0}
-                animateOnce={true}
-                className="bg-[rgba(255,255,255,0.4)] hover:bg-[rgba(255,255,255,0.9)] cursor-pointer backdrop-blur-[10px] rounded-lg"
-                key={service.id}
-              >
+              // <ScrollAnimation
+              //   animateIn="bounceInUp"
+              //   delay={0}
+              //   animateOnce={true}
+              //   className="bg-[rgba(255,255,255,0.4)] hover:bg-[rgba(255,255,255,0.9)] cursor-pointer backdrop-blur-[10px] rounded-lg"
+              //   key={service.id}
+              // >
+              <div className="bg-[rgba(255,255,255,0.4)] hover:bg-[rgba(255,255,255,0.9)] cursor-pointer backdrop-blur-[10px] rounded-lg">
                 <ServiceCard
                   img={service.image}
                   alt={service.name}
                   title={service.name}
                   points={service.description}
                 />
-              </ScrollAnimation>
+              </div>
+              // </ScrollAnimation>
             ))}
           </div>
           <div className="flex justify-center items-center w-full pt-8">
