@@ -1,6 +1,6 @@
 'use client'
 import Link from 'next/link'
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import Image from 'next/image'
 import { FaRegEye, FaRegEyeSlash } from 'react-icons/fa'
 import { Controller, useForm } from "react-hook-form";
@@ -16,14 +16,22 @@ import CustomSelect from '@/components/common/customSelect/CustomSelect'
 import { useRouter } from 'next/navigation'
 import CustomPhoneNumber from '@/components/common/customSelect/CustomPhoneNumber'
 import Ads from '@/components/ads/Ads'
-
+import { registerUser } from '@/redux/slices/authSlice'
+import { useDispatch, useSelector } from 'react-redux'
+import { AppDispatch, RootState } from '@/redux/store'
 
 export default function page() {
     const router = useRouter();
+    const dispatch = useDispatch<AppDispatch>();
+
+    const { loading, error, errorsList } = useSelector((state: RootState) => state.auth);
     const [captchaError, setCaptchaError] = useState("");
     const [verified, setVerified] = useState<any>(false);
     const [showPassword, setShowPassword] = useState(false);
     const [showC_Password, setC_ShowPassword] = useState(false);
+
+    const [showAlert, setShowAlert] = useState(false);
+    const [showErrorMessage, setShowErrorMessage] = useState([]);
 
     const staticOptions = [
         { id: "us", name: "United States" },
@@ -38,11 +46,11 @@ export default function page() {
     ];
 
     const {
-        register,
         handleSubmit,
         control,
+        getValues,
         formState: { errors },
-    } = useForm();
+    } = useForm({ mode: "onChange" });
 
     const handleCheckCaptcha = () => {
         setVerified(true);
@@ -71,14 +79,58 @@ export default function page() {
     const handleClick = () => {
         console.log("Creatimg account");
     };
-    const handleLoginSubmit = (data: any) => {
-        console.log(data);
+    const handleLoginSubmit = async (formData: any) => {
+        console.log(formData);
+        console.log(formData, "formData");
+        const credentials = {
+            name: formData?.name,
+            email: formData?.email,
+            role: formData?.role,
+            password: formData?.password,
+            confirm_password: formData?.confirm_password,
+            country_id: 2,
+            contact: formData?.contact,
+            referred_by: formData?.referred_by,
+        }
+        try {
+            await dispatch(registerUser(credentials)).then((response) => {
+                console.log(response, "response");
+                if (response?.payload?.statusCode == 200) {
+                    router.push('/login')
+                }
+            }).catch((err) => {
+                console.log(err, "Error while registering!");
+            })
+        } catch (error) {
+            setShowAlert(true)
+            console.error("Registering failed:", error);
+        }
     }
+    useEffect(() => {
+        if (errorsList && typeof errorsList === 'object') {
+            const flattenedErrors: any = Object.values(errorsList).flat();
+            setShowErrorMessage(flattenedErrors);
+            setShowAlert(flattenedErrors.length > 0);
+        }
+    }, [errorsList]);
 
     return (
         <>
             <Ads />
             <div className="w-full md:w-[550px] m-auto mt-20 px-4 min-h-[800px] text-center font-Lexend">
+                {showAlert && showErrorMessage.length > 0 && (
+                    <div
+                        className="bg-red-100 border-l-4 text-start mb-4 border-red-500 text-red-700 p-4 rounded relative"
+                        role="alert"
+                    >
+                        <strong className="block font-bold mb-2">Please address the following errors:</strong>
+                        <ul className="list-disc list-inside">
+                            {showErrorMessage.map((error, index) => (
+                                <li key={index}>{error}</li>
+                            ))}
+                        </ul>
+                    </div>
+                )}
                 <H1 className='text-primaryBlue mb-5'>CREATE ACCOUNT</H1>
 
                 {/* //Social Logins */}
@@ -140,46 +192,77 @@ export default function page() {
                     </div>
                 </div>
 
+
                 <div>
                     <form onSubmit={handleSubmit(handleLoginSubmit)}
                     >
                         {/* Name */}
                         <div className="flex flex-col">
-                            <AppInputField
-                                label="Name*"
-                                // variant="outlined"
-                                type="text"
-                                className="w-full"
-                                aria-label={errors?.name ? "Name error" : ""}
+                            <Controller
+                                name='name'
+                                control={control}
+                                defaultValue=""
+                                rules={{ required: "Name is required" }}
+                                render={({ field }) => (
+                                    <>
+                                        <AppInputField
+                                            label="Name*"
+                                            type="text"
+                                            className="w-full"
+                                            error={!!errors.name}
+                                            errorMessage={errors.name?.message}
+                                            aria-invalid={errors.name ? "true" : "false"}
+                                            {...field}
+                                        />
+
+                                    </>
+
+                                )}
                             />
                         </div>
 
                         {/* Email */}
                         <div className="flex flex-col">
-                            <AppInputField
-                                label="Email*"
-                                // variant="outlined"
-                                type="email"
-                                className="w-full"
-                                aria-label={errors?.email ? "Email error" : ""}
+                            <Controller
+                                name='email'
+                                control={control}
+                                defaultValue=""
+                                rules={{ required: "Email is required" }}
+                                render={({ field }) => (
+                                    <AppInputField
+                                        label="Email*"
+                                        type="text"
+                                        className="w-full"
+                                        error={!!errors.email}
+                                        errorMessage={errors.email?.message}
+                                        aria-label={errors?.email ? "Email error" : ""}
+                                        {...field}
+                                    />
+
+                                )}
                             />
+
                         </div>
 
                         {/* Password */}
                         <div className="flex flex-col">
                             <div className="relative w-full">
-                                <AppInputField
-                                    // id="password"
-                                    label="Password*"
-                                    // variant="outlined"
-                                    // autoComplete="on"
-                                    type={showPassword ? "text" : "password"}
-                                    className="w-full"
-                                    {...register("password", {
-                                        required: "Please Enter Your Password",
-                                    })}
-                                    aria-label={errors?.password ? "Password error" : ""}
-                                // error={!!errors.password}
+                                <Controller
+                                    name="password"
+                                    control={control}
+                                    defaultValue=""
+                                    rules={{ required: "Please Enter Your Password" }}
+                                    render={({ field }) => (
+                                        <AppInputField
+                                            label="Password*"
+                                            type={showPassword ? "text" : "password"}
+                                            className="w-full"
+                                            {...field}
+                                            error={!!errors.password}
+                                            errorMessage={errors.password?.message}
+                                            aria-label={errors?.password ? "Password error" : ""}
+                                        />
+                                    )}
                                 />
                                 <button
                                     type="button"
@@ -193,26 +276,31 @@ export default function page() {
                                     )}
                                 </button>
                             </div>
-                            <span className="text-left text-red-500 text-xs">
-                                {/* {errors?.password?.message} */}
-                            </span>
                         </div>
 
                         {/* Confirm Password */}
                         <div className="flex flex-col">
                             <div className="relative w-full">
-                                <AppInputField
-                                    // id="password"
-                                    label="Confirm Password*"
-                                    // variant="outlined"
-                                    // autoComplete="on"
-                                    type={showPassword ? "text" : "password"}
-                                    className="w-full"
-                                    {...register("password", {
+                                <Controller
+                                    name="confirm_password"
+                                    control={control}
+                                    defaultValue=""
+                                    rules={{
                                         required: "Please Enter Your Confirm Password",
-                                    })}
-                                    aria-label={errors?.password ? "Password error" : ""}
-                                // error={!!errors.password}
+                                        validate: (value) =>
+                                            value === getValues('password') || "Passwords do not match"
+                                    }}
+                                    render={({ field }) => (
+                                        <AppInputField
+                                            label="Confirm Password*"
+                                            type={showPassword ? "text" : "password"}
+                                            className="w-full"
+                                            {...field}
+                                            error={!!errors.confirm_password}
+                                            errorMessage={errors.confirm_password?.message}
+                                            aria-label={errors?.password ? "Password error" : ""}
+                                        />
+                                    )}
                                 />
                                 <button
                                     type="button"
@@ -226,93 +314,99 @@ export default function page() {
                                     )}
                                 </button>
                             </div>
-                            <span className="text-left text-red-500 text-xs">
-                                {/* {errors?.password?.message} */}
-                            </span>
                         </div>
 
                         {/* Referred By */}
                         <div className="flex flex-col">
-                            <AppInputField
-                                label="Referred By"
-                                type="text"
-                                className="w-full"
-                                value='Rimsha012'
-                                readOnly={true}
-                                aria-label={errors?.reffered ? "reffered error" : ""}
+                            <Controller
+                                name='referred_by'
+                                control={control}
+                                defaultValue="Rimsha012"
+                                render={({ field }) => (
+                                    <AppInputField
+                                        {...field}
+                                        label="Referred By"
+                                        type="text"
+                                        className="w-full"
+                                        readOnly={true}
+                                        aria-label={errors?.reffered ? "reffered error" : ""}
+                                    />
+                                )}
                             />
                         </div>
 
                         {/* Select Country */}
                         <div className="flex flex-col">
-                            <CustomSelect
-                                label="Select Country"
-                                name="text"
-                                className="w-full"
-                                options={staticOptions}
-                            // onChange={onChange}
+
+                            <Controller
+                                name="country_id"
+                                control={control}
+                                rules={{ required: "Country is Required" }}
+                                render={({ field }) => (
+                                    <CustomSelect
+                                        {...field}
+                                        label="Select Country"
+                                        name="text"
+                                        className="w-full"
+                                        error={!!errors.country_id}
+                                        errorMessage={errors?.country_id?.message as string}
+                                        options={staticOptions}
+                                    />)}
                             />
                         </div>
 
                         {/* Phone Number   */}
                         <div className="flex flex-col">
                             <Controller
-                                name="phone"
+                                name="contact"
                                 control={control}
                                 rules={{ required: "Phone Number is Required" }}
                                 render={({ field }) => (
-                                    <CustomPhoneNumber field={field} errors={errors} />
+                                    <CustomPhoneNumber
+                                        field={field}
+                                        error={!!errors.contact}
+                                        errorMessage={errors.contact?.message}
+                                    />
                                 )}
                             />
                         </div>
-
-                        {/* Remember Me */}
                         <div>
-                            <div className="flex justify-between">
-                                <div className="text-slate-500">
-                                    <input type="checkbox" className="autofill:bg-yellow-200" />{" "}
-                                    Remember me
-                                </div>
-                                <div className="text-slate-500">
-                                    <Link
-                                        href={"/forget-password"} >
-                                        <span className="text-[#0072b1] font-bold hover:text-slate-80">
-                                            Forgot Password?
-                                        </span>
-                                    </Link>
-                                </div>
+                            <div className="flex flex-col items-start mt-4">
+                                <span className="text-red-500 text-sm">{captchaError}</span>
+                                <ReCAPTCHA
+                                    sitekey={"6LdRjxslAAAAAIP7BsNtsYgCvPM5RfNXjHGIzveJ"}
+                                    onChange={(val: any) => {
+                                        handleCheckCaptcha();
+                                        handleRecaptchaTimeout();
+                                    }}
+                                />
+                            </div>
+
+                            <AppButton title='Create Account'
+                                onClick={handleClick}
+                                disabled={loading ? true : false}
+                                rightIcon={loading && (
+                                    <svg aria-hidden="true" className="w-6 h-6 text-gray-200 animate-spin  fill-blue-600" viewBox="0 0 100 101" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                        <path d="M100 50.5908C100 78.2051 77.6142 100.591 50 100.591C22.3858 100.591 0 78.2051 0 50.5908C0 22.9766 22.3858 0.59082 50 0.59082C77.6142 0.59082 100 22.9766 100 50.5908ZM9.08144 50.5908C9.08144 73.1895 27.4013 91.5094 50 91.5094C72.5987 91.5094 90.9186 73.1895 90.9186 50.5908C90.9186 27.9921 72.5987 9.67226 50 9.67226C27.4013 9.67226 9.08144 27.9921 9.08144 50.5908Z" fill="currentColor" />
+                                        <path d="M93.9676 39.0409C96.393 38.4038 97.8624 35.9116 97.0079 33.5539C95.2932 28.8227 92.871 24.3692 89.8167 20.348C85.8452 15.1192 80.8826 10.7238 75.2124 7.41289C69.5422 4.10194 63.2754 1.94025 56.7698 1.05124C51.7666 0.367541 46.6976 0.446843 41.7345 1.27873C39.2613 1.69328 37.813 4.19778 38.4501 6.62326C39.0873 9.04874 41.5694 10.4717 44.0505 10.1071C47.8511 9.54855 51.7191 9.52689 55.5402 10.0491C60.8642 10.7766 65.9928 12.5457 70.6331 15.2552C75.2735 17.9648 79.3347 21.5619 82.5849 25.841C84.9175 28.9121 86.7997 32.2913 88.1811 35.8758C89.083 38.2158 91.5421 39.6781 93.9676 39.0409Z" fill="currentFill" />
+                                    </svg>
+                                )}
+                                className={`${loading ? 'bg-blue-300 cursor-not-allowed' : 'bg-primaryBlue hover:bg-slate-800 cursor-pointer '} uppercase w-full mt-4 px-8 py-2 rounded-md
+                                 text-white text-xl flex items-center justify-center font-bold ease-in transition-all mb-4 sm:mb-0`}
+                            />
+                            <div className="w-[60%] text-center mt-4 text-slate-500 inline-block mb-5">
+                                <p className="text-slate-500">
+                                    Already an account?{" "}
+                                    <a
+                                        href={"/login"}
+                                        className="text-primaryBlue font-bold hover:text-slate-800"
+                                    >
+                                        LOGIN
+                                    </a>
+                                </p>
                             </div>
                         </div>
                     </form>
-                </div>
-
-                <div>
-                    <div className="flex flex-col items-start mt-4">
-                        <span className="text-red-500 text-sm">{captchaError}</span>
-                        <ReCAPTCHA
-                            sitekey={"6LdRjxslAAAAAIP7BsNtsYgCvPM5RfNXjHGIzveJ"}
-                            onChange={(val: any) => {
-                                handleCheckCaptcha();
-                                handleRecaptchaTimeout();
-                            }}
-                        />
-                    </div>
-
-                    <AppButton title='Create Account'
-                        onClick={handleClick}
-                        className="bg-primaryBlue uppercase w-full mt-4 px-8 py-2 rounded-md text-white text-xl font-bold hover:bg-slate-800 ease-in transition-all mb-4 sm:mb-0"
-                    />
-                    <div className="w-[60%] text-center mt-4 text-slate-500 inline-block mb-5">
-                        <p className="text-slate-500">
-                            Already an account?{" "}
-                            <a
-                                href={"/login"}
-                                className="text-primaryBlue font-bold hover:text-slate-800"
-                            >
-                                LOGIN
-                            </a>
-                        </p>
-                    </div>
                 </div>
             </div>
         </>

@@ -1,11 +1,35 @@
 "use client";
 
-import React, { useState } from "react";
+import { useEffect, useState, useRef } from "react";
 import AppButton from "../common/button/pages";
 import ServiceCard from "../common/card/ServiceCard";
 import serviceimg from "media/assets/about_img_2.webp";
 
 const Services = () => {
+  const [isVisible, setIsVisible] = useState(false);
+  const sectionRef = useRef(null);
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setIsVisible(true);
+        }
+      },
+      { threshold: 0.2 } // Trigger when 20% of the section is visible
+    );
+
+    if (sectionRef.current) {
+      observer.observe(sectionRef.current);
+    }
+
+    return () => {
+      if (sectionRef.current) {
+        observer.unobserve(sectionRef.current);
+      }
+    };
+  }, []);
+
   const [random_services, set_random_services] = useState([
     {
       id: 1,
@@ -54,7 +78,7 @@ const Services = () => {
 
   return (
     <>
-      <section className={"relative"}>
+      <section ref={sectionRef} className="relative">
         {/* Svg Wave */}
         <div className="absolute bottom-0 w-full hidden sm:block">
           <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320">
@@ -67,8 +91,21 @@ const Services = () => {
         </div>
         <div className="container m-auto overflow-hidden py-8 px-8">
           <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-4 gap-2">
-            {random_services.map((service, idx) => (
-              <div className="bg-[rgba(255,255,255,0.4)] hover:bg-[rgba(255,255,255,0.9)] cursor-pointer backdrop-blur-[10px] rounded-lg" key={idx}>
+            {random_services.map((service, index) => (
+              // <ScrollAnimation
+              //   animateIn="bounceInUp"
+              //   delay={0}
+              //   animateOnce={true}
+              //   className="bg-[rgba(255,255,255,0.4)] hover:bg-[rgba(255,255,255,0.9)] cursor-pointer backdrop-blur-[10px] rounded-lg"
+              //   key={service.id}
+              // >
+              <div
+                key={index}
+                className={`bg-[rgba(255,255,255,0.4)] hover:bg-[rgba(255,255,255,0.9)] cursor-pointer backdrop-blur-[10px] rounded-lg delay-[300ms] duration-[600ms] taos:translate-y-[100%] taos:opacity-0" 
+                  }`}
+                data-taos-offset="300"
+              // style={{ animationDelay: `${index * 0.2}s` }} // Stagger effect
+              >
                 <ServiceCard
                   img={service.image}
                   alt={service.name}
@@ -76,6 +113,7 @@ const Services = () => {
                   points={service.description}
                 />
               </div>
+              // </ScrollAnimation>
             ))}
           </div>
           <div className="flex justify-center items-center w-full pt-8">

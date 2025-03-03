@@ -37,8 +37,8 @@ export default function Banner(props: BannerProps) {
     const typedText = useTypedText(subtitle);
 
     return (
-        <section className="relative container md:px-4 mx-auto">
-            <div className="w-full py-5 my-10 bg-white">
+        <section className="container md:px-4 mx-auto">
+            <div className="w-full py-5 my-10 bg-white relative">
                 <div className="absolute w-full h-[600px] flex  justify-center items-center z-0 overflow-hidden">
                     <Image
                         src={shadeImage01}

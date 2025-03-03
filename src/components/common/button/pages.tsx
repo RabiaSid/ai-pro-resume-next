@@ -6,10 +6,12 @@ type propType = {
     title: string;
     mainColor?: string;
     altColor?: string;
+    width?: string;
     leftIcon?: React.ReactNode;
     rightIcon?: React.ReactNode;
     border?: string;
     onClick?: () => void;
+    disabled?: boolean;
 }
 
 export default function AppButton(props: propType) {
@@ -19,19 +21,24 @@ export default function AppButton(props: propType) {
         title,
         mainColor,
         altColor,
+        width,
         leftIcon,
         rightIcon,
         border,
         onClick,
+        disabled,
     } = props;
     return (
         <button
+            type="submit"
+            disabled={disabled}
             className={
                 className ? className :
                     `group border-2 border-transparent ${mainColor ? mainColor : "bg-primaryBlue"} 
                 ${altColor ? altColor : "hover:bg-transparent"} 
                 ${altColor ? altColor : "hover:border-primaryBlue"} 
-                inline-flex w-fit py-2 px-6 xl:py-3 xl:px-12 ${border ? border : "rounded-full"} justify-center 
+               
+                inline-flex ${width ? width : "w-full"} py-2 px-6 xl:py-3 xl:px-12 ${border ? border : "rounded-full"} justify-center 
                 items-center font-semibold sm:text-lg tracking-normal uppercase  
                 `}
             onClick={onClick}
