@@ -212,7 +212,8 @@ const ApplyNow = () => {
                     label="EXPERIENCE"
                     options={experienceData}
                     className="w-full"
-                    status={errors.experience ? "error" : null}
+                    error={!!errors.experience}
+                    errorMessage={errors?.experience?.message as string}
                   />
                 )}
               />
@@ -228,7 +229,8 @@ const ApplyNow = () => {
                     label="DEGREE"
                     options={degreeData}
                     className="w-full"
-                    status={errors.degree ? "error" : null}
+                    error={!!errors.degree}
+                    errorMessage={errors?.degree?.message as string}
                   />
                 )}
               />
