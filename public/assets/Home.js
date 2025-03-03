@@ -36,7 +36,7 @@ import MainSliderImage2 from "./img/home_slider/slider_2.png";
 import MainSliderImage3 from "./img/home_slider/slider_3.png";
 import MainSliderImage4 from "./img/home_slider/slider_4.png";
 import MainSliderImage5 from "./img/home_slider/slider_5.png";
-// import ScrollAnimation from "react-animate-on-scroll";
+import ScrollAnimation from "react-animate-on-scroll";
 import ServicesCard from "./components/shared-components/ServicesCard";
 import {
   FaCheckCircle,
@@ -350,94 +350,94 @@ text-[#0072b1] font-lexend font-bold text-xl md:text-3xl  w-[100%] drop-shadow-l
           <div className="relative">
             <div className="max-w-[1500px] m-auto px-4">
               <div className=" w-full text-center">
-                {/* <ScrollAnimation
+                <ScrollAnimation
                   animateIn="bounceInLeft"
                   animateOnce={true}
                   offset={300}
-                > */}
-                <div className="py-5">
-                  <h3 className="text-[#0072b1] drop-shadow-lg font-Lexend font-bold text-2xl md:text-3xl px-4 sm:px-0">
-                    What Makes Us
-                    <span className="text-[#00caa5] ml-4 text-2xl md:text-3xl">
-                      The Best Resume Builder
-                    </span>{" "}
-                    Online?
-                    <br />
-                  </h3>
-                  <div className="grid gap-4 mt-10 sm:grid-cols-2 xl:grid-cols-3 font-Lexend sm:px-0">
-                    <div className="p-6 shadow-[0_0_50px_0px_rgba(0,0,0,0.15)] rounded-lg bg-white flex">
-                      <div className="flex-shrink-0">
-                        <img
-                          src={service_1}
-                          alt="My Image"
-                          width={70}
-                          height={70}
-                          className="shadow-[0_0_1px_0px_rgba(0,0,0,0.2)]  w-[60px]  rounded-lg"
-                        />
+                >
+                  <div className="py-5">
+                    <h3 className="text-[#0072b1] drop-shadow-lg font-Lexend font-bold text-2xl md:text-3xl px-4 sm:px-0">
+                      What Makes Us
+                      <span className="text-[#00caa5] ml-4 text-2xl md:text-3xl">
+                        The Best Resume Builder
+                      </span>{" "}
+                      Online?
+                      <br />
+                    </h3>
+                    <div className="grid gap-4 mt-10 sm:grid-cols-2 xl:grid-cols-3 font-Lexend sm:px-0">
+                      <div className="p-6 shadow-[0_0_50px_0px_rgba(0,0,0,0.15)] rounded-lg bg-white flex">
+                        <div className="flex-shrink-0">
+                          <img
+                            src={service_1}
+                            alt="My Image"
+                            width={70}
+                            height={70}
+                            className="shadow-[0_0_1px_0px_rgba(0,0,0,0.2)]  w-[60px]  rounded-lg"
+                          />
+                        </div>
+                        <div className="ml-4 text-start">
+                          <h2 className="font-bold text-lg drop-shadow-lg text-primary-black font-Lexend leading-[1.5]">
+                            Personalized AI-Based Suggestions
+                          </h2>
+                          <p className="text-slate-800 mt-2 text-sm leading-[1.5] text-left">
+                            AI Pro Resume is your <b>resume specialist</b> that
+                            provides AI-based personalized suggestions based on
+                            your skills and experiences. These suggestions can
+                            speed up your cover letter and <b>resume-making</b>
+                            process.
+                          </p>
+                        </div>
                       </div>
-                      <div className="ml-4 text-start">
-                        <h2 className="font-bold text-lg drop-shadow-lg text-primary-black font-Lexend leading-[1.5]">
-                          Personalized AI-Based Suggestions
-                        </h2>
-                        <p className="text-slate-800 mt-2 text-sm leading-[1.5] text-left">
-                          AI Pro Resume is your <b>resume specialist</b> that
-                          provides AI-based personalized suggestions based on
-                          your skills and experiences. These suggestions can
-                          speed up your cover letter and <b>resume-making</b>
-                          process.
-                        </p>
+                      <div className="p-6 shadow-[0_0_50px_0px_rgba(0,0,0,0.15)] rounded-lg bg-white flex">
+                        <div className="flex-shrink-0">
+                          <img
+                            src={service_2}
+                            alt="My Image"
+                            width={70}
+                            height={70}
+                            className="shadow-[0_0_1px_0px_rgba(0,0,0,0.2)] w-[60px]  rounded-lg"
+                          />
+                        </div>
+                        <div className="ml-4 text-start">
+                          <h2 className="font-bold drop-shadow-lg text-lg text-primary-black font-Lexend leading-[1.5]">
+                            Resume Parser
+                          </h2>
+                          <p className="text-slate-800 mt-2 text-sm leading-[1.5] text-left">
+                            With the <b>perfect resume builder</b>, you do not
+                            have to write or copy-paste your data. Just import
+                            your current resume and see the magic of our resume
+                            parser tool. It fetches all the data from your file
+                            and transfers them to <b>creative resume maker</b>.
+                          </p>
+                        </div>
                       </div>
-                    </div>
-                    <div className="p-6 shadow-[0_0_50px_0px_rgba(0,0,0,0.15)] rounded-lg bg-white flex">
-                      <div className="flex-shrink-0">
-                        <img
-                          src={service_2}
-                          alt="My Image"
-                          width={70}
-                          height={70}
-                          className="shadow-[0_0_1px_0px_rgba(0,0,0,0.2)] w-[60px]  rounded-lg"
-                        />
-                      </div>
-                      <div className="ml-4 text-start">
-                        <h2 className="font-bold drop-shadow-lg text-lg text-primary-black font-Lexend leading-[1.5]">
-                          Resume Parser
-                        </h2>
-                        <p className="text-slate-800 mt-2 text-sm leading-[1.5] text-left">
-                          With the <b>perfect resume builder</b>, you do not
-                          have to write or copy-paste your data. Just import
-                          your current resume and see the magic of our resume
-                          parser tool. It fetches all the data from your file
-                          and transfers them to <b>creative resume maker</b>.
-                        </p>
-                      </div>
-                    </div>
-                    <div className="p-6 shadow-[0_0_50px_0px_rgba(0,0,0,0.15)] rounded-lg bg-white flex sm:col-span-2 xl:col-span-1">
-                      <div className="flex-shrink-0">
-                        <img
-                          src={service_3}
-                          alt="My Image"
-                          widtsh={70}
-                          height={70}
-                          className="shadow-[0_0_1px_0px_rgba(0,0,0,0.2)] w-[60px]  rounded-lg"
-                        />
-                      </div>
-                      <div className="ml-4 text-start">
-                        <h2 className="font-bold drop-shadow-lg text-lg text-primary-black font-Lexend leading-[1.5]">
-                          ATS Friendly Templates
-                        </h2>
-                        <p className="text-slate-800 mt-2 text-sm leading-[1.5] text-left">
-                          AI Pro Resume allows you to create an{" "}
-                          <b>ATS-friendly resume</b> that will pass the ATS
-                          scan without hassle. We help you{" "}
-                          <b>design resumes</b> that maximize your chance of
-                          being noticed by employers and application tracking
-                          systems.
-                        </p>
+                      <div className="p-6 shadow-[0_0_50px_0px_rgba(0,0,0,0.15)] rounded-lg bg-white flex sm:col-span-2 xl:col-span-1">
+                        <div className="flex-shrink-0">
+                          <img
+                            src={service_3}
+                            alt="My Image"
+                            widtsh={70}
+                            height={70}
+                            className="shadow-[0_0_1px_0px_rgba(0,0,0,0.2)] w-[60px]  rounded-lg"
+                          />
+                        </div>
+                        <div className="ml-4 text-start">
+                          <h2 className="font-bold drop-shadow-lg text-lg text-primary-black font-Lexend leading-[1.5]">
+                            ATS Friendly Templates
+                          </h2>
+                          <p className="text-slate-800 mt-2 text-sm leading-[1.5] text-left">
+                            AI Pro Resume allows you to create an{" "}
+                            <b>ATS-friendly resume</b> that will pass the ATS
+                            scan without hassle. We help you{" "}
+                            <b>design resumes</b> that maximize your chance of
+                            being noticed by employers and application tracking
+                            systems.
+                          </p>
+                        </div>
                       </div>
                     </div>
                   </div>
-                </div>
-                {/* </ScrollAnimation> */}
+                </ScrollAnimation>
                 <ScrollAnimation
                   animateIn="bounceInRight"
                   animateOnce={true}

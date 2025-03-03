@@ -5,7 +5,7 @@ import React, { useState, useEffect } from "react";
 import { usePathname } from "next/navigation";
 import { H3 } from "@/components/typography";
 
-type Faq = {
+interface Faq {
     question: string;
     answer: string;
     page: string;
@@ -86,7 +86,7 @@ export default function OurFaqs() {
     return (
         <>
             {faqs.length > 0 && (
-                <section className="w-full bg-white py-4 md:8 lg:mt-6 px-4 sm:px-20 justify-between items-center align-middle ">
+                <section className="w-full bg-white py-4 px-4 sm:px-20 justify-between items-center align-middle rounded-tr-[150px] relative">
                     <div className="flex sm:gap-2 justify-center items-center">
                         <H3 className="text-primaryBlue">
                             FREQUENTLY <span className="text-primaryGreen">ASKED </span> QUESTIONS
