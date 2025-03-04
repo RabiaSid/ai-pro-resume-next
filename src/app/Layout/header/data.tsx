@@ -3,6 +3,7 @@ import Image from "next/image";
 import coin from "media/assets/dollar.webp";
 import { BiCaretDown, BiSolidUser, BiUserCircle } from "react-icons/bi";
 import { FaShoppingCart } from "react-icons/fa";
+import { logoutUser } from "@/redux/slices/authSlice";
 
 type SubmenuItem = {
   name?: string;
@@ -35,7 +36,10 @@ export const menuItems: MenuItem[] = [
   { name: "Contact", path: "/contact-us" },
   { name: "Profile", path: "/account", className: "block md:hidden" },
   { name: "Dashboard", path: "/", className: "block md:hidden" },
-  { name: "Sign out", path: "/", className: "block md:hidden" },
+  // { name: "Sign out", path: "/", className: "block md:hidden" },
+
+  // { name: "Sign out", className: "block md:hidden", onClick: handleLogout },
+
   { name: "Login", path: "/", className: "block md:hidden" },
 ];
 
@@ -56,8 +60,8 @@ export const menuIconItems: MenuIconItem[] = [
       <div
         className={" items-center border-l gap-2 pl-2 hidden md:flex"}
         style={{ minHeight: "20px", minWidth: "20px" }}
-        // ref={menuRef}
-        // onClick={() => setIsDropOpen(!isDropOpen)}
+      // ref={menuRef}
+      // onClick={() => setIsDropOpen(!isDropOpen)}
       >
         <BiSolidUser className="bg-[#0072b1] text-white rounded-full p-1 text-2xl " />
       </div>
@@ -65,7 +69,7 @@ export const menuIconItems: MenuIconItem[] = [
     submenu: [
       { name: "Profile", path: "/" },
       { name: "Dashboard", path: "/" },
-      { name: "Sign out", path: "/" },
+      // { name: "Sign out", path: "/" },
     ],
   },
   {

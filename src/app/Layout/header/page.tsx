@@ -6,18 +6,23 @@ import styles from "./header.module.css"
 import { menuItems, menuIconItems } from './data';
 import { BiCaretDown, BiMenu } from 'react-icons/bi';
 import { AiOutlineClose } from 'react-icons/ai';
-
+import { logoutUser } from '@/redux/slices/authSlice';
+import { useDispatch } from 'react-redux';
+import { AppDispatch } from '@/redux/store';
 
 export default function Header() {
+
+    const dispatch = useDispatch<AppDispatch>();
+
     const [menuOpen, setMenuOpen] = useState(false);
     const [submenuOpen, setSubmenuOpen] = useState(false);
     const [submenu, setSubmenu] = useState<{ [key: number]: boolean }>({});
     const [isMobile, setIsMobile] = useState(false);
     const modalRef = useRef<HTMLDivElement | null>(null);
+
     const toggleMenu = () => {
         setMenuOpen((prev) => !prev);
     };
-
 
     const toggleSubmenu = (index: number) => {
         setSubmenuOpen(!submenuOpen)
@@ -39,7 +44,6 @@ export default function Header() {
         return () => window.removeEventListener('resize', handleResize);
     }, []);
 
-
     useEffect(() => {
         const handleClickOutside = (event: MouseEvent) => {
             if (modalRef.current && !modalRef.current.contains(event.target as Node)) {
@@ -52,6 +56,12 @@ export default function Header() {
             document.removeEventListener("mousedown", handleClickOutside);
         };
     }, []);
+
+    //logout user:
+    const handleLogout = () => {
+        dispatch(logoutUser());
+    }
+
     return (
         <nav className={`bg-white py-2 md:py-4 shadow-md z-10 relative`}>
             <div className="container md:px-4 mx-auto flex items-center justify-between ">
@@ -67,8 +77,8 @@ export default function Header() {
                             {/* Regular Menu Item */}
                             {!item.submenu ? (
                                 <Link href={item.path} className={`flex items-center py-2  
-                                text-gray-600 rounded hover:bg-primaryBlue hover:text-primaryBlue
-                                 transition-colors duration-300  ${item.className || ""}`}>
+                                        text-gray-600 rounded hover:bg-primaryBlue hover:text-primaryBlue
+                                         transition-colors duration-300  ${item.className || ""}`}>
                                     {item.leftIcon}  <span className={styles.navFont}>{item.name}</span>
                                 </Link>
                             ) : (
@@ -180,6 +190,9 @@ export default function Header() {
                                                     <span className={`${styles.navFontSubmenu} hover:bg-primaryBlue hover:text-white rounded-lg p-2`}>{sub.name}</span>
                                                 </Link>
                                             ))}
+                                            <button onClick={handleLogout} className="flex text-start flex-col px-1 py-2 w-full transition  text-gray-700 ">
+                                                <span className={`${styles.navFontSubmenu} hover:bg-primaryBlue hover:text-white rounded-lg p-2`}>Sign Out</span>
+                                            </button>
                                         </div>
                                     </div>
                                 )}

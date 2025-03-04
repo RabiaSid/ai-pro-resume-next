@@ -10,11 +10,9 @@ interface AuthState {
   errorsList: Record<string, string[]>; 
   statusCode: null;
 }
-
 // Async thunk for login
 export const loginUser = createAsyncThunk("auth/login", async (credentials: { email: string; password: string }, { rejectWithValue }) =>  {
     try {
-      console.log(credentials, "credentials");
       const response = await authService.login(credentials);
       return response;
     } catch (error: any) {
@@ -38,9 +36,10 @@ export const registerUser = createAsyncThunk(
   }
 );
 
+
 // Async thunk for logout
-export const logoutUser = createAsyncThunk("auth/logout", async () => {
-  authService.logout();
+export const logoutUser = createAsyncThunk("auth/logout", async (_, { dispatch }) => {
+  dispatch(authSlice.actions.handleLogout());
 });
 
 const authSlice = createSlice({
@@ -74,16 +73,12 @@ const authSlice = createSlice({
       })
       .addCase(loginUser.fulfilled, (state, action) => {
         state.loading = false;
-        console.log(action, "fulfilled login actionaction");
         state.user = action?.payload?.response?.data?.user; 
         state.token = action.payload.response.data.token; 
          Cookies.set("userToken", action.payload.response.data.token);
     })   
       .addCase(loginUser.rejected, (state, action) => {
-        console.log(action, "rejected login actionaction");
         state.loading = false;
-        // state.error = action.payload as string;
-        // state.errorsList = action.payload as string;
         state.error = action.error?.message  ? "Invalid Credentials" : "";
       })
       .addCase(registerUser.pending, (state) => {
@@ -92,7 +87,6 @@ const authSlice = createSlice({
         state.errorsList = {};
       })
       .addCase(registerUser.fulfilled, (state, action) => {
-        console.log(action, "fulfilled actionaction");
         state.loading = false;
       })
       .addCase(registerUser.rejected, (state, action) => {
@@ -108,7 +102,7 @@ const authSlice = createSlice({
       .addCase(logoutUser.fulfilled, (state) => {
         state.user = null;
         state.token = null;
-        Cookies.remove("token");
+        Cookies.remove("userToken");
       });
   },
   });
