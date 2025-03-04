@@ -14,7 +14,7 @@ const register = async (userData: { name: string; email: string; password: strin
 };
 
 const logout = () => {
-  Cookies.remove("token");
+  Cookies.remove("userToken");
 };
 
 export default {login, register, logout} 
