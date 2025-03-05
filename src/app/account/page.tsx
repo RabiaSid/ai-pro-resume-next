@@ -11,17 +11,13 @@ import { FiPhone } from 'react-icons/fi';
 import { CgClose } from 'react-icons/cg';
 import SunEditor from 'suneditor-react';
 import AppButton from '@/components/common/button/pages';
-import { BiDownArrow } from 'react-icons/bi';
-import { IoIosArrowDown, IoMdMove } from 'react-icons/io';
-import { FaRegTrashAlt } from 'react-icons/fa';
-import { MdOutlineKeyboardArrowUp } from 'react-icons/md';
+import ProfileSection from '@/components/profileSection/profileSection';
 
 
 export default function Account() {
   const [modelbox, setModelbox] = useState<boolean>(false);
   const modalRef = useRef<any>(null);
   const [activeIndex, setActiveIndex] = useState(0);
-  const [selectedIndex, setSelectedIndex] = useState<any>(null);
 
   const handleUserImageChange = (e: any) => {
     // const file = e.target.files[0];
@@ -64,14 +60,7 @@ export default function Account() {
     { title: "Password", content: "*******" },
   ];
 
-  const profileCategories = [
-    { label: "Experience", limit: "3", items: [{ id: 1, name: "Item 1" }, { id: 2, name: "Item 2" }] },
-    { label: "Education", limit: "4", items: [{ id: 1, name: "Item 1" }, { id: 2, name: "Item 2" }] },
-    { label: "Certificate", limit: "1", items: [{ id: 1, name: "Item 1" }, { id: 2, name: "Item 2" }] },
-    { label: "Awards", limit: "7", items: [{ id: 1, name: "Item 1" }, { id: 2, name: "Item 2" }] },
-    { label: "Language", limit: "3", items: [{ id: 1, name: "Item 1" }, { id: 2, name: "Item 2" }] },
-    { label: "Reference", limit: "4", items: [{ id: 1, name: "Item 1" }, { id: 2, name: "Item 2" }] },
-  ];
+
 
   useEffect(() => {
     const handleClickOutside = (event: any | never) => {
@@ -90,6 +79,8 @@ export default function Account() {
   }, []);
 
   const closeModal = () => setModelbox(false);
+
+
 
   return (
     <>
@@ -212,41 +203,7 @@ export default function Account() {
                 ))}
               </div>
             </div>
-            {profileCategories.map((category, index) => (
-              <div key={index} className="py-4 font-Lexend ">
-                <div
-                  className="flex justify-between items-center text-primarySlate font-bold cursor-pointer"
-                  onClick={() => setSelectedIndex(selectedIndex === index ? null : index)}
-                >
-                  <div className="flex gap-2 items-center">
-                    <span className="min-w-[90px]">{category.label}</span>
-                    <span className="bg-primaryBlue/25 w-8 h-8 flex justify-center items-center rounded-full text-sm">{category.limit}</span>
-                  </div>
-                  <IoIosArrowDown className={selectedIndex === index ? "rotate-180" : ""} />
-                </div>
-                {selectedIndex === index && (
-                  <div className="w-full  divide-y-[0.5px] ">
-                    {category.items.map((item) => (
-                      <div key={item.id} className="grid grid-cols-2 gap-4 w-full hover:bg-[#e9f5ff] py-3">
-                        <div className="flex items-center justify-start gap-2 font-bold text-[#343434]">
-                          <p className="flex items-center justify-center w-10 h-10 rounded-full border border-[#343434] text-md">{item.id}</p>
-                          <div className="flex flex-col">
-                            <p className="text-primary-blue text-sm">{item.name}</p>
-                            <p className="text-[#A7A7A7] text-sm">Description</p>
-                          </div>
-                        </div>
-                        <div className="flex items-center justify-end gap-4">
-                          <FaPencil size={15} className="text-[#343434] hover:text-[#1877f2] cursor-pointer" />
-                          <FaRegTrashAlt size={17} className="text-[#343434] hover:text-red-600 cursor-pointer" />
-                          <IoMdMove size={19} className="text-[#343434] hover:text-[#1877f2]" />
-                          <MdOutlineKeyboardArrowUp size={22} className="text-[#343434] hover:text-[#1877f2] cursor-pointer" />
-                        </div>
-                      </div>
-                    ))}
-                  </div>
-                )}
-              </div>
-            ))}
+            <ProfileSection />
           </div>
           <div className="mt-4 ">
             <>
@@ -397,7 +354,7 @@ export default function Account() {
             <div className="flex w-full px-8 py-5 justify-between border border-b ">
               <div className="w-full">
                 <div className="relative">
-                  {/* <SunEditor setOptions={{
+                  <SunEditor setOptions={{
                     height: "500px",
                     placeholder: "Enter the job description here...",
                     buttonList: [
@@ -408,7 +365,7 @@ export default function Account() {
                     resizeEnable: false,
                   }}
                     defaultValue={sections[0].content}
-                  /> */}
+                  />
                   <div
                     className="absolute top-2 right-2 z-20 flex items-center gap-2 bg-primaryGreen px-2 py-1.5 rounded-md !m-0 cursor-pointer"
                   // onClick={() => setAiModal(true)}
