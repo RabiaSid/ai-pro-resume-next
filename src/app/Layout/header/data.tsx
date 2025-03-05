@@ -60,8 +60,8 @@ export const menuIconItems: MenuIconItem[] = [
       <div
         className={" items-center border-l gap-2 pl-2 hidden md:flex"}
         style={{ minHeight: "20px", minWidth: "20px" }}
-      // ref={menuRef}
-      // onClick={() => setIsDropOpen(!isDropOpen)}
+        // ref={menuRef}
+        // onClick={() => setIsDropOpen(!isDropOpen)}
       >
         <BiSolidUser className="bg-[#0072b1] text-white rounded-full p-1 text-2xl " />
       </div>
@@ -73,7 +73,7 @@ export const menuIconItems: MenuIconItem[] = [
     ],
   },
   {
-    path: "/register",
+    path: "/cart",
     className: "border border-transparent hover:bg-transparent px-0 ",
     leftIcon: (
       <div className={`relative cursor-pointer`}>
