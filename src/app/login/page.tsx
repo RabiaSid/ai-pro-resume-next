@@ -18,11 +18,12 @@ import { useDispatch, useSelector } from 'react-redux'
 import { AppDispatch, RootState } from '@/redux/store'
 import { loginUser } from '@/redux/slices/authSlice'
 import Cookies from "js-cookie";
+import CustomAlert from '@/components/common/customAlerts/CustomAlert'
 
 export default function page() {
     const router = useRouter();
     const dispatch = useDispatch<AppDispatch>();
-    const { loading, user } = useSelector((state: RootState) => state.auth);
+    const { loading, user, token } = useSelector((state: RootState) => state.auth);
 
     const [showPassword, setShowPassword] = useState(false);
     const [captchaError, setCaptchaError] = useState("");
@@ -30,19 +31,21 @@ export default function page() {
     const [rememberMe, setRememberMe] = useState(false);
     const [showAlert, setShowAlert] = useState(false);
     const [showErrorMessage, setShowErrorMessage] = useState<string>();
+    const [showSuccessMessage, setShowSuccessMessage] = useState<string>();
 
     const {
         handleSubmit,
         control,
+        setValue,
         formState: { errors },
-    } = useForm({ mode: "onChange" });
+    } = useForm({
+        mode: "onChange"
+    });
 
     const handleCheckCaptcha = () => {
         setVerified(true);
         setCaptchaError("");
     };
-    console.log(user, "useruser");
-
     const resetRecaptchaValue = () => {
         setVerified(null);
     };
@@ -70,19 +73,29 @@ export default function page() {
             email: formData?.email,
             password: formData?.password,
         }
-        try {
-            const response = await dispatch(loginUser(credentials));
-            // rememberMe
+        await dispatch(loginUser(credentials)).then((response) => {
             if (response.payload?.statusCode == 200) {
-                router.push("/");
+                setShowAlert(true)
+                setShowSuccessMessage(response.payload.message);
+                if (formData.rememberMe) {
+                    localStorage.setItem("userCredentials", JSON.stringify(credentials));
+                    localStorage.setItem("rememberMie", "true");
+                } else {
+                    localStorage.removeItem("userCredentials");
+                    localStorage.removeItem("rememberMie");
+                }
+                setTimeout(() => {
+                    router.push("/");
+                }, 1000)
             } else {
                 setShowAlert(true)
-                setShowErrorMessage("Invalid Credentials.");
+                setShowErrorMessage(response.payload.message ?? "Invalid Credentials.");
             }
-        } catch (error) {
+        }).catch((err) => {
+            console.log(err);
             setShowAlert(true)
             setShowErrorMessage("Something wents wrong!");
-        }
+        })
     }
     useEffect(() => {
         const tokenExist = Cookies.get("userToken");
@@ -90,21 +103,34 @@ export default function page() {
             router.push("/")
         }
     }, [])
+
+    useEffect(() => {
+        const savedCredentials = localStorage.getItem("userCredentials");
+        const savedRememberMie = localStorage.getItem("rememberMie");
+        if (savedCredentials && savedRememberMie) {
+            const { email, password } = JSON.parse(savedCredentials);
+            setValue("email", email);
+            setValue("password", password);
+            setValue("rememberMe", true);
+        }
+        else {
+            setValue("email", "");
+            setValue("password", "");
+            setValue("rememberMe", false);
+        }
+    }, []);
+
     return (
         <>
             <Ads />
             <div className="w-full md:w-[550px] m-auto mt-20 px-4 min-h-[800px] text-center font-Lexend">
-
-                {showAlert && showErrorMessage?.length && (
-                    <div
-                        className="bg-red-100 border-l-4 text-start mb-4 border-red-500 text-red-700 p-4 rounded relative"
-                        role="alert"
-                    >
-                        <ul className="list-disc list-inside">
-                            {showErrorMessage}
-                        </ul>
-                    </div>
+                {showAlert && (showErrorMessage || showSuccessMessage) && (
+                    <CustomAlert
+                        messages={showErrorMessage || showSuccessMessage}
+                        type={showErrorMessage ? "error" : "success"}
+                    />
                 )}
+
                 <H1 className='text-primaryBlue mb-5'>SIGN IN</H1>
 
                 <div className="text-black text-left my-4 text-lg flex items-start justify-center">
@@ -233,9 +259,28 @@ export default function page() {
                     </div>
                     <div className="flex justify-between mt-[-10px]">
                         <div className="text-slate-500">
-                            <input type="checkbox" onClick={() => setRememberMe(true)} className="autofill:bg-yellow-200" />{" "}
-                            Remember me
+                            <Controller
+                                name="rememberMe"
+                                control={control}
+                                defaultValue=""
+                                render={({ field }) => (
+
+                                    <input
+                                        type="checkbox"
+                                        {...field}
+                                        checked={field.value}
+                                        onChange={(e) => {
+                                            const checked = e.target.checked;
+                                            field.onChange(checked);
+                                            setRememberMe(checked);
+                                        }}
+                                        className="autofill:bg-yellow-200"
+                                    />
+                                )}
+                            />
+                            {" "} Remember me
                         </div>
+
                         <div className="text-slate-500">
                             <Link
                                 href={"/forget-password"} >

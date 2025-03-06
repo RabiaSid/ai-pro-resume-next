@@ -35,6 +35,35 @@ export const registerUser = createAsyncThunk(
     }
   }
 );
+// Async thunk for Forget Password
+export const forgetPassword = createAsyncThunk(
+  "auth/forgetPassword",
+  async (email: string, { rejectWithValue }) => {
+    try {
+      const response = await authService.forgetPassword(email);
+      return response;
+
+    } catch (error: any) {
+      console.log(error, "respnse in error");
+      return rejectWithValue(error.response?.data || "Registration failed");
+    }
+  }
+);
+
+// Async thunk for Forget Password
+export const UpdatePassword = createAsyncThunk(
+  "auth/UpdatePassword",
+  async (userData: { verify_code: string; password: string, password_confirmation : string, email: string}, { rejectWithValue }) => {
+    try {
+      const response = await authService.updatePassword(userData);
+      return response;
+
+    } catch (error: any) {
+      console.log(error, "respnse in error");
+      return rejectWithValue(error.response?.data || "Registration failed");
+    }
+  }
+);
 
 
 // Async thunk for logout
@@ -44,13 +73,13 @@ export const logoutUser = createAsyncThunk("auth/logout", async (_, { dispatch }
 
 const authSlice = createSlice({
   name: "auth",
-  initialState: {
-    user: null,
-    token: Cookies.get("userToken") || null,
-    loading: false,
-    errorsList: {},
-    statusCode: null,
-  } as AuthState,
+  initialState : {
+  user: Cookies.get("userData") ? JSON.parse(Cookies.get("userData")!) : null,
+  token: Cookies.get("userToken") || null,
+  loading: false,
+  errorsList: {},
+  statusCode: null,
+    } as AuthState,
   reducers: {
     handleSetUser: (state, action) => {
       state.user = action.payload;
@@ -75,10 +104,11 @@ const authSlice = createSlice({
         console.log(action, "===================> action");
 
         state.loading = false;
-        state.user = action?.payload?.response?.data?.user;
-        state.token = action.payload.response.data.token;
-        Cookies.set("userToken", action.payload.response.data.token);
-      })
+        state.user = action?.payload?.response?.data?.user; 
+        state.token = action.payload.response.data.token; 
+         Cookies.set("userToken", action.payload.response.data.token);
+         Cookies.set("userData", JSON.stringify(action.payload.response.data.user));
+    })   
       .addCase(loginUser.rejected, (state, action) => {
         state.loading = false;
         state.error = action.error?.message ? "Invalid Credentials" : "";
@@ -105,6 +135,7 @@ const authSlice = createSlice({
         state.user = null;
         state.token = null;
         Cookies.remove("userToken");
+        Cookies.remove("userData");
       });
   },
 });

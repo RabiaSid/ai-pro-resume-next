@@ -13,8 +13,17 @@ const register = async (userData: { name: string; email: string; password: strin
   return response.data;
 };
 
+const forgetPassword = async (email: string) => {
+  const response = await axios.post(`${BASE_URL}/forgot-password`, email);
+  return response.data;
+};
+const updatePassword = async (userData: { verify_code: string; password: string; password_confirmation: string }) => {
+  const response = await axios.post(`${BASE_URL}/update-password`, userData);
+  return response.data;
+};
+
 const logout = () => {
   Cookies.remove("userToken");
 };
 
-export default {login, register, logout} 
+export default {login, register, logout, forgetPassword, updatePassword} 
