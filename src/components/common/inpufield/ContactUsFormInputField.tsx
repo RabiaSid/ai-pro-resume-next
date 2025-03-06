@@ -1,6 +1,8 @@
 import React from "react";
 import { Controller, Control } from "react-hook-form";
 import PhoneInput from "react-phone-number-input";
+import "react-phone-number-input/style.css";
+import styles from "./inpufield.module.css"
 
 type ContactFormFieldProps = {
   control: Control<any>;
@@ -42,7 +44,7 @@ const ContactUsFormInputField = (props: ContactFormFieldProps) => {
               specialLabel=""
               {...field}
               country={"US"}
-              inputClass="w-full px-3 py-2 placeholder-gray-500 text-gray-900 border-b-2 border-gray-300 focus:outline-none focus:border-teal-500 transition duration-300 ease-in-out rounded-md"
+              className={`w-full px-3 py-2 placeholder-gray-500 text-gray-900 border-b-2 border-gray-300 focus:border-teal-500 transition duration-300 ease-in-out rounded-md ${styles.inputPhoneNumber}`}
               containerClass="w-full"
               placeholder={placeholder}
               onChange={(value) => field.onChange(value)}

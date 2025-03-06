@@ -12,6 +12,7 @@ import { CgClose } from 'react-icons/cg';
 import SunEditor from 'suneditor-react';
 import AppButton from '@/components/common/button/pages';
 import ProfileSection from '@/components/profileSection/profileSection';
+import { API } from '@/services/backendService';
 
 
 export default function Account() {
@@ -27,6 +28,10 @@ export default function Account() {
     //   setCropModalVisible(true);
     // }
   };
+
+  API.get("/profile")
+    .then((data) => console.log("Users:", data))
+    .catch((err) => console.error("Fetch Error:", err));
 
   const userDetails = [
     { label: "Name", value: "Siri Hassni" },

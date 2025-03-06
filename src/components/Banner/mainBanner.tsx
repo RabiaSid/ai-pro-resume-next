@@ -37,25 +37,26 @@ export default function Banner(props: BannerProps) {
     const typedText = useTypedText(subtitle);
 
     return (
-        <section className="container md:px-4 mx-auto">
-            <div className="w-full py-5 my-10 bg-white relative">
-                <div className="absolute w-full h-[600px] flex  justify-center items-center z-0 overflow-hidden">
-                    <Image
-                        src={shadeImage01}
-                        alt="full shade image"
-                        className="w-[800px] relative left-[900px]  top-[50px] "
-                    />
-                    <Image
-                        src={shadeImage03}
-                        alt="full shade image"
-                        className="w-[1200px] relative left-[300px] top-[-150px] "
-                    />
-                    <Image
-                        src={shadeImage02}
-                        alt="full shade image"
-                        className="w-[1200px] relative top-[50px]"
-                    />
-                </div>
+        <section className="container md:px-4 mx-auto relative">
+            <div className="absolute w-full h-[600px] flex  justify-center items-center z-0 overflow-hidden">
+                <Image
+                    src={shadeImage01}
+                    alt="full shade image"
+                    className="w-[800px] relative left-[900px]  top-[50px] "
+                />
+                <Image
+                    src={shadeImage03}
+                    alt="full shade image"
+                    className="w-[1200px] relative left-[300px] top-[-150px] "
+                />
+                <Image
+                    src={shadeImage02}
+                    alt="full shade image"
+                    className="w-[1200px] relative top-[50px]"
+                />
+            </div>
+            <div className="w-full py-5 my-10 bg-white ">
+
 
 
                 <div className="grid lg:grid-cols-2 gap-8 items-center">
