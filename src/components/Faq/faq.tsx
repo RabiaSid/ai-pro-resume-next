@@ -42,6 +42,16 @@ const dummyFaqs: Faq[] = [
     answer: "You can install it using 'npx create-next-app@latest'.",
     page: "Services",
   },
+  {
+    question: "What is Next.js?",
+    answer: "Next.js is a React framework for production.",
+    page: "Pricing",
+  },
+  {
+    question: "How to install Next.js?",
+    answer: "You can install it using 'npx create-next-app@latest'.",
+    page: "Pricing",
+  },
 ];
 
 export default function OurFaqs() {

@@ -1,4 +1,4 @@
-.packagesfeature ul li::before {
+/* .packagesfeature ul li::before {
   content: "";
   width: 25px;
   height: 25px;
@@ -8,13 +8,13 @@
   background-size: cover;
   display: inline-block;
   margin-right: 5px;
-}
+} */
 
 .packagesfeature ul li {
   display: flex;
   align-items: center;
   font-size: 14px;
-  background-color: red;
+  /* background-color: red; */
 }
 
 .packagesfeature ul {

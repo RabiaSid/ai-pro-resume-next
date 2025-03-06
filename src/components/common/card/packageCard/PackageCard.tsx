@@ -1,6 +1,7 @@
 import React, { useRef } from "react";
 import Link from "next/link";
 import check from "media/assets/check.webp";
+import styles from "./PackageCard.module.css";
 
 // Define TypeScript interfaces for props
 interface PackageCardProps {
@@ -110,7 +111,7 @@ const PackageCard: React.FC<PackageCardProps> = ({
       <div className="px-4 py-4 flex flex-col gap-4">
         {/* Package features */}
         <div
-          className="packagesfeature h-auto 2xl:h-[450px]"
+          className={`${styles.packagesfeature} h-auto 2xl:h-[450px]`}
           dangerouslySetInnerHTML={{
             __html: modifyFeaturesWithImages(packagefeatures),
           }}

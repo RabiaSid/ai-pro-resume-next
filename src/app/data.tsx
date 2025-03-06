@@ -3,6 +3,7 @@ import MainSliderImage2 from "media/assets/home_slider/slider_2.webp";
 import MainSliderImage3 from "media/assets/home_slider/slider_3.webp";
 import MainSliderImage4 from "media/assets/home_slider/slider_4.webp";
 import MainSliderImage5 from "media/assets/home_slider/slider_5.webp";
+import { title } from "process";
 
 const images = [
   MainSliderImage1,
@@ -167,18 +168,19 @@ export const ApplyNowBannerData = {
 };
 
 export const ContactUsBannerData = {
-  title: (
-    <>
-      Contact Us-Connect with a{" "}
-      <span
-        style={{ color: "#00caa5" }}
-        className="bg-no-repeat bg-cover leading-[1.5] font-lexend font-bold"
-      >
-        AI Resume Builder
-      </span>{" "}
-      for Personalized Career Help
-    </>
-  ),
+  // title: (
+  //   <>
+  //     Contact Us-Connect with a{" "}
+  //     <span
+  //       style={{ color: "#00caa5" }}
+  //       className="bg-no-repeat bg-cover leading-[1.5] font-lexend font-bold"
+  //     >
+  //       AI Resume Builder
+  //     </span>{" "}
+  //     for Personalized Career Help
+  //   </>
+  // ),
+  title: "Let AI Build the Resume",
   description: <></>,
 };
 

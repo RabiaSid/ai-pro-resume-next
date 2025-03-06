@@ -17,6 +17,7 @@ import { ContactUsBannerData } from "../data";
 import Ads from "@/components/ads/Ads";
 import { useForm } from "react-hook-form";
 import ContactUsFormInputField from "@/components/common/inpufield/ContactUsFormInputField";
+import MainBanner from "@/components/Banner/mainBanner";
 
 const ContactUs = () => {
   const [captchaError, setCaptchaError] = useState<any>();
@@ -58,7 +59,7 @@ const ContactUs = () => {
   return (
     <div>
       <div className="w-full h-[20%]">
-        <ContactPageBanner {...ContactUsBannerData} />
+        <MainBanner {...ContactUsBannerData} />
       </div>
 
       <Ads />
