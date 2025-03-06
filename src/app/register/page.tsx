@@ -24,7 +24,7 @@ export default function page() {
     const router = useRouter();
     const dispatch = useDispatch<AppDispatch>();
 
-    const { loading, error, errorsList } = useSelector((state: RootState) => state.auth);
+    const { loading, errorsList } = useSelector((state: RootState) => state.auth);
     const [captchaError, setCaptchaError] = useState("");
     const [verified, setVerified] = useState<any>(false);
     const [showPassword, setShowPassword] = useState(false);
@@ -79,9 +79,7 @@ export default function page() {
     const handleClick = () => {
         console.log("Creatimg account");
     };
-    const handleLoginSubmit = async (formData: any) => {
-        console.log(formData);
-        console.log(formData, "formData");
+    const handleRegister = async (formData: any) => {
         const credentials = {
             name: formData?.name,
             email: formData?.email,
@@ -92,19 +90,30 @@ export default function page() {
             contact: formData?.contact,
             referred_by: formData?.referred_by,
         }
-        try {
-            await dispatch(registerUser(credentials)).then((response) => {
-                console.log(response, "response");
-                if (response?.payload?.statusCode == 200) {
-                    router.push('/login')
-                }
-            }).catch((err) => {
-                console.log(err, "Error while registering!");
-            })
-        } catch (error) {
+
+        await dispatch(registerUser(credentials)).then((response) => {
+            console.log(response, "response");
+            if (response?.payload?.statusCode == 200) {
+                router.push('/login')
+            }
+        }).catch((error) => {
             setShowAlert(true)
             console.error("Registering failed:", error);
-        }
+        })
+
+        // try {
+        //     await dispatch(registerUser(credentials)).then((response) => {
+        //         console.log(response, "response");
+        //         if (response?.payload?.statusCode == 200) {
+        //             router.push('/login')
+        //         }
+        //     }).catch((err) => {
+        //         console.log(err, "Error while registering!");
+        //     })
+        // } catch (error) {
+        //     setShowAlert(true)
+        //     console.error("Registering failed:", error);
+        // }
     }
     useEffect(() => {
         if (errorsList && typeof errorsList === 'object') {
@@ -136,7 +145,6 @@ export default function page() {
                 {/* //Social Logins */}
                 <div className='grid space-y-3'>
                     <div>
-                        {/* //Social Logins */}
                         <AppButton title='Sign-in  with Google'
                             className="w-[100%] border border-solid text-gray-400 border-slate-300 px-2 py-2 rounded-md hover:bg-slate-800 hover:text-white ease-in transition-all flex justify-center items-center"
                             childClassName="sm:tracking-widest relative"
@@ -155,7 +163,6 @@ export default function page() {
                     </div>
 
                     <div>
-                        {/* //Social Logins */}
                         <AppButton title='Sign-in  with Facebook'
                             className="w-[100%] border border-solid text-gray-400 border-slate-300 px-2 py-2 rounded-md hover:bg-slate-800 hover:text-white ease-in transition-all flex justify-center items-center"
                             childClassName="sm:tracking-widest relative"
@@ -192,9 +199,8 @@ export default function page() {
                     </div>
                 </div>
 
-
                 <div>
-                    <form onSubmit={handleSubmit(handleLoginSubmit)}
+                    <form onSubmit={handleSubmit(handleRegister)}
                     >
                         {/* Name */}
                         <div className="flex flex-col">
