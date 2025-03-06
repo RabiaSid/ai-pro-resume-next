@@ -2,6 +2,7 @@
 
 import PackageCard from "@/components/common/card/packageCard/PackageCard";
 import OurFaqs from "@/components/Faq/faq";
+import CoinsPurchase from "@/components/pricing/CoinsPurchase";
 import PackageCardSkeleton from "@/components/pricing/PackageCardSkeleton";
 import React, { useEffect, useRef, useState } from "react";
 
@@ -152,9 +153,9 @@ const pricing = () => {
         >
           {packageDetailText}
         </h1>
-        {/* <div id="coins_purchase">
+        <div id="coins_purchase">
           <CoinsPurchase />
-        </div> */}
+        </div>
 
         <OurFaqs />
       </div>
