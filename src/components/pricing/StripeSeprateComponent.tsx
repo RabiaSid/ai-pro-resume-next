@@ -17,21 +17,21 @@ import { Controller, useForm } from "react-hook-form";
 import axios from "axios";
 
 interface Props {
-  packageId: string;
-  packageDuration: string;
-  packagePrice: number;
-  services: string[];
-  discounted_amount: number;
-  sub_total: number;
-  tax_amount: number;
-  total_amount: number;
-  description: string;
+  packageId?: string;
+  packageDuration?: string;
+  packagePrice?: number;
+  services?: string[];
+  discounted_amount?: number;
+  sub_total?: number;
+  tax_amount?: number | string;
+  total_amount?: number;
+  description?: string;
   coupon_code?: string;
   coupon_discount_percent?: number;
   used_coins?: number;
-  tax_type: string;
-  isLoading: (loading: boolean) => void;
-  selectedPlan: string;
+  tax_type?: string;
+  isLoading?: any;
+  selectedPlan?: string;
   coinsAreUSing?: number;
   remaningUserCoins?: number;
 }
@@ -239,9 +239,8 @@ const StripeSeprateComponent: React.FC<Props> = (props) => {
                 type="text"
                 id="name"
                 name="name"
-                className={`${
-                  errors.name ? "border-red-500" : "border-primary"
-                } border-2 py-2 px-2  w-full placeholder:text-[20px] placeholder:text-[#6c757d] text-[20px] focus-visible:outline-none`}
+                className={`${errors.name ? "border-red-500" : "border-primary"
+                  } border-2 py-2 px-2  w-full placeholder:text-[20px] placeholder:text-[#6c757d] text-[20px] focus-visible:outline-none`}
                 placeholder="Cardholder Name"
               />
               {errors.name && (
@@ -257,9 +256,8 @@ const StripeSeprateComponent: React.FC<Props> = (props) => {
       <div className="">
         <label
           htmlFor="email"
-          className={`${
-            errors.email ? "text-red-500" : "text-gray-700"
-          } block `}
+          className={`${errors.email ? "text-red-500" : "text-gray-700"
+            } block `}
         >
           Email*
         </label>
@@ -275,9 +273,8 @@ const StripeSeprateComponent: React.FC<Props> = (props) => {
                 type="email"
                 id="email"
                 name="email"
-                className={`${
-                  errors.email ? "border-red-500" : "border-primary"
-                } border-2 py-2 px-2  w-full placeholder:text-[20px] placeholder:text-[#6c757d] text-[20px] focus-visible:outline-none`}
+                className={`${errors.email ? "border-red-500" : "border-primary"
+                  } border-2 py-2 px-2  w-full placeholder:text-[20px] placeholder:text-[#6c757d] text-[20px] focus-visible:outline-none`}
                 placeholder="Cardholder Email"
               />
               {errors.email && (
@@ -293,9 +290,8 @@ const StripeSeprateComponent: React.FC<Props> = (props) => {
       <div className=" w-full">
         <label
           htmlFor="address"
-          className={`${
-            errors.address ? "text-red-500" : "text-gray-700"
-          } block `}
+          className={`${errors.address ? "text-red-500" : "text-gray-700"
+            } block `}
         >
           Address
         </label>
@@ -309,9 +305,8 @@ const StripeSeprateComponent: React.FC<Props> = (props) => {
                 {...field}
                 type="text"
                 id="address"
-                className={`${
-                  errors.address ? "border-red-500" : "border-primary"
-                } border-2 py-2 px-2  w-full placeholder:text-[20px] placeholder:text-[#6c757d] text-[20px] focus-visible:outline-none`}
+                className={`${errors.address ? "border-red-500" : "border-primary"
+                  } border-2 py-2 px-2  w-full placeholder:text-[20px] placeholder:text-[#6c757d] text-[20px] focus-visible:outline-none`}
                 placeholder="Complete Address"
               />
               {errors.address && (
@@ -327,9 +322,8 @@ const StripeSeprateComponent: React.FC<Props> = (props) => {
       <div className=" w-full">
         <label
           htmlFor="postal_code"
-          className={`${
-            errors.address ? "text-red-500" : "text-gray-700"
-          } block `}
+          className={`${errors.address ? "text-red-500" : "text-gray-700"
+            } block `}
         >
           Postal Code
         </label>
@@ -343,9 +337,8 @@ const StripeSeprateComponent: React.FC<Props> = (props) => {
                 {...field}
                 type="text"
                 id="postal_code"
-                className={`${
-                  errors.postal_code ? "border-red-500" : "border-primary"
-                } border-2 py-2 px-2  w-full placeholder:text-[20px] placeholder:text-[#6c757d] text-[20px] focus-visible:outline-none`}
+                className={`${errors.postal_code ? "border-red-500" : "border-primary"
+                  } border-2 py-2 px-2  w-full placeholder:text-[20px] placeholder:text-[#6c757d] text-[20px] focus-visible:outline-none`}
                 placeholder="123456"
               />
               {errors.postal_code && (
@@ -361,9 +354,8 @@ const StripeSeprateComponent: React.FC<Props> = (props) => {
       <div className="">
         <label
           htmlFor="cardNumber"
-          className={`${
-            errors.cardNumber ? "text-red-500" : "text-gray-700"
-          } block`}
+          className={`${errors.cardNumber ? "text-red-500" : "text-gray-700"
+            } block`}
         >
           Card Number*
         </label>
@@ -379,9 +371,8 @@ const StripeSeprateComponent: React.FC<Props> = (props) => {
                 {...field}
                 id="cardNumber"
                 options={elementOptions}
-                className={`${
-                  errors.cardNumber ? "border-red-500" : "border-primary"
-                }  border-2 py-2 px-2 `}
+                className={`${errors.cardNumber ? "border-red-500" : "border-primary"
+                  }  border-2 py-2 px-2 `}
               />
               {errors.cardNumber && (
                 <span className="text-red-500 w-full left-0 -bottom-5 text-sm absolute">
@@ -397,9 +388,8 @@ const StripeSeprateComponent: React.FC<Props> = (props) => {
         <div className=" w-full">
           <label
             htmlFor="cardExpiry"
-            className={`${
-              errors.cardExpiry ? "text-red-500" : "text-gray-700"
-            } block`}
+            className={`${errors.cardExpiry ? "text-red-500" : "text-gray-700"
+              } block`}
           >
             Expiry Date*
           </label>
@@ -416,9 +406,8 @@ const StripeSeprateComponent: React.FC<Props> = (props) => {
                   {...field}
                   id="cardExpiry"
                   options={elementOptions}
-                  className={`${
-                    errors.cardExpiry ? "border-red-500" : "border-primary"
-                  }  border-2 py-2 px-2 `}
+                  className={`${errors.cardExpiry ? "border-red-500" : "border-primary"
+                    }  border-2 py-2 px-2 `}
                 />
                 {errors.cardExpiry && (
                   <span className="text-red-500 w-full left-0 -bottom-5 text-sm absolute">
@@ -433,9 +422,8 @@ const StripeSeprateComponent: React.FC<Props> = (props) => {
         <div className=" w-full">
           <label
             htmlFor="cardCvc"
-            className={`${
-              errors.cardCvc ? "text-red-500" : "text-gray-700"
-            } block`}
+            className={`${errors.cardCvc ? "text-red-500" : "text-gray-700"
+              } block`}
           >
             CVC
           </label>
@@ -452,9 +440,8 @@ const StripeSeprateComponent: React.FC<Props> = (props) => {
                   {...field}
                   id="cardCvc"
                   options={elementOptions}
-                  className={`${
-                    errors.cardCvc ? "border-red-500" : "border-primary"
-                  }  border-2 py-2 px-2 `}
+                  className={`${errors.cardCvc ? "border-red-500" : "border-primary"
+                    }  border-2 py-2 px-2 `}
                 />
                 {errors.cardCvc && (
                   <span className="text-red-500 w-full left-0 -bottom-5 text-sm absolute">

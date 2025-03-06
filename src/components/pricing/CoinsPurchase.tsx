@@ -2,9 +2,31 @@ import { PayPalButtons, PayPalScriptProvider } from "@paypal/react-paypal-js";
 import React, { useRef, useState } from "react";
 import { RiCoinsFill } from "react-icons/ri";
 import styles from "./CoinPurchase.module.css";
-import swal from "sweetalert";
+// import swal from "sweetalert";
 import { Elements } from "@stripe/react-stripe-js";
 import StripeSeprateComponent from "./StripeSeprateComponent";
+import PaymentSection from "./paymentSection";
+
+interface Plan {
+  id: string;
+  coins: number;
+  duration: number;
+  price: number;
+}
+
+interface Tax {
+  type: string;
+  amount: number;
+}
+
+interface PaymentProps {
+  totalAmount: number;
+  selectedPlan: Plan;
+  tax: Tax;
+  setIsLoading: (val: boolean) => void;
+}
+
+// const stripePromise = loadStripe("pk_test_51OEUmkGaxxNRTGagQIYF34iTl3r85j1GMZDKbq7jnesM3AzvN5MyudpkqwjLr9m1PLNjjKLz0G7MQCPOPpiL5jar00XuVUMSb8");
 
 const CoinsPurchase = () => {
   const [coinPlans, setCoinPlans] = useState<any[]>([
@@ -29,76 +51,76 @@ const CoinsPurchase = () => {
   const [totalAmount, setTotalAmount] = useState<any>(0);
   const totalAmountPara = useRef(null);
 
-  //   const Paypal__Before__Payment = () => {
-  //     // setIsLoading(true);
-  //     const data = {
-  //       payment_type: "paypal",
-  //       card_number: "4242",
-  //       //   card_name: user?.name,
-  //       tax: totalAmount.toFixed(1),
-  //       tax_type: tax.type,
-  //       total_amount: totalAmount,
-  //       planId: selectedPlan.id,
-  //     };
+  const Paypal__Before__Payment = () => {
+    // setIsLoading(true);
+    const data = {
+      payment_type: "paypal",
+      card_number: "4242",
+      //   card_name: user?.name,
+      tax: totalAmount.toFixed(1),
+      tax_type: tax.type,
+      total_amount: totalAmount,
+      planId: selectedPlan.id,
+    };
 
-  //     console.log(data);
+    console.log(data);
 
-  //     // ApiService.purchaseCoins(user?.token, data)
-  //     //   .then((res) => {
-  //     //     set_insert_id(res.data.data.id);
-  //     //     setIsLoading(false);
-  //     //     swal({
-  //     //       closeOnClickOutside: true,
-  //     //       title: "Congratulations",
-  //     //       text: res.data.message,
-  //     //       icon: "success",
-  //     //     })
-  //     //       .then(() => {})
-  //     //       .catch(() => {});
-  //     //   })
-  //     //   .catch((err) => {
-  //     //     console.log(err);
-  //     //     setIsLoading(false);
-  //     //   });
-  //   };
+    // ApiService.purchaseCoins(user?.token, data)
+    //   .then((res) => {
+    //     set_insert_id(res.data.data.id);
+    //     setIsLoading(false);
+    //     swal({
+    //       closeOnClickOutside: true,
+    //       title: "Congratulations",
+    //       text: res.data.message,
+    //       icon: "success",
+    //     })
+    //       .then(() => {})
+    //       .catch(() => {});
+    //   })
+    //   .catch((err) => {
+    //     console.log(err);
+    //     setIsLoading(false);
+    //   });
+  };
 
-  //   const Paypal__Successful__Payment = (order: any) => {
-  //     // setIsLoading(true);
-  //     const data = {
-  //       payment_type: "paypal",
-  //       card_number: "",
-  //       card_name: order.payer.name.given_name + " " + order.payer.name.surname,
-  //       tax: totalAmount.toFixed(1),
-  //       tax_type: tax.type,
-  //       total_amount: order.purchase_units[0].amount.value,
-  //       planId: selectedPlan.id,
-  //       //   id: insert_id,
-  //     };
+  const Paypal__Successful__Payment = (order: any) => {
+    // setIsLoading(true);
+    const data = {
+      payment_type: "paypal",
+      card_number: "",
+      card_name: order.payer.name.given_name + " " + order.payer.name.surname,
+      tax: totalAmount.toFixed(1),
+      tax_type: tax.type,
+      total_amount: order.purchase_units[0].amount.value,
+      planId: selectedPlan.id,
+      //   id: insert_id,
+    };
 
-  //     console.log(data);
+    console.log(data);
 
-  //     // ApiService.purchaseCoinsUpdate(user?.token, data)
-  //     //   .then((res) => {
-  //     //     console.log(res.data);
-  //     //     setIsLoading(false);
-  //     //     swal({
-  //     //       closeOnClickOutside: true,
-  //     //       title: "Congratulations",
-  //     //       text: res.data.message,
-  //     //       icon: "success",
-  //     //     })
-  //     //       .then(() => navigate("/dashboard?tab=mytransactions"))
-  //     //       .catch(() => navigate("/dashboard?tab=mytransactions"));
-  //     //   })
-  //     //   .catch((err) => {
-  //     //     console.log(err);
-  //     //     setIsLoading(false);
-  //     //   });
-  //   };
+    // ApiService.purchaseCoinsUpdate(user?.token, data)
+    //   .then((res) => {
+    //     console.log(res.data);
+    //     setIsLoading(false);
+    //     swal({
+    //       closeOnClickOutside: true,
+    //       title: "Congratulations",
+    //       text: res.data.message,
+    //       icon: "success",
+    //     })
+    //       .then(() => navigate("/dashboard?tab=mytransactions"))
+    //       .catch(() => navigate("/dashboard?tab=mytransactions"));
+    //   })
+    //   .catch((err) => {
+    //     console.log(err);
+    //     setIsLoading(false);
+    //   });
+  };
 
-  //   const stripePromise = loadStripe(
-  //     "pk_test_51OEUmkGaxxNRTGagQIYF34iTl3r85j1GMZDKbq7jnesM3AzvN5MyudpkqwjLr9m1PLNjjKLz0G7MQCPOPpiL5jar00XuVUMSb8"
-  //   );
+  // const stripePromise = loadStripe(
+  //   "pk_test_51OEUmkGaxxNRTGagQIYF34iTl3r85j1GMZDKbq7jnesM3AzvN5MyudpkqwjLr9m1PLNjjKLz0G7MQCPOPpiL5jar00XuVUMSb8"
+  // );
 
   return (
     <>
@@ -124,11 +146,10 @@ const CoinsPurchase = () => {
               {coinPlans?.map((plan, index) => (
                 <div
                   key={index}
-                  className={`cursor-pointer rounded-lg hover:bg-slate-200 border-2 shadow-[0px_0px_30px_rgb(220,220,230)] text-lg font-Lexend w-[120px] h-[100px] flex items-center justify-center relative flex-col ${
-                    selectedPlan?.id === plan.id
-                      ? "bg-[#0072b1] text-white"
-                      : "bg-white"
-                  }`}
+                  className={`cursor-pointer rounded-lg hover:bg-slate-200 border-2 shadow-[0px_0px_30px_rgb(220,220,230)] text-lg font-Lexend w-[120px] h-[100px] flex items-center justify-center relative flex-col ${selectedPlan?.id === plan.id
+                    ? "bg-[#0072b1] text-white"
+                    : "bg-white"
+                    }`}
                   onClick={() => setSelectedPlan(plan)}
                 >
                   {plan.discount > 0 && (
@@ -168,9 +189,8 @@ const CoinsPurchase = () => {
                     //   });
                     // }
                   }}
-                  className={`w-[200px] font-Lexend rounded-xl p-2 ${
-                    selectedPlan ? "bg-primaryBlue" : "bg-gray-200"
-                  }   text-white`}
+                  className={`w-[200px] font-Lexend rounded-xl p-2 ${selectedPlan ? "bg-primaryBlue" : "bg-gray-200"
+                    }   text-white`}
                 >
                   Proceed To Checkout
                 </button>
@@ -180,121 +200,12 @@ const CoinsPurchase = () => {
                 id="paymentProccedSection"
                 className={`  rounded-md transition-[0.5s] overflow-hidden w-full xl:max-w-[70%] m-auto`}
               >
-                {/* Payment Section */}
-                <div className="flex flex-col-reverse lg:flex-row h-full">
-                  {/* Purchase Section */}
-                  <div className="flex-1 p-4">
-                    {/* <PayPalScriptProvider
-                      className="w-full"
-                      options={{
-                        // "client-id":
-                        //   "ARsWe5o8_UCPdvf9VaobuOl3078EeB_BT1gjcfyLy0E8cmndgDKT2jwdJo4raEF47nKGJUyeSi9apTY9",
-                        // "merchant-id": "HYHD2ZSQNJTG2",
-                        "client-id":
-                          "ASKmsVMYxaukXBVYZ9Ec0pG7zfo-vPl4qHeHIBgrbWO-KPz8_G-ZjVDm9CHs5_TaznFaGo0brU2KMJ0q",
-
-                        "disable-funding": ["paylater", "card"],
-                      }}
-                    >
-                      <PayPalButtons
-                        style={{
-                          label: "checkout",
-                        }}
-                        createOrder={(data, actions) => {
-                          Paypal__Before__Payment();
-                          return actions.order.create({
-                            purchase_units: [
-                              {
-                                amount: {
-                                  value:
-                                    totalAmountPara.current.textContent.toString(),
-                                },
-                              },
-                            ],
-                          });
-                        }}
-                        onApprove={(data, actions) => {
-                          return actions.order.capture().then((order) => {
-                            Paypal__Successful__Payment(order);
-                          });
-                        }}
-                        onError={(error) => {
-                          swal(
-                            "Error!",
-                            "Deposit Balance Transaction Not Successfull!",
-                            "error"
-                          );
-                        }}
-                        onCancel={() => {
-                          swal(
-                            "Error!",
-                            "Deposit Balance Transaction has been cancelled",
-                            "error"
-                          );
-                        }}
-                      />
-                    </PayPalScriptProvider> */}
-                    <div className="px-10 py-2 flex items-center">
-                      <span className="w-full border-t  border-primary-blue"></span>
-                      <span className="mx-4 font-Lexend">OR</span>
-                      <span className="w-full border-t  border-primary-blue"></span>
-                    </div>
-                    <div className="pt-4">
-                      <div className="py-2 flex flex-col gap-2">
-                        <h1 className="text-2xl font-bold text-primaryBlue">
-                          Pay With Card
-                        </h1>
-                        <span className="text-muted text-sm">
-                          All transactions are secure and encrypted
-                        </span>
-                      </div>
-                    </div>
-                    {/* <Elements stripe={stripePromise} options={null}>
-                      <StripeSeprateComponent
-                        // isLoading={(val) => setIsLoading(val)}
-                        total_amount={totalAmount}
-                        selectedPlan={selectedPlan.id}
-                        tax_type={tax.type}
-                        tax_amount={totalAmount.toFixed(1)}
-                        currency={"usd"}
-                      />
-                    </Elements> */}
-                  </div>
-                  {/* Details Section */}
-                  <div className="flex flex-col gap-4 w-full lg:w-[300px] xl:w-[400px] 2xl:w-[500px] font-Lexend p-4 border h-full rounded-xl">
-                    <div className="flex items-center justify-between">
-                      <span className="text-muted text-base">Coins</span>
-                      <div className="flex items-center gap-1">
-                        <RiCoinsFill className="text-yellow-400" />
-                        <span>{selectedPlan?.coins}</span>
-                      </div>
-                    </div>
-
-                    <div className="flex items-center justify-between">
-                      <span className="text-muted">Valid Until</span>
-                      <span>{selectedPlan?.duration} Days</span>
-                    </div>
-
-                    <div className="flex items-center justify-between">
-                      <span className="text-muted">Price</span>
-
-                      <span>${selectedPlan?.price}</span>
-                    </div>
-
-                    <div className="flex items-center justify-between">
-                      <span className="text-muted">Tax ({tax.type})</span>
-                      <span>+ {tax?.amount}%</span>
-                    </div>
-
-                    <hr />
-
-                    <div className="flex items-center justify-between">
-                      <span className="font-bold">Total</span>
-                      <span className="flex items-center">
-                        $<p ref={totalAmountPara}>{totalAmount}</p>{" "}
-                      </span>
-                    </div>
-                  </div>
+                <div
+                  id="paymentProccedSection"
+                  className={`  rounded-md transition-[0.5s] overflow-hidden w-full xl:max-w-[90%] m-auto`}
+                >
+                  {/* Payment Section */}
+                  <PaymentSection />
                 </div>
               </div>
             )}
@@ -344,6 +255,4 @@ const CoinsPurchase = () => {
 };
 
 export default CoinsPurchase;
-function loadStripe(arg0: string) {
-  throw new Error("Function not implemented.");
-}
+
