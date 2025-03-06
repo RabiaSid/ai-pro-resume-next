@@ -12,70 +12,76 @@ import { H1, Lead } from "@/components/typography";
 // import NinaButton from "@/components/NinaButton";
 
 interface ButtonProps {
-    title: string;
-    mainColor: string;
-    sliderColor: string;
-    mainTextColor: string;
-    hoverTextColor: string;
-    authLink: string;
-    guestLink: string;
+  title?: string;
+  mainColor?: string;
+  sliderColor?: string;
+  mainTextColor?: string;
+  hoverTextColor?: string;
+  authLink?: string;
+  guestLink?: string;
 }
 
 type BannerProps = {
-    user?: { token?: any };
-    title: string;
-    subtitle: string[];
-    description: string | React.ReactNode;
-    button1: ButtonProps;
-    button2: ButtonProps;
-    images?: any;
-}
-
+  user?: { token?: any };
+  title?: string;
+  subtitle?: any;
+  description?: string | React.ReactNode;
+  button1?: ButtonProps;
+  button2?: ButtonProps;
+  images?: any;
+};
 
 export default function Banner(props: BannerProps) {
-    const { user, title, subtitle, description, button1, button2, images = [] } = props
-    const typedText = useTypedText(subtitle);
+  const {
+    user,
+    title,
+    subtitle,
+    description,
+    button1,
+    button2,
+    images = [],
+  } = props;
+  const typedText = useTypedText(subtitle);
 
-    return (
-        <section className="container md:px-4 mx-auto relative">
-            <div className="absolute w-full h-[600px] flex  justify-center items-center z-0 overflow-hidden">
-                <Image
-                    src={shadeImage01}
-                    alt="full shade image"
-                    className="w-[800px] relative left-[900px]  top-[50px] "
-                />
-                <Image
-                    src={shadeImage03}
-                    alt="full shade image"
-                    className="w-[1200px] relative left-[300px] top-[-150px] "
-                />
-                <Image
-                    src={shadeImage02}
-                    alt="full shade image"
-                    className="w-[1200px] relative top-[50px]"
-                />
-            </div>
-            <div className="w-full py-5 my-10 bg-white ">
+  return (
+    <section className="container md:px-4 mx-auto relative">
+      <div className="absolute w-full h-[600px] flex  justify-center items-center z-0 overflow-hidden">
+        <Image
+          src={shadeImage01}
+          alt="full shade image"
+          className="w-[800px] relative left-[900px]  top-[50px] "
+        />
+        <Image
+          src={shadeImage03}
+          alt="full shade image"
+          className="w-[1200px] relative left-[300px] top-[-150px] "
+        />
+        <Image
+          src={shadeImage02}
+          alt="full shade image"
+          className="w-[1200px] relative top-[50px]"
+        />
+      </div>
+      <div className="w-full py-5 my-10 bg-white ">
 
 
-
-                <div className="grid lg:grid-cols-2 gap-8 items-center">
-                    <div className="text-left space-y-6">
-                        <H1 className=" text-primaryBlack">
-                            <span className="block mb-2">{title}</span>
-                            <span className="bg-gradient-to-r from-blue-500 to-green-400 bg-clip-text text-transparent">
-                                {typedText}
-                            </span>
-                        </H1>
-                        <Lead className="text-gray-700 ">{description}</Lead>
-                        <div className="flex gap-4">
-                            <div>
-                                <AppButton title={button1.title} />
-                            </div>
-                            <div>
-                                <AppButton title={button2.title} />
-                            </div>
-                            {/* <NinaButton
+        <div className="grid lg:grid-cols-2 gap-8 items-center">
+          <div className="text-left space-y-6">
+            <H1 className=" text-primaryBlack">
+              <span className="block mb-2">{title}</span>
+              <span className="bg-gradient-to-r from-blue-500 to-green-400 bg-clip-text text-transparent">
+                {typedText}
+              </span>
+            </H1>
+            <Lead className="text-gray-700 ">{description}</Lead>
+            <div className="flex gap-4">
+              <div>
+                <AppButton title={button1?.title} />
+              </div>
+              <div>
+                <AppButton title={button2?.title} />
+              </div>
+              {/* <NinaButton
                             title={button1.title}
                             mainColor={button1.mainColor}
                             sliderColor={button1.sliderColor}
@@ -91,13 +97,13 @@ export default function Banner(props: BannerProps) {
                             hoverTextColor={button2.hoverTextColor}
                             link={user?.token ? button2.authLink : button2.guestLink}
                         /> */}
-                        </div>
-                    </div>
-                    <div className="flex justify-center items-center">
-                        <ZoomImageSlider images={images} />
-                    </div>
-                </div>
             </div>
-        </section>
-    );
+          </div>
+          <div className="flex justify-center items-center">
+            <ZoomImageSlider images={images} />
+          </div>
+        </div>
+      </div>
+    </section>
+  );
 }

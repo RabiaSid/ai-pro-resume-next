@@ -41,7 +41,8 @@ const ContactUsFormInputField = (props: ContactFormFieldProps) => {
             />
           ) : type === "phone" ? (
             <PhoneInput
-              specialLabel=""
+              speciallabel=""
+              autoComplete="on"
               {...field}
               country={"US"}
               className={`w-full px-3 py-2 placeholder-gray-500 text-gray-900 border-b-2 border-gray-300 focus:border-teal-500 transition duration-300 ease-in-out rounded-md ${styles.inputPhoneNumber}`}
