@@ -9,7 +9,9 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@paypal/react-paypal-js": "^8.8.2",
     "@reduxjs/toolkit": "^2.6.0",
+    "@stripe/react-stripe-js": "^3.3.0",
     "axios": "^1.7.9",
     "js-cookie": "^3.0.5",
     "next": "15.1.7",
@@ -26,6 +28,7 @@
     "react-typed": "^2.0.12",
     "slick-carousel": "^1.8.1",
     "suneditor-react": "^3.6.1",
+    "sweetalert": "^2.1.2",
     "taos": "^1.0.5"
   },
   "devDependencies": {
