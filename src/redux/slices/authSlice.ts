@@ -7,24 +7,24 @@ interface AuthState {
   token: string | null;
   loading: boolean;
   error: string | null;
-  errorsList: Record<string, string[]>; 
+  errorsList: Record<string, string[]>;
   statusCode: null;
 }
 // Async thunk for login
-export const loginUser = createAsyncThunk("auth/login", async (credentials: { email: string; password: string }, { rejectWithValue }) =>  {
-    try {
-      const response = await authService.login(credentials);
-      return response;
-    } catch (error: any) {
-      return rejectWithValue(error.message);
-    }
+export const loginUser = createAsyncThunk("auth/login", async (credentials: { email: string; password: string }, { rejectWithValue }) => {
+  try {
+    const response = await authService.login(credentials);
+    return response;
+  } catch (error: any) {
+    return rejectWithValue(error.message);
   }
+}
 );
 
 // Async thunk for register
 export const registerUser = createAsyncThunk(
   "auth/register",
-  async (userData: { name: string; email: string; password: string, confirm_password : string, country_id : number, contact : number, referred_by: string  }, { rejectWithValue }) => {
+  async (userData: { name: string; email: string; password: string, confirm_password: string, country_id: number, contact: number, referred_by: string }, { rejectWithValue }) => {
     try {
       const response = await authService.register(userData);
       return response;
@@ -44,13 +44,13 @@ export const logoutUser = createAsyncThunk("auth/logout", async (_, { dispatch }
 
 const authSlice = createSlice({
   name: "auth",
-  initialState : {
-  user: null,
-  token: Cookies.get("userToken") || null,
-  loading: false,
-  errorsList: {},
-  statusCode: null,
-    } as AuthState,
+  initialState: {
+    user: null,
+    token: Cookies.get("userToken") || null,
+    loading: false,
+    errorsList: {},
+    statusCode: null,
+  } as AuthState,
   reducers: {
     handleSetUser: (state, action) => {
       state.user = action.payload;
@@ -72,14 +72,16 @@ const authSlice = createSlice({
         state.error = null;
       })
       .addCase(loginUser.fulfilled, (state, action) => {
+        console.log(action, "===================> action");
+
         state.loading = false;
-        state.user = action?.payload?.response?.data?.user; 
-        state.token = action.payload.response.data.token; 
-         Cookies.set("userToken", action.payload.response.data.token);
-    })   
+        state.user = action?.payload?.response?.data?.user;
+        state.token = action.payload.response.data.token;
+        Cookies.set("userToken", action.payload.response.data.token);
+      })
       .addCase(loginUser.rejected, (state, action) => {
         state.loading = false;
-        state.error = action.error?.message  ? "Invalid Credentials" : "";
+        state.error = action.error?.message ? "Invalid Credentials" : "";
       })
       .addCase(registerUser.pending, (state) => {
         state.loading = true;
@@ -105,6 +107,6 @@ const authSlice = createSlice({
         Cookies.remove("userToken");
       });
   },
-  });
+});
 
 export default authSlice.reducer;

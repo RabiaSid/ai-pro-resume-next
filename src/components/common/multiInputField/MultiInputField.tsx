@@ -2,7 +2,7 @@ import React from "react";
 import { Controller, Control } from "react-hook-form";
 import PhoneInput from "react-phone-number-input";
 import "react-phone-number-input/style.css";
-import styles from "./inpufield.module.css"
+import styles from "./multiInputField.module.css"
 
 type ContactFormFieldProps = {
   control: Control<any>;
@@ -13,7 +13,7 @@ type ContactFormFieldProps = {
   rules?: any;
 };
 
-const ContactUsFormInputField = (props: ContactFormFieldProps) => {
+const MultiInputField = (props: ContactFormFieldProps) => {
   const { name, control, rules, label, placeholder, type } = props;
   return (
     <Controller
@@ -66,4 +66,4 @@ const ContactUsFormInputField = (props: ContactFormFieldProps) => {
   );
 };
 
-export default ContactUsFormInputField;
+export default MultiInputField;

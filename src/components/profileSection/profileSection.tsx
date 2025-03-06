@@ -32,11 +32,15 @@ export default function ProfileSection() {
     return (
         <div className="py-2 font-Lexend">
             <div
-                className="flex justify-between items-center text-primarySlate font-bold cursor-pointer py-2"
+                className="flex justify-between items-center text-primarySlate font-bold cursor-pointer"
                 onClick={() => setIsExpanded(!isExpanded)}
             >
                 <div className="flex gap-2 items-center">
                     <span className="min-w-[90px]">{profileCategory.name}</span>
+                    <span className="bg-primaryBlue/25 w-8 h-8 flex justify-center items-center rounded-full text-sm">
+                        2
+                    </span>
+
                 </div>
                 <IoIosArrowDown className={isExpanded ? "rotate-180" : ""} />
             </div>

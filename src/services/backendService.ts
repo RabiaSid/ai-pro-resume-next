@@ -14,11 +14,16 @@ const api = axios.create({
 // Attach token if available
 api.interceptors.request.use((config) => {
   const token = Cookies.get("userToken");
+  console.log(token, "my toekn");
+  
   if (token) {
     config.headers.Authorization = `Bearer ${token}`;
+  } else {
+    console.warn("No token found in cookies!");
   }
   return config;
 });
+
 
 // Generic request function
 const request = async (

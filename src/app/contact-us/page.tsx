@@ -13,11 +13,11 @@ import {
   BiSolidMap,
   BiSolidPhone,
 } from "react-icons/bi";
-import { ContactUsBannerData } from "../data";
 import Ads from "@/components/ads/Ads";
 import { useForm } from "react-hook-form";
-import ContactUsFormInputField from "@/components/common/inpufield/ContactUsFormInputField";
+import MultiInputField from "@/components/common/multiInputField/MultiInputField";
 import MainBanner from "@/components/Banner/mainBanner";
+import { ContactUsBannerData } from "./data";
 
 const ContactUs = () => {
   const [captchaError, setCaptchaError] = useState<any>();
@@ -75,7 +75,7 @@ const ContactUs = () => {
                   </h1>
 
                   {/* Full Name */}
-                  <ContactUsFormInputField
+                  <MultiInputField
                     control={control}
                     name="fullName"
                     placeholder="Full Name"
@@ -84,7 +84,7 @@ const ContactUs = () => {
                   />
 
                   {/* Phone Number */}
-                  <ContactUsFormInputField
+                  <MultiInputField
                     control={control}
                     name="phone"
                     placeholder="Enter your phone number"
@@ -93,7 +93,7 @@ const ContactUs = () => {
                   />
 
                   {/* Email */}
-                  <ContactUsFormInputField
+                  <MultiInputField
                     control={control}
                     name="email"
                     placeholder="Email"
@@ -108,7 +108,7 @@ const ContactUs = () => {
                   />
 
                   {/* Message (Textarea) */}
-                  <ContactUsFormInputField
+                  <MultiInputField
                     control={control}
                     name="message"
                     placeholder="How can we help you?"

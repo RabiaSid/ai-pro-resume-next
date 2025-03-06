@@ -7,10 +7,10 @@ interface LinkTextProps {
 }
 
 
-export function H1({ className = '', children }: any) {
+export function H1({ className = '', children, innerClass }: any) {
     const defaultClasses = 'text-3xl sm:text-4xl lg:text-5xl font-bold';
 
-    return <h1 className={`${defaultClasses} ${className}`}>{children}</h1>;
+    return <h1 className={`${innerClass ? innerClass : defaultClasses} ${className}`}>{children}</h1>;
 }
 
 export function H2({ className = '', children }: any) {

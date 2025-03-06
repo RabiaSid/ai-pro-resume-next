@@ -1,7 +1,7 @@
 "use client";
 import React, { useEffect, useRef, useState } from 'react'
 import { PiPencilBold } from 'react-icons/pi'
-import profile from 'media/assets/reusme_placeholder_image.webp'
+import profileImg from 'media/assets/reusme_placeholder_image.webp'
 import Image from 'next/image'
 import { FaPencil } from 'react-icons/fa6';
 import Link from 'next/link';
@@ -12,13 +12,18 @@ import { CgClose } from 'react-icons/cg';
 import SunEditor from 'suneditor-react';
 import AppButton from '@/components/common/button/pages';
 import ProfileSection from '@/components/profileSection/profileSection';
-import { API } from '@/services/backendService';
+import { userProfile } from '@/redux/slices/profileSlice';
+import { useDispatch, useSelector } from 'react-redux';
+import { AppDispatch, RootState } from '@/redux/store'
 
 
 export default function Account() {
+  const dispatch = useDispatch<AppDispatch>();
+  const { loading, profile } = useSelector((state: RootState) => state.profile);
+  const { token } = useSelector((state: RootState) => state.auth);
+
   const [modelbox, setModelbox] = useState<boolean>(false);
   const modalRef = useRef<any>(null);
-  const [activeIndex, setActiveIndex] = useState(0);
 
   const handleUserImageChange = (e: any) => {
     // const file = e.target.files[0];
@@ -29,12 +34,19 @@ export default function Account() {
     // }
   };
 
-  API.get("/profile")
-    .then((data) => console.log("Users:", data))
-    .catch((err) => console.error("Fetch Error:", err));
+  console.log(profile, "profile =======================>")
+
+
+  useEffect(() => {
+    if (token) {
+      dispatch(userProfile());
+    } else {
+      return
+    }
+  }, [])
 
   const userDetails = [
-    { label: "Name", value: "Siri Hassni" },
+    { label: "Name", value: profile.name },
     { label: "Job Position", value: "Your Job Title" },
     { label: "Years of Experience", value: "5 Years" },
     { label: "Mobile Number", value: "+03152300393" },
@@ -65,8 +77,6 @@ export default function Account() {
     { title: "Password", content: "*******" },
   ];
 
-
-
   useEffect(() => {
     const handleClickOutside = (event: any | never) => {
       if (
@@ -85,8 +95,6 @@ export default function Account() {
 
   const closeModal = () => setModelbox(false);
 
-
-
   return (
     <>
       <section className="relative container md:px-4 mx-auto">
@@ -96,7 +104,7 @@ export default function Account() {
               {/* if userimageUpdated */}
               <div className="relative w-36 h-36 m-auto rounded-full">
                 <Image
-                  src={profile}
+                  src={profileImg}
                   alt="Profile"
                   className="w-36 h-36 rounded-full m-auto"
                 />
@@ -133,12 +141,12 @@ export default function Account() {
                 id="user_profile_image"
               />
 
-              <h2 className="text-primaryBlue text-2xl font-bold font-Lexend text-center mt-8">
-                Hamza
+              <h2 className="text-primaryBlue text-2xl font-bold font-Lexend text-center mt-8 capitalize">
+                {profile?.name ?? "--"}
               </h2>
               <div className="font-Lexend text-sm text-center text-secondaryGray  ">
                 Customer ID :{" "}
-                <span><b className="text-primaryBlue">112233</b></span>
+                <span><b className="text-primaryBlue">{profile?.id ?? "--"}</b></span>
 
               </div>
 
