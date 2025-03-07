@@ -23,6 +23,8 @@ type MenuIconItem = {
   className?: string;
   leftIcon?: React.ReactNode;
   submenu?: SubmenuItem[];
+  LoginPath?: string;
+  RegPath?: string;
 };
 
 export const menuItems: MenuItem[] = [
@@ -32,7 +34,7 @@ export const menuItems: MenuItem[] = [
     name: "Services",
     path: "/services",
   },
-  { name: "Pricing", path: "/pricing" },
+  { name: "Pricing", path: "/packages" },
   { name: "Contact", path: "/contact-us" },
   { name: "Profile", path: "/account", className: "block md:hidden" },
   { name: "Dashboard", path: "/", className: "block md:hidden" },
@@ -44,15 +46,17 @@ export const menuItems: MenuItem[] = [
 ];
 
 export const menuIconItems: MenuIconItem[] = [
-  // {
-  //     name: "Login", path: "/login",
-  //     className: "text-black border border-transparent hover:bg-transparent px-0 hover:text-primaryBlue hidden md:flex",
-  //     leftIcon: (<BiUserCircle
-  //         className="text-lg text-[#00bfab] hover:text-[#0072b1]"
-  //         size={36}
-  //     />),
+  {
+    name: "Login",
+    path: "/login",
+    className: "text-black border border-transparent hover:bg-transparent px-0 hover:text-primaryBlue hidden md:flex",
+    leftIcon: (<BiUserCircle
+      className="text-lg text-[#00bfab] hover:text-[#0072b1]"
+      size={36}
+    />),
+    LoginPath: "LoginPath",
 
-  // },
+  },
   {
     path: "/register",
     className: "border border-transparent hover:bg-transparent px-0 ",
@@ -60,8 +64,8 @@ export const menuIconItems: MenuIconItem[] = [
       <div
         className={" items-center border-l gap-2 pl-2 hidden md:flex"}
         style={{ minHeight: "20px", minWidth: "20px" }}
-        // ref={menuRef}
-        // onClick={() => setIsDropOpen(!isDropOpen)}
+      // ref={menuRef}
+      // onClick={() => setIsDropOpen(!isDropOpen)}
       >
         <BiSolidUser className="bg-[#0072b1] text-white rounded-full p-1 text-2xl " />
       </div>
@@ -71,6 +75,7 @@ export const menuIconItems: MenuIconItem[] = [
       { name: "Dashboard", path: "/" },
       // { name: "Sign out", path: "/" },
     ],
+    RegPath: "RegPath",
   },
   {
     path: "/cart",
