@@ -19,12 +19,14 @@ import Ads from '@/components/ads/Ads'
 import { registerUser } from '@/redux/slices/authSlice'
 import { useDispatch, useSelector } from 'react-redux'
 import { AppDispatch, RootState } from '@/redux/store'
+import GoogleLogin from '@/components/socialLogins/googleLogin'
+import FBLogin from '@/components/socialLogins/facebookLogin'
+import LinkedInLogin from '@/components/socialLogins/linkedInLogin'
 
 export default function page() {
     const router = useRouter();
     const dispatch = useDispatch<AppDispatch>();
-
-    const { loading, errorsList } = useSelector((state: RootState) => state.auth);
+    const { loading, errorsList, token } = useSelector((state: RootState) => state.auth);
     const [captchaError, setCaptchaError] = useState("");
     const [verified, setVerified] = useState<any>(false);
     const [showPassword, setShowPassword] = useState(false);
@@ -145,7 +147,12 @@ export default function page() {
                 {/* //Social Logins */}
                 <div className='grid space-y-3'>
                     <div>
-                        <AppButton title='Sign-in  with Google'
+
+                        {/* <GoogleOAuthProvider clientId="836834017476-9e99ra10kti08qdrgr3ptgj56c06qut1.apps.googleusercontent.com"> */}
+                        <GoogleLogin />
+                        {/* </GoogleOAuthProvider> */}
+
+                        {/* <AppButton title='Sign-in  with Google'
                             className="w-[100%] border border-solid text-gray-400 border-slate-300 px-2 py-2 rounded-md hover:bg-slate-800 hover:text-white ease-in transition-all flex justify-center items-center"
                             childClassName="sm:tracking-widest relative"
                             leftIcon={
@@ -159,11 +166,12 @@ export default function page() {
                                     />
                                 </>
                             }
-                        />
+                        /> */}
                     </div>
 
                     <div>
-                        <AppButton title='Sign-in  with Facebook'
+                        <FBLogin />
+                        {/* <AppButton title='Sign-in  with Facebook'
                             className="w-[100%] border border-solid text-gray-400 border-slate-300 px-2 py-2 rounded-md hover:bg-slate-800 hover:text-white ease-in transition-all flex justify-center items-center"
                             childClassName="sm:tracking-widest relative"
                             leftIcon={
@@ -177,11 +185,12 @@ export default function page() {
                                     />
                                 </>
                             }
-                        />
+                        /> */}
                     </div>
 
                     <div>
-                        <AppButton title='Sign-in  with LinkendIn'
+                        <LinkedInLogin />
+                        {/* <AppButton title='Sign-in  with LinkendIn'
                             className="w-[100%] border border-solid text-gray-400 border-slate-300 px-2 py-2 rounded-md hover:bg-slate-800 hover:text-white ease-in transition-all flex justify-center items-center"
                             childClassName="sm:tracking-widest relative"
                             leftIcon={
@@ -195,7 +204,7 @@ export default function page() {
                                     />
                                 </>
                             }
-                        />
+                        /> */}
                     </div>
                 </div>
 
