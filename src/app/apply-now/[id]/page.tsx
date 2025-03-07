@@ -4,12 +4,12 @@ import React, { useState } from "react";
 import ReCAPTCHA from "react-google-recaptcha";
 import { Controller, useForm } from "react-hook-form";
 import { BiLoaderAlt } from "react-icons/bi";
-import ApplyNowBanner from "@/components/career/ApplyNowBanner";
-import { ApplyNowBannerData } from "@/app/data";
 import { MdOutlineSimCardDownload } from "react-icons/md";
 import CustomPhoneNumber from "@/components/common/customSelect/CustomPhoneNumber";
 import AppInputField from "@/components/common/inpufield/page";
 import CustomSelect from "@/components/common/customSelect/CustomSelect";
+import MainBanner from "@/components/Banner/mainBanner";
+import { ApplyNowBannerData } from "./data";
 
 const ApplyNow = () => {
   const [isButtonDisabled, setIsButtonDisabled] = useState<any>(false);
@@ -64,7 +64,7 @@ const ApplyNow = () => {
   return (
     <>
       <div className="w-full h-[20%]">
-        <ApplyNowBanner {...ApplyNowBannerData} />
+        <MainBanner {...ApplyNowBannerData} />
       </div>
 
       <section className="w-full bg-[#fff] py-20 px-4 2xl:px-40 flex flex-wrap flex-col justify-between gap-16 align-middle">

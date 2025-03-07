@@ -1,13 +1,13 @@
 "use client";
 
-import ServiceBanner from "@/components/services/ServiceBanner";
 import React, { useEffect, useState } from "react";
-import { ServiceBannerData } from "../data";
+import { ServiceBannerData } from "./data";
 import Ads from "@/components/ads/Ads";
 import OurFaqs from "@/components/Faq/faq";
 import PosterBanner from "@/components/services/PosterBanner";
 import arrow_design_7 from "media/assets/arrow_design_7.webp";
 import about_img_1 from "media/assets/about_img_1.webp";
+import MainBanner from "@/components/Banner/mainBanner";
 
 export default function Page() {
   const [services, setServices] = useState<any[]>([]);
@@ -62,7 +62,7 @@ export default function Page() {
 
   return (
     <>
-      <ServiceBanner {...ServiceBannerData} />
+      <MainBanner {...ServiceBannerData} />
       <Ads />
 
       <section className="w-full py-5 px-0 sm:px-10 2xl:px-10 flex flex-wrap flex-col justify-between align-middle">
