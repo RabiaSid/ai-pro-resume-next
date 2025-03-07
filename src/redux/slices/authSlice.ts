@@ -92,7 +92,7 @@ const authSlice = createSlice({
       state.user = null;
       state.token = null;
       Cookies.remove("userToken");
-    },
+      },
   },
   extraReducers: (builder) => {
     builder
@@ -101,8 +101,6 @@ const authSlice = createSlice({
         state.error = null;
       })
       .addCase(loginUser.fulfilled, (state, action) => {
-        console.log(action, "===================> action");
-
         state.loading = false;
         state.user = action?.payload?.response?.data?.user; 
         state.token = action.payload.response.data.token; 

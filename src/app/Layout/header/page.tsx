@@ -7,18 +7,27 @@ import { menuItems, menuIconItems } from './data';
 import { BiCaretDown, BiMenu } from 'react-icons/bi';
 import { AiOutlineClose } from 'react-icons/ai';
 import { logoutUser } from '@/redux/slices/authSlice';
-import { useDispatch } from 'react-redux';
-import { AppDispatch } from '@/redux/store';
+import { useDispatch, useSelector } from 'react-redux';
+import { AppDispatch, RootState } from '@/redux/store';
+import { useRouter } from 'next/navigation';
 
 export default function Header() {
-
+    const router = useRouter();
     const dispatch = useDispatch<AppDispatch>();
-
+    const { token } = useSelector((state: RootState) => state.auth);
     const [menuOpen, setMenuOpen] = useState(false);
     const [submenuOpen, setSubmenuOpen] = useState(false);
     const [submenu, setSubmenu] = useState<{ [key: number]: boolean }>({});
     const [isMobile, setIsMobile] = useState(false);
     const modalRef = useRef<HTMLDivElement | null>(null);
+
+    const filteredMenuItems = menuIconItems.filter((item) => {
+        if (token) {
+            return !item.LoginPath;
+        } else {
+            return !item.RegPath;
+        }
+    });
 
     const toggleMenu = () => {
         setMenuOpen((prev) => !prev);
@@ -60,6 +69,7 @@ export default function Header() {
     //logout user:
     const handleLogout = () => {
         dispatch(logoutUser());
+        router.push("/login")
     }
 
     return (
@@ -157,13 +167,13 @@ export default function Header() {
                                 )}
                             </div>
                         ))}
-                        {menuIconItems.map((item, index) => (
+                        {filteredMenuItems.map((item, index) => (
                             <div key={index} className="relative group hidden md:block">
                                 {/* Regular Menu Item */}
                                 {!item.submenu ? (
-                                    <Link href={item.path} className={`flex items-center py-2  
+                                    <Link href={item.path} className={` flex items-center py-2  
                                 text-gray-600 rounded hover:bg-primaryBlue hover:text-primaryBlue
-                                 transition-colors duration-300  ${item.className || ""}`}>
+                                 transition-colors duration-300 ${item.className || ""}`}>
                                         {item.leftIcon}  <span className={styles.navFont}>{item.name}</span>
                                     </Link>
                                 ) : (
