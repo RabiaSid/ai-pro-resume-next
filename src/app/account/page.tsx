@@ -15,6 +15,7 @@ import ProfileSection from '@/components/profileSection/profileSection';
 import { userProfile } from '@/redux/slices/profileSlice';
 import { useDispatch, useSelector } from 'react-redux';
 import { AppDispatch, RootState } from '@/redux/store'
+import { AwardsCategoryData, CertificatesCategoryData, EducationCategoryData, ExperienceCategoryData, LanguagesCategoryData, ReferencesCategoryData } from './data';
 
 
 export default function Account() {
@@ -94,6 +95,7 @@ export default function Account() {
   }, []);
 
   const closeModal = () => setModelbox(false);
+
 
   return (
     <>
@@ -216,7 +218,12 @@ export default function Account() {
                 ))}
               </div>
             </div>
-            <ProfileSection />
+            <ProfileSection profileCategory={ExperienceCategoryData} />
+            <ProfileSection profileCategory={EducationCategoryData} />
+            <ProfileSection profileCategory={CertificatesCategoryData} />
+            <ProfileSection profileCategory={AwardsCategoryData} />
+            <ProfileSection profileCategory={LanguagesCategoryData} />
+            <ProfileSection profileCategory={ReferencesCategoryData} />
           </div>
           <div className="mt-4 ">
             <>

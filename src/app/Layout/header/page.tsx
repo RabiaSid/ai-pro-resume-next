@@ -10,6 +10,8 @@ import { logoutUser } from '@/redux/slices/authSlice';
 import { useDispatch, useSelector } from 'react-redux';
 import { AppDispatch, RootState } from '@/redux/store';
 import { useRouter } from 'next/navigation';
+import { FaShoppingCart } from 'react-icons/fa';
+import coin from "media/assets/dollar.webp";
 
 export default function Header() {
     const router = useRouter();
@@ -114,6 +116,43 @@ export default function Header() {
                         </div>
                     ))}
 
+                    <Link href="/cart" className={`flex md:hidden items-center py-2  
+                                text-gray-600 rounded hover:bg-primaryBlue hover:text-primaryBlue
+                                 transition-colors duration-300 border border-transparent hover:bg-transparent px-0`}>
+                        <div className={`relative cursor-pointer`}>
+                            <div
+                                style={{ minHeight: "20px", minWidth: "20px" }}
+                                className="select-none absolute max-h-8 max-w-8 text-primaryBlue font-bold flex justify-center items-center text-sm -right-2 -top-2 bg-white rounded-full shadow-lg border"
+                            >
+                                2
+                            </div>
+
+                            <FaShoppingCart className="text-[#0072b1] text-md ml-4" size={25} />
+                        </div>
+                    </Link>
+                    <Link href="/register" className={`flex md:hidden items-center py-2  
+                                text-gray-600 rounded hover:bg-primaryBlue hover:text-primaryBlue
+                                 transition-colors duration-300 border border-transparent hover:bg-transparent`}>
+                        <div className="relative cursor-pointer">
+                            <div
+                                style={{ minHeight: "20px", minWidth: "20px" }}
+                                className="select-none absolute max-h-8 max-w-8 text-primaryBlue font-bold   flex justify-center items-center text-sm -right-1 -top-1 bg-white rounded-full shadow-lg border"
+                            >
+                                0
+                            </div>
+
+                            {/* <Link to={"/packages#coins_purchase"}> */}
+                            <Image
+                                src={coin}
+                                className="text-md ml-4 coin-icon"
+                                width="30"
+                                height="30"
+                                id="coinIcon"
+                                alt="coin"
+                            />
+                            {/* </Link> */}
+                        </div>
+                    </Link>
                     {/* Mobile Menu Toggle */}
                     <button onClick={toggleMenu} className="md:hidden p-2 text-gray-700">
                         {menuOpen ? (
@@ -142,20 +181,21 @@ export default function Header() {
                                     <div ref={modalRef} className={item.className || ""}>
                                         <button
                                             onClick={() => toggleSubmenu(index)}
-                                            className={`px-3 py-4 lg:px-4 md:mx-2 w-full text-gray-600 rounded md:hover:bg-primaryBlue  md:hover:text-white transition-colors duration-300 flex items-center justify-between`}
+                                            className={`px-3 py-4 lg:px-4 md:mx-2 w-full text-gray-600 rounded md:hover:bg-primaryBlue  md:hover:text-white transition-colors duration-300 flex items-center justify-between `}
                                         >
                                             <span className={styles.navFont}>{item.name} </span>
                                             <BiCaretDown
-                                                className={`mt-1 ${submenuOpen && submenu[index] ? "transform rotate-180" : ""
+                                                className={` ${submenuOpen && submenu[index] ? "transform rotate-180" : ""
                                                     }`}
-                                                size={24}
+                                                size={20}
                                             />
                                         </button>
 
-                                        <div className={`md:absolute divide-y-2 md:divide-y-0 md:left-0 md:mt-1 text-center md:text-start w-[90%] mx-auto md:w-48  md:bg-white md:border transition-all duration-300 overflow-hidden md:shadow-[0_3px_10px_rgb(0,0,0,0.2)] rounded-xl 
-                                        ${submenuOpen === true && submenu[index] ? "block" : "hidden"} md:group-hover:block`}
+                                        <div className={`md:absolute divide-y-2 md:divide-y-0 md:left-0 md:mt-1 text-center md:text-start min-w-[250px] mx-auto md:w-48  md:bg-white md:border transition-all duration-300 overflow-hidden md:shadow-[0_3px_10px_rgb(0,0,0,0.2)] rounded-xl 
+                                        ${submenuOpen === true && submenu[index] ? "block" : "hidden"} md:group-hover:block `}
                                             onClick={() => setSubmenuOpen(true)}
-                                        // onMouseLeave={() => setSubmenuOpen(false)}
+                                            // onMouseEnter={() => toggleSubmenu(index)}
+                                            onMouseLeave={() => setSubmenuOpen(false)}
                                         >
                                             {item.submenu.map((sub, subIndex) => (
                                                 <Link key={subIndex} href={sub.path} className="block px-4 py-4 md:hover:border-l-4 transition md:border-primaryGreen text-gray-700 md:hover:bg-primaryBlue md:hover:text-white">
@@ -208,6 +248,43 @@ export default function Header() {
                                 )}
                             </div>
                         ))}
+                        <Link href="/cart" className={`md:block flex items-center py-2  
+                                text-gray-600 rounded hover:bg-primaryBlue hover:text-primaryBlue
+                                 transition-colors duration-300 border border-transparent hover:bg-transparent px-0`}>
+                            <div className={`relative cursor-pointer`}>
+                                <div
+                                    style={{ minHeight: "20px", minWidth: "20px" }}
+                                    className="select-none absolute max-h-8 max-w-8 text-primaryBlue font-bold flex justify-center items-center text-sm -right-2 -top-2 bg-white rounded-full shadow-lg border"
+                                >
+                                    2
+                                </div>
+
+                                <FaShoppingCart className="text-[#0072b1] text-md ml-4" size={25} />
+                            </div>
+                        </Link>
+                        <Link href="/register" className={`md:block flex items-center py-2  
+                                text-gray-600 rounded hover:bg-primaryBlue hover:text-primaryBlue
+                                 transition-colors duration-300 border border-transparent hover:bg-transparent`}>
+                            <div className="relative cursor-pointer">
+                                <div
+                                    style={{ minHeight: "20px", minWidth: "20px" }}
+                                    className="select-none absolute max-h-8 max-w-8 text-primaryBlue font-bold   flex justify-center items-center text-sm -right-1 -top-1 bg-white rounded-full shadow-lg border"
+                                >
+                                    0
+                                </div>
+
+                                {/* <Link to={"/packages#coins_purchase"}> */}
+                                <Image
+                                    src={coin}
+                                    className="text-md ml-4 coin-icon"
+                                    width="30"
+                                    height="30"
+                                    id="coinIcon"
+                                    alt="coin"
+                                />
+                                {/* </Link> */}
+                            </div>
+                        </Link>
                     </div>
 
                 </div>

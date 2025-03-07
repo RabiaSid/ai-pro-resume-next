@@ -1,7 +1,7 @@
 "use client";
 
 import React from "react";
-import { ServiceBannerData } from "./data";
+import { ServiceBannerData, ServiceContentData } from "./data";
 import Ads from "@/components/ads/Ads";
 import OurFaqs from "@/components/Faq/faq";
 import MainBanner from "@/components/Banner/mainBanner";
@@ -12,13 +12,9 @@ export default function Page() {
   return (
     <>
       <MainBanner {...ServiceBannerData} />
-
       <Ads />
-
       <ServicesSection />
-
-      <ServiceContent />
-
+      <ServiceContent section={ServiceContentData} />
       <OurFaqs />
     </>
   );

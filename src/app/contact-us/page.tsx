@@ -10,9 +10,7 @@ const page = () => {
   return (
     <>
       <MainBanner {...ContactUsBannerData} />
-
       <Ads />
-
       <ContactUs />
     </>
   );

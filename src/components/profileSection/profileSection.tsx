@@ -5,32 +5,19 @@ import { FaRegTrashAlt } from 'react-icons/fa';
 import { MdOutlineKeyboardArrowUp } from 'react-icons/md';
 import { FaPencil } from 'react-icons/fa6';
 
-export default function ProfileSection() {
+type propsType = {
+    profileCategory?: any
+}
+
+export default function ProfileSection(props: propsType) {
+    const { profileCategory } = props
     const [isExpanded, setIsExpanded] = useState(false);
     const [isDetailsExpanded, setIsDetailsExpanded] = useState(false);
 
-    const profileCategory = {
-        id: 1,
-        name: "Item 1",
-        uuid: "304386",
-        user_id: 654,
-        job_position: "Aerospace Engineer",
-        company_name: "abc ltd",
-        country_id: 14,
-        state: "abc",
-        city: "abc",
-        type: null,
-        start_date: "2004-01-01",
-        end_date: null,
-        currently_working: 1,
-        company_description: null,
-        job_description: "hjkh hjkh hjkh hjkh hjkh hjkh hjkh",
-        sort: 1,
-        status: 1,
-    };
+
 
     return (
-        <div className="py-2 font-Lexend">
+        <div className="py-4 font-Lexend">
             <div
                 className="flex justify-between items-center text-primarySlate font-bold cursor-pointer"
                 onClick={() => setIsExpanded(!isExpanded)}
