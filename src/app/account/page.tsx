@@ -46,7 +46,7 @@ export default function Account() {
   }, [])
 
   const userDetails = [
-    { label: "Name", value: profile.name },
+    { label: "Name", value: profile?.name },
     { label: "Job Position", value: "Your Job Title" },
     { label: "Years of Experience", value: "5 Years" },
     { label: "Mobile Number", value: "+03152300393" },
@@ -176,7 +176,7 @@ export default function Account() {
                     </div>
                     <div
                     >
-                      {section.items ? (
+                      {section?.items ? (
                         <div className="text-[#343434] flex justify-start gap-2 flex-wrap text-sm">
                           {section.items.map((item: any, idx: any) => (
                             <div key={idx} className="relative group">

@@ -57,26 +57,26 @@ const PackageCard: React.FC<PackageCardProps> = ({
   };
 
   // Function to dynamically add images before red-highlighted points
-  const modifyFeaturesWithImages = (htmlContent: string): string => {
+  const modifyFeaturesWithImages = (htmlContent: any): any => {
+    if (typeof window === "undefined") return htmlContent; // Ensure it's running in the browser
+
     const parser = new DOMParser();
     const doc = parser.parseFromString(htmlContent, "text/html");
 
-    // Select all list items
     const listItems = doc.querySelectorAll("li");
 
     listItems.forEach((item) => {
-      // Create an image element
       const img = document.createElement("img");
-      img.src = check.src; // Use `check.src` for Next.js Image optimization
+      img.src = check.src; // Ensure check.src is defined and accessible
       img.style.width = "20px";
       img.style.marginRight = "8px";
 
-      // Insert the image before the text in the list item
       item.prepend(img);
     });
 
-    return doc.body.innerHTML; // Return the modified HTML
+    return doc.body.innerHTML;
   };
+
 
   return (
     <div className="w-[450px] h-auto 2xl:h-[700px] shadow-[0px_0px_20px_rgba(0,0,0,0.15)] rounded-3xl overflow-hidden p-0">
