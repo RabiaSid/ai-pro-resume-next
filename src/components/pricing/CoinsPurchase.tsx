@@ -19,12 +19,12 @@ interface Tax {
   amount: number;
 }
 
-interface PaymentProps {
-  totalAmount: number;
-  selectedPlan: Plan;
-  tax: Tax;
-  setIsLoading: (val: boolean) => void;
-}
+// interface PaymentProps {
+//   totalAmount: number;
+//   selectedPlan: Plan;
+//   tax: Tax;
+//   setIsLoading: (val: boolean) => void;
+// }
 
 // const stripePromise = loadStripe("pk_test_51OEUmkGaxxNRTGagQIYF34iTl3r85j1GMZDKbq7jnesM3AzvN5MyudpkqwjLr9m1PLNjjKLz0G7MQCPOPpiL5jar00XuVUMSb8");
 
@@ -44,79 +44,79 @@ const CoinsPurchase = () => {
   ]);
   const [selectedPlan, setSelectedPlan] = useState<any>();
   const [isProceeding, setIsProceeding] = useState<any>(false);
-  const [tax, setTax] = useState<any>({
-    amount: 0,
-    type: "",
-  });
-  const [totalAmount, setTotalAmount] = useState<any>(0);
-  const totalAmountPara = useRef(null);
+  // const [tax, setTax] = useState<any>({
+  //   amount: 0,
+  //   type: "",
+  // });
+  // const [totalAmount, setTotalAmount] = useState<any>(0);
+  // const totalAmountPara = useRef(null);
 
-  const Paypal__Before__Payment = () => {
-    // setIsLoading(true);
-    const data = {
-      payment_type: "paypal",
-      card_number: "4242",
-      //   card_name: user?.name,
-      tax: totalAmount.toFixed(1),
-      tax_type: tax.type,
-      total_amount: totalAmount,
-      planId: selectedPlan.id,
-    };
+  // const Paypal__Before__Payment = () => {
+  //   // setIsLoading(true);
+  //   const data = {
+  //     payment_type: "paypal",
+  //     card_number: "4242",
+  //     //   card_name: user?.name,
+  //     tax: totalAmount.toFixed(1),
+  //     tax_type: tax.type,
+  //     total_amount: totalAmount,
+  //     planId: selectedPlan.id,
+  //   };
 
-    console.log(data);
+  //   console.log(data);
 
-    // ApiService.purchaseCoins(user?.token, data)
-    //   .then((res) => {
-    //     set_insert_id(res.data.data.id);
-    //     setIsLoading(false);
-    //     swal({
-    //       closeOnClickOutside: true,
-    //       title: "Congratulations",
-    //       text: res.data.message,
-    //       icon: "success",
-    //     })
-    //       .then(() => {})
-    //       .catch(() => {});
-    //   })
-    //   .catch((err) => {
-    //     console.log(err);
-    //     setIsLoading(false);
-    //   });
-  };
+  //   // ApiService.purchaseCoins(user?.token, data)
+  //   //   .then((res) => {
+  //   //     set_insert_id(res.data.data.id);
+  //   //     setIsLoading(false);
+  //   //     swal({
+  //   //       closeOnClickOutside: true,
+  //   //       title: "Congratulations",
+  //   //       text: res.data.message,
+  //   //       icon: "success",
+  //   //     })
+  //   //       .then(() => {})
+  //   //       .catch(() => {});
+  //   //   })
+  //   //   .catch((err) => {
+  //   //     console.log(err);
+  //   //     setIsLoading(false);
+  //   //   });
+  // };
 
-  const Paypal__Successful__Payment = (order: any) => {
-    // setIsLoading(true);
-    const data = {
-      payment_type: "paypal",
-      card_number: "",
-      card_name: order.payer.name.given_name + " " + order.payer.name.surname,
-      tax: totalAmount.toFixed(1),
-      tax_type: tax.type,
-      total_amount: order.purchase_units[0].amount.value,
-      planId: selectedPlan.id,
-      //   id: insert_id,
-    };
+  // const Paypal__Successful__Payment = (order: any) => {
+  //   // setIsLoading(true);
+  //   const data = {
+  //     payment_type: "paypal",
+  //     card_number: "",
+  //     card_name: order.payer.name.given_name + " " + order.payer.name.surname,
+  //     tax: totalAmount.toFixed(1),
+  //     tax_type: tax.type,
+  //     total_amount: order.purchase_units[0].amount.value,
+  //     planId: selectedPlan.id,
+  //     //   id: insert_id,
+  //   };
 
-    console.log(data);
+  //   console.log(data);
 
-    // ApiService.purchaseCoinsUpdate(user?.token, data)
-    //   .then((res) => {
-    //     console.log(res.data);
-    //     setIsLoading(false);
-    //     swal({
-    //       closeOnClickOutside: true,
-    //       title: "Congratulations",
-    //       text: res.data.message,
-    //       icon: "success",
-    //     })
-    //       .then(() => navigate("/dashboard?tab=mytransactions"))
-    //       .catch(() => navigate("/dashboard?tab=mytransactions"));
-    //   })
-    //   .catch((err) => {
-    //     console.log(err);
-    //     setIsLoading(false);
-    //   });
-  };
+  //   // ApiService.purchaseCoinsUpdate(user?.token, data)
+  //   //   .then((res) => {
+  //   //     console.log(res.data);
+  //   //     setIsLoading(false);
+  //   //     swal({
+  //   //       closeOnClickOutside: true,
+  //   //       title: "Congratulations",
+  //   //       text: res.data.message,
+  //   //       icon: "success",
+  //   //     })
+  //   //       .then(() => navigate("/dashboard?tab=mytransactions"))
+  //   //       .catch(() => navigate("/dashboard?tab=mytransactions"));
+  //   //   })
+  //   //   .catch((err) => {
+  //   //     console.log(err);
+  //   //     setIsLoading(false);
+  //   //   });
+  // };
 
   // const stripePromise = loadStripe(
   //   "pk_test_51OEUmkGaxxNRTGagQIYF34iTl3r85j1GMZDKbq7jnesM3AzvN5MyudpkqwjLr9m1PLNjjKLz0G7MQCPOPpiL5jar00XuVUMSb8"

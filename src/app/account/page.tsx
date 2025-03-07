@@ -358,13 +358,13 @@ export default function Account() {
       </section>
       {modelbox && (
         <div
-          className="bg-[rgba(0,0,0,0.1)] flex justify-center items-center fixed top-0 left-0 w-full h-full z-[9999]"
+          className="bg-[rgba(0,0,0,0.5)] flex justify-center items-center fixed top-0 left-0 w-full h-full z-[9999]"
         >
-          <div className="bg-white w-[95%] lg:w-[70%] 2xl:w-[50%] font-Lexend flex flex-col rounded-2xl border shadow-lg" ref={modalRef}>
-            <div className="flex w-full px-8 py-5 justify-between border border-b">
+          <div className="bg-white w-[95%] lg:w-[50%] 2xl:w-[60%] font-Lexend flex flex-col rounded-lg border-[0.9px] shadow-lg border-primaryBlue/60" ref={modalRef}>
+            <div className="flex w-full px-8 py-5 justify-between border-b border-primaryBlue/60">
               Summary <CgClose onClick={() => setModelbox(false)} />
             </div>
-            <div className="flex w-full px-8 py-5 justify-between border border-b ">
+            <div className="flex w-full px-8 py-5 justify-between ">
               <div className="w-full">
                 <div className="relative">
                   <SunEditor setOptions={{
@@ -414,8 +414,8 @@ export default function Account() {
                     </svg>
                   </div>
                 </div>
-                <div className='w-full flex justify-end my-2'>
-                  <AppButton title='Save' width='w-[150px]' border='rounded-sm' padding='py-1 px-6' />
+                <div className='w-full flex justify-end mb-2 mt-4'>
+                  <AppButton title='Save' width='w-[130px]' border='rounded-sm' padding='py-1 px-6' />
                 </div>
               </div>
             </div>
