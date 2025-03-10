@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { Lexend } from "next/font/google";
+import { GoogleOAuthProvider } from "@react-oauth/google";
 import "./globals.css";
 import ConditionalLayout from "./Layout/conditionalLayout";
 import ReduxProvider from "@/redux/Provider";
@@ -30,13 +31,17 @@ export const metadata: Metadata = {
   },
 }
 
+const clientId = "836834017476-9e99ra10kti08qdrgr3ptgj56c06qut1.apps.googleusercontent.com";
+
 export default function RootLayout({ children }: any) {
   return (
     <html lang="en" suppressHydrationWarning>
       <body className={lexend.className}>
         <ReduxProvider>
           <ConditionalLayout>
-            {children}
+            <GoogleOAuthProvider clientId={clientId}>
+              {children}
+            </GoogleOAuthProvider>
           </ConditionalLayout>
         </ReduxProvider>
       </body>

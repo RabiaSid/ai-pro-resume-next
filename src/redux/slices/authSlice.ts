@@ -83,8 +83,13 @@ const authSlice = createSlice({
   reducers: {
     handleSetUser: (state, action) => {
       state.user = action.payload;
+      console.log(action, "actionactionactionaction11");
+
+      Cookies.set("userData", JSON.stringify(action.payload));
     },
     handleSetToken: (state, action) => {
+      console.log(action, "actionactionactionaction22");
+      
       state.token = action.payload;
       Cookies.set("userToken", action.payload);
     },
@@ -92,6 +97,24 @@ const authSlice = createSlice({
       state.user = null;
       state.token = null;
       Cookies.remove("userToken");
+      },
+    clearSessionAndStorages: (state) => {
+        console.log("Clearing all storage data...");
+  
+        // Clear all storage
+        localStorage.clear();
+        sessionStorage.clear();
+  
+        // Clear all cookies
+        const allCookies = Cookies.get();
+        Object.keys(allCookies).forEach((cookieName) => {
+          Cookies.remove(cookieName);
+        });
+         state.user = null;
+        state.token = null;
+        state.loading = false;
+        state.errorsList = {};
+        state.statusCode = null;
       },
   },
   extraReducers: (builder) => {
@@ -138,4 +161,5 @@ const authSlice = createSlice({
   },
 });
 
+export const { handleSetUser, handleSetToken, handleLogout, clearSessionAndStorages } = authSlice.actions;
 export default authSlice.reducer;
