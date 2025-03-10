@@ -30,16 +30,13 @@ export const metadata: Metadata = {
     type: 'website',
   },
 }
-
-const clientId = "836834017476-9e99ra10kti08qdrgr3ptgj56c06qut1.apps.googleusercontent.com";
-
 export default function RootLayout({ children }: any) {
   return (
     <html lang="en" suppressHydrationWarning>
       <body className={lexend.className}>
         <ReduxProvider>
           <ConditionalLayout>
-            <GoogleOAuthProvider clientId={clientId}>
+            <GoogleOAuthProvider clientId={process.env.NEXT_PUBLIC_google_app_id ?? ""}>
               {children}
             </GoogleOAuthProvider>
           </ConditionalLayout>

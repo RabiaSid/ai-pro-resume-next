@@ -83,13 +83,9 @@ const authSlice = createSlice({
   reducers: {
     handleSetUser: (state, action) => {
       state.user = action.payload;
-      console.log(action, "actionactionactionaction11");
-
       Cookies.set("userData", JSON.stringify(action.payload));
     },
-    handleSetToken: (state, action) => {
-      console.log(action, "actionactionactionaction22");
-      
+    handleSetToken: (state, action) => {      
       state.token = action.payload;
       Cookies.set("userToken", action.payload);
     },
@@ -100,7 +96,6 @@ const authSlice = createSlice({
       },
     clearSessionAndStorages: (state) => {
         console.log("Clearing all storage data...");
-  
         // Clear all storage
         localStorage.clear();
         sessionStorage.clear();

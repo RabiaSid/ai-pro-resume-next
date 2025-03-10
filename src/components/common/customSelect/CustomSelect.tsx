@@ -36,9 +36,9 @@ const CustomSelect = ({
                     {...rest}
                 >
                     <option value=""></option>
-                    {options.map((option) => (
-                        <option disabled={option.disabled} key={option.id} value={option.id}>
-                            {option.name}
+                    {options?.map((option) => (
+                        <option disabled={option?.disabled} key={option?.id} value={option?.id}>
+                            {option?.name}
                         </option>
                     ))}
                 </select>

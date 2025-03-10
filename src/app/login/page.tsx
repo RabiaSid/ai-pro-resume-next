@@ -1,7 +1,6 @@
 'use client'
 import Link from 'next/link'
 import React, { useEffect, useState } from 'react'
-import Image from 'next/image'
 import { FaRegEye, FaRegEyeSlash } from 'react-icons/fa'
 import { IoInformationCircle } from 'react-icons/io5'
 import { Controller, useForm } from "react-hook-form";
@@ -9,9 +8,6 @@ import ReCAPTCHA from "react-google-recaptcha";
 import { H1 } from '@/components/typography'
 import AppButton from '@/components/common/button/pages'
 import AppInputField from '@/components/common/inpufield/page'
-import GoogleLogo from "media/assets/google_logo.webp";
-import FacebookLogo from "media/assets/fb_logo.webp";
-import LinkedInLogo from "media/assets/link.webp";
 import { useRouter } from 'next/navigation'
 import Ads from '@/components/ads/Ads'
 import { useDispatch, useSelector } from 'react-redux'
@@ -26,7 +22,7 @@ import GoogleLogin from '@/components/socialLogins/googleLogin'
 export default function page() {
     const router = useRouter();
     const dispatch = useDispatch<AppDispatch>();
-    const { loading, user, token } = useSelector((state: RootState) => state.auth);
+    const { loading } = useSelector((state: RootState) => state.auth);
 
     const [showPassword, setShowPassword] = useState(false);
     const [captchaError, setCaptchaError] = useState("");
@@ -71,7 +67,10 @@ export default function page() {
 
     const handleLoginSubmit = async (formData: any) => {
         setShowAlert(false)
-        console.log(formData, "formData");
+        if (!verified) {
+            setCaptchaError("Please verify the ReCAPTCHA.");
+            return
+        }
         const credentials = {
             email: formData?.email,
             password: formData?.password,
@@ -89,14 +88,14 @@ export default function page() {
                 }
                 setTimeout(() => {
                     router.push("/");
-                }, 1000)
+                }, 500)
             } else {
                 setShowAlert(true)
                 setShowErrorMessage(response.payload.message ?? "Invalid Credentials.");
             }
         }).catch((err) => {
             console.log(err);
-            setShowAlert(true)
+            setShowAlert(true);
             setShowErrorMessage("Something wents wrong!");
         })
     }
@@ -248,14 +247,14 @@ export default function page() {
                         </div>
                     </div>
                     <div className="flex flex-col items-start mt-4">
-                        <span className="text-red-500 text-sm">{captchaError}</span>
                         <ReCAPTCHA
-                            sitekey={"6LdRjxslAAAAAIP7BsNtsYgCvPM5RfNXjHGIzveJ"}
+                            sitekey={process.env.NEXT_PUBLIC_captcha_sitekey ?? ""}
                             onChange={() => {
                                 handleCheckCaptcha();
                                 handleRecaptchaTimeout();
                             }}
                         />
+                        <span className="text-red-500 text-sm">{captchaError}</span>
                     </div>
 
                     <AppButton
