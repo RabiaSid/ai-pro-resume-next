@@ -19,6 +19,7 @@ import { AppDispatch, RootState } from '@/redux/store'
 import GoogleLogin from '@/components/socialLogins/googleLogin'
 import FBLogin from '@/components/socialLogins/facebookLogin'
 import LinkedInLogin from '@/components/socialLogins/linkedInLogin'
+import { UseCountries } from '@/redux/slices/reuseableSlice'
 
 export default function page() {
     const router = useRouter();
@@ -31,18 +32,7 @@ export default function page() {
 
     const [showAlert, setShowAlert] = useState(false);
     const [showErrorMessage, setShowErrorMessage] = useState([]);
-
-    const staticOptions = [
-        { id: "us", name: "United States" },
-        { id: "ca", name: "Canada" },
-        { id: "uk", name: "United Kingdom" },
-        { id: "au", name: "Australia" },
-        { id: "de", name: "Germany" },
-        { id: "fr", name: "France" },
-        { id: "in", name: "India" },
-        { id: "jp", name: "Japan" },
-        { id: "cn", name: "China" },
-    ];
+    const [countries, setcountries] = useState([]);
 
     const {
         handleSubmit,
@@ -85,7 +75,7 @@ export default function page() {
             role: formData?.role,
             password: formData?.password,
             confirm_password: formData?.confirm_password,
-            country_id: 2,
+            country_id: formData?.country_id,
             contact: formData?.contact,
             referred_by: formData?.referred_by,
         }
@@ -122,6 +112,12 @@ export default function page() {
         }
     }, [errorsList]);
 
+    useEffect(() => {
+        dispatch(UseCountries()).then((res) => {
+            console.log(res, "UseCountries");
+            setcountries(res?.payload?.data)
+        })
+    }, [])
     return (
         <>
             <Ads />
@@ -313,7 +309,7 @@ export default function page() {
                                         className="w-full"
                                         error={!!errors.country_id}
                                         errorMessage={errors?.country_id?.message as string}
-                                        options={staticOptions}
+                                        options={countries}
                                     />)}
                             />
                         </div>
