@@ -8,9 +8,6 @@ import ReCAPTCHA from "react-google-recaptcha";
 import { H1 } from '@/components/typography'
 import AppButton from '@/components/common/button/pages'
 import AppInputField from '@/components/common/inpufield/page'
-import GoogleLogo from "media/assets/google_logo.webp";
-import FacebookLogo from "media/assets/fb_logo.webp";
-import LinkedInLogo from "media/assets/link.webp";
 import CustomSelect from '@/components/common/customSelect/CustomSelect'
 
 import { useRouter } from 'next/navigation'
@@ -147,64 +144,15 @@ export default function page() {
                 {/* //Social Logins */}
                 <div className='grid space-y-3'>
                     <div>
-
-                        {/* <GoogleOAuthProvider clientId="836834017476-9e99ra10kti08qdrgr3ptgj56c06qut1.apps.googleusercontent.com"> */}
                         <GoogleLogin />
-                        {/* </GoogleOAuthProvider> */}
-
-                        {/* <AppButton title='Sign-in  with Google'
-                            className="w-[100%] border border-solid text-gray-400 border-slate-300 px-2 py-2 rounded-md hover:bg-slate-800 hover:text-white ease-in transition-all flex justify-center items-center"
-                            childClassName="sm:tracking-widest relative"
-                            leftIcon={
-                                <>
-                                    <Image
-                                        src={GoogleLogo}
-                                        alt="My Image"
-                                        width={25}
-                                        height={25}
-                                        className="mr-2"
-                                    />
-                                </>
-                            }
-                        /> */}
                     </div>
 
                     <div>
                         <FBLogin />
-                        {/* <AppButton title='Sign-in  with Facebook'
-                            className="w-[100%] border border-solid text-gray-400 border-slate-300 px-2 py-2 rounded-md hover:bg-slate-800 hover:text-white ease-in transition-all flex justify-center items-center"
-                            childClassName="sm:tracking-widest relative"
-                            leftIcon={
-                                <>
-                                    <Image
-                                        src={FacebookLogo}
-                                        alt="My Image"
-                                        width={25}
-                                        height={25}
-                                        className="mr-2"
-                                    />
-                                </>
-                            }
-                        /> */}
                     </div>
 
                     <div>
                         <LinkedInLogin />
-                        {/* <AppButton title='Sign-in  with LinkendIn'
-                            className="w-[100%] border border-solid text-gray-400 border-slate-300 px-2 py-2 rounded-md hover:bg-slate-800 hover:text-white ease-in transition-all flex justify-center items-center"
-                            childClassName="sm:tracking-widest relative"
-                            leftIcon={
-                                <>
-                                    <Image
-                                        src={LinkedInLogo}
-                                        alt="My Image"
-                                        width={25}
-                                        height={25}
-                                        className="mr-2"
-                                    />
-                                </>
-                            }
-                        /> */}
                     </div>
                 </div>
 

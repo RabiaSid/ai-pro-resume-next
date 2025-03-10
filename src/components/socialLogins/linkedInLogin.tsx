@@ -1,6 +1,9 @@
 import { useEffect } from "react";
 import { useSearchParams } from "next/navigation";
 import axios from "axios";
+import Image from "next/image";
+import LinkedInLogo from "media/assets/link.webp";
+import AppButton from "../common/button/pages";
 
 const LinkedInLogin: React.FC = () => {
     const clientId = "7769gw1uz1ow19";
@@ -39,13 +42,22 @@ const LinkedInLogin: React.FC = () => {
     };
 
     return (
-        <button
-            onClick={handleLinkedInLogin}
-            className="w-full border border-solid text-slate-500 border-slate-300 px-2 py-2 rounded-md hover:bg-slate-800 hover:text-white transition-all flex justify-center items-center"
-        >
-            <img src="/linkedin-logo.png" alt="LinkedIn Logo" width={25} height={25} className="mr-2" />
-            Sign-up with LinkedIn
-        </button>
+        <AppButton title='Sign-in  with LinkendIn' onClick={handleLinkedInLogin}
+            className="w-[100%] border border-solid text-gray-400 border-slate-300 px-2 py-2 rounded-md hover:bg-slate-800 hover:text-white ease-in transition-all flex justify-center items-center"
+            childClassName="sm:tracking-widest relative"
+            leftIcon={
+                <>
+                    <Image
+                        src={LinkedInLogo}
+                        alt="My Image"
+                        width={25}
+                        height={25}
+                        className="mr-2"
+                    />
+                </>
+            }
+        />
+
     );
 };
 

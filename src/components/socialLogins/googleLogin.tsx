@@ -2,7 +2,10 @@ import { clearSessionAndStorages, handleSetToken, handleSetUser } from "@/redux/
 import { AppDispatch, RootState } from "@/redux/store";
 import { useGoogleLogin } from "@react-oauth/google";
 import axios from "axios";
+import Image from "next/image";
 import { useDispatch, useSelector } from "react-redux";
+import AppButton from "../common/button/pages";
+import GoogleLogo from "media/assets/google_logo.webp";
 
 const GoogleLogin = () => {
     const dispatch = useDispatch<AppDispatch>();
@@ -46,12 +49,23 @@ const GoogleLogin = () => {
 
     return (
         <div className="grid space-y-3">
-            <button
+            <AppButton
                 onClick={() => login()}
-                className="w-[100%] border border-solid text-slate-500 border-slate-300 px-2 py-2 rounded-md hover:bg-slate-800 hover:text-white ease-in transition-all flex justify-center items-center"
-            >
-                Sign-up with Google
-            </button>
+                title='Sign-up with Google'
+                className="w-[100%] border border-solid text-gray-400 border-slate-300 px-2 py-2 rounded-md hover:bg-slate-800 hover:text-white ease-in transition-all flex justify-center items-center"
+                childClassName="sm:tracking-widest relative"
+                leftIcon={
+                    <>
+                        <Image
+                            src={GoogleLogo}
+                            alt="My Image"
+                            width={25}
+                            height={25}
+                            className="mr-2"
+                        />
+                    </>
+                }
+            />
         </div>
     );
 };
