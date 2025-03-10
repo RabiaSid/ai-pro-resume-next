@@ -48,7 +48,7 @@ export default function Header() {
 
     useEffect(() => {
         const handleResize = () => {
-            setIsMobile(window.innerWidth < 768);
+            setIsMobile(window.innerWidth < 1024);
         };
         handleResize();
         window.addEventListener('resize', handleResize);
@@ -75,15 +75,15 @@ export default function Header() {
     }
 
     return (
-        <nav className={`bg-white py-2 md:py-4 shadow-md z-10 relative`}>
-            <div className="container md:px-4 mx-auto flex items-center justify-between ">
+        <nav className={`bg-white py-2 lg:py-4 shadow-md z-10 relative`}>
+            <div className="container lg:px-4 mx-auto flex items-center justify-between ">
 
                 {/* Logo */}
                 <Link href="/" className="flex ">
                     <Image src={Logo} alt="Logo" width={150} height={40} className="logo py-2" />
                 </Link>
 
-                <div className='md:hidden flex items-center '>
+                <div className='lg:hidden flex items-center '>
                     {menuIconItems.map((item, index) => (
                         <div key={index} className="relative group ">
                             {/* Regular Menu Item */}
@@ -104,7 +104,7 @@ export default function Header() {
                                     </button>
 
                                     <div className={`absolute left-0 mt-1 w-48 bg-white border transition-all duration-300 overflow-hidden shadow-[0_3px_10px_rgb(0,0,0,0.2)] rounded-xl 
-                                        ${submenu[index] ? "block" : "hidden"} md:group-hover:block`}>
+                                        ${submenu[index] ? "block" : "hidden"} lg:group-hover:block`}>
                                         {submenuOpen && item.submenu.map((sub, subIndex) => (
                                             <Link key={subIndex} href={sub.path} className="block px-4 py-4 hover:border-l-4 transition border-primaryGreen text-gray-700 hover:bg-primaryBlue hover:text-white">
                                                 <span className={styles.navFontSubmenu}>{sub.name}</span>
@@ -116,7 +116,7 @@ export default function Header() {
                         </div>
                     ))}
 
-                    <Link href="/cart" className={`flex md:hidden items-center py-2  
+                    <Link href="/cart" className={`flex lg:hidden items-center py-2  
                                 text-gray-600 rounded hover:bg-primaryBlue hover:text-primaryBlue
                                  transition-colors duration-300 border border-transparent hover:bg-transparent px-0`}>
                         <div className={`relative cursor-pointer`}>
@@ -130,7 +130,7 @@ export default function Header() {
                             <FaShoppingCart className="text-[#0072b1] text-md ml-4" size={25} />
                         </div>
                     </Link>
-                    <Link href="/register" className={`flex md:hidden items-center py-2  
+                    <Link href="/register" className={`flex lg:hidden items-center py-2  
                                 text-gray-600 rounded hover:bg-primaryBlue hover:text-primaryBlue
                                  transition-colors duration-300 border border-transparent hover:bg-transparent`}>
                         <div className="relative cursor-pointer">
@@ -154,7 +154,7 @@ export default function Header() {
                         </div>
                     </Link>
                     {/* Mobile Menu Toggle */}
-                    <button onClick={toggleMenu} className="md:hidden p-2 text-gray-700">
+                    <button onClick={toggleMenu} className="lg:hidden p-2 text-gray-700">
                         {menuOpen ? (
                             <AiOutlineClose size={40} className="text-red-600" />
                         ) : (
@@ -163,16 +163,16 @@ export default function Header() {
                     </button>
                 </div>
 
-                <div className={`absolute md:static  top-16 left-0 w-full md:w-auto bg-white md:bg-transparent
-                 shadow-md md:shadow-none p-5 md:p-0 transition-all duration-300 
-                 ${menuOpen || !isMobile ? "block " : "hidden"} md:flex md:items-center md:space-x-4 scrollHeader `}>
-                    <div className={`flex md:items-center  flex-col md:flex-row divide-y-2 md:divide-y-0 ${isMobile && "max-h-[600px] overflow-y-auto overflow-x-hidden"} px-5 `}>
+                <div className={`absolute lg:static  top-16 left-0 w-full lg:w-auto bg-white lg:bg-transparent
+                 shadow-md lg:shadow-none p-5 lg:p-0 transition-all duration-300 
+                 ${menuOpen || !isMobile ? "block " : "hidden"} lg:flex lg:items-center lg:space-x-4 scrollHeader `}>
+                    <div className={`flex lg:items-center  flex-col lg:flex-row divide-y-2 lg:divide-y-0 ${isMobile && "max-h-[600px] overflow-y-auto overflow-x-hidden"} px-5 `}>
                         {menuItems.map((item, index) => (
                             <div key={index} className={`relative group `}>
 
                                 {/* Regular Menu Item */}
                                 {!item.submenu ? (
-                                    <Link href={item.path} className={`flex items-center  gap-2 px-4 py-4 lg:px-4 md:mx-2  text-gray-600 rounded md:hover:bg-primaryBlue md:hover:text-white transition-colors duration-300 ${item.className || ""}`}>
+                                    <Link href={item.path} className={`flex items-center  gap-2 px-4 py-4 xl:px-4 lg:mx-2  text-gray-600 rounded lg:hover:bg-primaryBlue lg:hover:text-white transition-colors duration-300 ${item.className || ""}`}>
                                         <span className={styles.navFont}>{item.name}</span>
                                     </Link>
                                 ) : (
@@ -181,7 +181,7 @@ export default function Header() {
                                     <div ref={modalRef} className={item.className || ""}>
                                         <button
                                             onClick={() => toggleSubmenu(index)}
-                                            className={`px-3 py-4 lg:px-4 md:mx-2 w-full text-gray-600 rounded md:hover:bg-primaryBlue  md:hover:text-white transition-colors duration-300 flex items-center justify-between `}
+                                            className={`px-3 py-4 xl:px-4 lg:mx-2 w-full text-gray-600 rounded lg:hover:bg-primaryBlue  lg:hover:text-white transition-colors duration-300 flex items-center justify-between lg:justify-evenly `}
                                         >
                                             <span className={styles.navFont}>{item.name} </span>
                                             <BiCaretDown
@@ -191,14 +191,14 @@ export default function Header() {
                                             />
                                         </button>
 
-                                        <div className={`md:absolute divide-y-2 md:divide-y-0 md:left-0 md:mt-1 text-center md:text-start min-w-[250px] mx-auto md:w-48  md:bg-white md:border transition-all duration-300 overflow-hidden md:shadow-[0_3px_10px_rgb(0,0,0,0.2)] rounded-xl 
-                                        ${submenuOpen === true && submenu[index] ? "block" : "hidden"} md:group-hover:block `}
+                                        <div className={`lg:absolute divide-y-2 lg:divide-y-0 lg:left-0 lg:mt-1 text-center lg:text-start min-w-[250px] mx-auto lg:w-48  lg:bg-white lg:border transition-all duration-300 overflow-hidden lg:shadow-[0_3px_10px_rgb(0,0,0,0.2)] rounded-xl 
+                                        ${submenuOpen === true && submenu[index] ? "block" : "hidden"} lg:group-hover:block `}
                                             onClick={() => setSubmenuOpen(true)}
                                             // onMouseEnter={() => toggleSubmenu(index)}
                                             onMouseLeave={() => setSubmenuOpen(false)}
                                         >
                                             {item.submenu.map((sub, subIndex) => (
-                                                <Link key={subIndex} href={sub.path} className="block px-4 py-4 md:hover:border-l-4 transition md:border-primaryGreen text-gray-700 md:hover:bg-primaryBlue md:hover:text-white">
+                                                <Link key={subIndex} href={sub.path} className="block px-4 py-4 lg:hover:border-l-4 transition lg:border-primaryGreen text-gray-700 lg:hover:bg-primaryBlue lg:hover:text-white">
                                                     <span className={styles.navFontSubmenu}>{sub.name}</span>
                                                 </Link>
                                             ))}
@@ -208,7 +208,7 @@ export default function Header() {
                             </div>
                         ))}
                         {filteredMenuItems.map((item, index) => (
-                            <div key={index} className="relative group hidden md:block">
+                            <div key={index} className="relative group hidden lg:block">
                                 {/* Regular Menu Item */}
                                 {!item.submenu ? (
                                     <Link href={item.path} className={` flex items-center py-2  
@@ -232,7 +232,7 @@ export default function Header() {
                                         </button>
 
                                         <div className={`absolute left-0 mt-1 w-48 bg-white border transition-all duration-300 overflow-hidden shadow-[0_3px_10px_rgb(0,0,0,0.2)] rounded-xl 
-                                        ${submenuOpen === true && submenu[index] ? "block" : "hidden"} md:group-hover:block divide-y-2 `}
+                                        ${submenuOpen === true && submenu[index] ? "block" : "hidden"} lg:group-hover:block divide-y-2 `}
                                             onMouseEnter={() => setSubmenuOpen(true)}
                                             onMouseLeave={() => setSubmenuOpen(false)}>
                                             {item.submenu.map((sub, subIndex) => (
@@ -248,7 +248,7 @@ export default function Header() {
                                 )}
                             </div>
                         ))}
-                        <Link href="/cart" className={`md:block flex items-center py-2  
+                        <Link href="/cart" className={`hidden lg:flex items-center py-2
                                 text-gray-600 rounded hover:bg-primaryBlue hover:text-primaryBlue
                                  transition-colors duration-300 border border-transparent hover:bg-transparent px-0`}>
                             <div className={`relative cursor-pointer`}>
@@ -262,7 +262,7 @@ export default function Header() {
                                 <FaShoppingCart className="text-[#0072b1] text-md ml-4" size={25} />
                             </div>
                         </Link>
-                        <Link href="/register" className={`md:block flex items-center py-2  
+                        <Link href="/register" className={`hidden lg:flex items-center py-2  
                                 text-gray-600 rounded hover:bg-primaryBlue hover:text-primaryBlue
                                  transition-colors duration-300 border border-transparent hover:bg-transparent`}>
                             <div className="relative cursor-pointer">

@@ -11,15 +11,15 @@ export default {
       colors: {
         background: "var(--background)",
         foreground: "var(--foreground)",
-        primaryBlue : "#0072b1",
-        secondaryBlue : "#27AAE1",
-        primaryGreen : "#01b2ac",
-        secondaryGreen : "#01b2ac90",
-        primaryBlack : "#231F20",
-        primaryGray : "#a3a3a3",
-        secondaryGray : "#A7A7A7",
-        primaryCran : "#00caa5",
-        primarySlate : "#343434",
+        primaryBlue: "#0072b1",
+        secondaryBlue: "#27AAE1",
+        primaryGreen: "#01b2ac",
+        secondaryGreen: "#01b2ac90",
+        primaryBlack: "#231F20",
+        primaryGray: "#a3a3a3",
+        secondaryGray: "#A7A7A7",
+        primaryCran: "#00caa5",
+        primarySlate: "#343434",
       },
       keyframes: {
         fadeInUp: {
@@ -32,10 +32,18 @@ export default {
           "80%": { transform: "translateY(5px)" },
           "100%": { transform: "translateY(0)" },
         },
+        rotate: {
+          "0%": { transform: "rotate(0deg)" },
+          "100%": { transform: "rotate(360deg)" },
+        },
+
+
       },
       animation: {
         fadeInUp: "fadeInUp 0.5s ease-out forwards",
         "bounce-in-up": "bounce-in-up 0.8s ease-out forwards",
+        rotate: "rotate 50s cubic-bezier(0.8, 0.2, 0.2, 0.8) infinite alternate",
+
       },
     },
   },

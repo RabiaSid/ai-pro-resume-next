@@ -120,7 +120,7 @@ export default function OurFaqs() {
   return (
     <>
       {faqs.length > 0 && (
-        <section className="w-full bg-white py-4 px-4 sm:px-20 justify-between items-center align-middle rounded-tr-[150px] relative">
+        <section className="w-full bg-white mt-2 py-4 px-4 sm:px-20 justify-between items-center align-middle rounded-tr-[150px] relative">
           <div className="flex sm:gap-2 justify-center items-center">
             <H3 className="text-primaryBlue">
               FREQUENTLY <span className="text-primaryGreen">ASKED </span>{" "}
@@ -140,17 +140,15 @@ export default function OurFaqs() {
                 >
                   <button
                     onClick={() => handleChange(i)}
-                    className={`accordion-toggle group inline-flex items-center justify-between font-normal leading-8 w-full transition duration-500 text-lg md:text-xl font-Lexend ${
-                      expanded === i ? "text-[#0072b180]" : "text-[#0072b1]"
-                    }`}
+                    className={`accordion-toggle group inline-flex items-center justify-between font-normal leading-8 w-full transition duration-500 text-lg md:text-xl font-Lexend ${expanded === i ? "text-[#0072b180]" : "text-[#0072b1]"
+                      }`}
                   >
                     <h5 className="text-left pr-3 w-[90%]">{faq.question}</h5>
                     <svg
-                      className={`transition duration-500  ${
-                        expanded === i
+                      className={`transition duration-500  ${expanded === i
                           ? "rotate-180 text-[#0072b180]"
                           : "text-[#0072b1]"
-                      }`}
+                        }`}
                       width="22"
                       height="22"
                       viewBox="0 0 22 22"
