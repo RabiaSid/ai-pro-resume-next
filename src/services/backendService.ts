@@ -11,9 +11,7 @@ const api = axios.create({
 
 // Attach token if available
 api.interceptors.request.use((config) => {
-  const token = Cookies.get("userToken");
-  console.log(token, "my toekn");
-  
+  const token = Cookies.get("userToken");  
   if (token) {
     config.headers.Authorization = `Bearer ${token}`;
   } else {

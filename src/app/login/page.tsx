@@ -1,7 +1,6 @@
 'use client'
 import Link from 'next/link'
 import React, { useEffect, useState } from 'react'
-import Image from 'next/image'
 import { FaRegEye, FaRegEyeSlash } from 'react-icons/fa'
 import { IoInformationCircle } from 'react-icons/io5'
 import { Controller, useForm } from "react-hook-form";
@@ -9,9 +8,6 @@ import ReCAPTCHA from "react-google-recaptcha";
 import { H1 } from '@/components/typography'
 import AppButton from '@/components/common/button/pages'
 import AppInputField from '@/components/common/inpufield/page'
-import GoogleLogo from "media/assets/google_logo.webp";
-import FacebookLogo from "media/assets/fb_logo.webp";
-import LinkedInLogo from "media/assets/link.webp";
 import { useRouter } from 'next/navigation'
 import Ads from '@/components/ads/Ads'
 import { useDispatch, useSelector } from 'react-redux'
@@ -92,14 +88,14 @@ export default function page() {
                 }
                 setTimeout(() => {
                     router.push("/");
-                }, 1000)
+                }, 500)
             } else {
                 setShowAlert(true)
                 setShowErrorMessage(response.payload.message ?? "Invalid Credentials.");
             }
         }).catch((err) => {
             console.log(err);
-            setShowAlert(true)
+            setShowAlert(true);
             setShowErrorMessage("Something wents wrong!");
         })
     }

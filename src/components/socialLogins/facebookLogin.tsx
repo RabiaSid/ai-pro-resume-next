@@ -3,8 +3,13 @@ import axios from "axios";
 import AppButton from "../common/button/pages";
 import Image from "next/image";
 import FacebookLogo from "media/assets/fb_logo.webp";
+import { useDispatch } from "react-redux";
+import { AppDispatch } from "@/redux/store";
+import { clearSessionAndStorages } from "@/redux/slices/authSlice";
 
 const FBLogin = () => {
+    const dispatch = useDispatch<AppDispatch>();
+
     const responseFacebook = async (response: any) => {
         console.log("Sending data111111:", response);
 
@@ -21,6 +26,7 @@ const FBLogin = () => {
                     "https://backend.aiproresume.com/public/api/login/social-response",
                     userData
                 );
+                dispatch(clearSessionAndStorages());
                 console.log("Sending data333:", res.data);
             } catch (error: any) {
                 console.error("Facebook login error:", error.response?.data?.message || error.message);

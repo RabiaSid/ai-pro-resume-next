@@ -69,7 +69,7 @@ export default function page() {
     const handleClick = () => {
         console.log("Creatimg account");
     };
-    const handleRegister = async (formData: any) => {
+    const handleRegisterSubmit = async (formData: any) => {
         if (!verified) {
             setCaptchaError("Please verify the ReCAPTCHA.");
             return
@@ -148,7 +148,7 @@ export default function page() {
                 </div>
 
                 <div>
-                    <form onSubmit={handleSubmit(handleRegister)}
+                    <form onSubmit={handleSubmit(handleRegisterSubmit)}
                     >
                         {/* Name */}
                         <div className="flex flex-col">

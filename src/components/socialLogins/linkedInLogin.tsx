@@ -4,8 +4,13 @@ import axios from "axios";
 import Image from "next/image";
 import LinkedInLogo from "media/assets/link.webp";
 import AppButton from "../common/button/pages";
+import { clearSessionAndStorages } from "@/redux/slices/authSlice";
+import { useDispatch } from "react-redux";
+import { AppDispatch } from "@/redux/store";
 
-const LinkedInLogin: React.FC = () => {
+const LinkedInLogin = () => {
+    const dispatch = useDispatch<AppDispatch>();
+
     const clientId = process.env.NEXT_PUBLIC_linkedIn_app_id;
     const redirectUri = "http://localhost:3000/login";
     const scope = "openid profile email";
@@ -24,7 +29,6 @@ const LinkedInLogin: React.FC = () => {
         const authUrl = `https://www.linkedin.com/oauth/v2/authorization?response_type=code&client_id=${clientId}&redirect_uri=${encodeURIComponent(
             redirectUri
         )}&state=${state}&scope=${encodeURIComponent(scope)}`;
-
         window.location.href = authUrl;
     };
 
@@ -34,7 +38,7 @@ const LinkedInLogin: React.FC = () => {
                 "https://backend.aiproresume.com/public/api/login/linkedin",
                 { code: authCode, redirect_uri: redirectUri }
             );
-
+            dispatch(clearSessionAndStorages());
             console.log("LinkedIn Login Success:", response.data);
         } catch (error: any) {
             console.error("LinkedIn login error:", error.response?.data?.message || error.message);
