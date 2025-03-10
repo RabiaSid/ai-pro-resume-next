@@ -214,7 +214,7 @@ export default function page() {
                         </div>
 
                     </div>
-                    <div className="flex justify-between mt-[-10px]">
+                    <div className="flex justify-between ">
                         <div className="text-slate-500">
                             <Controller
                                 name="rememberMe"
