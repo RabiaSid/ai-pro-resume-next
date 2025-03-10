@@ -6,11 +6,11 @@ import Image from "next/image";
 import { useDispatch, useSelector } from "react-redux";
 import AppButton from "../common/button/pages";
 import GoogleLogo from "media/assets/google_logo.webp";
+import { useRouter } from "next/navigation";
 
 const GoogleLogin = () => {
     const dispatch = useDispatch<AppDispatch>();
-    const { user, token } = useSelector((state: RootState) => state.auth);
-
+    const router = useRouter();
     const onSuccess = async (res: any) => {
         console.log(res, "OnSuccess 11");
 
@@ -33,6 +33,7 @@ const GoogleLogin = () => {
             dispatch(clearSessionAndStorages());
             dispatch(handleSetUser(response?.data?.data));
             dispatch(handleSetToken(response?.data?.data?.token));
+            router.push("/")
         } catch (error: any) {
             console.error("Error during login:", error);
         }
