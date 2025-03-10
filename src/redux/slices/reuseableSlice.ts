@@ -3,13 +3,13 @@ import { OldAPI } from '@/services/oldService';
 
 type countriesState = {
     countries: any;
-    loading: boolean;
+    countriesLoading: boolean;
 }
 // Async thunk for login
-export const UseCountries = createAsyncThunk("countries/UseCountries", async (_, { rejectWithValue }) => {
+export const useCountries = createAsyncThunk("countries/useCountries", async (_, { rejectWithValue }) => {
     try {
         const response = await OldAPI.get("/show-countries");
-        return response;
+        return response.data;
     } catch (error: any) {
         return rejectWithValue(error.message);
     }
@@ -17,30 +17,27 @@ export const UseCountries = createAsyncThunk("countries/UseCountries", async (_,
 );
 
 
-const profileSlice = createSlice({
+const reuseableSlice = createSlice({
     name: "countries",
     initialState: {
         countries: null,
-        loading: false
+        countriesLoading: false
     } as countriesState,
     reducers: {
     },
     extraReducers: (builder) => {
         builder
-            .addCase(UseCountries.pending, (state) => {
-                state.loading = true;
+            .addCase(useCountries.pending, (state) => {
+                state.countriesLoading = true;
             })
-            .addCase(UseCountries.fulfilled, (state, action) => {
-                console.log(action, "actionaction");
-                
-                state.loading = false;
-                // state.countries = action?.payload?.response?.data;
+            .addCase(useCountries.fulfilled, (state, action) => {
+                 state.countriesLoading = false;
+                 state.countries = action?.payload;
             })
-            .addCase(UseCountries.rejected, (state, action) => {
-                state.loading = false;
+            .addCase(useCountries.rejected, (state, action) => {
+                state.countriesLoading = false;
             })
-
     },
 });
 
-export default profileSlice.reducer;
+export default reuseableSlice.reducer;
