@@ -35,7 +35,7 @@ export const menuItems: MenuItem[] = [
   {
     name: "Resume",
     submenu: [
-      { name: "Resume Templates", path: "/" },
+      { name: "Resume Templates", path: "/resume-templates" },
       { name: "Resume Examples", path: "/" },
       { name: "Resume format", path: "/" },
       { name: "How to write a resume", path: "/" },
@@ -72,13 +72,15 @@ export const menuIconItems: MenuIconItem[] = [
   {
     name: "Login",
     path: "/login",
-    className: "text-black border border-transparent hover:bg-transparent px-0 hover:text-primaryBlue hidden md:flex",
-    leftIcon: (<BiUserCircle
-      className="text-lg text-[#00bfab] hover:text-[#0072b1]"
-      size={36}
-    />),
+    className:
+      "text-black border border-transparent hover:bg-transparent px-0 hover:text-primaryBlue hidden md:flex",
+    leftIcon: (
+      <BiUserCircle
+        className="text-lg text-[#00bfab] hover:text-[#0072b1]"
+        size={36}
+      />
+    ),
     LoginPath: "LoginPath",
-
   },
   {
     path: "/register",
@@ -97,5 +99,4 @@ export const menuIconItems: MenuIconItem[] = [
     ],
     RegPath: "RegPath",
   },
-
 ];
