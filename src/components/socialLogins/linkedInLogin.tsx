@@ -6,8 +6,8 @@ import LinkedInLogo from "media/assets/link.webp";
 import AppButton from "../common/button/pages";
 
 const LinkedInLogin: React.FC = () => {
-    const clientId = "7769gw1uz1ow19";
-    const redirectUri = "https://aiproresume.com/login";
+    const clientId = process.env.NEXT_PUBLIC_linkedIn_app_id;
+    const redirectUri = "http://localhost:3000/login";
     const scope = "openid profile email";
     const state = "foobar";
 

@@ -22,14 +22,6 @@ const FBLogin = () => {
                     userData
                 );
                 console.log("Sending data333:", res.data);
-
-                // console.log("Login Successful:", res.data);
-
-                // if (res.data.data.is_admin === 0) {
-                //     console.log("User is not admin, navigating to dashboard...");
-                // } else {
-                //     console.log("User is admin, navigating to admin dashboard...");
-                // }
             } catch (error: any) {
                 console.error("Facebook login error:", error.response?.data?.message || error.message);
             }
@@ -38,7 +30,7 @@ const FBLogin = () => {
 
     return (
         <FacebookLogin
-            appId="1613981572684330"
+            appId={process.env.NEXT_PUBLIC_fb_app_id ?? ""}
             onSuccess={responseFacebook}
             onFail={(error) => console.error("Login Failed!", error)}
             render={({ onClick }) => (

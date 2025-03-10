@@ -3,7 +3,7 @@ import { AppDispatch, RootState } from "@/redux/store";
 import { useGoogleLogin } from "@react-oauth/google";
 import axios from "axios";
 import Image from "next/image";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import AppButton from "../common/button/pages";
 import GoogleLogo from "media/assets/google_logo.webp";
 import { useRouter } from "next/navigation";

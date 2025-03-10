@@ -26,7 +26,7 @@ import GoogleLogin from '@/components/socialLogins/googleLogin'
 export default function page() {
     const router = useRouter();
     const dispatch = useDispatch<AppDispatch>();
-    const { loading, user, token } = useSelector((state: RootState) => state.auth);
+    const { loading } = useSelector((state: RootState) => state.auth);
 
     const [showPassword, setShowPassword] = useState(false);
     const [captchaError, setCaptchaError] = useState("");
@@ -71,7 +71,10 @@ export default function page() {
 
     const handleLoginSubmit = async (formData: any) => {
         setShowAlert(false)
-        console.log(formData, "formData");
+        if (!verified) {
+            setCaptchaError("Please verify the ReCAPTCHA.");
+            return
+        }
         const credentials = {
             email: formData?.email,
             password: formData?.password,
@@ -248,14 +251,14 @@ export default function page() {
                         </div>
                     </div>
                     <div className="flex flex-col items-start mt-4">
-                        <span className="text-red-500 text-sm">{captchaError}</span>
                         <ReCAPTCHA
-                            sitekey={"6LdRjxslAAAAAIP7BsNtsYgCvPM5RfNXjHGIzveJ"}
+                            sitekey={process.env.NEXT_PUBLIC_captcha_sitekey ?? ""}
                             onChange={() => {
                                 handleCheckCaptcha();
                                 handleRecaptchaTimeout();
                             }}
                         />
+                        <span className="text-red-500 text-sm">{captchaError}</span>
                     </div>
 
                     <AppButton

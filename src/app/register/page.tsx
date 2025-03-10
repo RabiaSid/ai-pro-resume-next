@@ -24,7 +24,7 @@ import { useCountries } from '@/redux/slices/reuseableSlice'
 export default function page() {
     const router = useRouter();
     const dispatch = useDispatch<AppDispatch>();
-    const { loading, errorsList, token } = useSelector((state: RootState) => state.auth);
+    const { loading, errorsList } = useSelector((state: RootState) => state.auth);
     const { countries } = useSelector((state: RootState) => state.reuseable)
     const [captchaError, setCaptchaError] = useState("");
     const [verified, setVerified] = useState<any>(false);
@@ -70,6 +70,11 @@ export default function page() {
         console.log("Creatimg account");
     };
     const handleRegister = async (formData: any) => {
+        if (!verified) {
+            setCaptchaError("Please verify the ReCAPTCHA.");
+            return
+        }
+
         const credentials = {
             name: formData?.name,
             email: formData?.email,
@@ -321,14 +326,14 @@ export default function page() {
                         </div>
                         <div>
                             <div className="flex flex-col items-start mt-4">
-                                <span className="text-red-500 text-sm">{captchaError}</span>
                                 <ReCAPTCHA
-                                    sitekey={"6LdRjxslAAAAAIP7BsNtsYgCvPM5RfNXjHGIzveJ"}
-                                    onChange={(val: any) => {
+                                    sitekey={process.env.NEXT_PUBLIC_captcha_sitekey ?? ""}
+                                    onChange={() => {
                                         handleCheckCaptcha();
                                         handleRecaptchaTimeout();
                                     }}
                                 />
+                                <span className="text-red-500 text-sm">{captchaError}</span>
                             </div>
 
                             <AppButton title='Create Account'

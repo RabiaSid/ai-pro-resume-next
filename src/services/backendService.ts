@@ -1,11 +1,9 @@
 import axios from "axios";
 import Cookies from "js-cookie";
 
-const BASE_URL = "https://app.aiproresume.com/api/v1";
-
 // Create an axios instance
 const api = axios.create({
-  baseURL: BASE_URL,
+  baseURL: process.env.NEXT_PUBLIC_new_Base_URL,
   headers: {
     "Content-Type": "application/json",
   },
