@@ -19,6 +19,9 @@ import { AppDispatch, RootState } from '@/redux/store'
 import { loginUser } from '@/redux/slices/authSlice'
 import Cookies from "js-cookie";
 import CustomAlert from '@/components/common/customAlerts/CustomAlert'
+import FBLogin from '@/components/socialLogins/facebookLogin'
+import LinkedInLogin from '@/components/socialLogins/linkedInLogin'
+import GoogleLogin from '@/components/socialLogins/googleLogin'
 
 export default function page() {
     const router = useRouter();
@@ -142,65 +145,19 @@ export default function page() {
                     </p>
                 </div>
 
-
                 {/* //Social Logins */}
                 <div className='grid space-y-3'>
-
                     <div>
-                        {/* //Social Logins */}
-                        <AppButton title='Sign-in  with Google'
-                            className="w-[100%] border border-solid text-gray-400 border-slate-300 px-2 py-2 rounded-md hover:bg-slate-800 hover:text-white ease-in transition-all flex justify-center items-center"
-                            childClassName="sm:tracking-widest relative"
-                            leftIcon={
-                                <>
-                                    <Image
-                                        src={GoogleLogo}
-                                        alt="My Image"
-                                        width={25}
-                                        height={25}
-                                        className="mr-2"
-                                    />
-                                </>
-                            }
-                        />
+                        <GoogleLogin />
                     </div>
 
                     <div>
-                        <AppButton title='Sign-in  with Facebook'
-                            className="w-[100%] border border-solid text-gray-400 border-slate-300 px-2 py-2 rounded-md hover:bg-slate-800 hover:text-white ease-in transition-all flex justify-center items-center"
-                            childClassName="sm:tracking-widest relative"
-                            leftIcon={
-                                <>
-                                    <Image
-                                        src={FacebookLogo}
-                                        alt="My Image"
-                                        width={25}
-                                        height={25}
-                                        className="mr-2"
-                                    />
-                                </>
-                            }
-                        />
+                        <FBLogin />
                     </div>
 
                     <div>
-                        <AppButton title='Sign-in  with LinkendIn'
-                            className="w-[100%] border border-solid text-gray-400 border-slate-300 px-2 py-2 rounded-md hover:bg-slate-800 hover:text-white ease-in transition-all flex justify-center items-center"
-                            childClassName="sm:tracking-widest relative"
-                            leftIcon={
-                                <>
-                                    <Image
-                                        src={LinkedInLogo}
-                                        alt="My Image"
-                                        width={25}
-                                        height={25}
-                                        className="mr-2"
-                                    />
-                                </>
-                            }
-                        />
+                        <LinkedInLogin />
                     </div>
-
                 </div>
 
                 <form onSubmit={handleSubmit(handleLoginSubmit)}>
