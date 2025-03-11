@@ -104,7 +104,7 @@ export default function ResumeTemplateSlider(props: propsType) {
 
 
     return (
-        <section className="container md:px-4 mx-auto">
+        <section className="container md:px-4 mx-auto relative">
             <div className="mt-2 px-2 flex justify-center items-center flex-wrap relative">
                 <H2 className="text-primaryBlue py-4">
                     {title}

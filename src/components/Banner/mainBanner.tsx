@@ -9,6 +9,9 @@ import shadeImage01 from "media/assets/pattrens/01.webp";
 import shadeImage02 from "media/assets/pattrens/02.webp";
 import shadeImage03 from "media/assets/pattrens/03.webp";
 import { H1, Lead } from "@/components/typography";
+import styles from "./mainBanner.module.css"
+import Link from "next/link";
+import bannerArrow from "media/assets/Banner_arrow_icon.webp";
 // import NinaButton from "@/components/NinaButton";
 
 interface ButtonProps {
@@ -26,6 +29,8 @@ type BannerProps = {
   title?: string | React.ReactNode;
   subtitle?: any;
   description?: string | React.ReactNode;
+  clickHere?: string;
+  link?: string;
   font2?: any;
   button1?: ButtonProps;
   button2?: ButtonProps;
@@ -39,6 +44,8 @@ export default function Banner(props: BannerProps) {
     title,
     subtitle,
     description,
+    clickHere,
+    link,
     font2,
     button1,
     button2,
@@ -48,24 +55,8 @@ export default function Banner(props: BannerProps) {
   const typedText = useTypedText(subtitle);
 
   return (
-    <section className="container md:px-4 mx-auto relative">
-      <div className="absolute w-full h-[600px] flex  justify-center items-center z-0 overflow-hidden">
-        <Image
-          src={shadeImage01}
-          alt="full shade image"
-          className="w-[800px] relative left-[900px]  top-[50px] "
-        />
-        <Image
-          src={shadeImage03}
-          alt="full shade image"
-          className="w-[1200px] relative left-[300px] top-[-150px] "
-        />
-        <Image
-          src={shadeImage02}
-          alt="full shade image"
-          className="w-[1200px] relative top-[50px]"
-        />
-      </div>
+    <section className={`container md:px-4 mx-auto relative overflow-hidden`}>
+      <div className="w-[350px] h-[310px] blur-[80px] bg-gradient-to-br from-primaryBlue to-primaryGreen animate-rotate rounded-[30%_70%_70%_30%/30%_30%_70%_70%] border border-red-500 top-28 right-52 absolute"></div>
       <div className="w-full py-5 my-10 bg-white ">
 
 
@@ -86,6 +77,28 @@ export default function Banner(props: BannerProps) {
             {
               description && <Lead className="text-gray-700 ">{description}</Lead>
             }
+
+            {/* <div className="flex flex-wrap items-center justify-start mt-6">
+              <h3 className="text-lg flex items-center">
+                Click here to check our
+                <span className="text-[#00caa5] lg:px-2 px-1">
+                  <Link href={link}>{clickHere}</Link>
+                </span>
+                <Image src={bannerArrow} className="ml-1" alt="arrow" />
+              </h3>
+            </div>
+
+            <div className="flex flex-col sm:flex-row items-center gap-6 mt-6">
+              <div>
+                <AppButton title={"IMPORT RESUME"} />
+              </div>
+            </div> */}
+
+            {/* <div className="flex flex-col sm:flex-row items-center gap-6 mt-6">
+              <div>
+                <AppButton title={"IMPORT RESUME"} />
+              </div>
+            </div> */}
 
             <div className="flex gap-4">
               {button1?.title &&
@@ -127,6 +140,7 @@ export default function Banner(props: BannerProps) {
           </div>
         </div>
       </div>
+
     </section>
   );
 }

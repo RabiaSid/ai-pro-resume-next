@@ -3,8 +3,13 @@ import axios from "axios";
 import AppButton from "../common/button/pages";
 import Image from "next/image";
 import FacebookLogo from "media/assets/fb_logo.webp";
+import { useDispatch } from "react-redux";
+import { AppDispatch } from "@/redux/store";
+import { clearSessionAndStorages } from "@/redux/slices/authSlice";
 
 const FBLogin = () => {
+    const dispatch = useDispatch<AppDispatch>();
+
     const responseFacebook = async (response: any) => {
         console.log("Sending data111111:", response);
 
@@ -21,15 +26,8 @@ const FBLogin = () => {
                     "https://backend.aiproresume.com/public/api/login/social-response",
                     userData
                 );
+                dispatch(clearSessionAndStorages());
                 console.log("Sending data333:", res.data);
-
-                // console.log("Login Successful:", res.data);
-
-                // if (res.data.data.is_admin === 0) {
-                //     console.log("User is not admin, navigating to dashboard...");
-                // } else {
-                //     console.log("User is admin, navigating to admin dashboard...");
-                // }
             } catch (error: any) {
                 console.error("Facebook login error:", error.response?.data?.message || error.message);
             }
@@ -38,7 +36,7 @@ const FBLogin = () => {
 
     return (
         <FacebookLogin
-            appId="1613981572684330"
+            appId={process.env.NEXT_PUBLIC_fb_app_id ?? ""}
             onSuccess={responseFacebook}
             onFail={(error) => console.error("Login Failed!", error)}
             render={({ onClick }) => (

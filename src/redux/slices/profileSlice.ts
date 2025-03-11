@@ -4,9 +4,6 @@ import { API } from '@/services/backendService';
 type profileState = {
     profile: any;
     loading: boolean;
-    error: string | null;
-    errorsList: Record<string, string[]>;
-    statusCode: null;
 }
 // Async thunk for login
 export const userProfile = createAsyncThunk("profile/userProfile", async (_, { rejectWithValue }) => {
@@ -24,9 +21,7 @@ const profileSlice = createSlice({
     name: "profile",
     initialState: {
         profile: null,
-        loading: false,
-        errorsList: {},
-        statusCode: null,
+        loading: false
     } as profileState,
     reducers: {
     },
@@ -34,7 +29,6 @@ const profileSlice = createSlice({
         builder
             .addCase(userProfile.pending, (state) => {
                 state.loading = true;
-                state.error = null;
             })
             .addCase(userProfile.fulfilled, (state, action) => {
                 state.loading = false;
@@ -42,7 +36,6 @@ const profileSlice = createSlice({
             })
             .addCase(userProfile.rejected, (state, action) => {
                 state.loading = false;
-                state.error = action.error?.message ? "Invalid Credentials" : "";
             })
 
     },

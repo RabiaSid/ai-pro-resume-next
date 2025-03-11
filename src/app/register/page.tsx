@@ -19,11 +19,13 @@ import { AppDispatch, RootState } from '@/redux/store'
 import GoogleLogin from '@/components/socialLogins/googleLogin'
 import FBLogin from '@/components/socialLogins/facebookLogin'
 import LinkedInLogin from '@/components/socialLogins/linkedInLogin'
+import { useCountries } from '@/redux/slices/reuseableSlice'
 
 export default function page() {
     const router = useRouter();
     const dispatch = useDispatch<AppDispatch>();
-    const { loading, errorsList, token } = useSelector((state: RootState) => state.auth);
+    const { loading, errorsList } = useSelector((state: RootState) => state.auth);
+    const { countries } = useSelector((state: RootState) => state.reuseable)
     const [captchaError, setCaptchaError] = useState("");
     const [verified, setVerified] = useState<any>(false);
     const [showPassword, setShowPassword] = useState(false);
@@ -31,18 +33,7 @@ export default function page() {
 
     const [showAlert, setShowAlert] = useState(false);
     const [showErrorMessage, setShowErrorMessage] = useState([]);
-
-    const staticOptions = [
-        { id: "us", name: "United States" },
-        { id: "ca", name: "Canada" },
-        { id: "uk", name: "United Kingdom" },
-        { id: "au", name: "Australia" },
-        { id: "de", name: "Germany" },
-        { id: "fr", name: "France" },
-        { id: "in", name: "India" },
-        { id: "jp", name: "Japan" },
-        { id: "cn", name: "China" },
-    ];
+    const [allCountries, setAllCountries] = useState([]);
 
     const {
         handleSubmit,
@@ -78,14 +69,19 @@ export default function page() {
     const handleClick = () => {
         console.log("Creatimg account");
     };
-    const handleRegister = async (formData: any) => {
+    const handleRegisterSubmit = async (formData: any) => {
+        if (!verified) {
+            setCaptchaError("Please verify the ReCAPTCHA.");
+            return
+        }
+
         const credentials = {
             name: formData?.name,
             email: formData?.email,
             role: formData?.role,
             password: formData?.password,
             confirm_password: formData?.confirm_password,
-            country_id: 2,
+            country_id: formData?.country_id,
             contact: formData?.contact,
             referred_by: formData?.referred_by,
         }
@@ -99,20 +95,6 @@ export default function page() {
             setShowAlert(true)
             console.error("Registering failed:", error);
         })
-
-        // try {
-        //     await dispatch(registerUser(credentials)).then((response) => {
-        //         console.log(response, "response");
-        //         if (response?.payload?.statusCode == 200) {
-        //             router.push('/login')
-        //         }
-        //     }).catch((err) => {
-        //         console.log(err, "Error while registering!");
-        //     })
-        // } catch (error) {
-        //     setShowAlert(true)
-        //     console.error("Registering failed:", error);
-        // }
     }
     useEffect(() => {
         if (errorsList && typeof errorsList === 'object') {
@@ -122,6 +104,15 @@ export default function page() {
         }
     }, [errorsList]);
 
+    useEffect(() => {
+        dispatch(useCountries());
+    }, [dispatch]);
+
+    useEffect(() => {
+        if (countries && countries.length > 0) {
+            setAllCountries(countries);
+        }
+    }, [countries]);
     return (
         <>
             <Ads />
@@ -157,7 +148,7 @@ export default function page() {
                 </div>
 
                 <div>
-                    <form onSubmit={handleSubmit(handleRegister)}
+                    <form onSubmit={handleSubmit(handleRegisterSubmit)}
                     >
                         {/* Name */}
                         <div className="flex flex-col">
@@ -313,7 +304,7 @@ export default function page() {
                                         className="w-full"
                                         error={!!errors.country_id}
                                         errorMessage={errors?.country_id?.message as string}
-                                        options={staticOptions}
+                                        options={allCountries}
                                     />)}
                             />
                         </div>
@@ -335,14 +326,14 @@ export default function page() {
                         </div>
                         <div>
                             <div className="flex flex-col items-start mt-4">
-                                <span className="text-red-500 text-sm">{captchaError}</span>
                                 <ReCAPTCHA
-                                    sitekey={"6LdRjxslAAAAAIP7BsNtsYgCvPM5RfNXjHGIzveJ"}
-                                    onChange={(val: any) => {
+                                    sitekey={process.env.NEXT_PUBLIC_captcha_sitekey ?? ""}
+                                    onChange={() => {
                                         handleCheckCaptcha();
                                         handleRecaptchaTimeout();
                                     }}
                                 />
+                                <span className="text-red-500 text-sm">{captchaError}</span>
                             </div>
 
                             <AppButton title='Create Account'

@@ -30,7 +30,7 @@ export default function AppInputField({
     ...rest
 }: PropsType) {
     return (
-        <div className={`w-72 ${className}`}>
+        <div className={`w-72 mt-2 ${className}`}>
             <div className={`relative flex ${styles.floatLabelInput}`}>
                 {leftIcon && <span className="mr-2">{leftIcon}</span>}
                 <input
@@ -40,17 +40,18 @@ export default function AppInputField({
                     value={value}
                     readOnly={readOnly}
                     onChange={onChange}
-                    className={`peer ${readOnly ? 'text-primaryGray cursor-not-allowed mb-[-10px] focus:border-primaryBlue' : 'focus:text-primaryBlue focus:outline-primaryBlue'}
-                        w-full focus:shadow-outline border rounded-md py-3 px-3 block appearance-none leading-normal transition-all duration-200
-                        ${error ? 'border-red-500 focus:border-red-500 focus:outline-red-500' : 'border-slate-300 focus:border-primaryBlue'}
-                    `}
+                    className={`peer w-full border rounded-md py-3 px-3 block appearance-none leading-normal transition-all duration-200
+        ${readOnly ? 'text-primaryGray cursor-not-allowed focus:border-primaryBlue' : 'focus:text-primaryBlue focus:outline-primaryBlue'}
+        ${error ? 'border-red-500 focus:border-red-500 focus:outline-red-500' : 'border-slate-300 focus:border-primaryBlue'}
+    `}
                     {...rest}
                 />
                 {rightIcon && <span className="ml-2">{rightIcon}</span>}
                 <label
                     htmlFor="input-field"
-                    className={`absolute bg-none bg-transparent top-3 left-3 pointer-events-none transition-all duration-200 px-2
-                        ${error ? 'text-red-500' : 'text-gray-400 peer-focus:text-primaryBlue'} `}
+                    className={`absolute bg-transparent top-3 left-3 pointer-events-none transition-all duration-200 px-2
+        ${error ? 'text-red-500' : 'text-gray-400 peer-placeholder-shown:text-gray-400 peer-focus:text-primaryBlue'}
+    `}
                 >
                     {label}
                 </label>
