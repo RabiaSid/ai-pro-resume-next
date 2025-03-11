@@ -160,18 +160,12 @@ export default function Account() {
                   />
                 )} */}
 
-              <p
-                className="text-[#343434] text-lg font-Lexend font-bold text-center mt-4"
-              >
+              <p className="text-[#343434] text-lg font-Lexend font-bold text-center mt-4">
                 Your Job Title
-
               </p>
               <div className='divide-y-[0.5px]'>
                 {sections.map((section: any, index: any) => (
-                  <div
-                    key={index}
-                    className="py-4 mx-4 font-Lexend"
-                  >
+                  <div key={index} className="py-4 mx-4 font-Lexend">
                     <div className="flex justify-between items-center text-[#A7A7A7] mb-2">
                       {section.title}:
                       <FaPencil className="text-[#A7A7A7] hover:text-[#1877F2] cursor-pointer" onClick={() => setModelbox(true)} />
@@ -202,7 +196,7 @@ export default function Account() {
               </div>
             </div>
           </div>
-          <div className="px-2 xl:px-16  divide-y-[0.5px]">
+          <div className="px-5 xl:px-16  divide-y-[0.5px]">
             <div className="py-4 ">
               <div className='font-Lexend text-[#0072b1] text-lg font-bold mb-2'>
                 Basic Details:
@@ -225,7 +219,7 @@ export default function Account() {
             <ProfileSection profileCategory={LanguagesCategoryData} />
             <ProfileSection profileCategory={ReferencesCategoryData} />
           </div>
-          <div className="mt-4 ">
+          <div className="mt-4  px-5 xl:px-0">
             <>
               <p className="font-Lexend text-4xl font-bold text-[#1877F2]">
                 {70}%

@@ -12,7 +12,7 @@ const LinkedInLogin = () => {
     const dispatch = useDispatch<AppDispatch>();
 
     const clientId = process.env.NEXT_PUBLIC_linkedIn_app_id;
-    const redirectUri = "http://localhost:3000/login";
+    const redirectUri = "https://aiproresume.com/login";
     const scope = "openid profile email";
     const state = "foobar";
 

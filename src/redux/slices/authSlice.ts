@@ -10,6 +10,7 @@ interface AuthState {
   errorsList: Record<string, string[]>;
   statusCode: null;
 }
+
 // Async thunk for login
 export const loginUser = createAsyncThunk("auth/login", async (credentials: { email: string; password: string }, { rejectWithValue }) => {
   try {
@@ -22,9 +23,7 @@ export const loginUser = createAsyncThunk("auth/login", async (credentials: { em
 );
 
 // Async thunk for register
-export const registerUser = createAsyncThunk(
-  "auth/register",
-  async (userData: { name: string; email: string; password: string, confirm_password: string, country_id: number, contact: number, referred_by: string }, { rejectWithValue }) => {
+export const registerUser = createAsyncThunk( "auth/register", async (userData: { name: string; email: string; password: string, confirm_password: string, country_id: number, contact: number, referred_by: string }, { rejectWithValue }) => {
     try {
       const response = await authService.register(userData);
       return response;
@@ -35,10 +34,9 @@ export const registerUser = createAsyncThunk(
     }
   }
 );
+
 // Async thunk for Forget Password
-export const forgetPassword = createAsyncThunk(
-  "auth/forgetPassword",
-  async (email: string, { rejectWithValue }) => {
+export const forgetPassword = createAsyncThunk( "auth/forgetPassword",async (email: string, { rejectWithValue }) => {
     try {
       const response = await authService.forgetPassword(email);
       return response;
@@ -50,7 +48,7 @@ export const forgetPassword = createAsyncThunk(
   }
 );
 
-// Async thunk for Forget Password
+// Async thunk for Update Password
 export const UpdatePassword = createAsyncThunk(
   "auth/UpdatePassword",
   async (userData: { verify_code: string; password: string, password_confirmation : string, email: string}, { rejectWithValue }) => {
@@ -64,7 +62,6 @@ export const UpdatePassword = createAsyncThunk(
     }
   }
 );
-
 
 // Async thunk for logout
 export const logoutUser = createAsyncThunk("auth/logout", async (_, { dispatch }) => {
@@ -124,7 +121,7 @@ const authSlice = createSlice({
         state.token = action.payload.response.data.token; 
          Cookies.set("userToken", action.payload.response.data.token);
          Cookies.set("userData", JSON.stringify(action.payload.response.data.user));
-    })   
+      })   
       .addCase(loginUser.rejected, (state, action) => {
         state.loading = false;
         state.error = action.error?.message ? "Invalid Credentials" : "";

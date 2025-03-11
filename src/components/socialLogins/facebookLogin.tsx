@@ -26,8 +26,8 @@ const FBLogin = () => {
                     "https://backend.aiproresume.com/public/api/login/social-response",
                     userData
                 );
-                dispatch(clearSessionAndStorages());
-                console.log("Sending data333:", res.data);
+                // dispatch(clearSessionAndStorages());
+                console.log("Sending data333:", res);
             } catch (error: any) {
                 console.error("Facebook login error:", error.response?.data?.message || error.message);
             }
