@@ -16,7 +16,6 @@ export const useCountries = createAsyncThunk("countries/useCountries", async (_,
 }
 );
 
-
 const reuseableSlice = createSlice({
     name: "countries",
     initialState: {

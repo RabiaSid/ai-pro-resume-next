@@ -12,7 +12,7 @@ import { CgClose } from 'react-icons/cg';
 import SunEditor from 'suneditor-react';
 import AppButton from '@/components/common/button/pages';
 import ProfileSection from '@/components/profileSection/profileSection';
-import { userProfile } from '@/redux/slices/profileSlice';
+import { userProfile, userSoftSkills, userTechnicalSkills } from '@/redux/slices/profileSlice';
 import { useDispatch, useSelector } from 'react-redux';
 import { AppDispatch, RootState } from '@/redux/store'
 import { AwardsCategoryData, CertificatesCategoryData, EducationCategoryData, ExperienceCategoryData, LanguagesCategoryData, ReferencesCategoryData } from './data';
@@ -20,7 +20,7 @@ import { AwardsCategoryData, CertificatesCategoryData, EducationCategoryData, Ex
 
 export default function Account() {
   const dispatch = useDispatch<AppDispatch>();
-  const { loading, profile } = useSelector((state: RootState) => state.profile);
+  const { loading, profile, soft_skills, technical_skills } = useSelector((state: RootState) => state.profile);
   const { token } = useSelector((state: RootState) => state.auth);
 
   const [modelbox, setModelbox] = useState<boolean>(false);
@@ -37,10 +37,12 @@ export default function Account() {
 
   console.log(profile, "profile =======================>")
 
-
   useEffect(() => {
     if (token) {
       dispatch(userProfile());
+      dispatch(userTechnicalSkills())
+      dispatch(userSoftSkills())
+
     } else {
       return
     }
@@ -48,23 +50,22 @@ export default function Account() {
 
   const userDetails = [
     { label: "Name", value: profile?.name },
-    { label: "Job Position", value: "Your Job Title" },
-    { label: "Years of Experience", value: "5 Years" },
-    { label: "Mobile Number", value: "+03152300393" },
-    { label: "Contact Number", value: "+03152300393" },
-    { label: "Website / Linkedin URL", value: "https://siraj.hassni.me" },
-    { label: "Country", value: "Pakistan" },
-    { label: "State", value: "Sindh" },
-    { label: "City", value: "Karachi" },
-    { label: "Street Address", value: "DHA Phase 7 ext" },
-    { label: "Postal Code", value: "92100" }
+    { label: "Job Position", value: profile?.job_position ?? "--" },
+    { label: "Years of Experience", value: profile?.experiences_count ?? "--" },
+    { label: "Mobile Number", value: profile?.mobile_number ?? "--" },
+    { label: "Contact Number", value: profile?.contact ?? "--" },
+    { label: "Website / Linkedin URL", value: profile?.website ?? "https://siraj.hassni.me" },
+    { label: "Country", value: profile?.country?.name ?? '--' },
+    { label: "State", value: profile?.country?.state ?? '--' },
+    { label: "City", value: profile?.country?.city ?? '--' },
+    { label: "Street Address", value: profile?.address ?? '--' },
+    { label: "Postal Code", value: profile?.postal_code ?? '--' }
   ];
 
   const sections = [
     {
       title: "Summary",
-      content:
-        "I am a passionate frontend developer who enjoys building user-friendly and responsive web applications. With a keen eye for detail and a strong understanding of UI/UX principles, I create seamless digital experiences.",
+      content: profile?.details?.summary ?? '--',
     },
     {
       title: "Technical Skills",
@@ -74,8 +75,14 @@ export default function Account() {
       title: "Soft Skills",
       items: ["Communication", "Problem Solving", "Teamwork", "Adaptability"],
     },
-    { title: "Email", content: "siraajhassni@gmail.com" },
-    { title: "Password", content: "*******" },
+    {
+      title: "Email",
+      content: profile?.email ?? '--'
+    },
+    {
+      title: "Password",
+      content: "*******"
+    },
   ];
 
   useEffect(() => {
@@ -87,15 +94,9 @@ export default function Account() {
         setModelbox(false);
       }
     };
-
     document.addEventListener("mousedown", handleClickOutside);
-    return () => {
-      document.removeEventListener("mousedown", handleClickOutside);
-    };
-  }, []);
-
-  const closeModal = () => setModelbox(false);
-
+    return () => { document.removeEventListener("mousedown", handleClickOutside) };
+  }, [])
 
   return (
     <>
@@ -160,18 +161,12 @@ export default function Account() {
                   />
                 )} */}
 
-              <p
-                className="text-[#343434] text-lg font-Lexend font-bold text-center mt-4"
-              >
+              <p className="text-[#343434] text-lg font-Lexend font-bold text-center mt-4">
                 Your Job Title
-
               </p>
               <div className='divide-y-[0.5px]'>
                 {sections.map((section: any, index: any) => (
-                  <div
-                    key={index}
-                    className="py-4 mx-4 font-Lexend"
-                  >
+                  <div key={index} className="py-4 mx-4 font-Lexend">
                     <div className="flex justify-between items-center text-[#A7A7A7] mb-2">
                       {section.title}:
                       <FaPencil className="text-[#A7A7A7] hover:text-[#1877F2] cursor-pointer" onClick={() => setModelbox(true)} />
@@ -202,7 +197,7 @@ export default function Account() {
               </div>
             </div>
           </div>
-          <div className="px-2 xl:px-16  divide-y-[0.5px]">
+          <div className="px-5 xl:px-16  divide-y-[0.5px]">
             <div className="py-4 ">
               <div className='font-Lexend text-[#0072b1] text-lg font-bold mb-2'>
                 Basic Details:
@@ -225,7 +220,7 @@ export default function Account() {
             <ProfileSection profileCategory={LanguagesCategoryData} />
             <ProfileSection profileCategory={ReferencesCategoryData} />
           </div>
-          <div className="mt-4 ">
+          <div className="mt-4  px-5 xl:px-0">
             <>
               <p className="font-Lexend text-4xl font-bold text-[#1877F2]">
                 {70}%
