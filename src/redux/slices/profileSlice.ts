@@ -8,7 +8,7 @@ type profileState = {
 // Async thunk for login
 export const userProfile = createAsyncThunk("profile/userProfile", async (_, { rejectWithValue }) => {
     try {
-        const response = await API.get("/profile");
+        const response = await API.get("user/profile");
         return response;
     } catch (error: any) {
         return rejectWithValue(error.message);

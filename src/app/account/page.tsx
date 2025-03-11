@@ -48,23 +48,22 @@ export default function Account() {
 
   const userDetails = [
     { label: "Name", value: profile?.name },
-    { label: "Job Position", value: "Your Job Title" },
-    { label: "Years of Experience", value: "5 Years" },
-    { label: "Mobile Number", value: "+03152300393" },
-    { label: "Contact Number", value: "+03152300393" },
-    { label: "Website / Linkedin URL", value: "https://siraj.hassni.me" },
-    { label: "Country", value: "Pakistan" },
-    { label: "State", value: "Sindh" },
-    { label: "City", value: "Karachi" },
-    { label: "Street Address", value: "DHA Phase 7 ext" },
-    { label: "Postal Code", value: "92100" }
+    { label: "Job Position", value: profile?.job_position ?? "--" },
+    { label: "Years of Experience", value: profile?.experiences_count ?? "--" },
+    { label: "Mobile Number", value: profile?.mobile_number ?? "--" },
+    { label: "Contact Number", value: profile?.contact ?? "--" },
+    { label: "Website / Linkedin URL", value: profile?.website ?? "https://siraj.hassni.me" },
+    { label: "Country", value: profile?.country?.name ?? '--' },
+    { label: "State", value: profile?.country?.state ?? '--' },
+    { label: "City", value: profile?.country?.city ?? '--' },
+    { label: "Street Address", value: profile?.address ?? '--' },
+    { label: "Postal Code", value: profile?.postal_code ?? '--' }
   ];
 
   const sections = [
     {
       title: "Summary",
-      content:
-        "I am a passionate frontend developer who enjoys building user-friendly and responsive web applications. With a keen eye for detail and a strong understanding of UI/UX principles, I create seamless digital experiences.",
+      content: profile?.details?.summary ?? '--',
     },
     {
       title: "Technical Skills",
@@ -74,8 +73,14 @@ export default function Account() {
       title: "Soft Skills",
       items: ["Communication", "Problem Solving", "Teamwork", "Adaptability"],
     },
-    { title: "Email", content: "siraajhassni@gmail.com" },
-    { title: "Password", content: "*******" },
+    {
+      title: "Email",
+      content: profile?.email ?? '--'
+    },
+    {
+      title: "Password",
+      content: "*******"
+    },
   ];
 
   useEffect(() => {
@@ -87,15 +92,9 @@ export default function Account() {
         setModelbox(false);
       }
     };
-
     document.addEventListener("mousedown", handleClickOutside);
-    return () => {
-      document.removeEventListener("mousedown", handleClickOutside);
-    };
-  }, []);
-
-  const closeModal = () => setModelbox(false);
-
+    return () => { document.removeEventListener("mousedown", handleClickOutside) };
+  }, [])
 
   return (
     <>

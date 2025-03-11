@@ -5,14 +5,12 @@ import Image from "next/image";
 import FacebookLogo from "media/assets/fb_logo.webp";
 import { useDispatch } from "react-redux";
 import { AppDispatch } from "@/redux/store";
-import { clearSessionAndStorages } from "@/redux/slices/authSlice";
+import { clearSessionAndStorages, handleSetToken, handleSetUser } from "@/redux/slices/authSlice";
 
 const FBLogin = () => {
     const dispatch = useDispatch<AppDispatch>();
 
     const responseFacebook = async (response: any) => {
-        console.log("Sending data111111:", response);
-
         if (response.name) {
             const userData = {
                 name: response.name,
@@ -20,14 +18,13 @@ const FBLogin = () => {
                 provider: "facebook",
                 provider_id: response.id,
             };
-            console.log("Sending data2222:", userData);
             try {
-                const res = await axios.post(
-                    "https://backend.aiproresume.com/public/api/login/social-response",
-                    userData
-                );
-                // dispatch(clearSessionAndStorages());
+                const res = await axios.post(`${process.env.NEXT_PUBLIC_old_Base_URL}/login/social-response`, userData);
                 console.log("Sending data333:", res);
+                console.log("Sending data3333333:", res.data);
+                dispatch(clearSessionAndStorages());
+                dispatch(handleSetUser(response?.data?.data));
+                dispatch(handleSetToken(response?.data?.data?.token));
             } catch (error: any) {
                 console.error("Facebook login error:", error.response?.data?.message || error.message);
             }

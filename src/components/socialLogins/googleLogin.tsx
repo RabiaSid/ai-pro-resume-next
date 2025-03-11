@@ -12,24 +12,18 @@ const GoogleLogin = () => {
     const dispatch = useDispatch<AppDispatch>();
     const router = useRouter();
     const onSuccess = async (res: any) => {
-        console.log(res, "OnSuccess 11");
 
         try {
             const userInfo = await axios.get(`https://www.googleapis.com/oauth2/v3/userinfo`, {
                 headers: { Authorization: `Bearer ${res.access_token}` },
             });
-
-            console.log(userInfo, "OnSuccess 22");
             const article = {
                 name: userInfo.data.name,
                 email: userInfo.data.email,
                 provider: "google",
                 provider_id: userInfo.data.sub,
             };
-            console.log(article, "OnSuccess 33");
-
             const response = await axios.post("https://backend.aiproresume.com/public/api/login/social-response", article);
-            console.log(response, "OnSuccess 44");
             dispatch(clearSessionAndStorages());
             dispatch(handleSetUser(response?.data?.data));
             dispatch(handleSetToken(response?.data?.data?.token));
