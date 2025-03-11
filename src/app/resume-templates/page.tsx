@@ -2,6 +2,9 @@ import MainBanner from "@/components/Banner/mainBanner";
 import React from "react";
 import ResumeTemplateBanner from "@/components/Banner/ResumeTemplateBanner/ResumeTemplateBanner";
 import Search from "@/components/resume-templates/Search";
+import Templates from "@/components/resume-templates/Templates";
+import ResumeContent from "@/components/resume-templates/ResumeContent";
+import { ResumeTemplateData } from "./data";
 
 const ResumeTemplates = () => {
   return (
@@ -30,6 +33,8 @@ const ResumeTemplates = () => {
         link={"/cover_letter_templates"}
       />
       <Search />
+      <Templates />
+      <ResumeContent section={ResumeTemplateData} />
     </>
   );
 };
