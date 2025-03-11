@@ -12,7 +12,7 @@ import { CgClose } from 'react-icons/cg';
 import SunEditor from 'suneditor-react';
 import AppButton from '@/components/common/button/pages';
 import ProfileSection from '@/components/profileSection/profileSection';
-import { userProfile } from '@/redux/slices/profileSlice';
+import { userProfile, userSoftSkills, userTechnicalSkills } from '@/redux/slices/profileSlice';
 import { useDispatch, useSelector } from 'react-redux';
 import { AppDispatch, RootState } from '@/redux/store'
 import { AwardsCategoryData, CertificatesCategoryData, EducationCategoryData, ExperienceCategoryData, LanguagesCategoryData, ReferencesCategoryData } from './data';
@@ -20,7 +20,7 @@ import { AwardsCategoryData, CertificatesCategoryData, EducationCategoryData, Ex
 
 export default function Account() {
   const dispatch = useDispatch<AppDispatch>();
-  const { loading, profile } = useSelector((state: RootState) => state.profile);
+  const { loading, profile, soft_skills, technical_skills } = useSelector((state: RootState) => state.profile);
   const { token } = useSelector((state: RootState) => state.auth);
 
   const [modelbox, setModelbox] = useState<boolean>(false);
@@ -37,10 +37,12 @@ export default function Account() {
 
   console.log(profile, "profile =======================>")
 
-
   useEffect(() => {
     if (token) {
       dispatch(userProfile());
+      dispatch(userTechnicalSkills())
+      dispatch(userSoftSkills())
+
     } else {
       return
     }
