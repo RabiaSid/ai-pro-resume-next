@@ -23,15 +23,19 @@ const FillAllDetails = [
   "Custom Section: If necessary, include any additional information relevant to your career.",
 ];
 
-const reviewServiceSteps = [
-  "Log in to your account and navigate to My Services from the header.",
-  "Select the professional resume review or cover letter review service you want.",
-  "Click on add to cart, and the checkout option will appear.",
-  "Select the checkout button, and you will head to the checkout page.",
-  "Upload the resume or cover letter you want our experts to review.",
-  "Complete the payment process to confirm your order. You can purchase through coins and by buying the most popular or premium package.",
-  "Within 2 days, you will receive an email with detailed suggestions and improvements for your resume or cover letter.",
-  "You can also access the reviewed document from the dashboard under My Services, where you will find a download option.",
+const UniqueFeatures = [
+  "Download your resume in PDF format.",
+  "Find matching cover letter templates to pair perfectly with your resume. You will find that in our professional cover letter template sections.",
+  "Work on the go with our mobile-friendly tools.",
+  "Save time with pre-made templates for fields like",
+  "Creative & Cultural Fields",
+  "Education & Learning",
+  "Engineering & Scientific",
+  "Food Service",
+  "Information Technology (IT)",
+  "Maintenance & Repair",
+  "Medicine Healthcare & Wellbeing",
+  "Office & Administrative",
 ];
 
 export const ResumeTemplateData = [
@@ -82,7 +86,6 @@ export const ResumeTemplateData = [
     title: <> Fill all the details in the following sections:</>,
     steps: FillAllDetails,
   },
-
   {
     title: "Switch Templates",
     description: (
@@ -97,5 +100,9 @@ export const ResumeTemplateData = [
         with a perfect resume template in no time.
       </>
     ),
+  },
+  {
+    title: <>Our Unique Features That Fit Your Needs</>,
+    steps: UniqueFeatures,
   },
 ];

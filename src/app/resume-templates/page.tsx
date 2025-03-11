@@ -5,6 +5,8 @@ import Search from "@/components/resume-templates/Search";
 import Templates from "@/components/resume-templates/Templates";
 import ResumeContent from "@/components/resume-templates/ResumeContent";
 import { ResumeTemplateData } from "./data";
+import OurFaqs from "@/components/Faq/faq";
+import Ads from "@/components/ads/Ads";
 
 const ResumeTemplates = () => {
   return (
@@ -35,6 +37,8 @@ const ResumeTemplates = () => {
       <Search />
       <Templates />
       <ResumeContent section={ResumeTemplateData} />
+      <OurFaqs />
+      <Ads />
     </>
   );
 };

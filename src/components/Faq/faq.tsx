@@ -52,6 +52,16 @@ const dummyFaqs: Faq[] = [
     answer: "You can install it using 'npx create-next-app@latest'.",
     page: "Pricing",
   },
+  {
+    question: "What is Next.js?",
+    answer: "Next.js is a React framework for production.",
+    page: "Resume Template",
+  },
+  {
+    question: "How to install Next.js?",
+    answer: "You can install it using 'npx create-next-app@latest'.",
+    page: "Resume Template",
+  },
 ];
 
 export default function OurFaqs() {
@@ -140,15 +150,17 @@ export default function OurFaqs() {
                 >
                   <button
                     onClick={() => handleChange(i)}
-                    className={`accordion-toggle group inline-flex items-center justify-between font-normal leading-8 w-full transition duration-500 text-lg md:text-xl font-Lexend ${expanded === i ? "text-[#0072b180]" : "text-[#0072b1]"
-                      }`}
+                    className={`accordion-toggle group inline-flex items-center justify-between font-normal leading-8 w-full transition duration-500 text-lg md:text-xl font-Lexend ${
+                      expanded === i ? "text-[#0072b180]" : "text-[#0072b1]"
+                    }`}
                   >
                     <h5 className="text-left pr-3 w-[90%]">{faq.question}</h5>
                     <svg
-                      className={`transition duration-500  ${expanded === i
+                      className={`transition duration-500  ${
+                        expanded === i
                           ? "rotate-180 text-[#0072b180]"
                           : "text-[#0072b1]"
-                        }`}
+                      }`}
                       width="22"
                       height="22"
                       viewBox="0 0 22 22"

@@ -36,28 +36,30 @@ const Ads = () => {
 
   return (
     <>
-      {ads
-        .filter((ad) => ad.slug === "career-top")
-        .map((ad) => (
-          <div key={ad.id} className="mb-5">
-            {ad.is_script === 0 ? (
-              <a href={ad.ad_url} target="_blank" rel="noopener noreferrer">
-                <Image
-                  className="w-[100px] h-[100px]"
-                  src={ad.image || "/placeholder.png"}
-                  alt={`Ad ${ad.id}`}
-                  width={800}
-                  height={400}
-                  layout="responsive"
-                />
-              </a>
-            ) : (
-              <div className="p-4 bg-gray-100">
-                <p className="text-xl font-semibold mb-2">{ad.ad_script}</p>
-              </div>
-            )}
-          </div>
-        ))}
+      <div className="my-4">
+        {ads
+          .filter((ad) => ad.slug === "career-top")
+          .map((ad) => (
+            <div key={ad.id} className="mb-5">
+              {ad.is_script === 0 ? (
+                <a href={ad.ad_url} target="_blank" rel="noopener noreferrer">
+                  <Image
+                    className="w-[100px] h-[100px]"
+                    src={ad.image || "/placeholder.png"}
+                    alt={`Ad ${ad.id}`}
+                    width={800}
+                    height={400}
+                    layout="responsive"
+                  />
+                </a>
+              ) : (
+                <div className="p-4 bg-gray-100">
+                  <p className="text-xl font-semibold mb-2">{ad.ad_script}</p>
+                </div>
+              )}
+            </div>
+          ))}
+      </div>
     </>
   );
 };
