@@ -204,7 +204,7 @@ export default function Account() {
               </div>
               <div className="flex flex-wrap items-center justify-between">
                 {userDetails.map((detail, index) => (
-                  <div key={index} className="mb-4 w-[30%]">
+                  <div key={index} className="mb-4 w-[50%] sm:w-[30%]">
                     <label className="font-Lexend text-[#A7A7A7]">
                       {detail.label}
                     </label>
