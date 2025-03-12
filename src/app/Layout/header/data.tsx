@@ -36,7 +36,7 @@ export const menuItems: MenuItem[] = [
     name: "Resume",
     submenu: [
       { name: "Resume Templates", path: "/resume-templates" },
-      { name: "Resume Examples", path: "/" },
+      { name: "Resume Examples", path: "/resume-examples" },
       { name: "Resume format", path: "/" },
       { name: "How to write a resume", path: "/" },
     ],

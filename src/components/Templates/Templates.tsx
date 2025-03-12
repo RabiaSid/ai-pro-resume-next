@@ -15,7 +15,7 @@ import template_9 from "media/assets/resume_template_images/template_9.webp";
 import template_10 from "media/assets/resume_template_images/template_10.webp";
 import template_11 from "media/assets/resume_template_images/template_11.webp";
 import template_12 from "media/assets/resume_template_images/template_12.webp";
-import "./template.css"
+import "./template.css";
 
 const Templates = () => {
   const [isHovered, setIsHovered] = useState<any>(false);
@@ -236,26 +236,34 @@ const Templates = () => {
               <div
                 className="relative flex justify-center items-center px-4 cursor-pointer flex-wrap mt-10 transition-all duration-700"
                 key={index}
-                onMouseEnter={() => setIsHovered(template.id)}
-                onMouseLeave={() => setIsHovered(null)}
               >
                 <div className="w-max lg:m-4">
-                  <div className={`relative transition-all duration-700  ${isHovered === template.id ? "scale-105" : "scale-100"}`}>
+                  <div
+                    className={`relative transition-all duration-700  ${
+                      isHovered === template.id ? "scale-105" : "scale-100"
+                    }`}
+                    onMouseEnter={() => setIsHovered(template.id)}
+                    onMouseLeave={() => setIsHovered(null)}
+                  >
                     {/* Eye Icon with Count */}
                     <div className="bg-gradient-to-r from-[#01B2AC]/80 to-[#00caa5]/80 px-2 h-6 right-4 top-4 rounded-sm gap-2 flex items-center justify-center absolute z-50">
                       <IoIosEye color="#fff" size={22} />
-                      <span className="text-sm text-white font-medium">100</span>
+                      <span className="text-sm text-white font-medium">
+                        100
+                      </span>
                     </div>
 
                     {/* Premium Badge */}
                     {template.is_paid === 1 && (
                       <div
-                        className={`absolute left-[-35px] top-[24px] w-[150px] h-8 text-white -rotate-45 flex justify-center items-center z-50 transition-all duration-700 ${isHovered === template.id ? "scale-110" : "scale-100"
-                          }`}
+                        className={`absolute left-[-35px] top-[24px] w-[150px] h-8 text-white -rotate-45 flex justify-center items-center z-50 transition-all duration-700 ${
+                          isHovered === template.id ? "scale-110" : "scale-100"
+                        }`}
                         style={{
                           background:
                             "linear-gradient(to right, #01B2AC, #0072B1)",
-                          clipPath: "polygon(20% 0%, 80% 0%, 100% 100%, 0% 100%)",
+                          clipPath:
+                            "polygon(20% 0%, 80% 0%, 100% 100%, 0% 100%)",
                         }}
                       >
                         <span>Premium</span>
@@ -266,8 +274,11 @@ const Templates = () => {
                     <div className="relative">
                       {/* Border Animation */}
                       <div
-                        className={`absolute border border-solid border-[#01B2AC] rounded-2xl w-full h-full z-10 transition-all duration-700 ${isHovered === template.id ? "-bottom-2 -right-2 scale-105" : "bottom-0 right-0 scale-100"
-                          }`}
+                        className={`absolute border border-solid border-[#01B2AC] rounded-2xl w-full h-full z-10 transition-all duration-700 ${
+                          isHovered === template.id
+                            ? "-bottom-2 -right-2 scale-105"
+                            : "bottom-0 right-0 scale-100"
+                        }`}
                       ></div>
 
                       {/* Image */}
@@ -276,19 +287,24 @@ const Templates = () => {
                         alt="Template Image"
                         width={300}
                         height={300}
-                        className={`shadow-lg rounded-xl w-full z-20 relative border transition-transform duration-700 ${isHovered === template.id ? "scale-105" : "scale-100"
-                          }`}
+                        className={`shadow-lg rounded-xl w-full z-20 relative border transition-transform duration-700 ${
+                          isHovered === template.id ? "scale-105" : "scale-100"
+                        }`}
                       />
 
                       <div
-                        className={`absolute box2 shadow-lg left-20  transition-transform duration-700  ${isHovered === template.id ? "bottom-56 z-30" : "z-10 bottom-0"} rounded-lg py-2 cursor-pointer JosefinSans text-md bg-[#01B2AC] hover:bg-[#0072b1] text-white w-[60%] flex justify-center items-center flex-wrap`}
+                        className={`absolute box2 shadow-lg left-20  transition-transform duration-700  ${
+                          isHovered === template.id
+                            ? "bottom-56 z-30"
+                            : "z-10 bottom-0"
+                        } rounded-lg py-2 cursor-pointer JosefinSans text-md bg-[#01B2AC] hover:bg-[#0072b1] text-white w-[60%] flex justify-center items-center flex-wrap`}
                       >
-                        Pay This Template
+                        Use This Template
                       </div>
                     </div>
 
                     {/* Template Name */}
-                    <p className="duration-300 transition-all text-md text-black text-center mt-4">
+                    <p className="duration-300 transition-all text-md text-black text-center mt-8">
                       {template.name}
                     </p>
 
@@ -303,15 +319,14 @@ const Templates = () => {
                       </p>
                     )}
                   </div>
-
                 </div>
-              </div >
+              </div>
             );
           })
         ) : (
           <h1 className="my-2 text-xl font-bold px-6">Loading....</h1>
         )}
-      </div >
+      </div>
     </>
   );
 };
