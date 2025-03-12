@@ -1,9 +1,9 @@
 import MainBanner from "@/components/Banner/mainBanner";
 import React from "react";
 import ResumeTemplateBanner from "@/components/Banner/ResumeTemplateBanner/ResumeTemplateBanner";
-import Search from "@/components/resume-templates/Search";
-import Templates from "@/components/resume-templates/Templates";
-import ResumeContent from "@/components/resume-templates/ResumeContent";
+import Search from "@/components/common/search/Search";
+import Templates from "@/components/Templates/Templates";
+import Content from "@/components/templates-content/Content";
 import { ResumeTemplateData } from "./data";
 import OurFaqs from "@/components/Faq/faq";
 import Ads from "@/components/ads/Ads";
@@ -32,11 +32,11 @@ const ResumeTemplates = () => {
         highlightText={"Pick the Perfect"}
         endText={"Resume Template "}
         clickHere={"Cover letter Templates"}
-        link={"/cover_letter_templates"}
+        link={"/cover-templates"}
       />
       <Search />
       <Templates />
-      <ResumeContent section={ResumeTemplateData} />
+      <Content section={ResumeTemplateData} />
       <OurFaqs />
       <Ads />
     </>
