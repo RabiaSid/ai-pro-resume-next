@@ -12,7 +12,7 @@ import { CgClose } from 'react-icons/cg';
 import SunEditor from 'suneditor-react';
 import AppButton from '@/components/common/button/pages';
 import ProfileSection from '@/components/profileSection/profileSection';
-import { userProfile, userSoftSkills, userTechnicalSkills } from '@/redux/slices/profileSlice';
+import { userAwards, userCertificates, userEducation, userExperiences, userLanguages, userProfile, userReferences, userSoftSkills, userTechnicalSkills } from '@/redux/slices/profileSlice';
 import { useDispatch, useSelector } from 'react-redux';
 import { AppDispatch, RootState } from '@/redux/store'
 import { AwardsCategoryData, CertificatesCategoryData, EducationCategoryData, ExperienceCategoryData, LanguagesCategoryData, ReferencesCategoryData } from './data';
@@ -20,7 +20,7 @@ import { AwardsCategoryData, CertificatesCategoryData, EducationCategoryData, Ex
 
 export default function Account() {
   const dispatch = useDispatch<AppDispatch>();
-  const { loading, profile, soft_skills, technical_skills } = useSelector((state: RootState) => state.profile);
+  const { loading, profile, softSkills, technicalSkills, education, awards, certificates, experiences, languages, references } = useSelector((state: RootState) => state.profile);
   const { token } = useSelector((state: RootState) => state.auth);
 
   const [modelbox, setModelbox] = useState<boolean>(false);
@@ -35,18 +35,28 @@ export default function Account() {
     // }
   };
 
-  console.log(profile, "profile =======================>")
+  console.log(
+    // profile, 
+    technicalSkills,
+    //  education,
+    //  experiences,
+    "profile =======================>")
 
   useEffect(() => {
     if (token) {
       dispatch(userProfile());
+      dispatch(userEducation());
       dispatch(userTechnicalSkills())
       dispatch(userSoftSkills())
-
+      dispatch(userCertificates())
+      dispatch(userExperiences())
+      dispatch(userAwards())
+      dispatch(userReferences());
+      dispatch(userLanguages())
     } else {
       return
     }
-  }, [])
+  }, [token])
 
   const userDetails = [
     { label: "Name", value: profile?.name ?? "--" },
@@ -214,12 +224,12 @@ export default function Account() {
                 ))}
               </div>
             </div>
-            <ProfileSection profileCategory={ExperienceCategoryData} />
-            <ProfileSection profileCategory={EducationCategoryData} />
-            <ProfileSection profileCategory={CertificatesCategoryData} />
-            <ProfileSection profileCategory={AwardsCategoryData} />
-            <ProfileSection profileCategory={LanguagesCategoryData} />
-            <ProfileSection profileCategory={ReferencesCategoryData} />
+            <ProfileSection profileCategory={experiences ?? []} />
+            <ProfileSection profileCategory={education ?? []} />
+            <ProfileSection profileCategory={certificates ?? []} />
+            <ProfileSection profileCategory={awards ?? []} />
+            <ProfileSection profileCategory={languages ?? []} />
+            <ProfileSection profileCategory={references ?? []} />
           </div>
           <div className="mt-4  px-5 xl:px-0">
             <>

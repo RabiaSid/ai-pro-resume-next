@@ -4,8 +4,14 @@ import { API } from '@/services/backendService';
 type profileState = {
     profile: any;
     loading: boolean;
-    technical_skills: [];
-    soft_skills: [];
+    technicalSkills: any[];
+    softSkills: any[];
+    education: any[];
+    experiences: any[];
+    certificates: any[];
+    awards: any[];
+    languages: any[];
+    references: any[];
 }
 // Async thunk for login
 export const userProfile = createAsyncThunk("profile/userProfile", async (_, { rejectWithValue }) => {
@@ -37,13 +43,77 @@ export const userSoftSkills = createAsyncThunk("profile/userSoftSkills", async (
     }
 });
 
+// Async thunk for userEducation
+export const userEducation = createAsyncThunk("profile/userEducation", async (_, { rejectWithValue }) => {
+    try {
+        const response = await API.get("user/profile/education");
+        return response;
+    } catch (error: any) {
+        return rejectWithValue(error.message);
+    }
+});
+
+// Async thunk for userExperiences
+export const userExperiences = createAsyncThunk("profile/userExperiences", async (_, { rejectWithValue }) => {
+    try {
+        const response = await API.get("user/profile/experiences");
+        return response;
+    } catch (error: any) {
+        return rejectWithValue(error.message);
+    }
+});
+
+// Async thunk for userCertificates
+export const userCertificates = createAsyncThunk("profile/userCertificates", async (_, { rejectWithValue }) => {
+    try {
+        const response = await API.get("user/profile/certificates");
+        return response;
+    } catch (error: any) {
+        return rejectWithValue(error.message);
+    }
+});
+
+// Async thunk for userAwards
+export const userAwards = createAsyncThunk("profile/userAwards", async (_, { rejectWithValue }) => {
+    try {
+        const response = await API.get("user/profile/awards");
+        return response;
+    } catch (error: any) {
+        return rejectWithValue(error.message);
+    }
+});
+// Async thunk for userLanguages
+export const userLanguages = createAsyncThunk("profile/userLanguages", async (_, { rejectWithValue }) => {
+    try {
+        const response = await API.get("user/profile/languages");
+        return response;
+    } catch (error: any) {
+        return rejectWithValue(error.message);
+    }
+});
+
+// Async thunk for userReferences
+export const userReferences = createAsyncThunk("profile/userReferences", async (_, { rejectWithValue }) => {
+    try {
+        const response = await API.get("user/profile/references");
+        return response;
+    } catch (error: any) {
+        return rejectWithValue(error.message);
+    }
+});
 const profileSlice = createSlice({
     name: "profile",
     initialState: {
         profile: null,
         loading: false,
-        technical_skills : [],
-        soft_skills: []
+        technicalSkills: [],
+        softSkills: [],
+        education: [],
+        experiences:[],
+        certificates: [],
+        awards: [],
+        languages: [],
+        references: []
     } as profileState,
     reducers: {
     },
@@ -59,30 +129,30 @@ const profileSlice = createSlice({
             .addCase(userProfile.rejected, (state, action) => {
                 state.loading = false;
             })
-            .addCase(userTechnicalSkills.pending, (state) => {
-                state.loading = true;
-            })
             .addCase(userTechnicalSkills.fulfilled, (state, action) => {
-                console.log(action, "actionactionaction");
-                
-                state.loading = false;
-                state.technical_skills = action?.payload?.response?.data;
-            })
-            .addCase(userTechnicalSkills.rejected, (state, action) => {
-                state.loading = false;
-            })
-            .addCase(userSoftSkills.pending, (state) => {
-                state.loading = true;
+                state.technicalSkills = action?.payload?.response?.data;
             })
             .addCase(userSoftSkills.fulfilled, (state, action) => {
-                console.log(action, "actionactionaction");
-                
-                state.loading = false;
-                state.soft_skills = action?.payload?.response?.data;
+                state.softSkills = action?.payload?.response?.data;
             })
-            .addCase(userSoftSkills.rejected, (state, action) => {
-                state.loading = false;
+            .addCase(userEducation.fulfilled, (state, action) => {
+                state.education = action?.payload?.response?.data;
             })
+            .addCase(userExperiences.fulfilled, (state, action) => {
+                state.experiences = action?.payload?.response?.data;
+            })
+            .addCase(userCertificates.fulfilled, (state, action) => {
+                state.certificates = action?.payload?.response?.data;
+            })
+            .addCase(userAwards.fulfilled, (state, action) => {
+                state.awards = action?.payload?.response?.data;
+            })
+            .addCase(userLanguages.fulfilled, (state, action) => {
+                state.languages = action?.payload?.response?.data;
+            })
+            .addCase(userReferences.fulfilled, (state, action) => {
+                state.references = action?.payload?.response?.data;
+            });
     },
 });
 

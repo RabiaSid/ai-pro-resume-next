@@ -14,7 +14,7 @@ export default function ProfileSection(props: propsType) {
     const [isExpanded, setIsExpanded] = useState(false);
     const [isDetailsExpanded, setIsDetailsExpanded] = useState(false);
 
-
+    console.log(profileCategory, "profileCategory");
 
     return (
         <div className="py-4 font-Lexend">
