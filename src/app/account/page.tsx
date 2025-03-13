@@ -20,9 +20,8 @@ import { AwardsCategoryData, CertificatesCategoryData, EducationCategoryData, Ex
 
 export default function Account() {
   const dispatch = useDispatch<AppDispatch>();
-  const { loading, profile, softSkills, technicalSkills, education, awards, certificates, experiences, languages, references } = useSelector((state: RootState) => state.profile);
+  const { profile, softSkills, technicalSkills, education, awards, certificates, experiences, languages, references } = useSelector((state: RootState) => state.profile);
   const { token } = useSelector((state: RootState) => state.auth);
-
   const [modelbox, setModelbox] = useState<boolean>(false);
   const modalRef = useRef<any>(null);
 
@@ -35,28 +34,21 @@ export default function Account() {
     // }
   };
 
-  console.log(
-    // profile, 
-    technicalSkills,
-    //  education,
-    //  experiences,
-    "profile =======================>")
-
   useEffect(() => {
     if (token) {
       dispatch(userProfile());
+      dispatch(userExperiences())
       dispatch(userEducation());
       dispatch(userTechnicalSkills())
       dispatch(userSoftSkills())
       dispatch(userCertificates())
-      dispatch(userExperiences())
       dispatch(userAwards())
       dispatch(userReferences());
       dispatch(userLanguages())
     } else {
       return
     }
-  }, [token])
+  }, [dispatch])
 
   const userDetails = [
     { label: "Name", value: profile?.name ?? "--" },
@@ -224,12 +216,12 @@ export default function Account() {
                 ))}
               </div>
             </div>
-            <ProfileSection profileCategory={experiences ?? []} />
-            <ProfileSection profileCategory={education ?? []} />
-            <ProfileSection profileCategory={certificates ?? []} />
-            <ProfileSection profileCategory={awards ?? []} />
-            <ProfileSection profileCategory={languages ?? []} />
-            <ProfileSection profileCategory={references ?? []} />
+            <ProfileSection sectionName="experiences" sectionType={experiences} />
+            <ProfileSection sectionName="education" sectionType={education} />
+            <ProfileSection sectionName="certificates" sectionType={certificates} />
+            {/* <ProfileSection sectionName="awards" sectionType={awards} />
+            <ProfileSection sectionName="languages" sectionType={languages} />
+            <ProfileSection sectionName="references" sectionType={references} /> */}
           </div>
           <div className="mt-4  px-5 xl:px-0">
             <>
