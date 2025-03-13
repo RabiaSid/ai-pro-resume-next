@@ -49,7 +49,7 @@ export default function Account() {
   }, [])
 
   const userDetails = [
-    { label: "Name", value: profile?.name },
+    { label: "Name", value: profile?.name ?? "--" },
     { label: "Job Position", value: profile?.job_position ?? "--" },
     { label: "Years of Experience", value: profile?.experiences_count ?? "--" },
     { label: "Mobile Number", value: profile?.mobile_number ?? "--" },
@@ -77,7 +77,8 @@ export default function Account() {
     },
     {
       title: "Email",
-      content: profile?.email ?? '--'
+      content: profile?.email ?? '--',
+      isEdit: false
     },
     {
       title: "Password",
@@ -169,7 +170,7 @@ export default function Account() {
                   <div key={index} className="py-4 mx-4 font-Lexend">
                     <div className="flex justify-between items-center text-[#A7A7A7] mb-2">
                       {section.title}:
-                      <FaPencil className="text-[#A7A7A7] hover:text-[#1877F2] cursor-pointer" onClick={() => setModelbox(true)} />
+                      <FaPencil className={`text-[#A7A7A7] hover:text-[#1877F2] cursor-pointer ${section.isEdit === false ? "hidden" : "block"}`} onClick={() => setModelbox(true)} />
                     </div>
                     <div
                     >
@@ -177,7 +178,7 @@ export default function Account() {
                         <div className="text-[#343434] flex justify-start gap-2 flex-wrap text-sm">
                           {section.items.map((item: any, idx: any) => (
                             <div key={idx} className="relative group">
-                              <p className="bg-[#F5F6FB] border-[#DFE0E2] px-4 py-1 border rounded-full max-w-[180px] truncate">
+                              <p className="bg-[#F5F6FB] border-[#DFE0E2] px-4 py-1 border rounded-full max-w-[180px] truncate cursor-pointer">
                                 {item}
                               </p>
                               <span className="absolute left-1/2 transform -translate-x-1/2 bottom-full mb-2 hidden group-hover:block bg-gray-900 text-white text-xs rounded py-1 px-2 whitespace-nowrap shadow-md">
@@ -187,7 +188,7 @@ export default function Account() {
                           ))}
                         </div>
                       ) : (
-                        <p className="text-[#343434] text-sm break-all">
+                        <p className="text-[#343434] text-sm break-all cursor-pointer">
                           {section.content}
                         </p>
                       )}
