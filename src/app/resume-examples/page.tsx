@@ -2,10 +2,9 @@ import MainBanner from "@/components/Banner/mainBanner";
 import React from "react";
 import ResumeTemplateBanner from "@/components/Banner/ResumeTemplateBanner/ResumeTemplateBanner";
 import Search from "@/components/common/search/Search";
-import Templates from "@/components/Templates/Templates";
-import Content from "@/components/templates-content/Content";
 import OurFaqs from "@/components/Faq/faq";
 import Ads from "@/components/ads/Ads";
+import Categories from "@/components/ExampleCategories/Categories";
 
 const ResumeExamples = () => {
   return (
@@ -29,8 +28,9 @@ const ResumeExamples = () => {
         clickHere={"Cover letter Example"}
         link={"/cover_letter_examples"}
       />
-      <Search />
       <Ads />
+      <Search />
+      <Categories />
       <OurFaqs />
     </>
   );
