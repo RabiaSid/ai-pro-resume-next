@@ -1,3 +1,67 @@
+import bannerArrow from "media/assets/Banner_arrow_icon.webp";
+import Image from "next/image";
+import Link from "next/link";
+import template_design1 from "media/assets/template_design_1.webp";
+import template_design2 from "media/assets/template_design_2.webp";
+import template_design3 from "media/assets/template_design_3.webp";
+import template_design4 from "media/assets/template_design_4.webp";
+
+export const BannerData = {
+  title: (
+    <>
+      Ready to Stand Out?{" "}
+      <span
+        className="bg-no-repeat bg-cover leading-[1.5] font-lexend font-bold text-primaryCran"
+      >
+        Pick the Perfect
+      </span>{" "}
+      Resume Template
+    </>
+  ),
+  description: (
+    <>
+      Curriculum templates are the key that makes your resume stand out.
+      AI Pro Resumes offers the best professional resume templates that
+      are ATS-friendly and customizable. To create a professional resume,
+      select from your preferred best resume templates, insert all the
+      details, and download in PDF format.
+      <br />
+      <br />
+      We have templates for all. Whether you are looking for a basic
+      resume template, a simple modern resume template, a resume portfolio
+      template, or an outdoor professional guiding resume template, we
+      have got you covered. Let’s now catch the recruiter's attention with
+      a clean simple resume template!
+    </>
+  ),
+  font2: true,
+  link: (
+    <>
+      Click here to check our
+      <span className="text-[#00caa5] lg:px-2 px-1">
+        <Link href="/resume-templates">Resume Templates</Link>
+      </span>
+      <Image src={bannerArrow} className="ml-1" alt="arrow" />
+    </>
+  ),
+  button1: {
+    title: "IMPORT RESUME",
+    mainColor: "#0072b1",
+    sliderColor: "#fff59c",
+    mainTextColor: "#FFFFFF",
+    hoverTextColor: "#0072b1",
+    authLink: "/import-resume",
+    guestLink: "/login",
+  },
+  BannerBoxImagesData: [
+    template_design1,
+    template_design2,
+    template_design3,
+    template_design4,
+  ],
+  isGradient: false
+}
+
 const stepsToCreateResume = [
   "Go to the AI pro resume home page.",
   "Click the login button and sign up for your account.",
@@ -44,7 +108,7 @@ export const ResumeTemplateData = [
       <>
         Build Your Perfect Resume with
         <span className="text-[#00caa5] ml-4 text-2xl md:text-3xl">
-          Professional Resume Template​
+          Professional Resume Template
         </span>
       </>
     ),

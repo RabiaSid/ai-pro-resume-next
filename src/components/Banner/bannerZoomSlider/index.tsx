@@ -1,13 +1,13 @@
 import React, { useEffect, useState } from 'react'
 import Image from 'next/image';
 import Head from "next/head";
-import styles from "./zoomImageSlider.module.css"
+import styles from "./bannerZoomSlider.module.css"
 
 type propsType = {
     images?: any;
 }
 
-export default function ZoomImageSlider(props: propsType) {
+export default function BannerZoomSlider(props: propsType) {
     const { images = [] } = props
     const [cImage, setCurrentIndex] = useState(0);
 
@@ -24,7 +24,7 @@ export default function ZoomImageSlider(props: propsType) {
             <Head>
                 <link rel="preload" as="image" href={images[0]} />
             </Head>
-            <div className={`w-full lg:w-[700px] ${styles.zoomImageSlider}`}>
+            <div className={`w-full lg:w-[700px] ${styles.bannerZoomSlider}`}>
                 {images.map((img: any, idx: any) => (
                     <Image
                         key={idx}

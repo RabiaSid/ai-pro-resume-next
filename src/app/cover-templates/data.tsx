@@ -1,3 +1,68 @@
+import bannerArrow from "media/assets/Banner_arrow_icon.webp";
+import Image from "next/image";
+import Link from "next/link";
+import template_design1 from "media/assets/template_design_1.webp";
+import template_design2 from "media/assets/template_design_2.webp";
+import template_design3 from "media/assets/template_design_3.webp";
+import template_design4 from "media/assets/template_design_4.webp";
+
+export const BannerData = {
+  title: (
+    <>
+      Mark your First{" "}
+      <span
+        className="bg-no-repeat bg-cover leading-[1.5] font-lexend font-bold text-primaryCran"
+      >
+        Impression impactful with our unique
+      </span>{" "}
+      Cover Letter templates.
+    </>
+  ),
+  description: (
+    <>
+      AI Pro Resume offers the best cover letter templates to assist you
+      in getting your dream job. Try our sample cover letter templates to
+      save time and effort. We have pre-written resumes and professional
+      cover letter template examples that give your cover letter a
+      polished and proficient look.
+      <br />
+      <br />
+      Our AI-powered suggestions and customizable cover letter templates
+      assist you in effortlessly displaying your skills and personality.
+      Whether you are looking for a short cover letter template, academic
+      cover letter template, or AI cover letter generator, your search
+      ends at AI Pro Resume. Get the best cover letter templates and shine
+      in the job market.
+    </>
+  ),
+  font2: true,
+  link: (
+    <>
+      Click here to check our
+      <span className="text-[#00caa5] lg:px-2 px-1">
+        <Link href="/cover-templates">Cover letter Templates</Link>
+      </span>
+      <Image src={bannerArrow} className="ml-1" alt="arrow" />
+    </>
+  ),
+  button1: {
+    title: "IMPORT RESUME",
+    mainColor: "#0072b1",
+    sliderColor: "#fff59c",
+    mainTextColor: "#FFFFFF",
+    hoverTextColor: "#0072b1",
+    authLink: "/import-resume",
+    guestLink: "/login",
+  },
+  BannerBoxImagesData: [
+    template_design1,
+    template_design2,
+    template_design3,
+    template_design4,
+  ],
+  isGradient: false
+}
+
 const ResumeBasedCoverLetter = [
   "If you create your resume using AI Pro Resume, your cover letter is just a click away.",
   "Select Write a Cover Letter, and we will generate a polished cover letter using the details from your resume.You must select the job title, add the job description,and tick the check box beneath the job description section.",

@@ -15,7 +15,6 @@ import template_9 from "media/assets/resume_template_images/template_9.webp";
 import template_10 from "media/assets/resume_template_images/template_10.webp";
 import template_11 from "media/assets/resume_template_images/template_11.webp";
 import template_12 from "media/assets/resume_template_images/template_12.webp";
-import "./template.css";
 
 const Templates = () => {
   const [isHovered, setIsHovered] = useState<any>(false);
@@ -239,9 +238,7 @@ const Templates = () => {
               >
                 <div className="w-max lg:m-4">
                   <div
-                    className={`relative transition-all duration-700  ${
-                      isHovered === template.id ? "scale-105" : "scale-100"
-                    }`}
+                    className={`relative transition-all duration-700  ${isHovered === template.id ? "scale-105" : "scale-100"}`}
                     onMouseEnter={() => setIsHovered(template.id)}
                     onMouseLeave={() => setIsHovered(null)}
                   >
@@ -256,9 +253,7 @@ const Templates = () => {
                     {/* Premium Badge */}
                     {template.is_paid === 1 && (
                       <div
-                        className={`absolute left-[-35px] top-[24px] w-[150px] h-8 text-white -rotate-45 flex justify-center items-center z-50 transition-all duration-700 ${
-                          isHovered === template.id ? "scale-110" : "scale-100"
-                        }`}
+                        className={`absolute left-[-35px] top-[24px] w-[150px] h-8 text-white -rotate-45 flex justify-center items-center z-50 transition-all duration-700 ${isHovered === template.id ? "scale-110" : "scale-100"}`}
                         style={{
                           background:
                             "linear-gradient(to right, #01B2AC, #0072B1)",
@@ -274,11 +269,10 @@ const Templates = () => {
                     <div className="relative">
                       {/* Border Animation */}
                       <div
-                        className={`absolute border border-solid border-[#01B2AC] rounded-2xl w-full h-full z-10 transition-all duration-700 ${
-                          isHovered === template.id
-                            ? "-bottom-2 -right-2 scale-105"
-                            : "bottom-0 right-0 scale-100"
-                        }`}
+                        className={`absolute border border-solid border-[#01B2AC]  w-full h-full z-10 transition-all duration-700 ${isHovered === template.id
+                          ? "-bottom-3 -right-3 scale-103 rounded-xl"
+                          : "bottom-0 right-0 scale-100 rounded-2xl"
+                          }`}
                       ></div>
 
                       {/* Image */}
@@ -287,17 +281,17 @@ const Templates = () => {
                         alt="Template Image"
                         width={300}
                         height={300}
-                        className={`shadow-lg rounded-xl w-full z-20 relative border transition-transform duration-700 ${
-                          isHovered === template.id ? "scale-105" : "scale-100"
-                        }`}
+                        className={`shadow-sm shadow-cyan-950/70 rounded-xl w-full z-20 relative border transition-transform duration-700 
+                        ${isHovered === template.id ? "scale-103" : "scale-100"
+                          }`}
                       />
 
                       <div
-                        className={`absolute box2 shadow-lg left-20  transition-transform duration-700  ${
-                          isHovered === template.id
-                            ? "bottom-56 z-30"
-                            : "z-10 bottom-0"
-                        } rounded-lg py-2 cursor-pointer JosefinSans text-md bg-[#01B2AC] hover:bg-[#0072b1] text-white w-[60%] flex justify-center items-center flex-wrap`}
+                        className={`absolute box2 shadow-lg left-20 transition-transform duration-2000  
+                        ${isHovered === template.id ? "bottom-56 z-30" : "z-10 bottom-0"} 
+                        rounded-lg py-2 cursor-pointer JosefinSans text-md 
+                      bg-[#01B2AC] hover:bg-[#0072b1] text-white w-[60%] 
+                        flex justify-center items-center flex-wrap`}
                       >
                         Use This Template
                       </div>
