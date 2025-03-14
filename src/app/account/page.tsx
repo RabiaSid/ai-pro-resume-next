@@ -16,9 +16,11 @@ import { userAwards, userCertificates, userEducation, userExperiences, userLangu
 import { useDispatch, useSelector } from 'react-redux';
 import { AppDispatch, RootState } from '@/redux/store'
 import { AwardsCategoryData, CertificatesCategoryData, EducationCategoryData, ExperienceCategoryData, LanguagesCategoryData, ReferencesCategoryData } from './data';
-
+import Cookies from 'js-cookie';
+import { useRouter } from 'next/navigation';
 
 export default function Account() {
+  const router = useRouter();
   const dispatch = useDispatch<AppDispatch>();
   const { profile, softSkills, technicalSkills, education, awards, certificates, experiences, languages, references } = useSelector((state: RootState) => state.profile);
   const { token } = useSelector((state: RootState) => state.auth);
@@ -99,6 +101,13 @@ export default function Account() {
     };
     document.addEventListener("mousedown", handleClickOutside);
     return () => { document.removeEventListener("mousedown", handleClickOutside) };
+  }, [])
+
+  useEffect(() => {
+    const tokenExist = Cookies.get("userToken");
+    if (!tokenExist) {
+      router.push("/login")
+    }
   }, [])
 
   return (
