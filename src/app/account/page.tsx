@@ -251,9 +251,9 @@ export default function Account() {
             <ProfileSection sectionName="experiences" sectionType={experiences} />
             <ProfileSection sectionName="education" sectionType={education} />
             <ProfileSection sectionName="certificates" sectionType={certificates} />
-            {/* <ProfileSection sectionName="awards" sectionType={awards} />
+            <ProfileSection sectionName="awards" sectionType={awards} />
             <ProfileSection sectionName="languages" sectionType={languages} />
-            <ProfileSection sectionName="references" sectionType={references} /> */}
+            <ProfileSection sectionName="references" sectionType={references} />
           </div>
           <div className="mt-4  px-5 xl:px-0">
             <>
