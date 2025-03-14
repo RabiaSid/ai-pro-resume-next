@@ -1,6 +1,5 @@
 import MainBanner from "@/components/Banner/mainBanner";
 import React from "react";
-import ResumeTemplateBanner from "@/components/Banner/ResumeTemplateBanner/ResumeTemplateBanner";
 import Search from "@/components/common/search/Search";
 import Templates from "@/components/Templates/Templates";
 import Content from "@/components/templates-content/Content";

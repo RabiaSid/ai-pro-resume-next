@@ -6,6 +6,14 @@ import template_design2 from "media/assets/template_design_2.webp";
 import template_design3 from "media/assets/template_design_3.webp";
 import template_design4 from "media/assets/template_design_4.webp";
 
+// Companies
+import saudi from "media/assets/company/saudi.webp";
+import aerotek from "media/assets/company/aerotek.webp";
+import geti from "media/assets/company/geti.webp";
+import ladders from "media/assets/company/ladders.webp";
+import snagajob from "media/assets/company/snagajob.webp";
+import alison from "media/assets/company/alison.webp";
+
 export const BannerData = {
   title: (
     <>
@@ -60,7 +68,40 @@ export const BannerData = {
     template_design3,
     template_design4,
   ],
-  isGradient: false
+  isGradient: false,
+  customerLogoText: "Our customers were hired by:",
+  customerLogo: [
+    {
+      image: saudi,
+      alt: saudi,
+      width: "w-[150px]",
+    },
+    {
+      image: aerotek,
+      alt: aerotek,
+      width: "w-[100px]",
+    },
+    {
+      image: geti,
+      alt: geti,
+      width: "w-[70px]",
+    },
+    {
+      image: ladders,
+      alt: ladders,
+      width: "w-[80px]",
+    },
+    {
+      image: snagajob,
+      alt: snagajob,
+      width: "w-[80px]",
+    },
+    {
+      image: alison,
+      alt: alison,
+      width: "w-[80px]",
+    },
+  ]
 }
 
 const ResumeBasedCoverLetter = [

@@ -54,7 +54,7 @@ const MultiInputField = (props: ContactFormFieldProps) => {
             <input
               {...field}
               type={type}
-              className={`w-full px-3 py-2 placeholder-gray-500 text-gray-900 border-b-2 border-gray-300 focus:outline-none focus:border-teal-500 transition duration-300 ease-in-out rounded-md ${error ? "border-red-500" : ""
+              className={`w-full px-3 py-3 placeholder-gray-500 text-gray-900 border-b-2 border-gray-300 focus:outline-none focus:border-teal-500 transition duration-300 ease-in-out rounded-md ${error ? "border-red-500" : ""
                 }`}
               placeholder={placeholder}
             />

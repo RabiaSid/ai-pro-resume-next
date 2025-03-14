@@ -31,7 +31,9 @@ type BannerProps = {
   images?: any;
   image?: any;
   BannerBoxImagesData?: any;
-  isGradient?: boolean
+  isGradient?: boolean;
+  customerLogoText?: string;
+  customerLogo?: any
 };
 
 export default function Banner(props: BannerProps) {
@@ -46,13 +48,15 @@ export default function Banner(props: BannerProps) {
     images = [],
     image,
     BannerBoxImagesData,
-    isGradient
+    isGradient,
+    customerLogoText,
+    customerLogo
   } = props;
   const typedText = useTypedText(subtitle);
 
   return (
     <section className={`container md:px-4 mx-auto relative overflow-hidden`}>
-      <div className={isGradient === false ? "hidden" : "w-[350px] h-[310px] blur-[80px] bg-gradient-to-br from-primaryBlue to-primaryGreen animate-rotate rounded-[30%_70%_70%_30%/30%_30%_70%_70%] border border-red-500 top-28 right-52 absolute"}></div>
+      <div className={isGradient === false ? "hidden" : "w-[350px] h-[310px] blur-[70px] bg-gradient-to-br from-primaryBlue to-primaryGreen animate-rotate rounded-[30%_70%_70%_30%/30%_30%_70%_70%] border border-red-500 top-28 right-52 absolute"}></div>
       <div className="w-full py-5 my-10 bg-white ">
         <div className="grid lg:grid-cols-2 gap-8 items-center">
           <div className="text-left space-y-6">
@@ -90,6 +94,9 @@ export default function Banner(props: BannerProps) {
                 </div>
               }
             </div>
+
+
+
           </div>
           <div className="flex justify-center items-center">
             {image && <Image
@@ -107,6 +114,16 @@ export default function Banner(props: BannerProps) {
                   className={`absolute md:left-[120px] lg:left-[20px] top-[45px] ${styles.animatedimage}`}
                 />
               </div>
+            }
+          </div>
+        </div>
+        <div>
+          <p className="font-semibold mt-6">{customerLogoText}</p>
+          <div className="flex flex-wrap justify-start items-center pt-4 gap-8">
+            {
+              customerLogo?.map((logo: any, idx: any) =>
+                <Image src={logo.image} alt={logo.image} className={logo.width} />
+              )
             }
           </div>
         </div>
