@@ -15,13 +15,11 @@ const VerifyUserPage = () => {
         if (token) {
             console.log('Token:', token);
             // You apican call your API here for verification
-            useEffect(() => {
-                // setLoading(true);
-                API.get(`verify-email/${token}`).then((res) => {
-                    console.log(res, "resresres");
-                    // setLoading(false);
-                });
-            }, []);
+            // setLoading(true);
+            API.get(`verify-email/${token}`).then((res) => {
+                console.log(res, "resresres");
+                // setLoading(false);
+            });
         }
     }, [token]);
 
