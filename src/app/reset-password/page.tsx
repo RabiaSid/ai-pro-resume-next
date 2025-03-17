@@ -68,7 +68,7 @@ export default function page() {
         })
     }
     return (
-        <Suspense>
+        <>
             <div className="w-full md:w-[550px] m-auto min-h-[800px] text-center font-Lexend flex flex-col justify-center">
 
                 {showAlert && (showErrorMessage || showSuccessMessage) && (
@@ -201,6 +201,6 @@ export default function page() {
                     </form>
                 </div>
             </div>
-        </Suspense>
+        </>
     )
 }

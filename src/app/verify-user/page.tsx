@@ -24,7 +24,7 @@ const VerifyUserPage = () => {
     }, [token]);
 
     return (
-        <Suspense>
+        <>
             <div className="flex items-center justify-center min-h-screen bg-gray-100 px-4">
                 <div className="bg-white border shadow-md rounded-lg p-8 -mt-52 relative w-full max-w-md text-center space-y-5">
                     {/* Top Icon */}
@@ -70,7 +70,7 @@ const VerifyUserPage = () => {
                     )}
                 </div>
             </div>
-        </Suspense>
+        </>
     );
 };
 

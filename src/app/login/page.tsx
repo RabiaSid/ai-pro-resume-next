@@ -125,7 +125,7 @@ export default function page() {
     }, []);
 
     return (
-        <Suspense>
+        <>
             <Ads />
             <div className="w-full md:w-[550px] m-auto mt-20 px-4 min-h-[800px] text-center font-Lexend">
                 {showAlert && (showErrorMessage || showSuccessMessage) && (
@@ -278,6 +278,6 @@ export default function page() {
                     className={` uppercase w-full mt-4 px-8 py-2 rounded-md text-white text-xl flex items-center justify-center font-bold ease-in transition-all mb-4 sm:mb-0 bg-primaryBlue hover:bg-slate-800 cursor-pointer`}
                 />
             </div>
-        </Suspense>
+        </>
     )
 }
