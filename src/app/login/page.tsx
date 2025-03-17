@@ -41,6 +41,8 @@ export default function page() {
         mode: "onChange"
     });
 
+    console.log(rememberMe);
+
     const handleCheckCaptcha = () => {
         setVerified(true);
         setCaptchaError("");

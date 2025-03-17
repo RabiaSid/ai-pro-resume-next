@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useEffect, useState, useRef } from 'react';
+import React, { useState, useRef } from 'react';
 import Slider from 'react-slick';
 import brand from 'media/assets/brand.webp';
 import premium from 'media/assets/premium.webp';

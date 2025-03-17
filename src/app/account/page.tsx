@@ -15,19 +15,17 @@ import ProfileSection from '@/components/profileSection/profileSection';
 import { userAwards, userCertificates, userEducation, userExperiences, userLanguages, userProfile, userReferences, userSoftSkills, userTechnicalSkills } from '@/redux/slices/profileSlice';
 import { useDispatch, useSelector } from 'react-redux';
 import { AppDispatch, RootState } from '@/redux/store'
-import { AwardsCategoryData, CertificatesCategoryData, EducationCategoryData, ExperienceCategoryData, LanguagesCategoryData, ReferencesCategoryData } from './data';
 import Cookies from 'js-cookie';
 import { useRouter } from 'next/navigation';
 import { AiIcon } from '@/constant/icon';
 import CustomSelect from '@/components/common/customSelect/CustomSelect';
 import { Controller, useForm } from 'react-hook-form';
-import AppInputField from '@/components/common/inpufield/page';
 import MultiInputField from '@/components/common/multiInputField/MultiInputField';
 
 export default function Account() {
   const router = useRouter();
   const dispatch = useDispatch<AppDispatch>();
-  const { profile, softSkills, technicalSkills, education, awards, certificates, experiences, languages, references } = useSelector((state: RootState) => state.profile);
+  const { profile, education, awards, certificates, experiences, languages, references } = useSelector((state: RootState) => state.profile);
   const { token } = useSelector((state: RootState) => state.auth);
   const [modelbox, setModelbox] = useState<boolean>(false);
   const [selectedSection, setSelectedSection] = useState<string | null>(null);
