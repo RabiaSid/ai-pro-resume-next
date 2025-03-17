@@ -17,30 +17,20 @@ import alison from "media/assets/company/alison.webp";
 export const BannerData = {
   title: (
     <>
-      Find the Perfect{" "}
+      Your Perfect{" "}
       <span className="bg-no-repeat bg-cover leading-[1.5] font-lexend font-bold text-primaryCran">
-        Resume Example
+        Cover Letter
       </span>{" "}
-      for Your Field
+      An Easy-to-Follow Example with AI Touch
     </>
   ),
-  description: (
-    <>
-      AI Pro Resume is your ultimate destination for creating professional
-      resumes and cover letters. To save you time and effort, we have introduced
-      creative resume examples. These great resume examples are pre-written. You
-      just have to click on them and add minor details to make your resume more
-      personalized. We offer professional resume templates that assist you in
-      landing the interview. Whether you are starting your career or a seasoned
-      professional, AI Pro Resume ensures your resume shines in the crowd.
-    </>
-  ),
+  description: <></>,
   font2: true,
   link: (
     <>
       Click here to check our
       <span className="text-[#00caa5] lg:px-2 px-1">
-        <Link href="/cover-examples">Cover letter Example</Link>
+        <Link href="/resume-examples">Resume Example</Link>
       </span>
       <Image src={bannerArrow} className="ml-1" alt="arrow" />
     </>

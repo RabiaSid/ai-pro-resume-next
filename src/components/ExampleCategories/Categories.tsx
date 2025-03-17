@@ -6,7 +6,7 @@ import premium from "media/assets/premium.webp";
 import Image from "next/image";
 import Slider from "react-slick";
 import template_1 from "media/assets/resume_template_images/template_1.webp";
-import './categories.css'
+import "./categories.css";
 
 const Categories = () => {
   const [isfilter, setIsfilter] = useState<any>(false);
@@ -1097,12 +1097,6 @@ const Categories = () => {
 
   const chk_temp = (cat_id: number, cat_name: string, cat_des: string) => {
     setIsfilter(true);
-
-    // Using static templates (replace this with your actual data)
-    const resumeExamples = [
-      { id: 1, name: "Resume 1", category_id: cat_id },
-      { id: 2, name: "Resume 2", category_id: cat_id },
-    ];
 
     // set_templates(top_categories.resume_examples);
     setSelectedCatName(cat_name);

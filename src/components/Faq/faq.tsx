@@ -87,6 +87,21 @@ const dummyFaqs: Faq[] = [
     answer: "You can install it using 'npx create-next-app@latest'.",
     page: "Resume Example",
   },
+  {
+    question: "How to install Next.js?",
+    answer: "You can install it using 'npx create-next-app@latest'.",
+    page: "Cover Example",
+  },
+  {
+    question: "What is Next.js?",
+    answer: "Next.js is a React framework for production.",
+    page: "Cover Example",
+  },
+  {
+    question: "How to install Next.js?",
+    answer: "You can install it using 'npx create-next-app@latest'.",
+    page: "Cover Example",
+  },
 ];
 
 export default function OurFaqs() {
@@ -113,7 +128,7 @@ export default function OurFaqs() {
     case "/cover-templates":
       currentPage = "Cover Template";
       break;
-    case "/cover-letter-examples":
+    case "/cover-examples":
       currentPage = "Cover Example";
       break;
     case "/services":
