@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { Suspense, useEffect } from "react";
 import { useSearchParams } from "next/navigation";
 import axios from "axios";
 import Image from "next/image";
@@ -45,21 +45,23 @@ const LinkedInLogin = () => {
     };
 
     return (
-        <AppButton title='Sign-in with LinkendIn' onClick={handleLinkedInLogin}
-            className="w-[100%] border border-solid text-gray-400 border-slate-300 px-2 py-2 rounded-md hover:bg-slate-800 hover:text-white ease-in transition-all flex justify-center items-center"
-            childClassName="sm:tracking-widest relative"
-            leftIcon={
-                <>
-                    <Image
-                        src={LinkedInLogo}
-                        alt="My Image"
-                        width={25}
-                        height={25}
-                        className="mr-2"
-                    />
-                </>
-            }
-        />
+        <Suspense>
+            <AppButton title='Sign-in with LinkendIn' onClick={handleLinkedInLogin}
+                className="w-[100%] border border-solid text-gray-400 border-slate-300 px-2 py-2 rounded-md hover:bg-slate-800 hover:text-white ease-in transition-all flex justify-center items-center"
+                childClassName="sm:tracking-widest relative"
+                leftIcon={
+                    <>
+                        <Image
+                            src={LinkedInLogo}
+                            alt="My Image"
+                            width={25}
+                            height={25}
+                            className="mr-2"
+                        />
+                    </>
+                }
+            />
+        </Suspense>
     );
 };
 
