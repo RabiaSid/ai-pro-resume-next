@@ -1,5 +1,5 @@
 'use client'
-import React, { useEffect, useState } from 'react'
+import React, { Suspense, useEffect, useState } from 'react'
 import { FaRegEye, FaRegEyeSlash } from 'react-icons/fa'
 import { Controller, useForm } from "react-hook-form";
 import ReCAPTCHA from "react-google-recaptcha";
@@ -112,7 +112,7 @@ export default function page() {
         }
     }, [countries]);
     return (
-        <>
+        <Suspense>
             <Ads />
             <div className="w-full md:w-[550px] m-auto mt-20 px-4 min-h-[800px] text-center font-Lexend">
                 {showAlert && showErrorMessage.length > 0 && (
@@ -361,6 +361,6 @@ export default function page() {
                     </form>
                 </div>
             </div>
-        </>
+        </Suspense>
     )
 }
