@@ -2,7 +2,6 @@
 
 import Image from "next/image";
 import React, { useState } from "react";
-import { FaCircleMinus, FaCirclePlus } from "react-icons/fa6";
 import { RiDeleteBinLine } from "react-icons/ri";
 import PackageImg from "media/assets/free_basic_img.webp";
 import Link from "next/link";
@@ -61,12 +60,12 @@ const Cart = () => {
       prev.map((pkg) =>
         pkg.id === id
           ? {
-              ...pkg,
-              quantity:
-                type === "add"
-                  ? pkg.quantity + 1
-                  : Math.max(1, pkg.quantity - 1),
-            }
+            ...pkg,
+            quantity:
+              type === "add"
+                ? pkg.quantity + 1
+                : Math.max(1, pkg.quantity - 1),
+          }
           : pkg
       )
     );

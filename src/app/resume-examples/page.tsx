@@ -3,8 +3,8 @@ import React from "react";
 import Search from "@/components/common/search/Search";
 import OurFaqs from "@/components/Faq/faq";
 import Ads from "@/components/ads/Ads";
-import Categories from "@/components/ExampleCategories/Categories";
 import { BannerData } from "./data";
+import ExampleCategories from "@/components/ExampleCategories/ExampleCategories";
 
 const ResumeExamples = () => {
   return (
@@ -12,7 +12,7 @@ const ResumeExamples = () => {
       <MainBanner {...BannerData} />
       <Ads />
       <Search />
-      <Categories />
+      <ExampleCategories />
       <OurFaqs />
     </>
   );
