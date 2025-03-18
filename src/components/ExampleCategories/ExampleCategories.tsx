@@ -1,483 +1,45 @@
-// "use client";
-
-// import React, { useState } from "react";
-// import { BiLeftArrowAlt, BiRightArrowAlt } from "react-icons/bi";
-// import premium from "media/assets/premium.webp";
-// import Image from "next/image";
-// import Slider from "react-slick";
-// import template_1 from "media/assets/resume_template_images/template_1.webp";
-// import './categories.css'
-
-// const Categories = () => {
-//   const [isfilter, setIsfilter] = useState<any>(false);
-
-
-//   const [showAllCategories, setShowAllCategories] = useState<any>(false);
-
-//   const [templates, set_templates] = useState<any[]>([]);
-//   const [selectedCatName, setSelectedCatName] = useState<any>("");
-//   const [selectedCatDesc, setSelectedCatDesc] = useState<any>("");
-
-//   const toggleCategories = () => {
-//     setShowAllCategories(!showAllCategories);
-//   };
-
-//   const chk_temp = (cat_id: number, cat_name: string, cat_des: string) => {
-//     setIsfilter(true);
-
-//     // Using static templates (replace this with your actual data)
-//     const resumeExamples = [
-//       { id: 1, name: "Resume 1", category_id: cat_id },
-//       { id: 2, name: "Resume 2", category_id: cat_id },
-//     ];
-
-//     // set_templates(top_categories.resume_examples);
-//     setSelectedCatName(cat_name);
-//     setSelectedCatDesc(cat_des);
-//   };
-
-//   return (
-//     <>
-//       <div className="flex justify-start items-start flex-wrap px-4 lg:px-16 xl:px-20 2xl:px-40">
-//         <div className="w-[100%] lg:w-[25%] 2xl:w-[30%] mb-10">
-//           <div className="border border-[#00caa5] rounded-lg shadow-[0px_0px_20px_0px_rgba(0,0,0,0.2)]">
-//             <h1 className="font-Lexend text-2xl py-4 px-4 text-[#0072b1]">
-//               Categories
-//             </h1>
-//             <hr className="border-t border-[#00caa5]" />
-//             {categories
-//               ?.sort((a, b) => a.name.localeCompare(b.name))
-//               .map((category, index) => (
-//                 <div
-//                   key={index}
-//                   id={category.id}
-//                   onClick={() => {
-//                     chk_temp(
-//                       category.id,
-//                       category.name,
-//                       category.short_description
-//                     );
-//                   }}
-//                   className={`flex gap-2 font-Lexend justify-start items-center p-2 text-slate-900 cursor-pointer  hover:text-[#0072b1] my-2 ${
-//                     !showAllCategories && index >= 3 ? "hidden md:flex" : ""
-//                   }`}
-//                 >
-//                   {/* <img
-//                     src={global.imageUrl + category.icon}
-//                     className="w-4"
-//                     alt={category.icon}
-//                   /> */}
-//                   <p className="font-Lexend text-lg pl-2">{category.name}</p>
-//                 </div>
-//               ))}
-//             {categories.length > 3 && (
-//               <div className="md:hidden">
-//                 <div
-//                   onClick={toggleCategories}
-//                   className="flex justify-start items-center p-2 text-slate-900 cursor-pointer hover:text-[#0072b1] hover:bg-white rounded-2xl hover:shadow-[0px_10px_20px_0px_rgba(0,0,0,0.3)] my-2"
-//                 >
-//                   <p className="font_1 text-lg pl-2 text-[#0072b1]">
-//                     {showAllCategories ? "Show Less" : "Show More"}
-//                   </p>
-//                 </div>
-//               </div>
-//             )}
-//           </div>
-//         </div>
-//         <div className="w-[100%] lg:w-[75%] 2xl:w-[70%]">
-//           {!isfilter ? (
-//             top_categories?.map((top_categories, index) => {
-//               if (top_categories.resume_examples.length === 0) return;
-//               const settings = {
-//                 dots: false,
-//                 infinite: true,
-//                 speed: 500,
-//                 slidesToShow:
-//                   top_categories.resume_examples.length < 4
-//                     ? top_categories.resume_examples.length
-//                     : 3,
-//                 slidesToScroll: 1,
-//                 arrows: false, // Hide navigation arrows
-//                 autoplay: true, // Enable auto sliding
-//                 autoplaySpeed: 2000,
-//                 responsive: [
-//                   {
-//                     breakpoint: 1300,
-//                     settings: {
-//                       slidesToShow:
-//                         top_categories.resume_examples.length < 4
-//                           ? top_categories.resume_examples.length
-//                           : 3,
-//                     },
-//                   },
-//                   {
-//                     breakpoint: 1280, // Approximate for large screens
-//                     settings: {
-//                       slidesToShow: 3, // Matches `md:w-[33%]`
-//                     },
-//                   },
-//                   {
-//                     breakpoint: 768, // Matches the `md` breakpoint in Tailwind
-//                     settings: {
-//                       slidesToShow: 2, // Matches `sm:w-[50%]`
-//                     },
-//                   },
-//                   {
-//                     breakpoint: 640, // Matches the `sm` breakpoint in Tailwind
-//                     settings: {
-//                       slidesToShow: 1, // Matches `w-full`
-//                     },
-//                   },
-//                 ],
-//               };
-
-//               return (
-//                 <div key={index}>
-//                   <div className="flex justify-between items-center flex-wrap ">
-//                     <div className="px-2 lg:px-8">
-//                       <h1 className="font-Lexend text-md lg:text-2xl text-[#0072b1]">
-//                         {top_categories.name}
-//                       </h1>
-//                     </div>
-
-//                     <div className="flex justify-end items-center">
-//                       <div className="border-2 border-[#0072b1] hover:border-[#00caa5] text-[#0072b1] hover:text-[#00caa5] rounded-full p-1 transition-all duration-200 cursor-pointer">
-//                         <BiLeftArrowAlt
-//                           size={25}
-//                           className="custom-arrow prev-arrow"
-//                           // onClick={() => sliderRefs.current[index].slickPrev()}
-//                         />
-//                       </div>
-
-//                       <div className="ml-4 border-2 border-[#0072b1] hover:border-[#00caa5] text-[#0072b1] hover:text-[#00caa5] rounded-full p-1 transition-all duration-200 cursor-pointer">
-//                         <BiRightArrowAlt
-//                           size={25}
-//                           className="custom-arrow prev-arrow"
-//                           // onClick={() => sliderRefs.current[index].slickNext()}
-//                         />
-//                       </div>
-//                     </div>
-//                   </div>
-//                   {top_categories.resume_examples.length < 4 ? (
-//                     <div className="flex justify-start items-start flex-wrap ">
-//                       {top_categories.resume_examples?.map(
-//                         (template: any, idx: any) => {
-//                           return (
-//                             <div
-//                               key={idx}
-//                               className="w-full sm:w-[50%] md:w-[33%] "
-//                             >
-//                               <div
-//                                 className="dd_btn4 flex justify-normal items-start px-6 py-8 lg:p-2 text-slate-600 cursor-pointer flex-wrap mt-2 "
-//                                 id={"bborder_box3_" + template.id + idx}
-//                               >
-//                                 <div className="cl_hover2 lg:m-4  ">
-//                                   <div className="relative">
-//                                     <div
-//                                       className=" w-6 h-6  right-4 top-4 rounded-full flex items-center justify-center absolute z-50"
-//                                       // onClick={() => openTemplatesModal(idx)}
-//                                     >
-//                                       {/* <img src={search_symbol} /> */}
-//                                     </div>
-//                                     {template.template.is_paid === 1 && (
-//                                       <div
-//                                         className="flex bg-gradient-to-r from-[#01B2AC] to-[#0072B1] w-[150px] h-8 absolute left-[-35px] top-6 text-white -rotate-45 justify-center items-center z-50"
-//                                         style={{
-//                                           clipPath:
-//                                             "polygon(20% 0%, 80% 0%, 100% 100%, 0% 100%)",
-//                                         }}
-//                                       >
-//                                         <Image
-//                                           src={premium}
-//                                           alt="premium icon"
-//                                         />
-//                                         <span>Premium</span>
-//                                       </div>
-//                                     )}
-//                                     <div
-//                                       className="relative bborder_box"
-//                                       id={"bborder_box_" + template.id + idx}
-//                                     >
-//                                       <div
-//                                         className="absolute border border-solid border-[#01B2AC] rounded-xl w-full h-full z-10"
-//                                         id={"bborder_box2_" + template.id + idx}
-//                                       ></div>
-//                                       <Image
-//                                         src={template.preview_image}
-//                                         width={300}
-//                                         height={300}
-//                                         alt="My Image"
-//                                         className="shadow-[0px_0px_3px_3px_rgba(0,0,0,0.3)] rounded-xl w-full z-20 relative"
-//                                       />
-//                                     </div>
-//                                     <div
-//                                       className="dd_menu4 rounded-xl z-30 absolute top-0 left-0 w-full h-[94%] justify-evenly items-end p-2 "
-//                                       // onClick={() =>
-//                                       //   NavigateToSteps(
-//                                       //     template.id,
-//                                       //     template.template_id,
-//                                       //     template.template.is_paid
-//                                       //   )
-//                                       // }
-//                                     >
-//                                       <div className="absolute box2 shadow-lg rounded-lg py-2 cursor-pointer JosefinSans text-sm bg-[#01B2AC] hover:bg-[#0072b1] text-white w-[60%] flex justify-center items-center flex-wrap">
-//                                         Use This Example
-//                                       </div>
-//                                     </div>
-//                                     <p className="cl_inner2 duration-300 transition-all Montserrat text-md text-black text-center mt-4 max-w-[160px] truncate mx-auto">
-//                                       {template.resume_name}
-//                                     </p>
-//                                     <span className="mt-2">
-//                                       {template?.job_positions.map(
-//                                         (position: any, posIdx: any) => (
-//                                           <div
-//                                             key={posIdx}
-//                                             className="bg-[#0072b1] flex items-center justify-center text-white text-xs font-semibold px-4 py-1 rounded mt-2"
-//                                           >
-//                                             <span className="max-w-[160px] truncate mx-auto">
-//                                               {position.name}
-//                                             </span>
-//                                           </div>
-//                                         )
-//                                       )}
-//                                     </span>
-//                                   </div>
-//                                 </div>
-//                               </div>
-//                             </div>
-//                           );
-//                         }
-//                       )}
-//                     </div>
-//                   ) : (
-//                     <Slider
-//                       {...settings}
-//                       // ref={(el) => (sliderRefs.current[index] = el)}
-//                     >
-//                       {top_categories.resume_examples?.map(
-//                         (template: any, idx: any) => {
-//                           return (
-//                             <div key={idx}>
-//                               <div
-//                                 className="dd_btn4 flex justify-normal items-start px-6 py-8 lg:p-2 text-slate-600 cursor-pointer flex-wrap mt-2 "
-//                                 id={"border_box3_" + idx}
-//                               >
-//                                 <div className="cl_hover2 w-max lg:m-4">
-//                                   <div className="relative">
-//                                     <div
-//                                       className=" w-6 h-6  right-4 top-4 rounded-full flex items-center justify-center absolute z-50"
-//                                       // onClick={() => openTemplatesModal(idx)}
-//                                     >
-//                                       {/* <img src={search_symbol} /> */}
-//                                     </div>
-//                                     {template.template.is_paid === 1 && (
-//                                       <div
-//                                         className="flex bg-gradient-to-r from-[#01B2AC] to-[#0072B1] w-[150px] h-8 absolute left-[-35px] top-6 text-white -rotate-45 justify-center items-center z-50"
-//                                         style={{
-//                                           clipPath:
-//                                             "polygon(20% 0%, 80% 0%, 100% 100%, 0% 100%)",
-//                                         }}
-//                                       >
-//                                         <Image
-//                                           src={premium}
-//                                           alt="premium icon"
-//                                         />
-//                                         <span>Premium</span>
-//                                       </div>
-//                                     )}
-//                                     <div
-//                                       className="relative border_box"
-//                                       id={"border_box_" + idx}
-//                                     >
-//                                       <div
-//                                         className="absolute border border-solid border-[#01B2AC] rounded-xl w-full h-full z-10"
-//                                         id={"border_box2_" + idx}
-//                                       ></div>
-//                                       <Image
-//                                         src={template.preview_image}
-//                                         width={300}
-//                                         height={300}
-//                                         alt="My Image"
-//                                         className="shadow-[0px_0px_3px_3px_rgba(0,0,0,0.3)] rounded-xl w-full z-20 relative"
-//                                       />
-//                                     </div>
-//                                     <div
-//                                       className="dd_menu4 rounded-xl z-30 absolute top-0 left-0 w-full h-[94%] justify-evenly items-end p-2 "
-//                                       // onClick={() =>
-//                                       //   NavigateToSteps(
-//                                       //     template.id,
-//                                       //     template.template_id,
-//                                       //     template.template.is_paid
-//                                       //   )
-//                                       // }
-//                                     >
-//                                       <div className="absolute box2 shadow-lg rounded-lg py-2 cursor-pointer JosefinSans text-sm bg-[#01B2AC] hover:bg-[#0072b1] text-white w-[60%] flex justify-center items-center flex-wrap">
-//                                         Use This Example
-//                                       </div>
-//                                     </div>
-//                                     <p className="cl_inner2 duration-300 transition-all Montserrat text-md text-black text-center mt-4 max-w-[160px] truncate mx-auto">
-//                                       {template.resume_name}
-//                                     </p>
-//                                     {template?.job_positions.map(
-//                                       (position: any, posIdx: any) => (
-//                                         <div
-//                                           key={posIdx}
-//                                           className="bg-[#0072b1] text-white flex items-center justify-center text-xs font-semibold px-4 py-1 rounded mt-2"
-//                                         >
-//                                           <span className="max-w-[160px] truncate mx-auto">
-//                                             {position.name}
-//                                           </span>
-//                                         </div>
-//                                       )
-//                                     )}
-//                                   </div>
-//                                 </div>
-//                               </div>
-//                             </div>
-//                           );
-//                         }
-//                       )}
-//                     </Slider>
-//                   )}
-
-//                   <br />
-//                   <br />
-//                   {/* {isModalOpen && (
-//                   <TemplatesSlider
-//                     open={isModalOpen}
-//                     onClose={closeTemplatesModal}
-//                     templates={top_categories.resume_examples}
-//                     initialIndex={initialIndex}
-//                   />
-//                 )} */}
-//                 </div>
-//               );
-//             })
-//           ) : (
-//             <div className="flex flex-col gap-4 mt-4 ">
-//               <div className="px-10">
-//                 <h1 className="font-Lexend text-2xl text-[#0072b1]">
-//                   {selectedCatName}
-//                 </h1>
-//               </div>
-//               <hr />
-//               <div className="px-10">
-//                 <p className="font-Lexend text-lg pl-2">{selectedCatDesc}</p>
-//               </div>
-//               <div
-//                 className={`${
-//                   templates?.length === 0
-//                     ? ""
-//                     : "grid sm:grid-cols-3 gap-4 px-4 border-4"
-//                 } `}
-//               >
-//                 {templates?.length !== 0 ? (
-//                   templates?.map((template: any, idx: any) => {
-//                     return (
-//                       <div key={idx} className="w-full">
-//                         <div
-//                           className="dd_btn4 flex justify-normal items-start text-slate-600 cursor-pointer flex-wrap mt-10"
-//                           id={"border_box3_" + idx}
-//                         >
-//                           <div className="lg:m-4">
-//                             <div className="relative">
-//                               <div
-//                                 className=" w-6 h-6  right-4 top-4 rounded-full flex items-center justify-center absolute z-50"
-//                                 //   onClick={() => openTemplatesModal(idx)}
-//                               >
-//                                 {/* <img src={search_symbol} /> */}
-//                               </div>
-//                               {template?.template.is_paid === 1 && (
-//                                 <div
-//                                   className="flex bg-gradient-to-r from-[#01B2AC] to-[#0072B1] w-[150px] h-8 absolute left-[-35px] top-6 text-white -rotate-45 justify-center items-center z-50"
-//                                   style={{
-//                                     clipPath:
-//                                       "polygon(20% 0%, 80% 0%, 100% 100%, 0% 100%)",
-//                                   }}
-//                                 >
-//                                   <Image src={premium} alt="premium icon" />
-//                                   <span>Premium</span>
-//                                 </div>
-//                               )}
-//                               <div
-//                                 className="relative border_box"
-//                                 id={"border_box_" + idx}
-//                               >
-//                                 <div
-//                                   className="absolute border border-solid border-[#01B2AC] rounded-xl w-full h-full z-10"
-//                                   id={"border_box2_" + idx}
-//                                 ></div>
-//                                 <Image
-//                                   src={template.preview_image}
-//                                   width={300}
-//                                   height={300}
-//                                   alt="My Image"
-//                                   className="shadow-[0px_0px_3px_3px_rgba(0,0,0,0.3)] rounded-xl w-full z-20 relative min-h-[300px]"
-//                                 />
-//                               </div>
-//                               <div
-//                                 className="dd_menu4 rounded-xl z-30 absolute top-0 left-0 w-full h-[94%] justify-evenly items-end p-2 "
-//                                 //   onClick={() =>
-//                                 //     NavigateToSteps(
-//                                 //       template.id,
-//                                 //       template.template_id
-//                                 //     )
-//                                 //   }
-//                               >
-//                                 <div className="absolute box2 shadow-lg rounded-lg py-2 cursor-pointer JosefinSans text-sm bg-[#01B2AC] hover:bg-[#0072b1] text-white w-[60%] flex justify-center items-center flex-wrap">
-//                                   Use This Example
-//                                 </div>
-//                               </div>
-//                               <p className="cl_inner2 duration-300 transition-all Montserrat text-md text-black text-center mt-4 max-w-[160px] truncate mx-auto">
-//                                 {template?.resume_name}
-//                               </p>
-//                               {template?.job_positions.map(
-//                                 (position: any, posIdx: any) => (
-//                                   <div
-//                                     key={posIdx}
-//                                     className="bg-[#0072b1] text-white flex items-center justify-center text-xs font-semibold px-4 py-1 rounded mt-2"
-//                                   >
-//                                     <span className="max-w-[160px] truncate mx-auto">
-//                                       {position.name}
-//                                     </span>
-//                                   </div>
-//                                 )
-//                               )}
-//                             </div>
-//                           </div>
-//                         </div>
-//                       </div>
-//                     );
-//                   })
-//                 ) : (
-//                   <h1 className="my-2 text-xl font-bold px-6">No results</h1>
-//                 )}
-//                 {/* {isModalOpen && (
-//                 <TemplatesSlider
-//                   open={isModalOpen}
-//                   onClose={closeTemplatesModal}
-//                   templates={templates}
-//                   initialIndex={initialIndex}
-//                 />
-//               )} */}
-//               </div>
-//             </div>
-//           )}
-//         </div>
-//       </div>
-//     </>
-//   );
-// };
-
-// export default Categories;
-
 "use client";
 import React, { useState } from 'react'
 import styles from './ExampleCategories.module.css'
 import { BiLeftArrowAlt, BiRightArrowAlt } from 'react-icons/bi';
-import Template1 from 'media/assets/resume_template_images/template_3.webp';
+import Slider from 'react-slick';
+import Templates from '../Templates/Templates';
+
+const settings: any = {
+  dots: false,
+  infinite: true,
+  speed: 500,
+  slidesToScroll: 1,
+  arrows: false,
+  autoplay: true,
+  autoplaySpeed: 2000,
+  responsive: [
+    {
+      breakpoint: 1300,
+    },
+    {
+      breakpoint: 1280, // Approximate for large screens
+      settings: {
+        slidesToShow: 3, // Matches `md:w-[33%]`
+      },
+    },
+    {
+      breakpoint: 768, // Matches the `md` breakpoint in Tailwind
+      settings: {
+        slidesToShow: 2, // Matches `sm:w-[50%]`
+      },
+    },
+    {
+      breakpoint: 640, // Matches the `sm` breakpoint in Tailwind
+      settings: {
+        slidesToShow: 1, // Matches `w-full`
+      },
+    },
+  ],
+};
 
 export default function ExampleCategories() {
+  const [isHovered, setIsHovered] = useState<any>(false);
   const [categories, set_categories] = useState<any[]>([
     {
       id: 6,
@@ -589,63 +151,63 @@ export default function ExampleCategories() {
       icon: "categories.svg",
     },
   ])
-
-
   const [top_categories, set_top_categories] = useState<any[]>([
-    {
-      id: 3,
-      name: "All Templates",
-      short_description:
-        "AI Pro Resume is your ultimate destination for creating professional resumes and cover letters. To save  you time and effort, we have introduced creative resume examples. These great resume examples are  pre-written. You just have to click on them and add minor details to make your resume more  personalized. We offer professional resume templates that assist you in landing the interview. Whether  you are starting your career or a seasoned professional, AI Pro Resume ensures your resume shines in  the crowd.",
-      cover_letter_description: null,
-      parent_id: 2,
-      top: 1,
-      icon: "categories.svg",
-      resume_examples: [
-        {
-          id: 83,
-          resume_name: "Industrial Engineer",
-          first_name: "Mark",
-          middle_name: "D. Henderson",
-          last_name: "Henderson",
-          email_address: "mark.henderson@email.com",
-          job_title: "example",
-          phone_number: "03115645434",
-          contact_number: "04653242531",
-          template_id: 3,
-          category_id: 13,
-          country_id: 20,
-          state: "Homjel'",
-          city: "Rahachow",
-          street_address: "675 street Ld Avenue",
-          postal_code: "1445",
-          date_of_birth: "2022-10-05",
-          gender: "male",
-          maritial_status: "single",
-          nationality: null,
-          id_no: "7656342648790",
-          // preview_image: template_1,
-          created_at: "2024-05-23T10:48:32.000000Z",
-          updated_at: "2024-11-01T10:56:28.000000Z",
-          deleted_at: null,
-          template: {
-            id: 3,
-            name: "Elegant Executive",
-            is_paid: 0,
-          },
-          job_positions: [
-            {
-              id: 53,
-              name: "Civil Engineer",
-              pivot: {
-                resume_example_id: 83,
-                job_position_id: 53,
-              },
-            },
-          ],
-        },
-      ]
-    }]);
+    // {
+    //   id: 3,
+    //   name: "All Templates",
+    //   short_description:
+    //     "AI Pro Resume is your ultimate destination for creating professional resumes and cover letters. To save  you time and effort, we have introduced creative resume examples. These great resume examples are  pre-written. You just have to click on them and add minor details to make your resume more  personalized. We offer professional resume templates that assist you in landing the interview. Whether  you are starting your career or a seasoned professional, AI Pro Resume ensures your resume shines in  the crowd.",
+    //   cover_letter_description: null,
+    //   parent_id: 2,
+    //   top: 1,
+    //   icon: "categories.svg",
+    //   resume_examples: [
+    //     {
+    //       id: 83,
+    //       resume_name: "Industrial Engineer",
+    //       first_name: "Mark",
+    //       middle_name: "D. Henderson",
+    //       last_name: "Henderson",
+    //       email_address: "mark.henderson@email.com",
+    //       job_title: "example",
+    //       phone_number: "03115645434",
+    //       contact_number: "04653242531",
+    //       template_id: 3,
+    //       category_id: 13,
+    //       country_id: 20,
+    //       state: "Homjel'",
+    //       city: "Rahachow",
+    //       street_address: "675 street Ld Avenue",
+    //       postal_code: "1445",
+    //       date_of_birth: "2022-10-05",
+    //       gender: "male",
+    //       maritial_status: "single",
+    //       nationality: null,
+    //       id_no: "7656342648790",
+    //       // preview_image: template_1,
+    //       created_at: "2024-05-23T10:48:32.000000Z",
+    //       updated_at: "2024-11-01T10:56:28.000000Z",
+    //       deleted_at: null,
+    //       template: {
+    //         id: 3,
+    //         name: "Elegant Executive",
+    //         is_paid: 0,
+    //       },
+    //       job_positions: [
+    //         {
+    //           id: 53,
+    //           name: "Civil Engineer",
+    //           pivot: {
+    //             resume_example_id: 83,
+    //             job_position_id: 53,
+    //           },
+    //         },
+    //       ],
+    //     },
+    //   ]
+    // }
+
+  ]);
 
   return (
     <div className="grid grid-cols-12 gap-8 px-4 lg:px-16 xl:px-20 2xl:px-40">
@@ -656,28 +218,12 @@ export default function ExampleCategories() {
           </h1>
           <hr className="border-t border-[#00caa5]" />
           {categories
-            // ?.sort((a, b) => a.name.localeCompare(b.name))
             .map((category: any, index: any) => (
               <div
                 key={index}
                 id={category.id}
-                onClick={() => {
-                  // chk_temp(
-                  //   category.id,
-                  //   category.name,
-                  //   category.short_description
-                  // );
-                }}
                 className={`flex gap-2 font-Lexend justify-start items-center p-2 text-slate-900 cursor-pointer  hover:text-[#0072b1] my-2 `}
-              // className={`flex gap-2 font-Lexend justify-start items-center p-2 text-slate-900 cursor-pointer  hover:text-[#0072b1] my-2 
-              // ${!showAllCategories && index >= 3 ? "hidden md:flex" : ""
-              //                   }`}
               >
-                {/* <img
-                    src={global.imageUrl + category.icon}
-                    className="w-4"
-                    alt={category.icon}
-                  /> */}
                 <p className="font-Lexend text-lg pl-2">{category.name}</p>
               </div>
             ))}
@@ -696,7 +242,6 @@ export default function ExampleCategories() {
               <BiLeftArrowAlt
                 size={25}
                 className="custom-arrow prev-arrow"
-              // onClick={() => sliderRefs.current[index].slickPrev()}
               />
             </div>
 
@@ -704,193 +249,19 @@ export default function ExampleCategories() {
               <BiRightArrowAlt
                 size={25}
                 className="custom-arrow prev-arrow"
-              // onClick={() => sliderRefs.current[index].slickNext()}
               />
             </div>
           </div>
         </div>
-      </div>
-      {/* {top_categories.resume_examples.length < 4 
-                    <div className="flex justify-start items-start flex-wrap ">
-                      {top_categories.resume_examples?.map(
-                        (template: any, idx: any) => {
-                          return (
-                            <div
-                              key={idx}
-                              className="w-full sm:w-[50%] md:w-[33%] "
-                            >
-                              <div
-                                className="dd_btn4 flex justify-normal items-start px-6 py-8 lg:p-2 text-slate-600 cursor-pointer flex-wrap mt-2 "
-                                id={"bborder_box3_" + template.id + idx}
-                              >
-                                <div className="cl_hover2 lg:m-4  ">
-                                  <div className="relative">
-                                    <div
-                                      className=" w-6 h-6  right-4 top-4 rounded-full flex items-center justify-center absolute z-50"
-                                      // onClick={() => openTemplatesModal(idx)}
-                                    >
-                                     
-        </div> */}
-      {/* {template.template.is_paid === 1 && (
-          <div
-            className="flex bg-gradient-to-r from-[#01B2AC] to-[#0072B1] w-[150px] h-8 absolute left-[-35px] top-6 text-white -rotate-45 justify-center items-center z-50"
-            style={{
-              clipPath:
-                "polygon(20% 0%, 80% 0%, 100% 100%, 0% 100%)",
-            }}
+
+        <div>
+          <Slider
+            {...settings}
           >
-            <Image
-              src={premium}
-              alt="premium icon"
-            />
-            <span>Premium</span>
-          </div>
-        )}
-        <div
-          className="relative bborder_box"
-          id={"bborder_box_" + template.id + idx}
-        >
-          <div
-            className="absolute border border-solid border-[#01B2AC] rounded-xl w-full h-full z-10"
-            id={"bborder_box2_" + template.id + idx}
-          ></div>
-          <Image
-            src={template.preview_image}
-            width={300}
-            height={300}
-            alt="My Image"
-            className="shadow-[0px_0px_3px_3px_rgba(0,0,0,0.3)] rounded-xl w-full z-20 relative"
-          />
+            <Templates />
+          </Slider>
         </div>
-        <div
-          className="dd_menu4 rounded-xl z-30 absolute top-0 left-0 w-full h-[94%] justify-evenly items-end p-2 "
-        // onClick={() =>
-        //   NavigateToSteps(
-        //     template.id,
-        //     template.template_id,
-        //     template.template.is_paid
-        //   )
-        // }
-        >
-          <div className="absolute box2 shadow-lg rounded-lg py-2 cursor-pointer JosefinSans text-sm bg-[#01B2AC] hover:bg-[#0072b1] text-white w-[60%] flex justify-center items-center flex-wrap">
-            Use This Example
-          </div>
-        </div>
-        <p className="cl_inner2 duration-300 transition-all Montserrat text-md text-black text-center mt-4 max-w-[160px] truncate mx-auto">
-          {template.resume_name}
-        </p>
-        <span className="mt-2">
-          {template?.job_positions.map(
-            (position: any, posIdx: any) => (
-              <div
-                key={posIdx}
-                className="bg-[#0072b1] flex items-center justify-center text-white text-xs font-semibold px-4 py-1 rounded mt-2"
-              >
-                <span className="max-w-[160px] truncate mx-auto">
-                  {position.name}
-                </span>
-              </div>
-            )
-          )}
-        </span>
       </div>
-    </div>
-                              </div >
-                            </div >
-                          );
-}
-                      )}
-                    </div >
-                  ) : (
-  <Slider
-    {...settings}
-  // ref={(el) => (sliderRefs.current[index] = el)}
-  >
-    {top_categories.resume_examples?.map(
-      (template: any, idx: any) => {
-        return (
-          <div key={idx}>
-            <div
-              className="dd_btn4 flex justify-normal items-start px-6 py-8 lg:p-2 text-slate-600 cursor-pointer flex-wrap mt-2 "
-              id={"border_box3_" + idx}
-            >
-              <div className="cl_hover2 w-max lg:m-4">
-                <div className="relative">
-                  <div
-                    className=" w-6 h-6  right-4 top-4 rounded-full flex items-center justify-center absolute z-50"
-                  // onClick={() => openTemplatesModal(idx)}
-                  >
-                    
-                  </div>
-                  {template.template.is_paid === 1 && (
-                    <div
-                      className="flex bg-gradient-to-r from-[#01B2AC] to-[#0072B1] w-[150px] h-8 absolute left-[-35px] top-6 text-white -rotate-45 justify-center items-center z-50"
-                      style={{
-                        clipPath:
-                          "polygon(20% 0%, 80% 0%, 100% 100%, 0% 100%)",
-                      }}
-                    >
-                      <Image
-                        src={premium}
-                        alt="premium icon"
-                      />
-                      <span>Premium</span>
-                    </div>
-                  )}
-                  <div
-                    className="relative border_box"
-                    id={"border_box_" + idx}
-                  >
-                    <div
-                      className="absolute border border-solid border-[#01B2AC] rounded-xl w-full h-full z-10"
-                      id={"border_box2_" + idx}
-                    ></div>
-                    <Image
-                      src={template.preview_image}
-                      width={300}
-                      height={300}
-                      alt="My Image"
-                      className="shadow-[0px_0px_3px_3px_rgba(0,0,0,0.3)] rounded-xl w-full z-20 relative"
-                    />
-                  </div>
-                  <div
-                    className="dd_menu4 rounded-xl z-30 absolute top-0 left-0 w-full h-[94%] justify-evenly items-end p-2 "
-                  // onClick={() =>
-                  //   NavigateToSteps(
-                  //     template.id,
-                  //     template.template_id,
-                  //     template.template.is_paid
-                  //   )
-                  // }
-                  >
-                    <div className="absolute box2 shadow-lg rounded-lg py-2 cursor-pointer JosefinSans text-sm bg-[#01B2AC] hover:bg-[#0072b1] text-white w-[60%] flex justify-center items-center flex-wrap">
-                      Use This Example
-                    </div>
-                  </div>
-                  <p className="cl_inner2 duration-300 transition-all Montserrat text-md text-black text-center mt-4 max-w-[160px] truncate mx-auto">
-                    {template.resume_name}
-                  </p>
-                  {template?.job_positions.map(
-                    (position: any, posIdx: any) => (
-                      <div
-                        key={posIdx}
-                        className="bg-[#0072b1] text-white flex items-center justify-center text-xs font-semibold px-4 py-1 rounded mt-2"
-                      >
-                        <span className="max-w-[160px] truncate mx-auto">
-                          {position.name}
-                        </span>
-                      </div>
-                    )
-                  )}
-                </div>
-              </div>
-            </div>
-          </div>
-        );
-      }
-    )}
-  </Slider>
-)} */}
 
     </div >
   )
