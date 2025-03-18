@@ -43,7 +43,7 @@ export const BannerData = {
         <>
             Click here to check our
             <span className="text-[#00caa5] lg:px-2 px-1">
-                <Link href="/cover_letter_examples">Cover letter Exampl</Link>
+                <Link href="/cover_letter_examples">Cover letter Example</Link>
             </span>
             <Image src={bannerArrow} className="ml-1" alt="arrow" />
         </>
