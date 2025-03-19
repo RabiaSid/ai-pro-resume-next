@@ -11,7 +11,6 @@ import { FiPhone } from 'react-icons/fi';
 import { CgClose } from 'react-icons/cg';
 import SunEditor from 'suneditor-react';
 import AppButton from '@/components/common/button/pages';
-import ProfileSection from '@/components/profileSection/profileSection';
 import { userAwards, userCertificates, userEducation, userExperiences, userLanguages, userProfile, userReferences, userSoftSkills, userTechnicalSkills } from '@/redux/slices/profileSlice';
 import { useDispatch, useSelector } from 'react-redux';
 import { AppDispatch, RootState } from '@/redux/store'
@@ -21,6 +20,7 @@ import { AiIcon } from '@/constant/icon';
 import CustomSelect from '@/components/common/customSelect/CustomSelect';
 import { Controller, useForm } from 'react-hook-form';
 import MultiInputField from '@/components/common/multiInputField/MultiInputField';
+import ProfileSection from '@/components/profile/profileSection/profileSection';
 
 export default function Account() {
   const router = useRouter();
