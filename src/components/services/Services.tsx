@@ -78,7 +78,7 @@ const Services = () => {
 
   return (
     <>
-      <section ref={sectionRef} className="relative">
+      <section ref={sectionRef} className="relative pb-5">
         {/* Svg Wave */}
         <div className="absolute bottom-0 w-full hidden sm:block">
           <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320">
@@ -104,7 +104,7 @@ const Services = () => {
                 className={`bg-[rgba(255,255,255,0.4)] hover:bg-[rgba(255,255,255,0.9)] cursor-pointer backdrop-blur-[10px] rounded-lg delay-[300ms] duration-[600ms] taos:translate-y-[100%] taos:opacity-0" 
                   }`}
                 data-taos-offset="300"
-              // style={{ animationDelay: `${index * 0.2}s` }} // Stagger effect
+                // style={{ animationDelay: `${index * 0.2}s` }} // Stagger effect
               >
                 <ServiceCard
                   img={service.image}

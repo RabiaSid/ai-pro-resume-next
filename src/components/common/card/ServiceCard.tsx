@@ -28,7 +28,7 @@ const ServiceCard = (props: services) => {
   return (
     <>
       <div
-        className="sm:h-[550px] border-2 border-white relative shadow-[0_0_20px_0px_rgba(0,0,0,0.1)] rounded-xl py-4 px-4 group flex flex-col gap-4 "
+        className="sm:h-[450px] border-2 border-white relative shadow-[0_0_20px_0px_rgba(0,0,0,0.1)] rounded-xl py-4 px-4 group flex flex-col gap-4 "
         onMouseEnter={() => setIsGroupHover(true)}
         onMouseLeave={() => setIsGroupHover(false)}
       >
@@ -39,8 +39,8 @@ const ServiceCard = (props: services) => {
           </div>
         </div>
         {/* Title */}
-        <div className="w-full text-center">
-          <span className="drop-shadow-lg text-lg font-bold text-center font-Lexend">
+        <div className="w-full">
+          <span className="drop-shadow-lg text-lg font-bold font-Lexend">
             {title}
           </span>
         </div>

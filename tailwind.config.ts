@@ -36,14 +36,12 @@ export default {
           "0%": { transform: "rotate(0deg)" },
           "100%": { transform: "rotate(360deg)" },
         },
-
-
       },
       animation: {
         fadeInUp: "fadeInUp 0.5s ease-out forwards",
         "bounce-in-up": "bounce-in-up 0.8s ease-out forwards",
-        rotate: "rotate 50s cubic-bezier(0.8, 0.2, 0.2, 0.8) infinite alternate",
-
+        rotate:
+          "rotate 50s cubic-bezier(0.8, 0.2, 0.2, 0.8) infinite alternate",
       },
     },
   },
