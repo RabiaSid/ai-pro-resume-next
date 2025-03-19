@@ -93,7 +93,7 @@ export default function Header() {
 
   return (
     <nav className={`bg-white py-2 lg:py-4 shadow-md z-10 relative`}>
-      <div className="container lg:px-4 mx-auto flex items-center justify-between ">
+      <div className="container pl-2 lg:px-4 mx-auto flex items-center justify-between ">
         {/* Logo */}
         <Link href="/" className="flex ">
           <Image

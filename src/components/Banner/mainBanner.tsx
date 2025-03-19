@@ -55,16 +55,18 @@ export default function Banner(props: BannerProps) {
   const typedText = useTypedText(subtitle);
 
   return (
-    <section className={`container md:px-4 mx-auto relative overflow-hidden`}>
+    <section
+      className={`container px-[12px] md:px-4 mx-auto relative overflow-hidden`}
+    >
       <div
         className={
           isGradient === false
             ? "hidden"
-            : "w-[350px] h-[310px] blur-[70px] bg-gradient-to-br from-primaryBlue to-primaryGreen animate-rotate rounded-[30%_70%_70%_30%/30%_30%_70%_70%] border border-red-500 top-[35rem] lg:top-[12rem] xl:top-28 right-[12rem] lg:right-[5rem] xl:right-52 absolute"
+            : "w-[270px] md:w-[350px] h-[250px] md:h-[310px] blur-[70px] bg-gradient-to-br from-primaryBlue to-primaryGreen animate-rotate rounded-[30%_70%_70%_30%/30%_30%_70%_70%] border border-red-500 top-[45rem] md:top-[35rem] lg:top-[12rem] xl:top-28 right-[5rem] md:right-[12rem] lg:right-[5rem] xl:right-52 absolute"
         }
       ></div>
-      <div className="w-full py-5 my-10 bg-white ">
-        <div className="grid lg:grid-cols-2 gap-8 items-center">
+      <div className="w-full md:py-5 my-10 bg-white ">
+        <div className="grid lg:grid-cols-2 gap-12 md:gap-8 items-center">
           <div className="text-left space-y-6">
             {!font2 ? (
               <H1 className={"text-primaryBlack"}>
