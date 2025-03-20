@@ -13,7 +13,7 @@ import Clients from "@/components/clients/Clients";
 import Reviews from "@/components/reviews/Reviews";
 import Features from "@/components/features/Features";
 import Services from "@/components/services/Services";
-import OnScrollAnime from '@/components/onScrollAnime/OnScrollAnime';
+import OnScrollAnime from "@/components/onScrollAnime/OnScrollAnime";
 
 export default function Page() {
   return (

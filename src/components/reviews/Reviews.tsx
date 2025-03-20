@@ -66,7 +66,7 @@ const Reviews = (props: propsType) => {
             </div>
           </div>
 
-          <div className="bg-opacity-25 flex flex-col w-full h-fit items-center px-4 mb-10 mt-4 relative">
+          <div className="bg-opacity-25 flex flex-col w-full h-fit items-center px-4 mb-5 mt-2 relative">
             <div className="w-full our__reviews">
               <AutoPlaySlider
                 options={{ align: "start" }}

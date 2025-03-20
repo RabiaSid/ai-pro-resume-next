@@ -70,7 +70,7 @@ export const menuItems: MenuItem[] = [
 
 export const menuIconItems: MenuIconItem[] = [
   {
-    name: "Login",
+    // name: "Login",
     path: "/login",
     className:
       "text-black border border-transparent hover:bg-transparent px-0 hover:text-primaryBlue hidden md:flex",
