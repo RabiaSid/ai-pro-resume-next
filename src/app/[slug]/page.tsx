@@ -2,8 +2,11 @@
 
 import Ads from "@/components/ads/Ads";
 import { OldAPI } from "@/services/oldService";
+import { autoBatchEnhancer } from "@reduxjs/toolkit";
+import { setServers } from "dns";
 import { useParams } from "next/navigation";
 import { useEffect, useState } from "react";
+import { serialize } from "v8";
 
 interface PageDetails {
   id: number;
