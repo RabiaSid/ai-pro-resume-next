@@ -21,7 +21,6 @@ api.interceptors.request.use((config) => {
   return config;
 });
 
-
 // Generic request function
 const request = async (
   method: "get" | "post" | "put" | "delete",
@@ -45,7 +44,8 @@ const request = async (
 
 // General API functions
 const OldAPI = {
-  get: (endpoint: string, params?: any) => request("get", endpoint, null, params),
+  get: (endpoint: string, params?: any) =>
+    request("get", endpoint, null, params),
   post: (endpoint: string, data: any) => request("post", endpoint, data),
   put: (endpoint: string, data: any) => request("put", endpoint, data),
   delete: (endpoint: string) => request("delete", endpoint),
